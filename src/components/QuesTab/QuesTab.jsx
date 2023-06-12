@@ -1,8 +1,13 @@
 import { Tab, Tabs } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const QuesTab = () => {
   const quesType = ["HTML", "CSS", "SQL", "Aptitude", "C"];
+  const [value, setValue] = useState(0);
+
+  const handleChange = () => {
+    setValue(newValue);
+  };
   return (
     <div>
       <Tabs value={value} onChange={handleChange} centered>
