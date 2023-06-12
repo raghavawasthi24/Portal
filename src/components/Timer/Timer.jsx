@@ -30,7 +30,9 @@ const Timer = () => {
 
   return (
     <div className="flex flex-col">
-      <Typography variant="h4">Time Left</Typography>
+      <Typography variant="h4" className="text-center">
+        Time Left
+      </Typography>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item>
           <Typography variant="h4">

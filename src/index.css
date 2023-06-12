@@ -5,4 +5,5 @@
 
 body{
     background-image: url(./assets/Background_portal.png);
+    background-size: cover;
 }

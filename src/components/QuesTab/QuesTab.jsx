@@ -3,9 +3,9 @@ import React, { useState } from "react";
 
 const QuesTab = () => {
   const quesType = ["HTML", "CSS", "SQL", "Aptitude", "C"];
-  const [value, setValue] = useState(0);
+  const [value, setValue] = React.useState(0);
 
-  const handleChange = () => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   return (

@@ -10,7 +10,9 @@ const QuesNumbers = () => {
         {quesCount?.map((ques, id) => {
           return (
             <Grid item key={id}>
-              <Button color="error">{ques}</Button>
+              <Button color="error" variant="contained">
+                {ques}
+              </Button>
             </Grid>
           );
         })}
