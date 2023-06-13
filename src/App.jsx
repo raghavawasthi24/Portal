@@ -1,5 +1,6 @@
 import React from "react";
-import Test from "./pages/User/Test/Test";
+import Test from "./User/pages/User/Test/Test";
+
 
 const App = () => {
   return (

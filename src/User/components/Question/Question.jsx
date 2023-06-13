@@ -16,7 +16,7 @@ const Question = (props) => {
       <Typography variant="h4">Question {ques?.quesNo || 1}</Typography>
       <Divider />
       <Typography variant="h5">
-        {ques?.ques || "What is the full form of HTML ?"}
+        {ques?.question || "What is the full form of HTML ?"}
       </Typography>
       <FormControl>
         <RadioGroup defaultValue="" name="radio-buttons-group">

@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 
-const QuesNumbers = () => {
+const QuesNumbers = ({ setActiveQuestion }) => {
   const quesCount = [1, 2, 3, 4, 5, 6];
   return (
     <div className="flex flex-col">
