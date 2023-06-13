@@ -2,11 +2,23 @@ import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 
 const QuesNumbers = ({ setActiveQuestion }) => {
-  const quesCount = [1, 2, 3, 4, 5, 6];
+  const quesCount = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
-    <div className="flex flex-col">
-      <Typography variant="h4">Questions </Typography>
-      <Grid container spacing={2} justifyContent="center" alignItems="center">
+    <div className="flex flex-col mt-12">
+      <Typography
+        variant="h5"
+        className="text-center  bg-gradient-to-r from-quesGrad1 to-quesGrad2 p-4 px-0"
+      >
+        Questions
+      </Typography>
+      <Grid
+        container
+        // spacing={2}
+        gap={4}
+        justifyContent="center"
+        alignItems="center"
+        sx={{ mt: "10px" }}
+      >
         {quesCount?.map((ques, id) => {
           return (
             <Grid item key={id}>

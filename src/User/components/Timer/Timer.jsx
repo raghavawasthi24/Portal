@@ -29,11 +29,21 @@ const Timer = () => {
   }, [hours, minutes, seconds]);
 
   return (
-    <div className="flex flex-col">
-      <Typography variant="h4" className="text-center">
+    <div className="flex flex-col mt-4">
+      <Typography
+        variant="h5"
+        className="text-center bg-gradient-to-r from-timerGrad1 to-timerGrad2 p-4"
+      >
         Time Left
       </Typography>
-      <Grid container spacing={2} justifyContent="center" alignItems="center">
+      <Grid
+        container
+        // spacing={2}
+        gap={2}
+        justifyContent="center"
+        alignItems="center"
+        sx={{ mt: "5px", ml: "0" }}
+      >
         <Grid item>
           <Typography variant="h4">
             {hours.toString().padStart(2, "0")}
