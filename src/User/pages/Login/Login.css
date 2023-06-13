@@ -1,0 +1,44 @@
+.loginPage{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../../Assets/Background_portal.png");
+    background-size: cover;
+}
+.loginLogo{
+   margin:7vh 0 4vh 10vw ;
+}
+.login{
+    display: flex;
+}
+.formSection{
+width: 50%;
+text-align: center;
+justify-content: center;
+margin:0 auto;
+align-self: center;
+}
+.login_form{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 30vw;
+      margin:0 auto;
+    align-self: center;
+}
+.login_field{
+    width:80%;
+    align-self: center;
+    
+}
+.login_btn{
+    
+    width:40%;
+    align-self: center;
+}
+.imageSection{
+    width: 50%;
+    text-align: center;
+    justify-content: center;
+}
