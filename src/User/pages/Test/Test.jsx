@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import QuesTab from "../../../components/QuesTab/QuesTab";
-import Question from "../../../components/Question/Question";
-import QuesNumbers from "../../../components/QuesNumbers/QuesNumbers";
-import Timer from "../../../components/Timer/Timer";
-import TestFooter from "../../../components/TestFooter/TestFooter";
-import TestHeader from "../../../components/TestHeader/TestHeader";
+import QuesTab from "../../components/QuesTab/QuesTab";
+import Question from "../../components/Question/Question";
+import QuesNumbers from "../../components/QuesNumbers/QuesNumbers";
+import Timer from "../../components/Timer/Timer";
+import TestFooter from "../../components/TestFooter/TestFooter";
+import TestHeader from "../../components/TestHeader/TestHeader";
 
 const Test = () => {
   const [activeQuestion, setActiveQuestion] = useState();
