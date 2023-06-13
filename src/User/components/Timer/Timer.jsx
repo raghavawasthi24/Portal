@@ -39,7 +39,7 @@ const Timer = () => {
       <Grid
         container
         // spacing={2}
-        gap={2}
+        gap={6}
         justifyContent="center"
         alignItems="center"
         sx={{ mt: "5px", ml: "0" }}

@@ -18,13 +18,13 @@ const Test = () => {
 
   return (
     <div className="flex justify-evenly">
-      <div className="flex flex-col justify-center w-5/8  m-4 py-4 pl-12 pr-0 mr-0">
+      <div className="flex flex-col justify-center w-5/8  m-0 py-4 pl-12">
         <TestHeader />
         <QuesTab />
         <Question ques={activeQuestion} />
         <TestFooter />
       </div>
-      <div className="flex flex-col w-3/8 m-0 mt-4 py-4 pl-0 pr-12">
+      <div className="flex flex-col w-3/8 m-0 py-4 pl-0 pr-12">
         <Timer />
         <QuesNumbers setActiveQuestion={setActiveQuestion} />
       </div>

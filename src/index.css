@@ -7,3 +7,7 @@ body{
     background-image: url(Images/Background_portal.png);
     background-size: cover;
 }
+
+::-webkit-scrollbar{
+    display: none;
+}

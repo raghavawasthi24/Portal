@@ -12,7 +12,7 @@ const Question = (props) => {
   const ques = props.ques;
   const optionSet = ["html", "httml", "htttlm", "htttttposa"];
   return (
-    <div className="m-4">
+    <div className="m-4 pl-3">
       <Typography variant="h6">Question {ques?.quesNo || 1}</Typography>
       <Divider />
       <Typography variant="body">

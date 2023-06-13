@@ -13,8 +13,8 @@ const QuesNumbers = ({ setActiveQuestion }) => {
       </Typography>
       <Grid
         container
-        // spacing={2}
-        gap={4}
+        spacing={2}
+        gap={3}
         justifyContent="center"
         alignItems="center"
         sx={{ mt: "10px" }}
