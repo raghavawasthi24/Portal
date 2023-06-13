@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-body{
-    background-image: url(./assets/Background_portal.png);
+body{    
+    background-image: url(Images/Background_portal.png);
     background-size: cover;
 }

@@ -4,6 +4,7 @@ import Question from "../../../components/Question/Question";
 import QuesNumbers from "../../../components/QuesNumbers/QuesNumbers";
 import Timer from "../../../components/Timer/Timer";
 import TestFooter from "../../../components/TestFooter/TestFooter";
+import TestHeader from "../../../components/TestHeader/TestHeader";
 
 const Test = () => {
   const [activeQuestion, setActiveQuestion] = useState();
@@ -16,8 +17,9 @@ const Test = () => {
   ];
 
   return (
-    <div className="flex">
-      <div className="flex flex-col">
+    <div className="flex m-16 justify-evenly">
+      <div className="flex flex-col justify-center">
+        <TestHeader />
         <QuesTab />
         <Question ques={activeQuestion} />
         <TestFooter />

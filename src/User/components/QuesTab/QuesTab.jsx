@@ -3,13 +3,14 @@ import React, { useState } from "react";
 
 const QuesTab = () => {
   const quesType = ["HTML", "CSS", "SQL", "Aptitude", "C"];
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    console.log(event);
   };
   return (
-    <div>
+    <div className="m-4 border">
       <Tabs value={value} onChange={handleChange} centered>
         {quesType?.map((type, id) => {
           return <Tab label={type} key={id} />;

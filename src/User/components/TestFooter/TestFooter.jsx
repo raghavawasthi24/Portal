@@ -4,12 +4,12 @@ import { Button } from "@mui/material";
 
 const TestFooter = () => {
   return (
-    <div>
+    <div className="mt-16">
       <div className="flex justify-between">
         <Button>Mark for Review</Button>
         <Button>Save And Next</Button>
       </div>
-      <div className="flex">
+      <div className="flex justify-around">
         <span>
           <CircleIcon color="error" /> UnAttempted
         </span>

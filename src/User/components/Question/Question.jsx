@@ -12,12 +12,13 @@ const Question = (props) => {
   const ques = props.ques;
   const optionSet = ["html", "httml", "htttlm", "htttttposa"];
   return (
-    <div>
-      <Typography variant="h4">Question {ques?.quesNo || 1}</Typography>
+    <div className="m-4 border">
+      <Typography variant="h6">Question {ques?.quesNo || 1}</Typography>
       <Divider />
-      <Typography variant="h5">
+      <Typography variant="body">
         {ques?.question || "What is the full form of HTML ?"}
       </Typography>
+      <br />
       <FormControl>
         <RadioGroup defaultValue="" name="radio-buttons-group">
           {optionSet?.map((option) => {
