@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 
-const QuesNumbers = ({ setActiveQuestion }) => {
+const QuesNumbers = ({ setActiveQuestionId }) => {
   const quesCount = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <div className="flex flex-col mt-12">
@@ -22,7 +22,11 @@ const QuesNumbers = ({ setActiveQuestion }) => {
         {quesCount?.map((ques, id) => {
           return (
             <Grid item key={id}>
-              <Button color="error" variant="contained">
+              <Button
+                color="error"
+                variant="contained"
+                onClick={() => setActiveQuestionId(id + 1)}
+              >
                 {ques}
               </Button>
             </Grid>

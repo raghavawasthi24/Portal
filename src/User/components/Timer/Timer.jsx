@@ -42,7 +42,7 @@ const Timer = () => {
         gap={6}
         justifyContent="center"
         alignItems="center"
-        sx={{ mt: "5px", ml: "0" }}
+        sx={{ pt: "10px", ml: "0" }}
       >
         <Grid item>
           <Typography variant="h4">

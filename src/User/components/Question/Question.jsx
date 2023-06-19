@@ -16,17 +16,22 @@ const Question = (props) => {
       <Typography variant="h6">Question {ques?.quesNo || 1}</Typography>
       <Divider />
       <Typography variant="body">
-        {ques?.question || "What is the full form of HTML ?"}
+        {ques?.question || "What is the full form of HTMLx ?"}
       </Typography>
       <br />
       <FormControl>
-        <RadioGroup defaultValue="" name="radio-buttons-group">
-          {optionSet?.map((option) => {
+        <RadioGroup
+          defaultValue=""
+          name="radio-buttons-group"
+          onChange={(e) => console.log(e.target.value)}
+        >
+          {optionSet?.map((option, id) => {
             return (
               <FormControlLabel
                 value={option}
                 control={<Radio />}
                 label={option}
+                key={id}
               />
             );
           })}
