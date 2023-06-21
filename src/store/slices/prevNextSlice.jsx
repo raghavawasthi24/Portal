@@ -21,8 +21,11 @@ const prevNextSlice=createSlice({
             else
             state.initialQues++;
         },
+        moveQues:(state,action)=>{
+            state.initialQues=action.payload
+        }
     }
 })
 
 export default prevNextSlice.reducer;
-export const { prevQues ,nextQues} = prevNextSlice.actions;
+export const { prevQues ,nextQues,moveQues} = prevNextSlice.actions;

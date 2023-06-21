@@ -5,6 +5,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {useSelector,useDispatch} from "react-redux";
 // import { prevQues,nextQues } from '../../../../../actions';
 import { prevQues,nextQues } from '../../../../../store/slices/PrevNextSlice';
+import { Button } from '@mui/material';
 
 const QuesControl = () => {
 
@@ -17,16 +18,15 @@ const QuesControl = () => {
   //   return state.prevNext;
   // })
   return (
-    <div className='flex w-full justify-between'>
+    <div className='flex justify-between pt-4 pb-10 bg-gradient-to-r from-testFooterGrad1 to-testFooterGrad2'>
       {/* <p>{data.initialQty}</p> */}
-        <p onClick={()=>dispatch(prevQues())}>
-            <ArrowBackIosNewIcon/>
-            Previous Question
-        </p>
-        <p onClick={()=>dispatch(nextQues())}>
+        <Button variant='text' sx={{color:"black"}} onClick={()=>dispatch(prevQues())} startIcon={<ArrowBackIosNewIcon/>}>
+             Previous Question
+        </Button>
+        <Button  variant='text' sx={{color:"black"}} onClick={()=>dispatch(nextQues())} endIcon={<ArrowForwardIosIcon/>}>
             Next Question
-            <ArrowForwardIosIcon/>
-        </p>
+            
+        </Button>
     </div>
   )
 }
