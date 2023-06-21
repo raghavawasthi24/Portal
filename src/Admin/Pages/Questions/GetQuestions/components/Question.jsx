@@ -30,18 +30,18 @@ const GetQuestions = () => {
     // const myState=useSelector((state)=>state.changeQues);
   return (
     <div className=''>
-        <p>Question-{data.initialQty}</p>
-        <p>{QuesArr[data.initialQty-1].question}</p>
+        <p>Question-{data.initialQues}</p>
+        <p>{QuesArr[data.initialQues-1].question}</p>
         
         <FormControl>
             <RadioGroup>
-            {QuesArr[data.initialQty-1].answer.map((item,key)=>{
+            {QuesArr[data.initialQues-1].answer.map((item,key)=>{
                 return(<FormControlLabel key={key} value={item} control={<Radio/>} label={item}/>)
             })}
             </RadioGroup>
 
             <p>Correct Answer</p>
-            <p>{QuesArr[data.initialQty-1].correctAns}</p>
+            <p>{QuesArr[data.initialQues-1].correctAns}</p>
         </FormControl>
     </div>
   )

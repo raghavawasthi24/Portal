@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
-    initialQty:1
+    initialQues:1
 }
 
 const prevNextSlice=createSlice({
@@ -9,17 +9,17 @@ const prevNextSlice=createSlice({
     initialState,
     reducers:{
         prevQues:state=>{
-            if(state.initialQty<2)
-            state.initialQty=1
+            if(state.initialQues<2)
+            state.initialQues=1
             else
-            state.initialQty--
+            state.initialQues--
             
         },
         nextQues:state=>{
-            if(state.initialQty>4)
-            state.initialQty=5
+            if(state.initialQues>4)
+            state.initialQues=5
             else
-            state.initialQty++;
+            state.initialQues++;
         },
     }
 })
