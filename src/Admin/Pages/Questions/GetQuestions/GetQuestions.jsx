@@ -12,7 +12,7 @@ const GetQuestions = () => {
             <Question/>
             <QuesControl/>
         </div>
-        <div className='w-1/3 flex flex-col justify-center'>
+        <div className='w-1/3 flex flex-col justify-start p-8 pt-20'>
           <Dropdown/>
             <QuesTab/>
         </div>
