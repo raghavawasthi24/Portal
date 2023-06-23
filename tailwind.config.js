@@ -16,6 +16,9 @@ export default {
         testHeadGrad3: "rgba(236, 228, 254, 0.75)",
         testFooterGrad1: "rgba(217, 217, 247, 0.75)",
         testFooterGrad2: "rgba(213, 240, 249, 0.75)",
+        dropdownGrad1: "rgba(165, 242, 255, 0.5)",
+        dropdownGrad2:"rgba(33, 83, 249, 0.23)",
+        dropdownGrad3: "rgba(167, 185, 244, 0.56)"
       },
     },
   },

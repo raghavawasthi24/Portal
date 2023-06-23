@@ -9,7 +9,7 @@ const Dropdown = () => {
      setSelTech(e.target.value)
     }
   return (
-    <div className='w-full'>
+    <div className='w-full bg-gradient-to-r from-dropdownGrad1 via-dropdownGrad2 to-dropdownGrad3'>
         <FormControl sx={{width:"100%"}}>
             <Select 
             value={selTech}
@@ -17,7 +17,7 @@ const Dropdown = () => {
             {techArr.map((item,key)=>{
                 return(<MenuItem key={key} value={item}>{item}</MenuItem>)
             })}
-            </Select>
+            </Select> 
         </FormControl>
     </div>
   )
