@@ -1,6 +1,7 @@
 import { FormControlLabel, FormLabel, RadioGroup,FormControl, Radio } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {useSelector} from "react-redux";
+import axios from 'axios';
 
 const GetQuestions = () => {
     const QuesArr=[{
@@ -25,6 +26,11 @@ const GetQuestions = () => {
         answer:["Ram","Shyam","Dana","moore"],
         correctAns:"Ram",
     }]
+    useEffect(()=>{
+        axios.get("https://examportalcsi.onrender.com/api/v1/getquestions")
+        .then((res)=>{console.log(res)})
+        .catch((err)=>{console.log(err)})
+    },[])
     const data = useSelector(state => state.prevNext)
 
     // const myState=useSelector((state)=>state.changeQues);

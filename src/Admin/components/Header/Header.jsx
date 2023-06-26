@@ -33,14 +33,14 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full flex items-center justify-between border mt-12 px-9 mx-16 h-20 bg-gradient-to-r from-testHeadGrad1 via-testHeadGrad2 to-testHeadGrad3">
+    <div className="w-full m-auto flex items-center justify-between border px-9 py-3 bg-gradient-to-r from-testHeadGrad1 via-testHeadGrad2 to-testHeadGrad3 absolute top-7">
       <img alt="logo" src="Images/csiLogo.svg" className="w-8  ml-12  " />
       <Typography
         variant="h6"
         className="text-center "
         align="left"
       >
-        <div className="ml-2 mt-1">CSI Exam Portal</div>
+        <div className="ml-2 text-gray-600">CSI Exam Portal</div>
       </Typography>
       <div className="flex justify-between  ">
       <Button
