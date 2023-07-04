@@ -18,19 +18,25 @@ const Test = () => {
     {
       quesNo: 1,
       question: "What is bla",
-      optionSet: ["jhin", "gala", "lahu", "hu"],
+      optionSet: ["html", "css", "js", "node"],
       review: false,
     },
     {
       quesNo: 2,
       question: "What is bla2",
-      optionSet: ["jhin", "gala", "lahu", "hu"],
+      optionSet: ["pyq", "sem 2", "btech", "true"],
       review: false,
     },
     {
       quesNo: 3,
-      question: "What is bla3",
-      optionSet: ["jhin", "gala", "lahu", "hu"],
+      question: "What is true",
+      optionSet: ["all of the above", "none of the above", "option d", "false"],
+      review: false,
+    },
+    {
+      quesNo: 4,
+      question: "What is ql",
+      optionSet: ["sql", "mysql", "postgre", "oracle"],
       review: false,
     },
   ];
@@ -55,7 +61,8 @@ const Test = () => {
 
   return (
     <div className="flex justify-evenly">
-      <div className="flex flex-col justify-center w-5/8  m-0 py-4 pl-12">
+      {/* <div className="flex flex-col justify-center w-6/8  m-0 py-4 pl-12"> */}
+      <div className="flex flex-col justify-center w-8/12 m-0 py-4 pl-12">
         <TestHeader />
         <QuesTab />
         <Question ques={activeQuestion} />
@@ -65,10 +72,18 @@ const Test = () => {
           activeQuestion={activeQuestion}
         />
       </div>
-      <div className="flex flex-col w-3/8 m-0 py-4 pl-0 pr-12">
-        <Timer />
-        <QuesNumbers setActiveQuestionId={setActiveQuestionId} />
-        <Button type="submit">Submit</Button>
+      {/* <div className="flex flex-col w-2/8 m-0 py-4 pl-0 pr-12"> */}
+      <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-between">
+        <div>
+          <Timer />
+          <QuesNumbers setActiveQuestionId={setActiveQuestionId} />
+        </div>
+        <Button
+          type="submit"
+          className="!bg-submitColor !text-white w-4 !mx-auto"
+        >
+          Submit
+        </Button>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const Question = (props) => {
   const ques = props.ques;

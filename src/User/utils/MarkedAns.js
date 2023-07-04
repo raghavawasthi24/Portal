@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const MarkedAns = ({ quesId, ansId, reviewFlag }) => {
   axios
     .post(`link`, {

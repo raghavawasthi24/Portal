@@ -1,29 +1,34 @@
 import React from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Button } from "@mui/material";
-import { prevQues,nextQues } from "../../../store/slices/PrevNextSlice";
-import {useSelector,useDispatch} from "react-redux";
-
+import { prevQues, nextQues } from "../../../store/slices/PrevNextSlice";
+import { useDispatch } from "react-redux";
 
 const TestFooter = (props) => {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const saveAndNext = () => {
     props.activeQuestion.review = false;
     console.log(props.activeQuestion);
-    props.setActiveQuestionId(() => props.activeQuestionId + 1);
+    dispatch(nextQues());
+    // props.setActiveQuestionId(() => props.activeQuestionId + 1);
   };
   const reviewAndNext = () => {
     props.activeQuestion.review = true;
     console.log(props.activeQuestion);
-    props.setActiveQuestionId(() => props.activeQuestionId + 1);
+    dispatch(prevQues());
+    // props.setActiveQuestionId(() => props.activeQuestionId + 1);
   };
   return (
     <div className="mt-16 bg-gradient-to-r from-testFooterGrad1 to-testFooterGrad2 py-4 px-4">
       <div className="flex justify-between">
         {/* <div className="bg-reviewColor border-radius"> */}
-        <Button onClick={()=>dispatch(prevQues())}>Mark for Review</Button>
+        <Button onClick={reviewAndNext} className="!bg-reviewColor !text-white">
+          Mark for Review
+        </Button>
         {/* </div> */}
-        <Button onClick={()=>dispatch(nextQues())}>Save And Next</Button>
+        <Button onClick={saveAndNext} className="!text-white !bg-saveColor">
+          Save And Next
+        </Button>
       </div>
       <div className="flex justify-around mt-4">
         <span className="flex items-center">
