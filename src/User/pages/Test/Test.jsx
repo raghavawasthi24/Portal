@@ -36,7 +36,8 @@ const Test = () => {
 
   return (
     <div className="flex justify-evenly">
-      <div className="flex flex-col justify-center w-5/8  m-0 py-4 pl-12">
+      {/* <div className="flex flex-col justify-center w-6/8  m-0 py-4 pl-12"> */}
+      <div className="flex flex-col justify-center w-8/12 m-0 py-4 pl-12">
         <TestHeader />
         <QuesTab />
         <Question ques={activeQuestion} />
@@ -46,10 +47,18 @@ const Test = () => {
           activeQuestion={activeQuestion}
         />
       </div>
-      <div className="flex flex-col w-3/8 m-0 py-4 pl-0 pr-12">
-        <Timer />
-        <QuesNumbers setActiveQuestionId={setActiveQuestionId} />
-        <Button type="submit">Submit</Button>
+      {/* <div className="flex flex-col w-2/8 m-0 py-4 pl-0 pr-12"> */}
+      <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-between">
+        <div>
+          <Timer />
+          <QuesNumbers setActiveQuestionId={setActiveQuestionId} />
+        </div>
+        <Button
+          type="submit"
+          className="!bg-submitColor !text-white w-4 !mx-auto"
+        >
+          Submit
+        </Button>
       </div>
     </div>
   );

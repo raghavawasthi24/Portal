@@ -14,7 +14,7 @@ const QuesNumbers = ({ setActiveQuestionId }) => {
       <Grid
         container
         spacing={2}
-        gap={3}
+        gap={1}
         justifyContent="center"
         alignItems="center"
         sx={{ mt: "10px" }}
