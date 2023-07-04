@@ -3,7 +3,6 @@
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    background-image: url("../../Assets/Background_portal.png");
     background-size: cover;
 }
 .loginLogo{
@@ -27,10 +26,22 @@ align-self: center;
       margin:0 auto;
     align-self: center;
 }
+.login_form_header{
+    font-size: larger;
+    font-weight: bold;
+}
 .login_field{
     width:80%;
     align-self: center;
-    
+}
+.input_field{
+    margin:1rem 0 2rem 0; 
+}
+.error{
+    color: red;
+    font-size: smaller;
+    align-items: flex-start;
+    align-self: flex-start;
 }
 .login_btn{
     

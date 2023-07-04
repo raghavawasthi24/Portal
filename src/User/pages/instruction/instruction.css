@@ -1,0 +1,38 @@
+.instructionPage{
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+}
+.instructionLeft{
+    display: flex;
+    flex-direction: column;
+}
+.instruction_list{
+    display: flex;
+    font-size: 15px;
+    font-weight: bold;
+}
+.instruction_box{
+    align-self: center;
+}
+.instructionRight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 5vh;
+}
+.instruction_header{
+      background: linear-gradient(90deg , rgba(215, 244, 249, 0.75) 0%, rgba(191, 212, 252, 0.75) 60.21%, rgba(213, 214, 250, 0.75) 100%);
+      height:4rem;
+      font-weight: 400;
+      font-size: 25px;
+      font-weight: bold;
+}
+.instruction_heading{
+    padding: 1.5vh 4vw;
+}
+.confirm_box{
+    text-align: center;
+    margin-top: 3vh;
+    height: 22vh;
+}
