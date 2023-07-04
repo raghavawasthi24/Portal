@@ -3,8 +3,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { moveQues } from "../../../store/slices/PrevNextSlice";
 
-const QuesNumbers = () => {
-  const quesCount = [1, 2, 3, 4];
+const QuesNumbers = ({ length }) => {
+  console.log(length);
+  // const quesCount = [1, 2, 3, 4];
   const dispatch = useDispatch();
   return (
     <div className="flex flex-col mt-12">
@@ -22,15 +23,15 @@ const QuesNumbers = () => {
         alignItems="center"
         sx={{ mt: "10px" }}
       >
-        {quesCount?.map((ques, id) => {
+        {[...Array(length)]?.map((ques, id) => {
           return (
             <Grid item key={id}>
               <Button
                 color="error"
                 variant="contained"
-                onClick={() => dispatch(moveQues(ques))}
+                onClick={() => dispatch(moveQues(id + 1))}
               >
-                {ques}
+                {id + 1}
               </Button>
             </Grid>
           );

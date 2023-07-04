@@ -15,7 +15,7 @@ const TestFooter = (props) => {
   const reviewAndNext = () => {
     props.activeQuestion.review = true;
     console.log(props.activeQuestion);
-    dispatch(prevQues());
+    dispatch(nextQues());
     // props.setActiveQuestionId(() => props.activeQuestionId + 1);
   };
   return (
