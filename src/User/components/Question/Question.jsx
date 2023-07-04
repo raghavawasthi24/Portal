@@ -7,13 +7,15 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import {useSelector} from "react-redux";
 
 const Question = (props) => {
   const ques = props.ques;
   const optionSet = ["html", "httml", "htttlm", "htttttposa"];
+  const data = useSelector(state => state.prevNext)
   return (
     <div className="m-4 pl-3">
-      <Typography variant="h6">Question {ques?.quesNo || 1}</Typography>
+      <Typography variant="h6">Question {data.initialQues}</Typography>
       <Divider />
       <Typography variant="body">
         {ques?.question || "What is the full form of HTMLx ?"}

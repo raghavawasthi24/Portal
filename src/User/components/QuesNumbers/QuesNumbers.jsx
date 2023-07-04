@@ -1,8 +1,11 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
+import { useDispatch } from 'react-redux';
+import { moveQues } from "../../../store/slices/PrevNextSlice";
 
 const QuesNumbers = ({ setActiveQuestionId }) => {
   const quesCount = [1, 2, 3, 4, 5, 6, 7, 8];
+  const dispatch=useDispatch();
   return (
     <div className="flex flex-col mt-12">
       <Typography
@@ -25,7 +28,7 @@ const QuesNumbers = ({ setActiveQuestionId }) => {
               <Button
                 color="error"
                 variant="contained"
-                onClick={() => setActiveQuestionId(id + 1)}
+                onClick={() =>dispatch(moveQues(ques))}
               >
                 {ques}
               </Button>
