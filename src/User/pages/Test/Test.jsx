@@ -7,10 +7,12 @@ import TestFooter from "../../components/TestFooter/TestFooter";
 import TestHeader from "../../components/TestHeader/TestHeader";
 import { Button } from "@mui/material";
 import {useSelector} from "react-redux";
+import axios from "axios";
 
 const Test = () => {
   const [activeQuestionId, setActiveQuestionId] = useState();
   const [activeQuestion, setActiveQuestion] = useState();
+  const [upQues,setUpQues]=useState([]);
   const data = useSelector(state => state.prevNext)
   const questionsGroup = [
     {
@@ -32,10 +34,24 @@ const Test = () => {
       review: false,
     },
   ];
+
+
+  useEffect(()=>{
+   axios.get("https://examportalcsi.onrender.com/api/v1/category/html")
+   .then((res)=>{
+    console.log(res.data)
+    setUpQues(res.data)
+    setActiveQuestion(res.data[data.initialQues - 1])
+  })
+   .catch((err)=>{console.log(err)})
+  },[])
+
+
   useEffect(() => {
     console.log(activeQuestionId);
-    setActiveQuestion(questionsGroup[data.initialQues - 1]);
+    setActiveQuestion(upQues[data.initialQues - 1]);
   }, [data.initialQues]);
+
 
   return (
     <div className="flex justify-evenly">
@@ -45,7 +61,7 @@ const Test = () => {
         <Question ques={activeQuestion} />
         <TestFooter
           setActiveQuestionId={setActiveQuestionId}
-          activeQuestionId={activeQuestionId}
+          // activeQuestionId={activeQuestionId}
           activeQuestion={activeQuestion}
         />
       </div>

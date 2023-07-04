@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 
 const Question = (props) => {
   const ques = props.ques;
-  const optionSet = ["html", "httml", "htttlm", "htttttposa"];
+  // const optionSet = ques.options;
   const data = useSelector(state => state.prevNext)
   return (
     <div className="m-4 pl-3">
@@ -27,7 +27,7 @@ const Question = (props) => {
           name="radio-buttons-group"
           onChange={(e) => console.log(e.target.value)}
         >
-          {optionSet?.map((option, id) => {
+          {ques?.options.map((option, id) => {
             return (
               <FormControlLabel
                 value={option}
@@ -36,7 +36,12 @@ const Question = (props) => {
                 key={id}
               />
             );
-          })}
+            
+          })} 
+          
+           {
+            console.log(ques?.options)
+           }
         </RadioGroup>
       </FormControl>
     </div>
