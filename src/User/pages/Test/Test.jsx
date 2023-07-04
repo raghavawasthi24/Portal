@@ -31,7 +31,6 @@ const Test = () => {
     },
   ];
   useEffect(() => {
-    console.log(activeQuestionId);
     setActiveQuestion(questionsGroup[activeQuestionId - 1]);
   }, [activeQuestionId]);
 
