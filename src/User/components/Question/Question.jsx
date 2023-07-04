@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const Question = (props) => {
   const ques = props.ques;
-  console.log(ques);
+  // console.log(ques);
   // const optionSet = ["html", "httml", "htttlm", "htttttposa"];
   const optionSet = ques?.optionSet;
   const data = useSelector((state) => state.prevNext);

@@ -1,9 +1,13 @@
 import { Tab, Tabs } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const QuesTab = () => {
   const quesType = ["HTML", "CSS", "SQL", "Aptitude", "C"];
   const [value, setValue] = useState(0);
+
+  // useEffect(() => {
+  //   setSection(quesType.values.toLowerCase());
+  // }, [value]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

@@ -16,19 +16,19 @@ const Test = () => {
     {
       quesNo: 1,
       question: "What is bla",
-      optionSet: ["jhin", "gala", "lahu", "hu"],
+      optionSet: ["html", "css", "js", "node"],
       review: false,
     },
     {
       quesNo: 2,
       question: "What is bla2",
-      optionSet: ["jhin", "gala", "lahu", "hu"],
+      optionSet: ["pyq", "sem 2", "btech", "true"],
       review: false,
     },
     {
       quesNo: 3,
-      question: "What is bla3",
-      optionSet: ["jhin", "gala", "lahu", "hu"],
+      question: "What is true",
+      optionSet: ["all of the above", "none of the above", "option d", "false"],
       review: false,
     },
     {
@@ -39,7 +39,7 @@ const Test = () => {
     },
   ];
   useEffect(() => {
-    console.log(activeQuestionId);
+    // console.log(activeQuestionId);
     setActiveQuestion(questionsGroup[data.initialQues - 1]);
   }, [data.initialQues]);
 

@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { moveQues } from "../../../store/slices/PrevNextSlice";
 
-const QuesNumbers = ({ setActiveQuestionId }) => {
+const QuesNumbers = () => {
   const quesCount = [1, 2, 3, 4];
   const dispatch = useDispatch();
   return (
