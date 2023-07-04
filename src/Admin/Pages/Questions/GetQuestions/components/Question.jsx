@@ -26,6 +26,7 @@ const GetQuestions = () => {
         answer:["Ram","Shyam","Dana","moore"],
         correctAns:"Ram",
     }]
+    
     useEffect(()=>{
         axios.get("https://examportalcsi.onrender.com/api/v1/getquestions")
         .then((res)=>{console.log(res)})

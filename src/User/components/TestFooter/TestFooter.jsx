@@ -1,16 +1,21 @@
 import React from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Button } from "@mui/material";
+import { prevQues, nextQues } from "../../../store/slices/PrevNextSlice";
+import { useDispatch } from "react-redux";
 
 const TestFooter = (props) => {
+  const dispatch = useDispatch();
   const saveAndNext = () => {
     props.activeQuestion.review = false;
     console.log(props.activeQuestion);
+    dispatch(nextQues());
     // props.setActiveQuestionId(() => props.activeQuestionId + 1);
   };
   const reviewAndNext = () => {
     props.activeQuestion.review = true;
     console.log(props.activeQuestion);
+    dispatch(prevQues());
     // props.setActiveQuestionId(() => props.activeQuestionId + 1);
   };
   return (

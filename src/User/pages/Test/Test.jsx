@@ -6,10 +6,12 @@ import Timer from "../../components/Timer/Timer";
 import TestFooter from "../../components/TestFooter/TestFooter";
 import TestHeader from "../../components/TestHeader/TestHeader";
 import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const Test = () => {
   const [activeQuestionId, setActiveQuestionId] = useState();
   const [activeQuestion, setActiveQuestion] = useState();
+  const data = useSelector((state) => state.prevNext);
   const questionsGroup = [
     {
       quesNo: 1,
@@ -29,10 +31,17 @@ const Test = () => {
       optionSet: ["jhin", "gala", "lahu", "hu"],
       review: false,
     },
+    {
+      quesNo: 4,
+      question: "What is ql",
+      optionSet: ["sql", "mysql", "postgre", "oracle"],
+      review: false,
+    },
   ];
   useEffect(() => {
-    setActiveQuestion(questionsGroup[activeQuestionId - 1]);
-  }, [activeQuestionId]);
+    console.log(activeQuestionId);
+    setActiveQuestion(questionsGroup[data.initialQues - 1]);
+  }, [data.initialQues]);
 
   return (
     <div className="flex justify-evenly">
