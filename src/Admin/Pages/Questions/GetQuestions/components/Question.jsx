@@ -32,7 +32,6 @@ const GetQuestions = () => {
         correctAns:"Ram",
     }]
 
-    // const [showEdit,setShowEdit]=useState(false);
     
     useEffect(()=>{
         axios.get("https://examportalcsi.onrender.com/api/v1/getquestions")
