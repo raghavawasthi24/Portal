@@ -2,6 +2,11 @@ import { FormControlLabel, FormLabel, RadioGroup,FormControl, Radio } from '@mui
 import React, { useEffect } from 'react'
 import {useSelector} from "react-redux";
 import axios from 'axios';
+import EditIcon from '@mui/icons-material/Edit';
+import { useState } from 'react';
+import EditQuestion from './EditQuestion';
+import { useDispatch } from 'react-redux';
+import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 
 const GetQuestions = () => {
     const QuesArr=[{
@@ -26,6 +31,8 @@ const GetQuestions = () => {
         answer:["Ram","Shyam","Dana","moore"],
         correctAns:"Ram",
     }]
+
+    // const [showEdit,setShowEdit]=useState(false);
     
     useEffect(()=>{
         axios.get("https://examportalcsi.onrender.com/api/v1/getquestions")
@@ -33,13 +40,18 @@ const GetQuestions = () => {
         .catch((err)=>{console.log(err)})
     },[])
     const data = useSelector(state => state.prevNext)
+    const showEdit= useSelector(state=>state.editShow)
+    const dispatch=useDispatch();
 
     // const myState=useSelector((state)=>state.changeQues);
   return (
     <div className='p-10 flex flex-col justify-between h-full'>
         
         <div className=''>
-        <p>Question-{data.initialQues}</p>
+        <div className='flex justify-between my-3'>
+            <p>Question-{data.initialQues}</p>
+            <EditIcon onClick={()=>dispatch(toggleEditOpt())}/>
+        </div>
         <hr/>
             <p>{QuesArr[data.initialQues-1].question}</p>
             
@@ -56,6 +68,14 @@ const GetQuestions = () => {
                 <hr/>
                 <p>{QuesArr[data.initialQues-1].correctAns}</p>
             </div>
+
+            <div className={showEdit.initialValue?'absolute top-0 start-0 w-full h-full z-10':'hide'}>
+                <EditQuestion/>
+            </div>
+
+            {
+                console.log(showEdit)
+            }
        
     </div>
   )
