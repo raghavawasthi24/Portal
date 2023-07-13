@@ -1,7 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  initialQues: 1,
+  initialQues: [{
+    question:"What is Your Name?",
+    answer:["Ram","Shyam","Dana","moore"],
+    correctAns:"Ram",
+},
+{
+    question:"What is Your Adress?",
+    answer:["Rfnfrknf","Sgfkfrkfhyam","fkmnfkDana","mfnkjfnoore"],
+    correctAns:"Sgfkfrkfhyam",
+},{
+    question:"What is Your Father's name?",
+    answer:["Ram","Shyam","Dana","moore"],
+    correctAns:"Ram",
+},{
+    question:"What is Your mother's Name?",
+    answer:["Ram","Shyam","Dana","moore"],
+    correctAns:"Ram",
+},{
+    question:"What is Your son's Name?",
+    answer:["Ram","Shyam","Dana","moore"],
+    correctAns:"Ram",
+}],
 };
 
 const QuestionsSlice = createSlice({
@@ -9,12 +30,11 @@ const QuestionsSlice = createSlice({
   initialState,
   reducers: {
     quesList: (state) => {
-      if (state.initialQues < 2) state.initialQues = 1;
-      else state.initialQues--;
+      state.initialQues=state.initialQues
     },
   },
 });
 
-export default prevNextSlice.reducer;
-export const { prevQues, nextQues, moveQues } = prevNextSlice.actions;
+export default QuestionsSlice.reducer;
+export const { quesList } = QuestionsSlice.actions;
  

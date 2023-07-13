@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,25 +9,37 @@ import SendIcon from '@mui/icons-material/Send';
 import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import CancelIcon from '@mui/icons-material/Cancel';
+import {useSelector} from "react-redux";
 
 const EditQuestion = () => {
-    const initialvalues={
-        question:"What is Your Name?",
-        opt1:"Ram",
-        opt2:"Shyam",
-        opt3:"Dana",
-        opt4:"Moore",
-        correctAns:"Shyam"
-    }
-    const [formvalues,setFormvalues]=useState(initialvalues);
+  
+  
+
     const dispatch=useDispatch();
+    const data = useSelector(state => state.prevNext)
+    const questionDisplay= useSelector(state=>state.quesList)
+
+
+  const [formvalues,setFormvalues]=useState(questionDisplay.initialQues[data.initialQues-1]);
+
+  useEffect(()=>{
+    console.log(questionDisplay.initialQues[data.initialQues-1])
+    setFormvalues(questionDisplay.initialQues[data.initialQues-1])
+  },[data.initialQues])
+
+ 
+
     const inputHandler=(e)=>{
       const {name,value}=e.target;
       setFormvalues({...formvalues,[name]:value})
     }
   return (
     <div className='flex flex-col w-2/3 m-auto mt-3 p-5 rounded bg-white' style={{boxShadow:"1px 1px 5px grey"}}>
-      <CancelIcon onClick={()=>dispatch(toggleEditOpt())} className='self-end'/>
+      <CancelIcon onClick={()=>dispatch(toggleEditOpt())} className='self-end' style={{cursor:"pointer"}}/>
+
+    {/* {
+      console.log(questionDisplay.initialQues)
+    } */}
         <TextField
           id="outlined-multiline-flexible"
           label="Question"
@@ -46,7 +58,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{margin:"1rem 0"}}
-          value={formvalues.opt1}
+          value={formvalues.answer[0]}
           name="opt1"
         onChange={inputHandler}
         />
@@ -56,7 +68,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{margin:"1rem 0"}}
-          value={formvalues.opt2}
+          value={formvalues.answer[1]}
           name="opt2"
         onChange={inputHandler}
         />
@@ -66,7 +78,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{margin:"1rem 0"}}
-          value={formvalues.opt3}
+          value={formvalues.answer[2]}
           name="opt3"
         onChange={inputHandler}
         />
@@ -76,7 +88,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{margin:"1rem 0"}}
-          value={formvalues.opt4}
+          value={formvalues.answer[3]}
           name="opt4"
         onChange={inputHandler}
         />
@@ -92,10 +104,13 @@ const EditQuestion = () => {
           label="Correct Option"
           onChange={inputHandler}
         >
-          <MenuItem value={formvalues.opt1} defaultChecked>{formvalues.opt1}</MenuItem>
-          <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
-          <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
-          <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
+          {
+            formvalues.answer.map((val,key)=>{
+              return(
+                <MenuItem value={val} key={key}>{val}</MenuItem>
+              )
+            })
+          }
         </Select>
       </FormControl>
 

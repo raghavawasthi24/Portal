@@ -4,7 +4,7 @@ import Login from "./User/pages/Login/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LeaderBoard from "./Admin/Pages/LeaderBoard/LeaderBoard";
 import GetQuestions from "./Admin/Pages/Questions/GetQuestions/GetQuestions";
-import AdminHome from "./Admin/AdminHome";
+// import AdminHome from "./Admin/AdminHome";
 import GetCandidates from "./Admin/Pages/Candidates/GetCandidates/GetCandidates";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
@@ -19,9 +19,9 @@ const App = () => {
           <Route exact path="/" element={<Login />}></Route>
           <Route exact path="test" element={<Test />}></Route>
           <Route exact path="leaderboard" element={<LeaderBoard />} />
-          <Route exact path="getQuestion" element={<GetQuestions />} />
+          <Route exact path="admin" element={<GetQuestions />} />
           <Route exact path="getCandidate" element={<GetCandidates />} />
-          <Route exact path="admin" element={<AdminHome />} />
+          {/* <Route exact path="admin" element={<AdminHome />} /> */}
         </Routes>
       </BrowserRouter>
     </FullScreen>
