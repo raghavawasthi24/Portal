@@ -1,10 +1,14 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { moveQues } from "../../../store/slices/PrevNextSlice";
 
-const QuesNumbers = ({ setActiveQuestionId }) => {
-  const quesCount = [1, 2, 3, 4, 5, 6, 7, 8];
+const QuesNumbers = ({ length }) => {
+  console.log(length);
+  // const quesCount = [1, 2, 3, 4];
+  const dispatch = useDispatch();
   return (
-    <div className="flex flex-col mt-12">
+    <div className="flex flex-col">
       <Typography
         variant="h5"
         className="text-center  bg-gradient-to-r from-quesGrad1 to-quesGrad2 p-4 px-0"
@@ -14,20 +18,20 @@ const QuesNumbers = ({ setActiveQuestionId }) => {
       <Grid
         container
         spacing={2}
-        gap={3}
+        gap={1}
         justifyContent="center"
         alignItems="center"
         sx={{ mt: "10px" }}
       >
-        {quesCount?.map((ques, id) => {
+        {[...Array(length)]?.map((ques, id) => {
           return (
             <Grid item key={id}>
               <Button
                 color="error"
                 variant="contained"
-                onClick={() => setActiveQuestionId(id + 1)}
+                onClick={() => dispatch(moveQues(id + 1))}
               >
-                {ques}
+                {id + 1}
               </Button>
             </Grid>
           );

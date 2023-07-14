@@ -78,7 +78,7 @@ const Login = () => {
                 // }}
                 InputProps={{
                   style: {
-                    borderRadius: "10px",
+                    borderRadius: "8px",
                     borderLeft: "4px solid #543BA0",
                   },
                 }}
@@ -101,7 +101,7 @@ const Login = () => {
                 // sx={{ margin: "0 auto 1rem auto" }}
                 InputProps={{
                   style: {
-                    borderRadius: "10px",
+                    borderRadius: "8px",
                     borderLeft: "4px solid #543BA0",
                   },
                 }}
@@ -112,7 +112,7 @@ const Login = () => {
             </div>
             <Button
               variant="contained"
-              className="login_field"
+              className="login_btn"
               type="submit"
               sx={{ backgroundColor: "#543BA0" }}
             >

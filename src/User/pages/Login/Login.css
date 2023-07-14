@@ -27,15 +27,16 @@ align-self: center;
     align-self: center;
 }
 .login_form_header{
-    font-size: larger;
+    font-size: x-large;
     font-weight: bold;
+    margin-top: 3vh;
 }
 .login_field{
     width:80%;
     align-self: center;
 }
 .input_field{
-    margin:1rem 0 2rem 0; 
+    margin:1rem 0 1.5rem 0; 
 }
 .error{
     color: red;
@@ -44,7 +45,6 @@ align-self: center;
     align-self: flex-start;
 }
 .login_btn{
-    
     width:40%;
     align-self: center;
 }
