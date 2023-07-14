@@ -16,8 +16,8 @@ const QuesTab = ({ setSection }) => {
     // console.log(newValue, section);
   };
   return (
-    <div className="mx-32 mt-0 mb-6  shadow-md shadow-gray-600">
-      <Tabs value={value} onChange={handleChange} centered>
+    <div className="mt-0 mb-6  shadow-md shadow-gray-600 mx-32">
+      <Tabs value={value} onChange={handleChange} variant="fullWidth">
         {quesType?.map((type, id) => {
           return <Tab label={type} key={id} className="shadow" />;
         })}

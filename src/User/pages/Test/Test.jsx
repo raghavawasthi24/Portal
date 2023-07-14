@@ -38,7 +38,7 @@ const Test = () => {
 
   return (
     <div className="flex justify-evenly">
-      <div className="flex flex-col justify-center w-8/12 m-0 py-4 pl-12">
+      <div className="flex flex-col justify-start w-8/12 m-0 py-4 pl-12">
         <TestHeader />
         <QuesTab setSection={setSection} />
         <Question ques={activeQuestion} />
@@ -57,7 +57,7 @@ const Test = () => {
         </div>
         <Button
           type="submit"
-          className="!bg-submitColor !text-white w-4 !mx-auto"
+          className="!bg-submitColor !text-white w-4 !mx-auto !px-16 !py-2"
         >
           Submit
         </Button>

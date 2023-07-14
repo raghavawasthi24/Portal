@@ -8,7 +8,7 @@ const QuesNumbers = ({ length }) => {
   // const quesCount = [1, 2, 3, 4];
   const dispatch = useDispatch();
   return (
-    <div className="flex flex-col mt-12">
+    <div className="flex flex-col">
       <Typography
         variant="h5"
         className="text-center  bg-gradient-to-r from-quesGrad1 to-quesGrad2 p-4 px-0"

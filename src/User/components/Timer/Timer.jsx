@@ -29,7 +29,7 @@ const Timer = () => {
   }, [hours, minutes, seconds]);
 
   return (
-    <div className="flex flex-col mt-4 !text-center">
+    <div className="flex flex-col mt-4 !text-center align-middle border bg-red-500 h-48">
       <Typography
         variant="h5"
         className="text-center bg-gradient-to-r from-timerGrad1 to-timerGrad2 p-4"
@@ -42,7 +42,7 @@ const Timer = () => {
         gap={6}
         justifyContent="center"
         alignItems="center"
-        sx={{ pt: "10px", ml: "0" }}
+        sx={{ pt: "10px", ml: "0", background: "white", height: "100%" }}
       >
         <Grid item>
           <Typography
