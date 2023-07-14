@@ -14,3 +14,6 @@ html{
 ::-webkit-scrollbar{
     display: none;
 }
+.hide{
+    display: none;
+}

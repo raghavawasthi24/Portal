@@ -13,7 +13,7 @@ const prevNextSlice = createSlice({
       else state.initialQues--;
     },
     nextQues: (state) => {
-      if (state.initialQues > 1) state.initialQues = 2;
+      if (state.initialQues > 49) state.initialQues = 2;
       else state.initialQues++;
     },
     moveQues: (state, action) => {
