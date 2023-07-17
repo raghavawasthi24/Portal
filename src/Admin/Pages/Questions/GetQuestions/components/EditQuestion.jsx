@@ -13,7 +13,14 @@ import {useSelector} from "react-redux";
 
 const EditQuestion = () => {
   
-  
+  let initialValues={
+    question:"",
+    opt1:"",
+    opt2:"",
+    opt3:"",
+    opt4:"",
+    correctAns:""
+  }
 
     const dispatch=useDispatch();
     const data = useSelector(state => state.prevNext)
@@ -24,7 +31,13 @@ const EditQuestion = () => {
 
   useEffect(()=>{
     console.log(questionDisplay.initialQues[data.initialQues-1])
-    setFormvalues(questionDisplay.initialQues[data.initialQues-1])
+    initialValues.question=questionDisplay.initialQues[data.initialQues-1].question;
+    initialValues.opt1=questionDisplay.initialQues[data.initialQues-1].answer[0];
+    initialValues.opt2=questionDisplay.initialQues[data.initialQues-1].answer[1];
+    initialValues.opt3=questionDisplay.initialQues[data.initialQues-1].answer[2];
+    initialValues.opt4=questionDisplay.initialQues[data.initialQues-1].answer[3];
+    initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].correctAns;
+    setFormvalues(initialValues)
   },[data.initialQues])
 
  
@@ -58,7 +71,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{margin:"1rem 0"}}
-          value={formvalues.answer[0]}
+          value={formvalues.opt1}
           name="opt1"
         onChange={inputHandler}
         />
@@ -68,7 +81,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{margin:"1rem 0"}}
-          value={formvalues.answer[1]}
+          value={formvalues.opt2}
           name="opt2"
         onChange={inputHandler}
         />
@@ -78,7 +91,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{margin:"1rem 0"}}
-          value={formvalues.answer[2]}
+          value={formvalues.opt3}
           name="opt3"
         onChange={inputHandler}
         />
@@ -88,7 +101,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{margin:"1rem 0"}}
-          value={formvalues.answer[3]}
+          value={formvalues.opt4}
           name="opt4"
         onChange={inputHandler}
         />
@@ -104,13 +117,10 @@ const EditQuestion = () => {
           label="Correct Option"
           onChange={inputHandler}
         >
-          {
-            formvalues.answer.map((val,key)=>{
-              return(
-                <MenuItem value={val} key={key}>{val}</MenuItem>
-              )
-            })
-          }
+        <MenuItem value={formvalues.opt1}>{formvalues.opt1}</MenuItem>
+        <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
+        <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
+        <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
         </Select>
       </FormControl>
 
