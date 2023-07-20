@@ -8,6 +8,8 @@ import GetQuestions from "./Admin/Pages/Questions/GetQuestions/GetQuestions";
 import GetCandidates from "./Admin/Pages/Candidates/GetCandidates/GetCandidates";
 import Instruction from "./User/pages/instruction/instruction";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import Feedback from "./User/pages/Feedback/Feedback";
+import Thankyou from "./User/pages/Thankyou/Thankyou";
 
 const App = () => {
   const handle = useFullScreenHandle();
@@ -23,6 +25,10 @@ const App = () => {
           <Route exact path="admin" element={<GetQuestions />} />
           <Route exact path="getCandidate" element={<GetCandidates />} />
           <Route exact path="instruction" element={<Instruction/>}/>
+          <Route exact path="feedback" element={<Feedback/>}/>
+          <Route exact path="Thankyou" element={<Thankyou/>}/>
+
+
           {/* <Route exact path="admin" element={<AdminHome />} /> */}
         </Routes>
       </BrowserRouter>
