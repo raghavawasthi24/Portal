@@ -10,6 +10,7 @@ import Instruction from "./User/pages/instruction/instruction";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Feedback from "./User/pages/Feedback/Feedback";
 import Thankyou from "./User/pages/Thankyou/Thankyou";
+import AddQuestions from "./Admin/Pages/Questions/AddQuestions/AddQuestions";
 
 const App = () => {
   const handle = useFullScreenHandle();
@@ -29,6 +30,7 @@ const App = () => {
           <Route exact path="Thankyou" element={<Thankyou/>}/>
 
 
+          <Route exact path="addQuestions" element={<AddQuestions/>}/>
           {/* <Route exact path="admin" element={<AdminHome />} /> */}
         </Routes>
       </BrowserRouter>
