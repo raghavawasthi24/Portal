@@ -6,7 +6,8 @@ const initialState =
     initialValue:[
       {
         Name:"Shipra Tripathi",
-        Number:"2110321"
+        Number:"2110321",
+        hosteler:"yes",
       },
       {
         Name:"Raghav Awasthi",
@@ -31,12 +32,12 @@ const StudentSlice = createSlice({
       state.initialValue = state.initialValue.filter((student) =>     
            student.Name.toLowerCase().includes(action.payload.toLowerCase())
       )
+      },
+    categoryStudent:(state,action)=>{
       
-    
-    console.log(f,action.payload)
-    },
+    }
   },
 });
 
 export default StudentSlice.reducer;
-export const { searchStudent } = StudentSlice.actions;
+export const { searchStudent,categoryStudent } = StudentSlice.actions;
