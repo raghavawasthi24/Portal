@@ -23,7 +23,7 @@ const SearchBar = () => {
     InputProps={{
       startAdornment: <SearchIcon />,
     }}
-    sx={{ width: "20rem" }}
+    sx={{ width: "100%" }}
   />
     </div>
   )

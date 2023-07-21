@@ -13,7 +13,7 @@ const CandidateDisplay=()=>{
 
 
   return (
-    <div className=" w-full">
+    <div className=" w-full h-full overflow-scroll border-black">
       
         <TableContainer component={Paper}>
           <Table>

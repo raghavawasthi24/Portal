@@ -5,10 +5,10 @@ import Stack from "@mui/material/Stack";
 const Buttons = () => {
   const candidateBtn = [
     "All",
-    "Girls Day Scholar",
-    "Girls Hosteller",
-    "Boys Day Scholar",
-    "Boys Hosteller",
+    "Girls (Day Scholar)",
+    "Girls (Hosteller)",
+    "Boys (Day Scholar)",
+    "Boys (Hosteller)",
   ];
   return (
     <div className="">
@@ -20,7 +20,9 @@ const Buttons = () => {
             key={index}
             sx={{
               backgroundColor: "white",
-              color: "slategray",
+              color: "black",
+              padding:"1rem",
+              boxShadow:"0.5px 0.5px 3px black",
               "&:hover": {
                 backgroundColor: "rgba(222, 234, 254, 1)",
               },

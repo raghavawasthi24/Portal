@@ -15,7 +15,8 @@ const initialState =
     {
       Name:"Ishu Singh",
       Number:"21103212"
-    }
+    },
+    
     ]
   };
 
