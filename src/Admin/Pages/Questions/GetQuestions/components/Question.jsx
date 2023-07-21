@@ -1,9 +1,7 @@
 import { FormControlLabel, FormLabel, RadioGroup,FormControl, Radio } from '@mui/material'
 import React, { useEffect } from 'react'
 import {useSelector} from "react-redux";
-import axios from 'axios';
 import EditIcon from '@mui/icons-material/Edit';
-import { useState } from 'react';
 import EditQuestion from './EditQuestion';
 import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"

@@ -13,10 +13,11 @@ const Buttons = () => {
   return (
     <div className="">
     <Stack direction="column" spacing={3}>
-      {candidateBtn.map((val) => {
+      {candidateBtn.map((val,index) => {
         return (
           <Button
             variant="contained"
+            key={index}
             sx={{
               backgroundColor: "white",
               color: "slategray",
