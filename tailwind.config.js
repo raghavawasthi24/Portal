@@ -18,7 +18,8 @@ export default {
         testFooterGrad2: "rgba(213, 240, 249, 0.75)",
         dropdownGrad1: "rgba(165, 242, 255, 0.5)",
         dropdownGrad2:"rgba(33, 83, 249, 0.23)",
-        dropdownGrad3: "rgba(167, 185, 244, 0.56)"
+        dropdownGrad3: "rgba(167, 185, 244, 0.56)",
+        leaderboardColor: "rgba(84, 59, 160, 1)"
       },
     },
   },
