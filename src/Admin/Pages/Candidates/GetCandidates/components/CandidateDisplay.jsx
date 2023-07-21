@@ -24,12 +24,13 @@ const CandidateDisplay=()=>{
               </TableRow>
             </TableHead>
             <TableBody>
-              {/* {data.initialValue.map((student, index) => (
+              {data.initialValue.map((student, index) => (
                 <TableRow key={index}>
                   <TableCell>{student.Name}</TableCell>
                   <TableCell>{student.Number}</TableCell>
                 </TableRow>
-              ))} */}
+              ))}
+              
   
             </TableBody>
           </Table>
