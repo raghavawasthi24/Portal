@@ -6,10 +6,7 @@ import Header from './components/Header/Header';
 const index = () => {
   return (
     <>
-    <Header/>
-    <Routes>
-        <Route to="/" element={<GetQuestions/>}/>
-    </Routes>
+    <GetQuestions/>
     </>
   )
 }

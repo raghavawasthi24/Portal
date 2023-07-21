@@ -29,7 +29,7 @@ const Timer = () => {
   }, [hours, minutes, seconds]);
 
   return (
-    <div className="flex flex-col mt-4">
+    <div className="flex flex-col mt-4 !text-center align-middle border bg-red-500 h-48">
       <Typography
         variant="h5"
         className="text-center bg-gradient-to-r from-timerGrad1 to-timerGrad2 p-4"
@@ -42,22 +42,31 @@ const Timer = () => {
         gap={6}
         justifyContent="center"
         alignItems="center"
-        sx={{ pt: "10px", ml: "0" }}
+        sx={{ pt: "10px", ml: "0", background: "white", height: "100%" }}
       >
         <Grid item>
-          <Typography variant="h4">
+          <Typography
+            variant="h5"
+            className="!bg-reviewColor p-2 !text-white rounded"
+          >
             {hours.toString().padStart(2, "0")}
           </Typography>
           <Typography variant="caption">Hours</Typography>
         </Grid>
         <Grid item>
-          <Typography variant="h4">
+          <Typography
+            variant="h5"
+            className="!bg-reviewColor p-2 !text-white rounded"
+          >
             {minutes.toString().padStart(2, "0")}
           </Typography>
           <Typography variant="caption">Minutes</Typography>
         </Grid>
         <Grid item>
-          <Typography variant="h4">
+          <Typography
+            variant="h5"
+            className="!bg-reviewColor p-2 !text-white rounded"
+          >
             {seconds.toString().padStart(2, "0")}
           </Typography>
           <Typography variant="caption">Seconds</Typography>

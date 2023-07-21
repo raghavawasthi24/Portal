@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const Dropdown = () => {
 
-    const techArr=["HTML","CSS","JavaScript","Aptitude"];
+    const techArr=["HTML","CSS","JavaScript","Aptitude","C","C++","Java"];
     const [selTech,setSelTech]=useState(techArr[0])
     const handleTech=(e)=>{
      setSelTech(e.target.value)

@@ -6,27 +6,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import {useSelector} from "react-redux";
 
 const CandidateDisplay=()=>{
-const students = [
-  { Name: "Shipra", Number: "2113129" },
-  { Name: "Ishu", Number: "2332323" },
-  { Name: "Raghav", Number: "2110159" },
-];
+  const data = useSelector(state => state.student)
 
-// const GetCandidate = () => {
-//   const [searchQuery, setSearchQuery] = useState("");
-
-//   const handleSearch = (event) => {
-//     setSearchQuery(event.target.value);
-//   };
-
-//   const filteredStudents = students.filter((student) =>
-//     student.Name.toLowerCase().includes(searchQuery.toLowerCase())
-//   );
 
   return (
-    <div className=" w-full">
+    <div className=" w-full h-full overflow-scroll border-black">
       
         <TableContainer component={Paper}>
           <Table>
@@ -37,12 +24,14 @@ const students = [
               </TableRow>
             </TableHead>
             <TableBody>
-              {students.map((student, index) => (
+              {data.initialValue.map((student, index) => (
                 <TableRow key={index}>
                   <TableCell>{student.Name}</TableCell>
                   <TableCell>{student.Number}</TableCell>
                 </TableRow>
               ))}
+              
+  
             </TableBody>
           </Table>
         </TableContainer>

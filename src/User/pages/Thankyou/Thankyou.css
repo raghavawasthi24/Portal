@@ -1,0 +1,29 @@
+.ThankMain{
+    margin-top: 4rem;
+    text-align: center !important;
+}
+.ThankImg{
+   
+    display: flex !important; 
+    justify-content: center;
+    align-items: center;
+}
+.ThankHead{
+    padding: 2rem;
+    font-size: 3rem;
+    font-family: poppins;
+    font-weight: 900;
+    background: linear-gradient(180deg, #7BCEEF 0%, rgba(117, 63, 229, 0.58) 100%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.Copyright{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3718AE;
+    font-size: 1.5rem;
+    font-weight: 500;
+}

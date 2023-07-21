@@ -1,0 +1,19 @@
+.FeedbackHead{
+  font-family: poppins !important;
+ margin-bottom: 1rem !important;
+ font-weight: 500 !important;
+ font-size: 2rem !important;
+}
+.FeedbackMain{
+  margin-top: 5rem;
+    text-align: center;
+}
+.FeedbackBtn{
+  font-size: 1rem ;
+  border-radius: 15px ;
+  padding: 1rem ;
+  width: 10rem;
+  color: white ;
+  background: rgba(84, 59, 160, 1) ;
+
+}
