@@ -13,7 +13,7 @@ const initialState =
         Number:"2110158"
     },
     {
-      Name:"Ishu Singh",
+      Name:"Abhinav Tripathi",
       Number:"21103212"
     },
     
@@ -27,12 +27,17 @@ const StudentSlice = createSlice({
   initialState,
   reducers: {
     searchStudent: (state, action) => {
+      
+    axios.get("https://exam-portal-django.onrender.com/accounts/StudentList/")
+    .then((response) => setStudents(response.data))
+    .catch((error) => console.error(error));                                   
+
       state.initialValue = f;
       state.initialValue = state.initialValue.filter((student) =>     
            student.Name.toLowerCase().includes(action.payload.toLowerCase())
       )
       
-    
+      
     console.log(f,action.payload)
     },
   },
