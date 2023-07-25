@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../../../components/Header/Header";
+import Header from "../../../components/Header"
 import Question from "./components/Question"
 import Dropdown from "../../../components/Dropdown";
 import Button from '@mui/material/Button';

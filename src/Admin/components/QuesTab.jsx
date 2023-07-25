@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { moveQues } from '../../../../../store/slices/PrevNextSlice';
+import { moveQues } from '../../store/slices/PrevNextSlice';
 import { Button } from '@mui/material';
 
 const QuesTab = () => {

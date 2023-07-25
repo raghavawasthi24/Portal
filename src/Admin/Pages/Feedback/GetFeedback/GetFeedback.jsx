@@ -1,17 +1,19 @@
 import React from 'react';
 import Feedback from './components/Feedback';
-import FeedControl from './components/FeedControl';
-import Header from "../../../components/Header/Header"
+import QuesControl from '../../../components/QuesControl';
+import Header from "../../../components/Header"
 
 const GetFeedback = () => {
   return (
-    <div className='w-screen h-screen flex flex-col justify-between'>
+    <div className='w-screen h-screen'>
         <Header/>
-        <div className='w-2/3 mx-auto mt-14'>
-            <Feedback/>
-        </div>
-        <div className='w-2/3 mx-auto'>
-            <FeedControl/>
+        <div className='w-2/3 h-screen flex flex-col justify-between'>
+          <div className=' mt-14 '>
+              <Feedback/>
+          </div>
+          <div>
+              <QuesControl/>
+          </div>
         </div>
     </div>
   )

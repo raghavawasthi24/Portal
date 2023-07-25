@@ -26,12 +26,12 @@ const App = () => {
           <Route exact path="test" element={<Test />}></Route>
           <Route exact path="leaderboard" element={<LeaderBoard />} />
           <Route exact path="admin" element={<AdminHome/>} />
-          <Route exact path="admin/getCandidate" element={<GetCandidates />} />
+          <Route exact path="getCandidate" element={<GetCandidates />} />
           <Route exact path="instruction" element={<Instruction/>}/>
           <Route exact path="feedback" element={<Feedback/>}/>
           <Route exact path="Thankyou" element={<Thankyou/>}/>
-          <Route exact path="admin/addQuestions" element={<AddQuestions/>}/>
-          <Route exact path="admin/addfeedback" element={<AddFeedback/>}/>
+          <Route exact path="addQuestions" element={<AddQuestions/>}/>
+          <Route exact path="addfeedback" element={<AddFeedback/>}/>
           <Route exact path="getfeedback" element={<GetFeedback/>}/>
           {/* <Route exact path="admin" element={<AdminHome />} /> */}
         </Routes>

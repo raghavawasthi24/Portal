@@ -65,7 +65,7 @@ const Header = () => {
       }}
     >
       <MenuItem onClick={()=>{handleClose2,navigate("/admin")}}>Questions</MenuItem>
-      <MenuItem onClick={()=>{handleClose2,navigate("/admin/getCandidate")}}>Candidates</MenuItem>
+      <MenuItem onClick={()=>{handleClose2,navigate("/getCandidate")}}>Candidates</MenuItem>
       <MenuItem onClick={()=>{handleClose2,navigate("/getfeedback")}}>Feedback</MenuItem>
       <MenuItem onClick={()=>{handleClose2,navigate("/leaderboard")}}>Leaderboard</MenuItem>
     </Menu>
@@ -91,9 +91,9 @@ const Header = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={()=>{handleClose,navigate("/admin/addQuestions")}}>Questions</MenuItem>
+          <MenuItem onClick={()=>{handleClose,navigate("/addQuestions")}}>Questions</MenuItem>
           <MenuItem onClick={()=>{handleClose,navigate("/admin")}}>Candidates</MenuItem>
-          <MenuItem onClick={()=>{handleClose,navigate("/admin/addfeedback")}}>Feedback</MenuItem>
+          <MenuItem onClick={()=>{handleClose,navigate("/addfeedback")}}>Feedback</MenuItem>
         </Menu>
 
         <div className="mr-9">

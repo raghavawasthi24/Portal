@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import Tabtable from "./Tabtable";
-import Header from "../../components/Header/Header";
+// import Header from "../../components/Header/Header";
 
 const LeaderBoard = () => {
   const students = [

@@ -2,7 +2,7 @@ import React from "react";
 import CandidateDisplay from "./components/CandidateDisplay";
 import Buttons from "./components/Button";
 import SearchBar from "./components/SearchBar";
-import Header from "../../../components/Header/Header"
+import Header from "../../../components/Header"
 
 const GetCandidates = () => {
   return (

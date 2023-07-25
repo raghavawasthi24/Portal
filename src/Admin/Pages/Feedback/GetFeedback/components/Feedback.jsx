@@ -2,9 +2,10 @@ import { FormControlLabel, FormLabel, RadioGroup,FormControl, Radio } from '@mui
 import React, { useEffect } from 'react'
 import {useSelector} from "react-redux";
 import EditIcon from '@mui/icons-material/Edit';
-// import EditQuestion from './EditQuestion';
+import EditQuestion from './EditFeedback';
 import { useDispatch } from 'react-redux';
-// import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
+import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
+import EditFeedback from './EditFeedback';
 // import { quesList } from '../../../../../store/slices/QuestionsSlice';
 
 
@@ -13,24 +14,25 @@ const Feedback = () => {
     // useEffect(()=>{
     //     dispatch(quesList())
     // },[])
-    const data = useSelector(state => state.feedback)
+    const feedvalue = useSelector(state => state.feedback)
+    const data = useSelector(state => state.prevNext)
     // const questionDisplay= useSelector(state=>state.quesList)
-    // const showEdit= useSelector(state=>state.editShow)
-    // const dispatch=useDispatch();
+    const showEdit= useSelector(state=>state.editShow)
+    const dispatch=useDispatch();
 
   return (
     <div className='p-10 flex flex-col justify-between'>
         <div className=''>
         <div className='flex justify-between my-3'>
             <p>Question-1</p>
-            <EditIcon style={{cursor:"pointer"}}/>
+            <EditIcon style={{cursor:"pointer"}} onClick={()=>dispatch(toggleEditOpt())}/>
         </div>
         <hr/>
-            <p>{data.initial[0].question}</p>
+            <p>{feedvalue.initial[data.initialQues-1].question}</p>
             
             <FormControl>
                 <RadioGroup>
-                {data.initial[0].answer.map((item,key)=>{
+                {feedvalue.initial[data.initialQues-1].answer.map((item,key)=>{
                     return(<FormControlLabel key={key} value={item} control={<Radio/>} label={item}/>)
                 })}
                 </RadioGroup>
@@ -38,9 +40,9 @@ const Feedback = () => {
         </div>
             <hr />
 
-            {/* <div className={showEdit.initialValue?'absolute top-0 start-0 w-full h-full z-10':'hide'}>
-                <EditQuestion/>
-            </div> */}
+            <div className={showEdit.initialValue?'absolute top-0 start-0 w-full h-full z-10':'hide'}>
+                <EditFeedback/>
+            </div>
 
           
        
