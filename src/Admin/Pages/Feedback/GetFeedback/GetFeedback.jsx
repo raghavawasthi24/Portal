@@ -16,7 +16,7 @@ const GetFeedback = () => {
               <QuesControl/>
           </div>
         </div>
-        <div className='w-1/3' style={{marginTop:"10rem", marginRight:"2rem"}}>
+        <div className='w-1/3' style={{marginTop:"10rem", marginRight:"2rem",padding:"5rem"}}>
           <QuesTab/>
         </div>
     </div>
