@@ -6,6 +6,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
+import { useNavigate } from "react-router-dom";
 
 import Tabtable from "./Tabtable";
 // import Header from "../../components/Header/Header";
@@ -23,9 +25,13 @@ const LeaderBoard = () => {
     { Rank: 9, Name: "Shipra", Number: "2113129" },
     { Rank: 10, Name: "Shipra", Number: "2113129" },
   ];
+  const navigate=useNavigate();
 
   return (
     <div className="flex flex-col items-center justify-between min-h-screen">
+       <div className="absolute" style={{top:"3rem",left:"3rem"}}>
+        <ArrowCircleUpRoundedIcon sx={{width:"3rem",height:"3rem",rotate:"270deg",color:"rgba(84, 59, 160, 1)"}} onClick={()=>navigate("/admin")}/>
+       </div>
       <div className="p-4 mt-5">
         <h1 className=" font-sans font-bold text-3xl text-center mb-5  tracking-widest  whitespace-pre  text-leaderboardColor ">
           Leader Board
