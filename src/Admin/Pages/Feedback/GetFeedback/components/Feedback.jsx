@@ -24,7 +24,7 @@ const Feedback = () => {
     <div className='p-10 flex flex-col justify-between'>
         <div className=''>
         <div className='flex justify-between my-3'>
-            <p>Question-1</p>
+            <p>Question-{data.initialQues}</p>
             <EditIcon style={{cursor:"pointer"}} onClick={()=>dispatch(toggleEditOpt())}/>
         </div>
         <hr/>
