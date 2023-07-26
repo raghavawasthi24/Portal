@@ -40,7 +40,7 @@ const QuestionsSlice = createSlice({
             console.log(err)
         })
       state.initialQues=state.initialQues
-    },
+    }
   },
 });
 
