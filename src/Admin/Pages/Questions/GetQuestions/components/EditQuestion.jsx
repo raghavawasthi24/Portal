@@ -31,12 +31,12 @@ const EditQuestion = () => {
 
   useEffect(()=>{
     console.log(questionDisplay.initialQues[data.initialQues-1])
-    initialValues.question=questionDisplay.initialQues[data.initialQues-1].question;
-    initialValues.opt1=questionDisplay.initialQues[data.initialQues-1].answer[0];
-    initialValues.opt2=questionDisplay.initialQues[data.initialQues-1].answer[1];
-    initialValues.opt3=questionDisplay.initialQues[data.initialQues-1].answer[2];
-    initialValues.opt4=questionDisplay.initialQues[data.initialQues-1].answer[3];
-    initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].correctAns;
+    initialValues.question=questionDisplay.initialQues[data.initialQues-1].question.ques;
+    initialValues.opt1=questionDisplay.initialQues[data.initialQues-1].options[0].ans;
+    initialValues.opt2=questionDisplay.initialQues[data.initialQues-1].options[1].ans;
+    initialValues.opt3=questionDisplay.initialQues[data.initialQues-1].options[2].ans;
+    initialValues.opt4=questionDisplay.initialQues[data.initialQues-1].options[3].ans;
+    initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].question.correct_ans;
     setFormvalues(initialValues)
   },[data.initialQues])
 
