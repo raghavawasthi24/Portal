@@ -4,11 +4,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
-import CancelIcon from '@mui/icons-material/Cancel';
+// import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
+// import CancelIcon from '@mui/icons-material/Cancel';
 
 
-const Question = () => {
+const AddFeedback = () => {
   
   let initialValues={
     question:"",
@@ -16,7 +16,6 @@ const Question = () => {
     opt2:"",
     opt3:"",
     opt4:"",
-    correctAns:""
   }
 
 
@@ -85,26 +84,9 @@ const Question = () => {
         onChange={inputHandler}
         />
 
-
-<FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Correct Option</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={formvalues.correctAns}
-          name='correctAns'
-          label="Correct Option"
-          onChange={inputHandler}
-        >
-        <MenuItem value={formvalues.opt1}>{formvalues.opt1}</MenuItem>
-        <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
-        <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
-        <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
-        </Select>
-      </FormControl>
      
     </div>
   )
 }
 
-export default Question
+export default AddFeedback

@@ -3,6 +3,7 @@ import  prevNextSlice  from "./slices/PrevNextSlice";
 import EditContSlice from "./slices/EditContSlice";
 import QuestionsSlice from "./slices/QuestionsSlice";
 import StudentsSlice from "./slices/StudentsSlice";
+import FeedbackSlice from "./slices/FeedbackSlice";
 
 const store= configureStore({
     reducer:{
@@ -10,6 +11,7 @@ const store= configureStore({
         editShow : EditContSlice,
         quesList : QuestionsSlice,
         student: StudentsSlice,
+        feedback: FeedbackSlice
     },
 })
 

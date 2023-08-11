@@ -6,14 +6,31 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { useEffect } from "react";
+import { studentList } from "../../../../../store/slices/StudentsSlice";
+import axios from "axios";
 
 const CandidateDisplay=()=>{
   const data = useSelector(state => state.student)
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+      axios.get("https://exam-portal-django.onrender.com/accounts/StudentList/")
+       .then((res)=>{console.log(res.data);
+        dispatch(studentList(res.data))
+        // state.initialValue=res.data;
+      })
+       .catch((err)=>{console.log(err)})
+    
+  },[])
 
 
   return (
     <div className=" w-full h-full overflow-scroll border-black">
+      {
+        console.log(data)
+      }
       
         <TableContainer component={Paper}>
           <Table>
@@ -26,8 +43,8 @@ const CandidateDisplay=()=>{
             <TableBody>
               {data.initialValue.map((student, index) => (
                 <TableRow key={index}>
-                  <TableCell>{student.Name}</TableCell>
-                  <TableCell>{student.Number}</TableCell>
+                  <TableCell>{student.name}</TableCell>
+                  <TableCell>{student.studentNo}</TableCell>
                 </TableRow>
               ))}
               

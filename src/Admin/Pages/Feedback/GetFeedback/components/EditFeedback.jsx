@@ -4,11 +4,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import CancelIcon from '@mui/icons-material/Cancel';
+import {useSelector} from "react-redux";
 
-
-const Question = () => {
+const EditFeedback = () => {
   
   let initialValues={
     question:"",
@@ -19,9 +22,23 @@ const Question = () => {
     correctAns:""
   }
 
+    const dispatch=useDispatch();
+    const data = useSelector(state => state.prevNext)
+    const feedbakQues = useSelector(state => state.feedback)
 
 
-  const [formvalues,setFormvalues]=useState(initialValues);
+  const [formvalues,setFormvalues]=useState(feedbakQues.initial);
+
+  useEffect(()=>{
+    console.log(feedbakQues.initial[data.initialQues-1])
+    initialValues.question=feedbakQues.initial[data.initialQues-1].question;
+    initialValues.opt1=feedbakQues.initial[data.initialQues-1].answer[0];
+    initialValues.opt2=feedbakQues.initial[data.initialQues-1].answer[1];
+    initialValues.opt3=feedbakQues.initial[data.initialQues-1].answer[2];
+    initialValues.opt4=feedbakQues.initial[data.initialQues-1].answer[3];
+    // initialValues.correctAns=feedbakQues.initial[data.initialQues-1].correctAns;
+    setFormvalues(initialValues)
+  },[data.initialQues])
 
  
 
@@ -30,8 +47,12 @@ const Question = () => {
       setFormvalues({...formvalues,[name]:value})
     }
   return (
-    <div className='flex flex-col'>
-      
+    <div className='flex flex-col w-2/3 m-auto mt-8 p-5 rounded bg-white' style={{boxShadow:"1px 1px 5px grey"}}>
+      <CancelIcon onClick={()=>dispatch(toggleEditOpt())} className='self-end' style={{cursor:"pointer"}}/>
+
+    {/* {
+      console.log(feedbakQues,data)
+    } */}
         <TextField
           id="outlined-multiline-flexible"
           label="Question"
@@ -86,7 +107,7 @@ const Question = () => {
         />
 
 
-<FormControl fullWidth>
+{/* <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Correct Option</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -101,10 +122,14 @@ const Question = () => {
         <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
         <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
         </Select>
-      </FormControl>
+      </FormControl> */}
+
+      <Button variant="outlined" sx={{width:"8rem",margin:"0.8rem auto"}} endIcon={<SendIcon />}>
+        Update
+      </Button>
      
     </div>
   )
 }
 
-export default Question
+export default EditFeedback

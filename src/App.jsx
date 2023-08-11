@@ -11,6 +11,8 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Feedback from "./User/pages/Feedback/Feedback";
 import Thankyou from "./User/pages/Thankyou/Thankyou";
 import AddQuestions from "./Admin/Pages/Questions/AddQuestions/AddQuestions";
+import AddFeedback from "./Admin/Pages/Feedback/AddFeedback/AddFeedback";
+import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
 import LandingPage from "./User/pages/LandingPage/LandingPage";
 
 const App = () => {
@@ -30,9 +32,9 @@ const App = () => {
           <Route exact path="instruction" element={<Instruction/>}/>
           <Route exact path="feedback" element={<Feedback/>}/>
           <Route exact path="Thankyou" element={<Thankyou/>}/>
-
-
           <Route exact path="addQuestions" element={<AddQuestions/>}/>
+          <Route exact path="addfeedback" element={<AddFeedback/>}/>
+          <Route exact path="getfeedback" element={<GetFeedback/>}/>
           {/* <Route exact path="admin" element={<AdminHome />} /> */}
         </Routes>
       </BrowserRouter>

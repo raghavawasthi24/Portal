@@ -1,21 +1,9 @@
 import { createSlice,current } from "@reduxjs/toolkit";
-
+import axios from "axios";
 
 const initialState =
   {
     initialValue:[
-      {
-        Name:"Shipra Tripathi",
-        Number:"2110321"
-      },
-      {
-        Name:"Raghav Awasthi",
-        Number:"2110158"
-    },
-    {
-      Name:"Ishu Singh",
-      Number:"21103212"
-    },
     
     ]
   };
@@ -26,17 +14,26 @@ const StudentSlice = createSlice({
   name: "searchStudent",
   initialState,
   reducers: {
+    studentList: (state,action)=>{
+      console.log("dekjb")
+      state.initialValue=action.payload;
+      f=action.payload;
+    },
     searchStudent: (state, action) => {
       state.initialValue = f;
       state.initialValue = state.initialValue.filter((student) =>     
-           student.Name.toLowerCase().includes(action.payload.toLowerCase())
+           student.name.toLowerCase().includes(action.payload.toLowerCase())
       )
-      
-    
-    console.log(f,action.payload)
-    },
+      },
+    categoryStudent:(state,action)=>{
+      console.log(action.payload.gender)
+      state.initialValue = f;
+      state.initialValue = state.initialValue.filter((student) =>     
+      student.gender.includes(action.payload.gender)
+      )
+    }
   },
 });
 
 export default StudentSlice.reducer;
-export const { searchStudent } = StudentSlice.actions;
+export const { searchStudent,categoryStudent,studentList } = StudentSlice.actions;
