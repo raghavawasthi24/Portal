@@ -19,8 +19,7 @@ const Test = () => {
 
   useEffect(() => {
     axios
-      .get(`https://examportalcsi.onrender.com/api/v1/category/${section}`)
-      .then((res) => {
+      .get(`https://csiexamportal-eb0u.onrender.com/api/v1/category/${section}`).then((res) => {
         console.log(res.data);
         setQuesData(res.data);
         setLength(res.data.length);
