@@ -10,9 +10,6 @@ const initialState = {
 };
 
 
-function drama(){
-  const data=useSelector(state=>state.quesList);
-}
 
 const prevNextSlice = createSlice({
   name: "prevNext",

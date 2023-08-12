@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useSelector} from "react-redux";
+import { quesList } from '../../../../../store/slices/QuestionsSlice';
 
 const EditQuestion = () => {
   
@@ -26,19 +27,19 @@ const EditQuestion = () => {
     const data = useSelector(state => state.prevNext)
     const questionDisplay= useSelector(state=>state.quesList)
 
-
+  
   const [formvalues,setFormvalues]=useState(questionDisplay.initialQues[data.initialQues-1]);
 
   useEffect(()=>{
-    console.log(questionDisplay.initialQues[data.initialQues-1])
-    initialValues.question=questionDisplay.initialQues[data.initialQues-1].question.ques;
-    initialValues.opt1=questionDisplay.initialQues[data.initialQues-1].options[0].ans;
-    initialValues.opt2=questionDisplay.initialQues[data.initialQues-1].options[1].ans;
-    initialValues.opt3=questionDisplay.initialQues[data.initialQues-1].options[2].ans;
-    initialValues.opt4=questionDisplay.initialQues[data.initialQues-1].options[3].ans;
+    // console.log(questionDisplay.initialQues[data.initialQues-1])
+    initialValues.question=questionDisplay.initialQues[data.initialQues-1]?.question;
+    initialValues.opt1=questionDisplay.initialQues[data.initialQues-1]?.options[0];
+    initialValues.opt2=questionDisplay.initialQues[data.initialQues-1]?.options[1];
+    initialValues.opt3=questionDisplay.initialQues[data.initialQues-1]?.options[2];
+    initialValues.opt4=questionDisplay.initialQues[data.initialQues-1]?.options[3];
     initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].question.correct_ans;
     setFormvalues(initialValues)
-  },[data.initialQues])
+  },[questionDisplay.initialQues[data.initialQues-1]?.question])
 
  
 
@@ -54,61 +55,67 @@ const EditQuestion = () => {
       console.log(questionDisplay.initialQues)
     } */}
         <TextField
-          id="outlined-multiline-flexible"
+          id="standard-multiline-flexible"
           label="Question"
           multiline
           maxRows={4}
           value={formvalues.question}
           name="question"
         onChange={inputHandler}
-          sx={{margin:"1rem 0"}}
+        variant="standard"
+          sx={{margin:"0.8rem 0"}}
         />
 
 
         <TextField
-          id="outlined-multiline-flexible"
+          id="standard-multiline-flexible"
           label="Option 1"
           multiline
           maxRows={4}
-          sx={{margin:"1rem 0"}}
+          sx={{width:"50%",margin:"0.8rem 0"}}
           value={formvalues.opt1}
           name="opt1"
         onChange={inputHandler}
+        variant="standard"
         />
         <TextField
-          id="outlined-multiline-flexible"
+          id="standard-multiline-flexible"
           label="Option 2"
           multiline
           maxRows={4}
-          sx={{margin:"1rem 0"}}
+          sx={{width:"50%",margin:"0.8rem 0"}}
           value={formvalues.opt2}
           name="opt2"
         onChange={inputHandler}
+        variant="standard"
         />
+
         <TextField
-          id="outlined-multiline-flexible"
+          id="standard-multiline-flexible"
           label="Option 3"
           multiline
           maxRows={4}
-          sx={{margin:"1rem 0"}}
+          sx={{width:"50%",margin:"0.8rem 0"}}
           value={formvalues.opt3}
           name="opt3"
         onChange={inputHandler}
+        variant="standard"
         />
         <TextField
-          id="outlined-multiline-flexible"
+          id="standard-multiline-flexible"
           label="Option 4"
           multiline
           maxRows={4}
-          sx={{margin:"1rem 0"}}
+          sx={{width:"50%",margin:"0.8rem 0"}}
           value={formvalues.opt4}
           name="opt4"
         onChange={inputHandler}
+        variant="standard"
         />
 
 
 <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Correct Option</InputLabel>
+        <InputLabel id="demo-simple-select-label" variant="standard">Correct Option</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -116,6 +123,7 @@ const EditQuestion = () => {
           name='correctAns'
           label="Correct Option"
           onChange={inputHandler}
+          variant="standard"
         >
         <MenuItem value={formvalues.opt1}>{formvalues.opt1}</MenuItem>
         <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
