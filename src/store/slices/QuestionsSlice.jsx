@@ -7,6 +7,7 @@ const initialState = {
     options:["Ram","Shyam","Dana","moore"],
     correctAns:"Ram",
 }],
+submitQuestion:true
 };
 
 const QuestionsSlice = createSlice({
@@ -16,10 +17,16 @@ const QuestionsSlice = createSlice({
     quesList: (state,action) => {
       state.initialQues=action.payload
       console.log(action.payload)
+    },
+    toggleQuestion:(state,action)=>{
+      if(state.submitQuestion)
+      state.submitQuestion=false
+    else
+    state.submitQuestion=true
     }
   },
 });
 
 export default QuestionsSlice.reducer;
-export const { quesList } = QuestionsSlice.actions;
+export const { quesList,toggleQuestion } = QuestionsSlice.actions;
  
