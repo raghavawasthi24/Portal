@@ -11,6 +11,7 @@ import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useSelector} from "react-redux";
 import { quesList } from '../../../../../store/slices/QuestionsSlice';
+import axios from 'axios';
 
 const EditQuestion = () => {
   
@@ -37,7 +38,14 @@ const EditQuestion = () => {
     initialValues.opt2=questionDisplay.initialQues[data.initialQues-1]?.options[1];
     initialValues.opt3=questionDisplay.initialQues[data.initialQues-1]?.options[2];
     initialValues.opt4=questionDisplay.initialQues[data.initialQues-1]?.options[3];
-    initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].question.correct_ans;
+    let options=questionDisplay.initialQues[data.initialQues-1]?.options
+    let ansId=questionDisplay.initialQues[data.initialQues-1]?.ansId
+    let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
+    let index=ansId?.indexOf(correctId)
+
+    initialValues.correctAns=options[index]
+    // setCorrectAns(options[index])
+    // initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].question.correct_ans;
     setFormvalues(initialValues)
   },[questionDisplay.initialQues[data.initialQues-1]?.question])
 
@@ -46,6 +54,18 @@ const EditQuestion = () => {
     const inputHandler=(e)=>{
       const {name,value}=e.target;
       setFormvalues({...formvalues,[name]:value})
+    }
+
+    const updateQues=()=>{
+      axios.put(`https://csi-examportal.onrender.com/api/v1/updatequestions/${questionDisplay.initialQues[data.initialQues-1]._id}`,{
+        "question":formvalues.question,
+        "option":[formvalues.opt1,formvalues.opt2,formvalues.opt3,formvalues.opt4],
+
+      })
+      .then((res)=>{
+        console.log(res)
+      })
+      
     }
   return (
     <div className='flex flex-col w-2/3 m-auto mt-3 p-5 rounded bg-white' style={{boxShadow:"1px 1px 5px grey"}}>
@@ -132,7 +152,7 @@ const EditQuestion = () => {
         </Select>
       </FormControl>
 
-      <Button variant="outlined" sx={{width:"8rem",margin:"0.8rem auto"}} endIcon={<SendIcon />}>
+      <Button variant="outlined" sx={{width:"8rem",margin:"0.8rem auto"}} endIcon={<SendIcon />} onClick={updateQues}>
         Update
       </Button>
      

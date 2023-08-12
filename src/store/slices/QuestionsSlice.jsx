@@ -4,11 +4,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   initialQues: [{
     question:"N/A",
+    category:"HTML",
     options:["N/A","N/A","N/A","N/A"],
     correctAns:"N/A",
 }],
 submitQuestion:true,
-quesCategory:""
+quesCategory:"HTML "
 };
  let f=initialState.initialQues;
 const QuestionsSlice = createSlice({
@@ -27,24 +28,15 @@ const QuestionsSlice = createSlice({
     state.submitQuestion=true
     },
     quesCtgSel:(state,action)=>{
-      // state.initialQues = f;
       if(action.payload=="ALL"){
         state.initialQues=f;
       }
       else{
-
-      
       state.initialQues = f.filter((student) =>     
       student.category.includes(action.payload)
       )
       }
       state.quesCategory=action.payload
-      // console.log(action.payload,state.initialQues,f)
-      // console.log(f.filter((student) =>     
-      // student.category.includes(action.payload)))
-      // state.initialQues.map((item)=>{
-      //   console.log(item)
-      // })
     }
   },
 });

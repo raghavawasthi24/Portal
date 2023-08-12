@@ -10,10 +10,7 @@ const QuesTab = () => {
     const data= useSelector(state=>state.quesList);
     
 
-    useEffect(()=>{
-          dispatch(moveQues(1))
-        console.log(data.quesCategory)
-    },[data.quesCategory])
+
     
   return (
     <div className='flex w-full flex-wrap justify-center mt-5'>

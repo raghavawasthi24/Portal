@@ -14,32 +14,25 @@ const GetQuestions = () => {
     useEffect(()=>{
         axios.get("https://csi-examportal.onrender.com/api/v1/getquestions")
         .then((res)=>{
-            // console.log(res.data.msg)
             dispatch(quesList(res.data.msg))
         })
         .catch((err)=>{
             console.log(err)
-        })
-       
-        
+        }) 
     },[])
-
-    
+   
     const data = useSelector(state => state.prevNext)
     const questionDisplay= useSelector(state=>state.quesList)
     const showEdit= useSelector(state=>state.editShow)
     const [correctAns,setCorrectAns]=useState()
-     const dispatch=useDispatch();
-    useEffect(()=>{
-        // console.log(questionDisplay.initialQues[data.initialQues-1].options)
+    const dispatch=useDispatch();
+
+
+    useEffect(()=>{  
         let options=questionDisplay.initialQues[data.initialQues-1]?.options
-        // console.log(questionDisplay.initialQues[data.initialQues-1].ansId)
         let ansId=questionDisplay.initialQues[data.initialQues-1]?.ansId
-        // console.log(questionDisplay.initialQues[data.initialQues-1].correctId)
         let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
-        // console.log(ansId?.indexOf(correctId))
         let index=ansId?.indexOf(correctId)
-        // console.log(options[index])
         setCorrectAns(options[index])
     },[questionDisplay.initialQues[data.initialQues-1]?.question])
 
@@ -68,8 +61,6 @@ const GetQuestions = () => {
                 <p>Correct Answer</p>
                 <hr/>
                <p>{correctAns}</p>
-                {/* <p>{questionDisplay.initialQues[data.initialQues-1].options[questionDisplay.initialQues[data.initialQues-1].ansId.indexOf(questionDisplay.initialQues[data.initialQues-1].correctId)]}</p> */}
-                {/* <p>{questionDisplay.initialQues[data.initialQues-1].question.correct_ans}</p> */}
             </div>
 
             <div className={showEdit.initialValue?'absolute top-6 start-0 w-full h-full z-10':'hide'}>
