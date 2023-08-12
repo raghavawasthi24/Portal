@@ -1,8 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { quesList } from '../../store/slices/QuestionsSlice';
+import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+
+// const data= ;
 
 const initialState = {
   initialQues: 1,
 };
+
+
+function drama(){
+  const data=useSelector(state=>state.quesList);
+}
 
 const prevNextSlice = createSlice({
   name: "prevNext",
@@ -15,9 +25,11 @@ const prevNextSlice = createSlice({
       } 
       else state.initialQues--;
     },
-    nextQues: (state) => {
-      if (state.initialQues > 49) state.initialQues = 2;
+    nextQues: (state,action) => {
+      
+      if (state.initialQues == action.payload.length) state.initialQues = 1;
       else state.initialQues++;
+      // console.log(action.payload)
     },
     moveQues: (state, action) => {
       state.initialQues = action.payload;
