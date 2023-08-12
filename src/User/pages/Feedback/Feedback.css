@@ -15,5 +15,7 @@
   width: 10rem;
   color: white ;
   background: rgba(84, 59, 160, 1) ;
-
+}
+.FeedbackBtn:disabled{
+  opacity: 0.6;
 }

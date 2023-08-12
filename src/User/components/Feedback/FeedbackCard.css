@@ -17,11 +17,20 @@
 }
 .emoji{
     padding: 0rem 1rem;
+    opacity: 0.6;
+
+}
+.selectedEmoji{
+    opacity: 1;
 }
 .emojiHead{
     color:#3F3F3F;
 }
+.emoji:visited{
+    opacity: 1;
+}
 .emoji:hover{
+    opacity: 1;
     /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.4s;
 
