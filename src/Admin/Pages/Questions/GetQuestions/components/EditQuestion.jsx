@@ -27,7 +27,11 @@ const EditQuestion = () => {
     const dispatch=useDispatch();
     const data = useSelector(state => state.prevNext)
     const questionDisplay= useSelector(state=>state.quesList)
-
+    
+    const [value1,setvalue1]=useState([]);
+    // const [value2,setvalue2]=useState();
+    // const [value3,setvalue3]=useState();
+    // const [value4,setvalue4]=useState();
   
   const [formvalues,setFormvalues]=useState(questionDisplay.initialQues[data.initialQues-1]);
 
@@ -38,6 +42,7 @@ const EditQuestion = () => {
     initialValues.opt2=questionDisplay.initialQues[data.initialQues-1]?.options[1];
     initialValues.opt3=questionDisplay.initialQues[data.initialQues-1]?.options[2];
     initialValues.opt4=questionDisplay.initialQues[data.initialQues-1]?.options[3];
+    setvalue1(questionDisplay.initialQues[data.initialQues-1]?.ansId);
     let options=questionDisplay.initialQues[data.initialQues-1]?.options
     let ansId=questionDisplay.initialQues[data.initialQues-1]?.ansId
     let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
@@ -145,7 +150,10 @@ const EditQuestion = () => {
           onChange={inputHandler}
           variant="standard"
         >
-        <MenuItem value={formvalues.opt1}>{formvalues.opt1}</MenuItem>
+        {/* <MenuItem value={value1[0]}>{formvalues.opt1}</MenuItem> */}
+        {
+          console.log(value1[0])
+        }
         <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
         <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
         <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
