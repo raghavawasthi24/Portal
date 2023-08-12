@@ -10,37 +10,39 @@ import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useSelector} from "react-redux";
-
+import axios from 'axios';
 const EditFeedback = () => {
   
   let initialValues={
     question:"",
-    opt1:"",
-    opt2:"",
-    opt3:"",
-    opt4:"",
-    correctAns:""
   }
 
     const dispatch=useDispatch();
     const data = useSelector(state => state.prevNext)
     const feedbakQues = useSelector(state => state.feedback)
+    const feedbackQuesNo=useSelector(state=>state.editShow)
 
 
   const [formvalues,setFormvalues]=useState(feedbakQues.initial);
+  const [id,setId]=useState();
 
   useEffect(()=>{
-    console.log(feedbakQues.initial[data.initialQues-1])
-    initialValues.question=feedbakQues.initial[data.initialQues-1].question;
-    initialValues.opt1=feedbakQues.initial[data.initialQues-1].answer[0];
-    initialValues.opt2=feedbakQues.initial[data.initialQues-1].answer[1];
-    initialValues.opt3=feedbakQues.initial[data.initialQues-1].answer[2];
-    initialValues.opt4=feedbakQues.initial[data.initialQues-1].answer[3];
-    // initialValues.correctAns=feedbakQues.initial[data.initialQues-1].correctAns;
+    console.log(feedbakQues.initial[feedbackQuesNo.initialQues],feedbackQuesNo.initialQues)
+    initialValues.question=feedbakQues.initial[feedbackQuesNo.initialQues].question_text;
     setFormvalues(initialValues)
-  },[data.initialQues])
+    setId(feedbakQues.initial[feedbackQuesNo.initialQues].id)
+  },[feedbakQues.initial[feedbackQuesNo.initialQues]])
 
- 
+ const updateQues=()=>{
+  axios.patch(`http://13.48.30.130/feedback/${id}/update/`,{
+      "question_text":formvalues.question
+    }
+  )
+  .then((res)=>{
+    console.log(res)
+    window.location.reload()
+  })
+ }
 
     const inputHandler=(e)=>{
       const {name,value}=e.target;
@@ -57,74 +59,22 @@ const EditFeedback = () => {
           id="outlined-multiline-flexible"
           label="Question"
           multiline
+          rows={10}
           maxRows={4}
+          placeholder='Write question for feedback ✍'
           value={formvalues.question}
           name="question"
         onChange={inputHandler}
           sx={{margin:"1rem 0"}}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
 
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 1"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt1}
-          name="opt1"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 2"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt2}
-          name="opt2"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 3"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt3}
-          name="opt3"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 4"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt4}
-          name="opt4"
-        onChange={inputHandler}
-        />
+        
 
-
-{/* <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Correct Option</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={formvalues.correctAns}
-          name='correctAns'
-          label="Correct Option"
-          onChange={inputHandler}
-        >
-        <MenuItem value={formvalues.opt1}>{formvalues.opt1}</MenuItem>
-        <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
-        <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
-        <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
-        </Select>
-      </FormControl> */}
-
-      <Button variant="outlined" sx={{width:"8rem",margin:"0.8rem auto"}} endIcon={<SendIcon />}>
+      <Button variant="outlined" sx={{width:"8rem",margin:"0.8rem auto"}} endIcon={<SendIcon />} onClick={updateQues}>
         Update
       </Button>
      
