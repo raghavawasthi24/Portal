@@ -9,7 +9,8 @@ const initialState = {
     correctAns:"N/A",
 }],
 submitQuestion:true,
-quesCategory:"HTML "
+quesCategory:"HTML",
+flag:0,
 };
  let f=initialState.initialQues;
 const QuestionsSlice = createSlice({
@@ -26,6 +27,7 @@ const QuestionsSlice = createSlice({
       state.submitQuestion=false
     else
     state.submitQuestion=true
+    state.flag=1
     },
     quesCtgSel:(state,action)=>{
      

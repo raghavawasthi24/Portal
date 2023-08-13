@@ -23,7 +23,7 @@ const Dropdown = () => {
     // },[currentdata.initialQues[0].question])
     const dispatch=useDispatch();
   return (
-    <div className='w-full bg-gradient-to-r from-dropdownGrad1 via-dropdownGrad2 to-dropdownGrad3'>
+    <div className='w-2/3 bg-gradient-to-r from-dropdownGrad1 via-dropdownGrad2 to-dropdownGrad3 mx-auto'>
         <FormControl sx={{width:"100%"}}>
             <Select 
             value={selTech}
