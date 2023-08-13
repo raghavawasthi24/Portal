@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import QuesTab from "../../components/QuesTab/QuesTab";
 import Question from "../../components/Question/Question";
 import QuesNumbers from "../../components/QuesNumbers/QuesNumbers";
-import Timer from "../../components/Timer/Timer";
+import Timer from "../../components/Timer/Timer2";
 import TestFooter from "../../components/TestFooter/TestFooter";
 import TestHeader from "../../components/TestHeader/TestHeader";
 import { Button } from "@mui/material";
@@ -42,14 +42,12 @@ const Test = () => {
         <TestHeader />
         <QuesTab />
         <Question />
-        <TestFooter
-        />
+        <TestFooter />
       </div>
       <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-between">
         <div>
           <Timer />
-          <QuesNumbers
-          />
+          <QuesNumbers />
         </div>
         <Button
           type="submit"
