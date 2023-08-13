@@ -20,7 +20,7 @@ const QuestionsSlice = createSlice({
     quesList: (state,action) => {
       state.initialQues=action.payload
       f=action.payload
-      // console.log(action.payload,f)
+      console.log(action.payload,f)
     },
     toggleQuestion:(state,action)=>{
       if(state.submitQuestion)
@@ -32,7 +32,7 @@ const QuestionsSlice = createSlice({
     quesCtgSel:(state,action)=>{
      
       state.initialQues = f.filter((student) =>     
-      student.category.includes(action.payload)
+      student.category==action.payload
       )
       console.log(action.payload)
       state.quesCategory=action.payload

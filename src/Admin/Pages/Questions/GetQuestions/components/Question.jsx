@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import EditIcon from '@mui/icons-material/Edit';
 import EditQuestion from './EditQuestion';
 import { useDispatch } from 'react-redux';
+import { quesCtgSel } from '../../../../../store/slices/QuestionsSlice';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import { quesList } from '../../../../../store/slices/QuestionsSlice';
 import axios from 'axios';
@@ -15,6 +16,7 @@ const GetQuestions = () => {
         axios.get("https://csi-examportal.onrender.com/api/v1/getquestions")
         .then((res)=>{
             dispatch(quesList(res.data.msg))
+            dispatch(quesCtgSel('HTML'))
         })
         .catch((err)=>{
             console.log(err)
@@ -29,11 +31,13 @@ const GetQuestions = () => {
 
 
     useEffect(()=>{  
+        console.log(questionDisplay.initialQues[data.initialQues-1])
         let options=questionDisplay.initialQues[data.initialQues-1]?.options
-        let ansId=questionDisplay.initialQues[data.initialQues-1]?.ansId
+        let ansId=questionDisplay.initialQues[data.initialQues-1]?.options
         let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
-        let index=ansId?.indexOf(correctId)
-        setCorrectAns(options[index])
+        let index=ansId?.findIndex(x=>x.ansId==correctId)
+        console.log(index,options)
+        setCorrectAns(options[index].name)
     },[questionDisplay.initialQues[data.initialQues-1]?.question])
 
   return (
@@ -51,7 +55,7 @@ const GetQuestions = () => {
             <FormControl>
                 <RadioGroup>
                 {questionDisplay.initialQues[data.initialQues-1]?.options.map((item,key)=>{
-                    return(<FormControlLabel key={key} value={item} control={<Radio/>} label={item}/>)
+                    return(<FormControlLabel key={key} value={item} control={<Radio/>} label={item.name}/>)
                 })}
                
                 </RadioGroup>
@@ -64,7 +68,7 @@ const GetQuestions = () => {
             </div>
 
             <div className={showEdit.initialValue?'absolute top-6 start-0 w-full h-full z-10':'hide'}>
-                <EditQuestion/>
+                {/* <EditQuestion/> */}
             </div>
 
           

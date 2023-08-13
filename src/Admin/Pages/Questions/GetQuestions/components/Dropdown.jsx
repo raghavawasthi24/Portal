@@ -1,8 +1,8 @@
 import { FormControl,Select,MenuItem} from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { quesCtgSel } from '../../store/slices/QuestionsSlice';
-import { moveQues } from '../../store/slices/PrevNextSlice';
+import { quesCtgSel } from '../../../../../store/slices/QuestionsSlice';
+import { moveQues } from '../../../../../store/slices/prevNextSlice';
 import { useEffect } from 'react';
 
 const Dropdown = () => {
