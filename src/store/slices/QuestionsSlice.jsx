@@ -9,6 +9,7 @@ const initialState = {
       correctAns: "N/A",
       review: false,
       visited: false,
+      ansId: null,
     },
   ],
   submitQuestion: true,
@@ -33,6 +34,7 @@ const QuestionsSlice = createSlice({
             ...newQuestion,
             visited: existingQuestion.visited,
             review: existingQuestion.review,
+            ansId: existingQuestion.ansId,
           };
         } else {
           // If the question is new, set its review status to false
@@ -40,6 +42,7 @@ const QuestionsSlice = createSlice({
             ...newQuestion,
             visited: false,
             review: false,
+            ansId: null,
           };
         }
       });
@@ -74,6 +77,10 @@ const QuestionsSlice = createSlice({
         });
       }
     },
+    setAnsId: (state, action) => {
+      const { index, ansId } = action.payload;
+      state.initialQues[index].ansId = ansId;
+    },
     setVisited: (state, action) => {
       const { index } = action.payload;
       if (!state.initialQues[index].visited) {
@@ -90,4 +97,5 @@ export const {
   quesCtgSel,
   toggleReview,
   setVisited,
+  setAnsId,
 } = QuestionsSlice.actions;

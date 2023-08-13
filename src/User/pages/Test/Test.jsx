@@ -27,7 +27,7 @@ const Test = () => {
         </div>
         <Button
           type="submit"
-          className="!bg-submitColor !text-white w-4 !mx-auto !px-16 !py-2"
+          className="!bg-submitColor !text-white w-4 !mx-auto !px-16 !py-2 absolute -bottom-10"
         >
           Submit
         </Button>

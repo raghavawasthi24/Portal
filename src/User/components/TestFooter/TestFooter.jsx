@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import { nextQues } from "../../../store/slices/PrevNextSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setVisited, toggleReview } from "../../../store/slices/QuestionsSlice";
+import axios from "axios";
 
 const TestFooter = () => {
   const dispatch = useDispatch();
@@ -18,18 +19,37 @@ const TestFooter = () => {
   };
   const saveAndNext = () => {
     //change the review to false
+    submitAnswer(
+      quesData.initialQues[data.initialQues - 1]._id,
+      quesData.initialQues[data.initialQues - 1].quesId,
+      quesData.initialQues[data.initialQues - 1].ansId
+    );
     setReview(false);
     markVisited();
     dispatch(nextQues(quesData.initialQues));
   };
   const reviewAndNext = () => {
     //change the review to true
+    submitAnswer({
+      id: quesData.initialQues[data.initialQues - 1]._id,
+      quesId: quesData.initialQues[data.initialQues - 1].quesId,
+      ansId: quesData.initialQues[data.initialQues - 1].ansId,
+    });
     setReview(true);
     markVisited();
     dispatch(nextQues(quesData.initialQues));
   };
   const markVisited = () => {
     dispatch(setVisited({ index: data?.initialQues - 1 }));
+  };
+  const submitAnswer = ({ id, quesId, ansId }) => {
+    axios
+      .post(`https://csi-examportal.onrender.com/api/v1/postResponse/:${id}`, {
+        quesId,
+        ansId,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
