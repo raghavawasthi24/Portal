@@ -33,9 +33,8 @@ const GetQuestions = () => {
     useEffect(()=>{  
         console.log(questionDisplay.initialQues[data.initialQues-1])
         let options=questionDisplay.initialQues[data.initialQues-1]?.options
-        let ansId=questionDisplay.initialQues[data.initialQues-1]?.options
         let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
-        let index=ansId?.findIndex(x=>x.ansId==correctId)
+        let index=options?.findIndex(x=>x.ansId==correctId)
         console.log(index,options)
         setCorrectAns(options[index].name)
     },[questionDisplay.initialQues[data.initialQues-1]?.question])
@@ -67,8 +66,8 @@ const GetQuestions = () => {
                <p>{correctAns}</p>
             </div>
 
-            <div className={showEdit.initialValue?'absolute top-6 start-0 w-full h-full z-10':'hide'}>
-                {/* <EditQuestion/> */}
+            <div className={showEdit.initialValue?'absolute top-6 start-0 w-full z-10':'hide'}>
+                <EditQuestion/>
             </div>
 
           
