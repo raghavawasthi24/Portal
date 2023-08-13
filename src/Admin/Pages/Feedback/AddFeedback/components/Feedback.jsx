@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 // import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 // import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -12,21 +13,28 @@ const AddFeedback = () => {
   
   let initialValues={
     question:"",
-    opt1:"",
-    opt2:"",
-    opt3:"",
-    opt4:"",
   }
 
-
-
   const [formvalues,setFormvalues]=useState(initialValues);
-
- 
 
     const inputHandler=(e)=>{
       const {name,value}=e.target;
       setFormvalues({...formvalues,[name]:value})
+    }
+
+    const addQues=()=>{
+      axios.post("http://13.48.30.130/feedback/add-f-question/",[
+        {
+          "question_text":formvalues.question
+        }
+      ])
+      .then((res)=>{
+        console.log(res)
+        toast.success("Question Saved Successfully")
+        setFormvalues(initialValues)
+      }).catch((err)=>{
+        console.log(err)
+      })
     }
   return (
     <div className='flex flex-col'>
@@ -35,55 +43,24 @@ const AddFeedback = () => {
           id="outlined-multiline-flexible"
           label="Question"
           multiline
+          rows={10}
           maxRows={4}
+          placeholder='Write question for feedback ✍'
           value={formvalues.question}
           name="question"
         onChange={inputHandler}
           sx={{margin:"1rem 0"}}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
+       <Button variant="contained" sx={{width:"20%",margin:"0.8rem 0 0.8rem auto", padding:"0.5rem"}} endIcon={<SendIcon />} onClick={addQues}>
+           Submit
+       </Button>
 
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 1"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt1}
-          name="opt1"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 2"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt2}
-          name="opt2"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 3"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt3}
-          name="opt3"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 4"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt4}
-          name="opt4"
-        onChange={inputHandler}
-        />
 
+       <ToastContainer />
      
     </div>
   )

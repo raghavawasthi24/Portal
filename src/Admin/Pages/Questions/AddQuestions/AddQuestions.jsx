@@ -1,11 +1,14 @@
 import React from "react";
 import Header from "../../../components/Header"
 import Question from "./components/Question"
-import Dropdown from "../../../components/Dropdown";
+import Dropdown from "./components/Dropdown";
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import { toggleQuestion } from "../../../../store/slices/QuestionsSlice";
+import { useDispatch } from "react-redux";
 
 const AddQuestions = () => {
+  const dispatch=useDispatch();
   return <div>
     <Header/>
     <div className="flex" style={{margin:"7rem 0 0 3rem"}}>
@@ -13,9 +16,9 @@ const AddQuestions = () => {
         <Question/>
       </div>
       <div className="w-1/3 flex flex-col justify-between" style={{margin:"3rem 4rem 0 2rem"}}>
-         <Dropdown/>
+         <Dropdown onClick={()=>dispatch(toggleQuestion())}/>
 
-         <Button variant="contained" sx={{width:"80%",margin:"0.8rem auto", padding:"0.5rem"}} endIcon={<SendIcon />}>
+         <Button variant="contained" sx={{width:"80%",margin:"0.8rem auto", padding:"0.5rem"}} endIcon={<SendIcon />} onClick={()=>dispatch(toggleQuestion())}>
         Submit
       </Button>
       </div>
