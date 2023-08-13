@@ -8,6 +8,7 @@ const QuesTab = () => {
     // const quesNo=["1","2","3","4","5","6","7","8","9","10"]
     const dispatch=useDispatch();
     const data= useSelector(state=>state.quesList);
+    const quesNo=useSelector(state=>state.prevNext)
     
 
 
@@ -17,7 +18,7 @@ const QuesTab = () => {
         {
             data.initialQues.map((item,key)=>{
                 return(<div key={key} onClick={()=>dispatch(moveQues(key+1))}>
-                    <Button variant='contained' sx={{margin:"0.5rem"}}>{key+1}</Button>
+                    <Button variant='contained' sx={{margin:"0.5rem",backgroundColor:quesNo.initialQues==key+1?'#f95959':''}}>{key+1}</Button>
                 </div>)
             })
         }
