@@ -17,42 +17,38 @@ const Test = () => {
   const [section, setSection] = useState("html");
   const data = useSelector((state) => state.prevNext);
 
-  useEffect(() => {
-    axios
-      .get(`https://examportalcsi.onrender.com/api/v1/category/${section}`)
-      .then((res) => {
-        console.log(res.data);
-        setQuesData(res.data);
-        setLength(res.data.length);
-        setActiveQuestion(res.data[data.initialQues - 1]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [section]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://examportalcsi.onrender.com/api/v1/category/${section}`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setQuesData(res.data);
+  //       setLength(res.data.length);
+  //       setActiveQuestion(res.data[data.initialQues - 1]);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [section]);
 
-  useEffect(() => {
-    console.log(activeQuestionId);
-    setActiveQuestion(quesData[data.initialQues - 1]);
-  }, [data.initialQues]);
+  // useEffect(() => {
+  //   console.log(activeQuestionId);
+  //   setActiveQuestion(quesData[data.initialQues - 1]);
+  // }, [data.initialQues]);
 
   return (
     <div className="flex justify-evenly">
       <div className="flex flex-col justify-start w-8/12 m-0 py-4 pl-12">
         <TestHeader />
-        <QuesTab setSection={setSection} />
-        <Question ques={activeQuestion} />
+        <QuesTab />
+        <Question />
         <TestFooter
-          setActiveQuestionId={setActiveQuestionId}
-          activeQuestion={activeQuestion}
         />
       </div>
       <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-between">
         <div>
           <Timer />
           <QuesNumbers
-            setActiveQuestionId={setActiveQuestionId}
-            length={length}
           />
         </div>
         <Button

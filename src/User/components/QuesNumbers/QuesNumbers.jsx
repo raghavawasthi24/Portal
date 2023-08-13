@@ -1,10 +1,11 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { moveQues } from "../../../store/slices/PrevNextSlice";
 
-const QuesNumbers = ({ length }) => {
-  console.log(length);
+const QuesNumbers = () => {
+
+  const quesdata= useSelector(state=>state.quesList);
   // const quesCount = [1, 2, 3, 4];
   const dispatch = useDispatch();
   return (
@@ -23,7 +24,7 @@ const QuesNumbers = ({ length }) => {
         alignItems="center"
         sx={{ mt: "10px" }}
       >
-        {[...Array(length)]?.map((ques, id) => {
+        {quesdata.initialQues?.map((ques, id) => {
           return (
             <Grid item key={id}>
               <Button
