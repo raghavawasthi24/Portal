@@ -19,40 +19,51 @@ const FeedbackCard = (props) => {
   }
    
   return (
-   <Box className="QuestionMain">
-        <Typography variant='h6' className='QuestionHead'>{props.question}</Typography>
-        <Box className="emojiFlex">
+//    <Box className="QuestionMain">
+//         <Typography variant='h6' className='QuestionHead'>{props.question}</Typography>
+//         <div className="emojiFlex">
    
-        <Button style={{display:"grid"}} disabled={disable} onClick={(e)=>selectEmojiFn(e,1)}>
-        <img className="emoji" src="src\User\assets\Confounded face.svg"></img>
-        <p className='emojiHead'>Poor</p>
-        </Button>
+//         <div>
+//           <Button disabled={disable} onClick={(e)=>selectEmojiFn(e,1)}>
+//           <img className="emoji" src="src\User\assets\Confounded face.png"></img>
+         
+//           </Button>
 
-    <Button style={{display:"grid"}} disabled={disable} onClick={(e)=>selectEmojiFn(e,2)}>
+//         </div>
+        
+//         {/* <img className='emoji' src="src\User\assets\Confounded face.png"></img> */}
 
-        <img className='emoji' src="src\User\assets\Disappointed face.svg" ></img>
-        <p className='emojiHead'>Fair</p>
-        </Button>
+//     <Button disabled={disable} onClick={(e)=>selectEmojiFn(e,2)}>
+
+//         <img className='emoji' src="src\User\assets\Disappointed face.svg" ></img>
+       
+//         </Button>
       
-        <Button style={{display:"grid"}} disabled={disable} onClick={(e)=>selectEmojiFn(e,3)}>
+//         <Button disabled={disable} onClick={(e)=>selectEmojiFn(e,3)}>
 
-        <img className='emoji' src="src\User\assets\Good face.svg" ></img>
-        <p className='emojiHead'>Good</p>
+//         <img className='emoji' src="src\User\assets\Good face.svg" ></img>
+       
 
-        </Button>
+//         </Button>
     
 
-        <Button style={{display:"grid"}} disabled={disable} onClick={(e)=>selectEmojiFn(e,4)}>
+//         <Button disabled={disable} onClick={(e)=>selectEmojiFn(e,4)}>
         
-        <img className='emoji' src="src\User\assets\Oh Yeah face.svg" ></img>
-        <p className='emojiHead'>Excellent</p>
+//         <img className='emoji' src="src\User\assets\Oh Yeah face.svg" ></img>
+       
 
-        </Button>
+//         </Button>
 
 
-        </Box>
+//         </div>
 
-</Box>
+// </Box>
+<div className='w-1/3'>
+  <div className='w-full' style={{display:"flex",flexDirection:"column"}}>
+  <img className="emoji" src="src\User\assets\Confounded face.png"></img>
+  <p>Poor</p>
+  </div>
+</div>
   )
 }
 
