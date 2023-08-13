@@ -8,9 +8,9 @@ import axios from 'axios'
 
 const Feedback = () => {
   const [apiData,setApiData] = useState({})
-  const [formvValue,setFormValue]= useState({})
-  const [disable,setedisable]=useState()
-  const [Suggestions,setsuggestion]= useState("")
+  const [formvValue,setFormValue]= useState([])
+  const [disable,setedisable]=useState(true)
+  const [Suggestions,setsuggestion]= useState()
 
   
   useEffect(() => {
@@ -33,7 +33,10 @@ const Feedback = () => {
     }
   }
    const handlevalue = (data) =>{
-    console.log(data)
+    setFormValue([...formvValue,data])
+   }
+   const handlesubmit = () => {
+     console.log([...formvValue,Suggestions])
    }
   
 
@@ -45,7 +48,7 @@ const Feedback = () => {
     <Box>
       {
       apiData.map((ques,i)=>(
-     <FeedbackCard key={i} question={ques.question_text} ondata={handlevalue}/>))
+     <FeedbackCard key={i} question={ques.question_text} ques_id={ques.id} ondata={handlevalue}/>))
       }
     <Box className="QuestionMain">
     <Typography variant='h6' className='QuestionHead'>Your Suggestions matter, drop us one!</Typography>
@@ -53,9 +56,11 @@ const Feedback = () => {
     <OutlinedInput style={{borderRadius:"15px"}}  onChange={(e) => Suggestionfn(e)} />
      </FormControl>
      {disable ? <p style={{color:"red"}}>Fill The Feedback Form Before Submitting</p>:null}
+
 </Box>
+<button className='FeedbackBtn'  disabled={disable} onClick={handlesubmit} >Submit</button>
+
     </Box>
-    <button className='FeedbackBtn'  disabled={disable} >Submit</button>
     </Container> : null }
     </>
   )
