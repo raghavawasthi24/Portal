@@ -23,9 +23,10 @@ const AddFeedback = () => {
     }
 
     const addQues=()=>{
+      if(formvalues.question.trim()!=""){
       axios.post("http://13.48.30.130/feedback/add-f-question/",[
         {
-          "question_text":formvalues.question
+          "question_text":formvalues.question.trim()
         }
       ])
       .then((res)=>{
@@ -35,6 +36,7 @@ const AddFeedback = () => {
       }).catch((err)=>{
         console.log(err)
       })
+    }
     }
   return (
     <div className='flex flex-col'>

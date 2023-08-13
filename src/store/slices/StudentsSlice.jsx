@@ -26,10 +26,13 @@ const StudentSlice = createSlice({
       )
       },
     categoryStudent:(state,action)=>{
-      console.log(action.payload.gender)
+      // console.log(action.payload.gender,action.payload.isHosteler)
       state.initialValue = f;
       state.initialValue = state.initialValue.filter((student) =>     
       student.gender.includes(action.payload.gender)
+      )
+      state.initialValue = state.initialValue.filter((student) =>     
+      student.isHosteler.toString()==action.payload.isHosteler
       )
     }
   },
