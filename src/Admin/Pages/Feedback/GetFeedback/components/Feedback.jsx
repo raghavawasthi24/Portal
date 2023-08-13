@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import EditFeedback from './EditFeedback';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import { feedbacklist } from '../../../../../store/slices/FeedbackSlice';
 // import { quesList } from '../../../../../store/slices/QuestionsSlice';
 
@@ -23,10 +25,16 @@ const Feedback = () => {
         
     },[])
     const delFeedback=(id)=>{
-        axios.get("http://13.48.30.130/feedback/add-f-question/")
+        axios.delete(`http://13.48.30.130/feedback/delete-f-question/${id}`)
+        .then((res)=>{
+            console.log(res)
+            toast.success("Question deleted successfully")
+            axios.get("http://13.48.30.130/feedback/add-f-question/")
         .then((res)=>{
             console.log(res)
             dispatch(feedbacklist(res.data))
+        })
+            // dispatch(feedbacklist(res.data))
         })
     }
     // const feedvalue = useSelector(state => state.feedback)
@@ -37,22 +45,23 @@ const Feedback = () => {
     const dispatch=useDispatch();
 
   return (
-    <div className='p-10 h-screen overflow-scroll flex flex-col justify-between'>
+    <div className='p-10 overflow-scroll flex flex-col'>
         {
             feedbackList.initial.map((item,key)=>{
                 return(
-                    <div className='mt-4'>
-                    <div className='flex justify-between my-3'>
-                        <p>Question-{data.initialQues}</p>
+                    <div className='my-3 p-3' style={{border:"1px solid grey",borderRadius:"10px",boxShadow:"0.5px 0.5px 3px grey"}}>
+                    <div className='flex justify-between my-2'>
+                        <p>Question-{key+1}</p>
                         
                         <div>
                             <EditIcon style={{cursor:"pointer",margin:"0 0.7rem"}} onClick={()=>dispatch(toggleEditOpt(key))}/>
                             <DeleteIcon style={{cursor:"pointer",margin:"0 0.7rem",color:"red"}} onClick={()=>delFeedback(item.id)}/>
                         </div>
+                        
                     </div>
-                    <p>{item.question_text}</p>
-                    <hr/>
-                       
+                    <hr />
+                    <p className='mt-2'>{item.question_text}</p>
+                               
                     </div>
                 )
             })
@@ -66,7 +75,7 @@ const Feedback = () => {
             </div>
 
           
-       
+            <ToastContainer />
     </div>
   )
 }

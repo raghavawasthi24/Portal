@@ -28,9 +28,9 @@ const EditFeedback = () => {
 
   useEffect(()=>{
     console.log(feedbakQues.initial[feedbackQuesNo.initialQues],feedbackQuesNo.initialQues)
-    initialValues.question=feedbakQues.initial[feedbackQuesNo.initialQues].question_text;
+    initialValues.question=feedbakQues.initial[feedbackQuesNo.initialQues]?.question_text;
     setFormvalues(initialValues)
-    setId(feedbakQues.initial[feedbackQuesNo.initialQues].id)
+    setId(feedbakQues.initial[feedbackQuesNo.initialQues]?.id)
   },[feedbakQues.initial[feedbackQuesNo.initialQues]])
 
  const updateQues=()=>{
