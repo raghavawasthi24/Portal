@@ -18,6 +18,7 @@ const TestFooter = () => {
     dispatch(toggleReview({ question: currentQuestion.question, review }));
   };
   const saveAndNext = () => {
+    if (quesData.initialQues[data.initialQues - 1].ansId === "") return;
     //change the review to false
     submitAnswer(
       quesData.initialQues[data.initialQues - 1]._id,
@@ -29,6 +30,7 @@ const TestFooter = () => {
     dispatch(nextQues(quesData.initialQues));
   };
   const reviewAndNext = () => {
+    if (quesData.initialQues[data.initialQues - 1].ansId === "") return;
     //change the review to true
     submitAnswer({
       id: quesData.initialQues[data.initialQues - 1]._id,

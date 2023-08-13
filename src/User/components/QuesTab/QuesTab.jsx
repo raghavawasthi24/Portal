@@ -9,18 +9,18 @@ const QuesTab = () => {
   const [selTech, setSelTech] = useState(quesType[0]);
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
-  const currentdata = useSelector((state) => state.quesList);
+  const currentdata = useSelector((state) => state?.quesList);
 
   useEffect(() => {
     // console.log(currentdata.initialQues[0].question)
     dispatch(quesCtgSel(selTech));
-  }, [currentdata.initialQues[0].question]);
+  }, [currentdata?.initialQues[0]?.question]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setSelTech(quesType[newValue]);
     dispatch(quesCtgSel(quesType[newValue]));
-    dispatch(moveQues(1))
+    dispatch(moveQues(1));
   };
   return (
     <div className="mt-0 mb-6  shadow-md shadow-gray-600 mx-32">

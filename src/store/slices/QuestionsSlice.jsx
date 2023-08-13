@@ -9,7 +9,7 @@ const initialState = {
       correctAns: "N/A",
       review: false,
       visited: false,
-      ansId: null,
+      ansId: "",
     },
   ],
   submitQuestion: true,
@@ -42,7 +42,7 @@ const QuestionsSlice = createSlice({
             ...newQuestion,
             visited: false,
             review: false,
-            ansId: null,
+            ansId: "",
           };
         }
       });

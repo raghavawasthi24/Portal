@@ -6,11 +6,10 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { quesList, setAnsId } from "../../../store/slices/QuestionsSlice";
+import { setAnsId } from "../../../store/slices/QuestionsSlice";
 
 const Question = () => {
   const dispatch = useDispatch();
@@ -22,10 +21,12 @@ const Question = () => {
   // const defaultAnswerId = quesData.initialQues[data.initialQues - 1]?.ansId;
 
   const [selectedValue, setSelectedValue] = useState("");
+  const [quesName, setQuesName] = useState("");
 
   useEffect(() => {
+    setQuesName(quesData.initialQues[data.initialQues - 1]?.quesId);
     const defaultAnswerId = quesData.initialQues[data.initialQues - 1]?.ansId;
-    setSelectedValue(defaultAnswerId || "");
+    setSelectedValue(defaultAnswerId);
   }, [data, quesData]);
 
   const handleAns = (e) => {
@@ -37,14 +38,6 @@ const Question = () => {
     );
   };
 
-  useEffect(() => {
-    axios
-      .get("https://csi-examportal.onrender.com/api/v1/getquestions")
-      .then((res) => {
-        // console.log(res)
-        dispatch(quesList(res.data.msg));
-      });
-  }, []);
   return (
     <div className="m-4 pl-3">
       <Typography variant="h6">Question {data.initialQues}</Typography>
@@ -54,11 +47,7 @@ const Question = () => {
       </Typography>
       <br />
       <FormControl>
-        <RadioGroup
-          defaultValue={selectedValue}
-          name={quesData.initialQues[data.initialQues - 1]?.quesId}
-          onChange={handleAns}
-        >
+        <RadioGroup value={selectedValue} name={quesName} onChange={handleAns}>
           {quesData.initialQues[data.initialQues - 1]?.options.map(
             (option, id) => {
               return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid } from "@mui/material";
+import axios from "axios";
 
 const Timer = () => {
   const [timeRemaining, setTimeRemaining] = useState(0); // Total time remaining in seconds
