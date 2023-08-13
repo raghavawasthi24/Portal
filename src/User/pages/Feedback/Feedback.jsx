@@ -45,14 +45,14 @@ const Feedback = () => {
     {apiData.length ?
     <Container className="FeedbackMain">
     <Typography className="FeedbackHead" >Feedback</Typography>
-    
+    <Box>
       {
       apiData.map((ques,i)=>(
      <FeedbackCard key={i} question={ques.question_text} ques_id={ques.id} ondata={handlevalue}/>))
       }
     <Box className="QuestionMain">
     <Typography variant='h6' className='QuestionHead'>Your Suggestions matter, drop us one!</Typography>
-    <FormControl sx={{ width:"90%", margin:"0.5rem 0" }}>
+    <FormControl sx={{ width:"90%", margin:"0.5rem" }}>
     <OutlinedInput style={{borderRadius:"15px"}}  onChange={(e) => Suggestionfn(e)} />
      </FormControl>
      {disable ? <p style={{color:"red"}}>Fill The Feedback Form Before Submitting</p>:null}
@@ -60,7 +60,7 @@ const Feedback = () => {
 </Box>
 <button className='FeedbackBtn'  disabled={disable} onClick={handlesubmit} >Submit</button>
 
-    
+    </Box>
     </Container> : null }
     </>
   )

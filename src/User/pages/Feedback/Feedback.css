@@ -5,8 +5,6 @@
  font-size: 2rem !important;
 }
 .FeedbackMain{
-  /* width: 100% !important;
-  overflow-x:hidden ; */
   margin-top: 5rem;
     text-align: center;
 }
@@ -14,7 +12,7 @@
   font-size: 1rem ;
   border-radius: 15px ;
   padding: 1rem ;
-  /* width: 10rem; */
+  width: 10rem;
   color: white ;
   background: rgba(84, 59, 160, 1) ;
   margin-bottom: 4rem;

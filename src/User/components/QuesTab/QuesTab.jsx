@@ -2,6 +2,7 @@ import { Tab, Tabs } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { quesCtgSel } from "../../../store/slices/QuestionsSlice";
+import { moveQues } from "../../../store/slices/PrevNextSlice";
 
 const QuesTab = () => {
   const quesType = ["HTML", "CSS", "JavaScript", "Aptitude", "C"];
@@ -19,6 +20,7 @@ const QuesTab = () => {
     setValue(newValue);
     setSelTech(quesType[newValue]);
     dispatch(quesCtgSel(quesType[newValue]));
+    dispatch(moveQues(1))
   };
   return (
     <div className="mt-0 mb-6  shadow-md shadow-gray-600 mx-32">
