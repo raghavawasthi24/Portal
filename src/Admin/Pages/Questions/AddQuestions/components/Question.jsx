@@ -4,8 +4,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
-import CancelIcon from '@mui/icons-material/Cancel';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+// import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
+// import CancelIcon from '@mui/icons-material/Cancel';
 
 
 const Question = () => {
@@ -22,6 +24,7 @@ const Question = () => {
 
 
   const [formvalues,setFormvalues]=useState(initialValues);
+  const [count,setCount]=useState(1);
 
  
 
@@ -29,8 +32,38 @@ const Question = () => {
       const {name,value}=e.target;
       setFormvalues({...formvalues,[name]:value})
     }
+
+    const dropdownData = useSelector(state=>state.quesList)
+    useEffect(()=>{
+      console.log(dropdownData)
+    },[dropdownData.submitQuestion])
+
+    useEffect(()=>{
+      axios.get("https://csi-examportal.onrender.com/api/v1/counts?category=CSS")
+      .then((res)=>{
+        // console.log(res.data.msg.categoryResponse[res.data.msg.categoryResponse.length-1].count)
+        // console.log(res.data.msg.categoryResponse.length-1)
+        if(res.data.msg.categoryResponse.length!=0)
+        setCount(res.data.msg.categoryResponse[res.data.msg.categoryResponse.length-1].count)
+      }).catch((err)=>{
+        console.log(err)
+      })
+
+      // axios.get("https://csi-examportal.onrender.com/api/v1/getquestions")
+      //   .then((res)=>{
+      //       // dispatch(quesList(res.data.msg))
+      //       console.log(res)
+      //   })
+      //   .catch((err)=>{
+      //       console.log(err)
+      //   }) 
+    })
+    
   return (
     <div className='flex flex-col'>
+      {
+        console.log(dropdownData)
+      }
       
         <TextField
           id="outlined-multiline-flexible"

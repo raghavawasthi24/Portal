@@ -28,16 +28,16 @@ const QuestionsSlice = createSlice({
     state.submitQuestion=true
     },
     quesCtgSel:(state,action)=>{
-      if(action.payload=="ALL"){
-        state.initialQues=f;
-      }
-      else{
+     
       state.initialQues = f.filter((student) =>     
       student.category.includes(action.payload)
       )
-      }
+      console.log(action.payload)
       state.quesCategory=action.payload
-    }
+    },
+    // addQuestion:(state,action)=>{
+
+    // }
   },
 });
 
