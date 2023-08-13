@@ -10,32 +10,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const Test = () => {
-  const [activeQuestionId, setActiveQuestionId] = useState();
-  const [activeQuestion, setActiveQuestion] = useState();
-  const [length, setLength] = useState();
-  const [quesData, setQuesData] = useState([]);
-  const [section, setSection] = useState("html");
   const data = useSelector((state) => state.prevNext);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://examportalcsi.onrender.com/api/v1/category/${section}`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setQuesData(res.data);
-  //       setLength(res.data.length);
-  //       setActiveQuestion(res.data[data.initialQues - 1]);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [section]);
-
-  // useEffect(() => {
-  //   console.log(activeQuestionId);
-  //   setActiveQuestion(quesData[data.initialQues - 1]);
-  // }, [data.initialQues]);
-
+  console.log(data);
   return (
     <div className="flex justify-evenly">
       <div className="flex flex-col justify-start w-8/12 m-0 py-4 pl-12">
