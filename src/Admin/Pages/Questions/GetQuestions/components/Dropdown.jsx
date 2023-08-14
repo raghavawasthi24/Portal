@@ -27,7 +27,8 @@ const Dropdown = () => {
         <FormControl sx={{width:"100%"}}>
             <Select 
             value={selTech}
-            onChange={handleTech}>
+            onChange={handleTech}
+            sx={{textAlign:"center"}}>
             {techArr.map((item,key)=>{
                 return(<MenuItem key={key} value={item}>{item}</MenuItem>)
             })}
