@@ -24,8 +24,8 @@ const App = () => {
     <FullScreen handle={handle}>
       <BrowserRouter>
         <Routes>
-         <Route exact path="/" element={<LandingPage/>}></Route>
-          <Route exact path="/login" element={<Login />}></Route>
+         <Route exact path="/animation" element={<LandingPage/>}></Route>
+          <Route exact path="/" element={<Login />}></Route>
           <Route exact path="test" element={<Test />}></Route>
           <Route exact path="leaderboard" element={<LeaderBoard />} />
           <Route exact path="admin" element={<AdminHome/>} />

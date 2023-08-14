@@ -1,11 +1,11 @@
-import { Circle, KeyboardArrowDown } from '@mui/icons-material';
+import { Circle } from '@mui/icons-material';
 import { Box, Button, Card, Divider, FormControl, Grid, InputLabel, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, Select, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import arr from '../../constants/InstructionContent';
 import "./instruction.css"
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ErrorMessage } from 'formik';
+
+import axios from 'axios';
 
 
 const Instruction = () => {
@@ -38,17 +38,14 @@ const Instruction = () => {
  
   
    const handleSave=()=>{
-
-// axios
-//     .post(`http://13.48.30.130/accounts/loginInfo/`, {
-//       studentNo: "21153090",
-//     })
-//     .then((res) => {
-//       console.log(res.data.logintime);
-//       localStorage.setItem("savedTime", res.data.logintime.toString());
-//     })
-//     .catch((err) => console.log(err));
-    navigate('/test');
+axios
+    .post(`http://13.48.30.130/accounts/loginInfo/`,{studentNo:localStorage.getItem("studentNo")})
+    .then((res) => {
+      console.log(res.data.logintime);
+      localStorage.setItem("savedTime", res.data.logintime.toString());
+    })
+    .catch((err) => console.log(err));
+    navigate('/animation');
    }
   return (
     <Box style={{overflow:"hidden"}}>
@@ -76,7 +73,7 @@ const Instruction = () => {
                  <Typography style={{fontWeight:"bold",margin:"3vh"}}>I hereby confirm that I have read all the instructions and ready to begin my test. </Typography>
                  <div style={{margin:"5vh"}}>
                     <Typography style={{color:"lightgray",fontSize:"small",margin:"0.5vh"}}>Write START to start your exam</Typography>
-                    <TextField style={{width:"15vw",height:"5vh",borderRadius:"7px",boxShadow:"4px 4px 10px 0px #00000040",justifyContent:"center",alignItems:"center"}} variant="standard" type="text"
+                    <TextField style={{width:"15vw",height:"5vh",borderRadius:"7px",boxShadow:"4px 4px 10px 0px #00000040",justifyContent:"center",paddingLeft:"6vw"}}  variant="standard" type="text"
                     value={start}
                     onChange={handleInput}
                     disabled={!enabletextfield} 
