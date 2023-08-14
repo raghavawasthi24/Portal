@@ -11,10 +11,12 @@ import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useSelector} from "react-redux";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 const EditFeedback = () => {
   
   let initialValues={
     question:"",
+    category:"",
   }
 
     const dispatch=useDispatch();
@@ -29,19 +31,25 @@ const EditFeedback = () => {
   useEffect(()=>{
     console.log(feedbakQues.initial[feedbackQuesNo.initialQues],feedbackQuesNo.initialQues)
     initialValues.question=feedbakQues.initial[feedbackQuesNo.initialQues]?.question_text;
+    initialValues.category=feedbakQues.initial[feedbackQuesNo.initialQues]?.question_type;
     setFormvalues(initialValues)
     setId(feedbakQues.initial[feedbackQuesNo.initialQues]?.id)
   },[feedbakQues.initial[feedbackQuesNo.initialQues]])
 
  const updateQues=()=>{
+  if(formvalues.question.trim()!="" &&  formvalues.category.trim()!=""){
   axios.patch(`http://13.48.30.130/feedback/${id}/update/`,{
-      "question_text":formvalues.question
+      "question_text":formvalues.question.trim(),
+      "question_type":formvalues.category
     }
   )
   .then((res)=>{
     console.log(res)
     window.location.reload()
   })
+}
+else
+toast.error("Please Fill Details")
  }
 
     const inputHandler=(e)=>{
@@ -59,7 +67,7 @@ const EditFeedback = () => {
           id="outlined-multiline-flexible"
           label="Question"
           multiline
-          rows={10}
+          rows={7}
           maxRows={4}
           placeholder='Write question for feedback ✍'
           value={formvalues.question}
@@ -72,6 +80,21 @@ const EditFeedback = () => {
         />
 
 
+
+<FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">Category</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={formvalues.category}
+    label="Category"
+    name="category"
+    onChange={inputHandler}
+  >
+    <MenuItem value="emoji">Emoji</MenuItem>
+    <MenuItem value="text">Text</MenuItem>
+  </Select>
+</FormControl>
         
 
       <Button variant="outlined" sx={{width:"8rem",margin:"0.8rem auto"}} endIcon={<SendIcon />} onClick={updateQues}>

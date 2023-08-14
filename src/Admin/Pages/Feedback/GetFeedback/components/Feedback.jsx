@@ -17,7 +17,7 @@ import { feedbacklist } from '../../../../../store/slices/FeedbackSlice';
 const Feedback = () => {
     
     useEffect(()=>{
-        axios.get("http://13.48.30.130/feedback/add-f-question/")
+        axios.get("http://13.48.30.130/feedback/get-f-question/")
         .then((res)=>{
             console.log(res)
             dispatch(feedbacklist(res.data))
@@ -29,7 +29,7 @@ const Feedback = () => {
         .then((res)=>{
             console.log(res)
             toast.success("Question deleted successfully")
-            axios.get("http://13.48.30.130/feedback/add-f-question/")
+            axios.get("http://13.48.30.130/feedback/get-f-question/")
         .then((res)=>{
             console.log(res)
             dispatch(feedbacklist(res.data))
@@ -61,6 +61,7 @@ const Feedback = () => {
                     </div>
                     <hr />
                     <p className='mt-2'>{item.question_text}</p>
+                    <p className='mt-2'><span className='text-green-900'>Category</span> : {item.question_type}</p>
                                
                     </div>
                 )
