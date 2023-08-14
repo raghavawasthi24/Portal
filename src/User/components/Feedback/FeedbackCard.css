@@ -7,6 +7,7 @@
     background-color: #E0E1F940;
 }
 .QuestionHead{
+    font-size: 1rem !important;
     font-family: poppins !important;
 }
 .emojiFlex{
@@ -16,21 +17,32 @@
     justify-content: center;
 }
 .emoji{
+    width: 5rem;
     padding: 0rem 1rem;
+
+}
+.emojibtn{
     opacity: 0.6;
 
 }
-.selectedEmoji{
+/* .selectedEmoji{
     opacity: 1;
-}
+} */
 .emojiHead{
+    font-size: 0.75rem;
     color:#3F3F3F;
 }
-.emoji:visited{
+.emojibtn:hover {
     opacity: 1;
+        /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.4s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
 }
+
 .emoji:hover{
-    opacity: 1;
+  /* opacity: 1; */
     /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.4s;
 
