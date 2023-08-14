@@ -13,6 +13,7 @@ import Thankyou from "./User/pages/Thankyou/Thankyou";
 import AddQuestions from "./Admin/Pages/Questions/AddQuestions/AddQuestions";
 import AddFeedback from "./Admin/Pages/Feedback/AddFeedback/AddFeedback";
 import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
+import LandingPage from "./User/pages/LandingPage/LandingPage";
 import Loader from "./Loader/Loader";
 
 const App = () => {
@@ -23,7 +24,8 @@ const App = () => {
     <FullScreen handle={handle}>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Login />}></Route>
+         <Route exact path="/" element={<LandingPage/>}></Route>
+          <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="test" element={<Test />}></Route>
           <Route exact path="leaderboard" element={<LeaderBoard />} />
           <Route exact path="admin" element={<AdminHome/>} />

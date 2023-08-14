@@ -2,31 +2,27 @@ import React, { useState } from "react";
 import "./Login.css";
 import LoginGif from "../../assets/Coding workshop (1).gif";
 import { Button, Paper, TextField } from "@mui/material";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { Formik, useFormik } from "formik";
+import axios from "axios";
 
 const initialValues = {
-  studentNo: "",
+  student_no: "",
   password: "",
 };
 const validate = (values) => {
   let errors = {};
-  if (!values.studentNo) {
-    errors.studentNo = "Required";
-  } else if (!/^2([1-2]){1}([0-9]{5,6})$/i.test(values.studentNo)) {
-    errors.studentNo = "Invalid Student No.";
+  if (!values.student_no) {
+    errors.student_no = "Required";
+  } else if (!/^2([1-2]){1}([0-9]{5,6})$/i.test(values.student_no)) {
+    errors.student_no = "Invalid Student No.";
   }
   // else {
-  //   errors.studentNo=''
+  //   errors.student_no=''
   // }
 
   if (!values.password) {
     errors.password = "Required";
-  } else if (
-    !/^(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z])(?=\D*\d)(?=[^!#%]*[!#%])[A-Za-z0-9!#%@]{8,32}$/i.test(
-      values.password
-    )
-  ) {
+  } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/i.test(values.password)) {
     errors.password =
       "Invalid Password";
   }
@@ -35,12 +31,18 @@ const validate = (values) => {
   // }
   return errors;
 };
-const validationSchema = Yup.object({
-  studentNo: Yup.string().required("Required"),
-  password: Yup.string().required("Required"),
-});
+// const validationSchema = Yup.object({
+//   student_no: Yup.string().required("Required"),
+//   password: Yup.string().required("Required"),
+// });
 const onSubmit = (values) => {
-  console.log("Form data", values);
+  console.log(values);
+axios.post("http://13.48.30.130/accounts/login/",values)
+.then((res)=>{
+  console.log(res)
+}).catch((err)=>{
+  console.log(err)
+})
 };
 
 const Login = () => {
@@ -49,7 +51,7 @@ const Login = () => {
     , onSubmit });
   // console.log('form data',formik.values)
   // console.log('form errors',formik.errors)
-  console.log("Visited fields", formik.touched);
+  // console.log("Visited fields", formik.touched);
 
   return (
     <div className="loginPage">
@@ -60,7 +62,7 @@ const Login = () => {
         className="loginLogo"
       />
       <div className="login">
-        <form className="formSection" onSubmit={formik.handleSubmit}>
+        <form className="formSection" onSubmit={formik.handleSubmit} >
           <Paper elevation={3} className="login_form">
             <h3 className="login_form_header">CINE-2023</h3>
             <div className="input_field">
@@ -69,10 +71,10 @@ const Login = () => {
                 variant="outlined"
                 className="login_field"
                 required
-                name="studentNo"
+                name="student_no"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.studentNo}
+                value={formik.values.student_no}
                 // sx={{
                 //   margin: "2rem auto",
                 // }}
@@ -83,8 +85,8 @@ const Login = () => {
                   },
                 }}
               />
-              {formik.touched.studentNo && formik.errors.studentNo ? (
-                <p className="error">{formik.errors.studentNo}</p>
+              {formik.touched.student_no && formik.errors.student_no ? (
+                <p className="error">{formik.errors.student_no}</p>
               ) : null}
             </div>
             <div className="input_field">
