@@ -17,10 +17,9 @@ const Feedback = () => {
     axios.get("http://13.48.30.130/feedback/add-f-question/").then((res)=>setApiData(res.data))
   
   }, [])
-  console.log(apiData)
 
   const Suggestionfn = (e) =>{
-    if((Suggestions || e.target.value.trim().length)&& (formvValue.length === apiData.length) ) {
+    if(e.target.value.trim().length){
     e.target.style.border = ""
     e.target.style.borderRadius = ""
      setsuggestion(e.target.value.trim())
