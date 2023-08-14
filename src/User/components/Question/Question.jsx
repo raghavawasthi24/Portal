@@ -6,37 +6,62 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setAnsId } from "../../../store/slices/QuestionsSlice";
 
-const Question = (props) => {
-  const ques = props.ques;
+const Question = () => {
+  const dispatch = useDispatch();
   // const optionSet = ques.options;
   const data = useSelector((state) => state.prevNext);
+  const quesData = useSelector((state) => state.quesList);
+  console.log(quesData.initialQues[data.initialQues - 1]?.ansId);
+
+  // const defaultAnswerId = quesData.initialQues[data.initialQues - 1]?.ansId;
+
+  const [selectedValue, setSelectedValue] = useState("");
+  const [quesName, setQuesName] = useState("");
+
+  useEffect(() => {
+    setQuesName(quesData.initialQues[data.initialQues - 1]?.quesId);
+    const defaultAnswerId = quesData.initialQues[data.initialQues - 1]?.ansId;
+    setSelectedValue(defaultAnswerId);
+  }, [data, quesData]);
+
+  const handleAns = (e) => {
+    console.log(e.target.value);
+    const newSelectedValue = e.target.value;
+    setSelectedValue(newSelectedValue);
+    dispatch(
+      setAnsId({ index: data.initialQues - 1, ansId: newSelectedValue })
+    );
+  };
+
   return (
     <div className="m-4 pl-3">
       <Typography variant="h6">Question {data.initialQues}</Typography>
       <Divider />
-      <Typography variant="body">{ques?.question}</Typography>
+      <Typography variant="body">
+        {quesData.initialQues[data.initialQues - 1]?.question}
+      </Typography>
       <br />
       <FormControl>
-        <RadioGroup
-          defaultValue=""
-          name="radio-buttons-group"
-          onChange={(e) => console.log(e.target.value)}
-        >
-          {ques?.options.map((option, id) => {
-            return (
-              <FormControlLabel
-                value={option}
-                control={<Radio />}
-                label={option}
-                key={id}
-              />
-            );
-          })}
+        <RadioGroup value={selectedValue} name={quesName} onChange={handleAns}>
+          {quesData.initialQues[data.initialQues - 1]?.options.map(
+            (option, id) => {
+              return (
+                <FormControlLabel
+                  value={option.ansId}
+                  control={<Radio />}
+                  label={option.name}
+                  key={id}
+                />
+              );
+            }
+          )}
 
-          {console.log(ques?.options)}
+          {/* {console.log(quesData.initialQues)} */}
         </RadioGroup>
       </FormControl>
     </div>

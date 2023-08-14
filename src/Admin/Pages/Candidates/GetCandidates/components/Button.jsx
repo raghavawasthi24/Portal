@@ -8,20 +8,28 @@ import { categoryStudent } from "../../../../../store/slices/StudentsSlice";
 const Buttons = () => {
   const candidateBtn = [
     {
+      category:"Boy",
       gender:"Male",
-      hosteler:"Hosteler"
+      hosteler:"Hosteler",
+      isHosteler:"true"
     },
     {
+      category:"Boy",
       gender:"Male",
-      hosteler:"Day Scholar"
+      hosteler:"Day Scholar",
+      isHosteler:"false"
     },
     {
+      category:"Girl",
       gender:"Female",
-      hosteler:"Hosteler"
+      hosteler:"Hosteler",
+      isHosteler:"true"
     },
     {
+      category:"Girl",
       gender:"Female",
-      hosteler:"Day Scholar"
+      hosteler:"Day Scholar",
+      isHosteler:"false"
     },
   ];
   const dispatch=useDispatch();
@@ -45,7 +53,7 @@ const Buttons = () => {
               onClick={()=>dispatch(categoryStudent(val))}
             >
               {" "}
-              {val.gender}
+              {val.category}
               ({val.hosteler})
             </Button>
           );
