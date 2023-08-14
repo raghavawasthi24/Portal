@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Login.css";
 import LoginGif from "../../assets/Coding workshop (1).gif";
 import { Button, Paper, TextField } from "@mui/material";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
+
+
+const Login = () => {
+  const navigate=useNavigate();
 const initialValues = {
   student_no: "",
   password: "",
@@ -12,7 +17,7 @@ const initialValues = {
 const validate = (values) => {
   let errors = {};
   if (!values.student_no) {
-    errors.student_no = "Required";
+    errors.student_no = "**Required";
   } else if (!/^2([1-2]){1}([0-9]{5,6})$/i.test(values.student_no)) {
     errors.student_no = "Invalid Student No.";
   }
@@ -21,7 +26,7 @@ const validate = (values) => {
   // }
 
   if (!values.password) {
-    errors.password = "Required";
+    errors.password = "**Required";
   } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/i.test(values.password)) {
     errors.password =
       "Invalid Password";
@@ -31,21 +36,20 @@ const validate = (values) => {
   // }
   return errors;
 };
-// const validationSchema = Yup.object({
-//   student_no: Yup.string().required("Required"),
-//   password: Yup.string().required("Required"),
-// });
 const onSubmit = (values) => {
   console.log(values);
 axios.post("http://13.48.30.130/accounts/login/",values)
 .then((res)=>{
   console.log(res)
+  localStorage.setItem("Name",res.data.name)
+  localStorage.setItem("studentNo",res.data.studentNo)
+  localStorage.setItem("id",res.data._id)
+  navigate('/instruction');
 }).catch((err)=>{
   console.log(err)
+  alert('Incorrect Username or Password');
 })
 };
-
-const Login = () => {
   const formik = useFormik({ initialValues,
     validate 
     , onSubmit });
