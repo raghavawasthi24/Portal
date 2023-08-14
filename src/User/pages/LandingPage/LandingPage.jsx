@@ -1,5 +1,5 @@
 import React from 'react'
-import entryVideo from "../../assets/CREATEFINAL.gif"
+import entryVideo from "../../assets/Csi Animation.gif"
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 

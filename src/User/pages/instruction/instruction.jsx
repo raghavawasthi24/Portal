@@ -38,6 +38,16 @@ const Instruction = () => {
  
   
    const handleSave=()=>{
+
+// axios
+//     .post(`http://13.48.30.130/accounts/loginInfo/`, {
+//       studentNo: "21153090",
+//     })
+//     .then((res) => {
+//       console.log(res.data.logintime);
+//       localStorage.setItem("savedTime", res.data.logintime.toString());
+//     })
+//     .catch((err) => console.log(err));
     navigate('/test');
    }
   return (
