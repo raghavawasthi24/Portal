@@ -15,13 +15,11 @@ const TestFooter = () => {
   const currentCategoryQuestions =
     quesState.find((item) => item.category === category)?.questions || [];
   const data = useSelector((state) => state.prevNext);
-  console.log(quesData.initialQues[data.initialQues - 1], data.initialQues);
 
   function isAnsIdEmpty(questionsArray, inputId) {
     const question = questionsArray.find((item) => item.id === inputId);
 
     if (question) {
-      console.log("quesFound");
       return question.ansId === "";
     } else {
       return false;

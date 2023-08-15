@@ -12,7 +12,6 @@ import BasicModal from "./components/PopUp";
 
 const Test = () => {
   const data = useSelector((state) => state.prevNext);
-  console.log(data);
   const dispatch = useDispatch();
 
   useEffect(() => {

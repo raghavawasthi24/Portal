@@ -34,7 +34,6 @@ const QuestionsSlice = createSlice({
       state.initialQues = f.filter(
         (student) => student.category == action.payload
       );
-      console.log(action.payload);
       state.quesCategory = action.payload;
     },
   },

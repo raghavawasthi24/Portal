@@ -9,15 +9,17 @@ import {
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { markAnsId } from "../../../store/slices/QuestionsSlice";
+import { markAnsId } from "../../../store/slices/ReviewSlice";
 
 const Question = () => {
   const dispatch = useDispatch();
   // const optionSet = ques.options;
   const data = useSelector((state) => state.prevNext);
   const quesData = useSelector((state) => state.quesList);
-  console.log(quesData.initialQues[data.initialQues - 1]?.ansId);
   const category = quesData.quesCategory;
+  const quesState = useSelector((state) => state.review.categories);
+  const currentCategoryQuestions =
+    quesState.find((item) => item.category === category)?.questions || [];
   // const defaultAnswerId = quesData.initialQues[data.initialQues - 1]?.ansId;
 
   const [selectedValue, setSelectedValue] = useState("");
@@ -25,12 +27,13 @@ const Question = () => {
 
   useEffect(() => {
     setQuesName(quesData.initialQues[data.initialQues - 1]?.quesId);
-    const defaultAnswerId = quesData.initialQues[data.initialQues - 1]?.ansId;
-    setSelectedValue(defaultAnswerId);
-  }, [data, quesData]);
+    const defaultAnswerId = currentCategoryQuestions.find(
+      (item) => item.id === quesName
+    );
+    setSelectedValue(defaultAnswerId?.ansId || "");
+  }, [data, quesData, currentCategoryQuestions, quesName]);
 
   const handleAns = (e) => {
-    console.log(e.target.value);
     const newSelectedValue = e.target.value;
     setSelectedValue(newSelectedValue);
     dispatch(

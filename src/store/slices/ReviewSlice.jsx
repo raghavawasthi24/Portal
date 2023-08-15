@@ -45,6 +45,7 @@ const ReviewSlice = createSlice({
         );
         if (question) {
           question.review = review;
+          question.visited = true;
         } else {
           category.questions.push({
             id: questionId,
@@ -70,7 +71,7 @@ const ReviewSlice = createSlice({
           category.questions.push({
             id: questionId,
             review: false,
-            visited: true,
+            visited: false,
             ansId: ansId,
           });
         }
