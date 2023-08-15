@@ -13,6 +13,8 @@ import Thankyou from "./User/pages/Thankyou/Thankyou";
 import AddQuestions from "./Admin/Pages/Questions/AddQuestions/AddQuestions";
 import AddFeedback from "./Admin/Pages/Feedback/AddFeedback/AddFeedback";
 import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
+import LandingPage from "./User/pages/LandingPage/LandingPage";
+import Loader from "./Loader/Loader";
 
 const App = () => {
   const handle = useFullScreenHandle();
@@ -22,6 +24,7 @@ const App = () => {
     <FullScreen handle={handle}>
       <BrowserRouter>
         <Routes>
+         <Route exact path="/animation" element={<LandingPage/>}></Route>
           <Route exact path="/" element={<Login />}></Route>
           <Route exact path="test" element={<Test />}></Route>
           <Route exact path="leaderboard" element={<LeaderBoard />} />
@@ -33,6 +36,7 @@ const App = () => {
           <Route exact path="addQuestions" element={<AddQuestions/>}/>
           <Route exact path="addfeedback" element={<AddFeedback/>}/>
           <Route exact path="getfeedback" element={<GetFeedback/>}/>
+          <Route exact path="loader" element={<Loader/>}/>
           {/* <Route exact path="admin" element={<AdminHome />} /> */}
         </Routes>
       </BrowserRouter>

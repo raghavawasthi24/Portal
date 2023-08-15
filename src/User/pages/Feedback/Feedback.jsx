@@ -1,8 +1,9 @@
-import { Button, FormControl, OutlinedInput, Typography } from '@mui/material'
-import { Container,Box, color } from '@mui/system'
-
-import React, { useEffect, useState } from 'react'
+import { Typography } from '@mui/material'
+import { Container,Box } from '@mui/system'
+import { useNavigate } from 'react-router-dom'
+import  { useEffect, useState } from 'react'
 import FeedbackCard from '../../components/Feedback/FeedbackCard'
+import FeedbackQues from '../../components/Feedback/FeedbackQues'
 import "./Feedback.css"
 import axios from 'axios'
 
@@ -10,33 +11,27 @@ const Feedback = () => {
   const [apiData,setApiData] = useState({})
   const [formvValue,setFormValue]= useState([])
   const [disable,setedisable]=useState(true)
-  const [Suggestions,setsuggestion]= useState()
+ 
+  const navigate=useNavigate();
 
-  
+
   useEffect(() => {
-    axios.get("http://13.48.30.130/feedback/add-f-question/").then((res)=>setApiData(res.data))
-  
+    axios.get("http://13.48.30.130/feedback/get-f-question/").then((res)=>setApiData(res.data))
   }, [])
 
-  const Suggestionfn = (e) =>{
-    if(e.target.value.trim().length){
-    e.target.style.border = ""
-    e.target.style.borderRadius = ""
-     setsuggestion(e.target.value.trim())
-    setedisable(false)}
 
-    else{
-      console.log(e.target.style)
-      e.target.style.border = " 4px solid red"
-      e.target.style.borderRadius = " 15px"
-      setedisable(true)
-    }
-  }
+
    const handlevalue = (data) =>{
+    console.log(data)
     setFormValue([...formvValue,data])
+    if(formvValue.length + 1 === apiData.length){
+      setedisable(false)}
+      else{
+        setedisable(true)
+      }
    }
    const handlesubmit = () => {
-     console.log([...formvValue,Suggestions])
+     axios.post("http://13.48.30.130/feedback/add-f-answer/",{"student_number":localStorage.getItem("studentNo"),"answers":formvValue}).then(navigate('/thankyou'))
    }
   
 
@@ -48,16 +43,12 @@ const Feedback = () => {
     <Box>
       {
       apiData.map((ques,i)=>(
+        ques.question_type === "text" ? <FeedbackQues question={ques.question_text} ques_id={ques.id}  ondata={handlevalue}/> :
      <FeedbackCard key={i} question={ques.question_text} ques_id={ques.id} ondata={handlevalue}/>))
       }
-    <Box className="QuestionMain">
-    <Typography variant='h6' className='QuestionHead'>Your Suggestions matter, drop us one!</Typography>
-    <FormControl sx={{ width:"90%", margin:"0.5rem" }}>
-    <OutlinedInput style={{borderRadius:"15px"}}  onChange={(e) => Suggestionfn(e)} />
-     </FormControl>
-     {disable ? <p style={{color:"red"}}>Fill The Feedback Form Before Submitting</p>:null}
 
-</Box>
+
+{disable ? <p style={{color:"red",marginBottom:"1rem"}}>Fill The Feedback Form Before Submitting</p>:null}
 <button className='FeedbackBtn'  disabled={disable} onClick={handlesubmit} >Submit</button>
 
     </Box>

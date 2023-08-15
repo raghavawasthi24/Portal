@@ -1,0 +1,65 @@
+.cont{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.small{
+    width: 10rem;
+    height: 10rem;
+    position: relative;
+}
+
+.frame1{
+    
+    position: absolute;
+    bottom: 0;
+    /* left: 50%; */
+    animation-name: frame;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes frame {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    30% {opacity: 1;}
+    60% {opacity: 1;}
+    100% {opacity: 1;}
+}
+
+.frame2{
+    position: absolute;
+    bottom: 0;
+    /* left: 50%; */
+    z-index: 1;
+    animation-name: framee;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes framee {
+    0% {opacity: 0;}
+    20% {opacity: 0;}
+    30% {opacity: 1;}
+    60% {opacity: 1;}
+    100% {opacity: 1;}
+}
+
+
+.frame3{
+    position: absolute;
+    bottom: 0;
+    /* left: 50%; */
+    z-index: 1;
+    animation-name: frameee;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes frameee {
+    0% {opacity: 0;}
+    20% {opacity: 0;}
+    30% {opacity: 0;}
+    60% {opacity: 1;}
+    100% {opacity: 1;}
+}

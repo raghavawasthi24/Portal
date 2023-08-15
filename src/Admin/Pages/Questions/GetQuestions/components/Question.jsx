@@ -54,8 +54,9 @@ const GetQuestions = () => {
             <FormControl>
                 <RadioGroup>
                 {questionDisplay.initialQues[data.initialQues-1]?.options.map((item,key)=>{
-                    return(<FormControlLabel key={key} value={item} control={<Radio/>} label={item.name}/>)
+                    return(<FormControlLabel key={key} checked={item.name===correctAns} value={item} control={<Radio/>} label={item.name}/>)
                 })}
+                {/* <FormControlLabel value="HTML11" checked control={<Radio/>} label="HTML11"/> */}
                
                 </RadioGroup>
                 </FormControl>
