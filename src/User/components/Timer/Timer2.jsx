@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getLoginTime } from "../../utils/index";
 
 const Timer = () => {
   const [timeRemaining, setTimeRemaining] = useState(0); // Total time remaining in seconds
@@ -10,6 +11,12 @@ const Timer = () => {
 
   useEffect(() => {
     const savedTime = parseFloat(localStorage.getItem("savedTime"));
+    if (!savedTime) getLoginTime();
+  }, []);
+
+  useEffect(() => {
+    const savedTime = parseFloat(localStorage.getItem("savedTime"));
+
     const currentTime = Math.floor(Date.now() / 1000); // Convert current time to seconds
     if (savedTime) {
       const elapsedTime = currentTime - savedTime;

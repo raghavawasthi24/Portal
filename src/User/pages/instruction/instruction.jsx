@@ -3,15 +3,12 @@ import {
   Box,
   Button,
   Card,
-  Divider,
   FormControl,
   Grid,
   InputLabel,
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
-  Menu,
   MenuItem,
   Select,
   TextField,
@@ -21,8 +18,7 @@ import React, { useState } from "react";
 import arr from "../../constants/InstructionContent";
 import "./instruction.css";
 import { useNavigate } from "react-router-dom";
-
-import axios from "axios";
+import { getLoginTime } from "../../utils/index";
 
 const Instruction = () => {
   const navigate = useNavigate();
@@ -51,15 +47,7 @@ const Instruction = () => {
 
   const handleSave = () => {
     localStorage.setItem("language", Language);
-    axios
-      .post(`http://13.48.30.130/accounts/loginInfo/`, {
-        studentNo: localStorage.getItem("studentNo"),
-      })
-      .then((res) => {
-        console.log(res.data.logintime);
-        localStorage.setItem("savedTime", res.data.logintime.toString());
-      })
-      .catch((err) => console.log(err));
+    getLoginTime();
     navigate("/animation");
   };
   return (
