@@ -50,6 +50,7 @@ const Instruction = () => {
   };
 
   const handleSave = () => {
+    localStorage.setItem("language", Language);
     axios
       .post(`http://13.48.30.130/accounts/loginInfo/`, {
         studentNo: localStorage.getItem("studentNo"),

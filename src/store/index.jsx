@@ -5,6 +5,7 @@ import QuestionsSlice from "./slices/QuestionsSlice";
 import StudentsSlice from "./slices/StudentsSlice";
 import FeedbackSlice from "./slices/FeedbackSlice";
 import ReviewReducer from "./slices/ReviewSlice";
+import TestCategorySlice from "./slices/TestCategorySlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     student: StudentsSlice,
     feedback: FeedbackSlice,
     review: ReviewReducer,
+    test: TestCategorySlice,
   },
 });
 
