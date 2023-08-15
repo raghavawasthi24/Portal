@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { nextQues } from "../../../store/slices/PrevNextSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setVisited } from "../../../store/slices/QuestionsSlice";
-
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { setReview } from "../../../store/slices/ReviewSlice";
 
@@ -22,7 +22,8 @@ const TestFooter = () => {
   };
 
   const saveAndNext = () => {
-    if (quesData.initialQues[data.initialQues - 1].ansId === "") return;
+    if (quesData.initialQues[data.initialQues - 1].ansId === "")
+      toast.error("Select an option");
     //change the review to false
     submitAnswer(
       quesData.initialQues[data.initialQues - 1]._id,
@@ -35,7 +36,8 @@ const TestFooter = () => {
   };
 
   const reviewAndNext = () => {
-    if (quesData.initialQues[data.initialQues - 1].ansId === "") return;
+    if (quesData.initialQues[data.initialQues - 1].ansId === "")
+      toast.error("Select an option");
     //change the review to true
     submitAnswer({
       id: quesData.initialQues[data.initialQues - 1]._id,
@@ -60,7 +62,7 @@ const TestFooter = () => {
   };
 
   return (
-    <div className="mt-16 bg-gradient-to-r from-testFooterGrad1 to-testFooterGrad2 py-4 px-4 absolute bottom-6 w-3/5 left-16">
+    <div className="mt-16 bg-gradient-to-r from-testFooterGrad1 to-testFooterGrad2 py-4 px-4 absolute bottom-0 w-3/5 left-16">
       <div className="flex justify-between">
         {/* <div className="bg-reviewColor border-radius"> */}
         <Button
@@ -90,6 +92,7 @@ const TestFooter = () => {
           Marked for review
         </span>
       </div>
+      <ToastContainer />
     </div>
   );
 };

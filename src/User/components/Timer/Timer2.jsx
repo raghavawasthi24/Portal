@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Timer = () => {
   const [timeRemaining, setTimeRemaining] = useState(0); // Total time remaining in seconds
   const studentNumber = localStorage.getItem("studentNumber");
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   useEffect(() => {
     const savedTime = parseFloat(localStorage.getItem("savedTime"));

@@ -9,6 +9,7 @@ import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { quesList } from "../../../store/slices/QuestionsSlice";
+import BasicModal from "./components/PopUp";
 
 const Test = () => {
   const data = useSelector((state) => state.prevNext);
@@ -36,12 +37,13 @@ const Test = () => {
           <Timer />
           <QuesNumbers />
         </div>
-        <Button
+        {/* <Button
           type="submit"
-          className="!bg-submitColor !text-white w-4 !mx-auto !px-16 !py-2 fixed -bottom-10"
+          className="!bg-submitColor !text-white w-4 !mx-auto !px-16 !py-2 fixed -bottom-16"
         >
           Submit
-        </Button>
+        </Button> */}
+        <BasicModal />
       </div>
     </div>
   );
