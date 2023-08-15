@@ -9,7 +9,7 @@ const LandingPage = () => {
   useEffect(() => {
     setTimeout(() => {
       navigate('/test')
-    }, 10000)
+    }, 5000)
   }, [])
   return (
     <div ><img src={entryVideo} alt='entryvideo' style={{height:"60vh",margin:"20vh auto "}}/></div>

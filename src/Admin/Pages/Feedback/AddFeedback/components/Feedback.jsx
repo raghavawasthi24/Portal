@@ -33,7 +33,6 @@ const AddFeedback = () => {
         {
           "question_text":formvalues.question.trim(),
           "question_type":formvalues.category,
-          "options":""
         }
       ])
       .then((res)=>{
