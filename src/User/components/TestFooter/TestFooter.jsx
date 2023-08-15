@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Button } from "@mui/material";
 import { nextQues } from "../../../store/slices/PrevNextSlice";
@@ -16,15 +16,20 @@ const TestFooter = () => {
     quesState.find((item) => item.category === category)?.questions || [];
   const data = useSelector((state) => state.prevNext);
 
-  function isAnsIdEmpty(questionsArray, inputId) {
-    const question = questionsArray.find((item) => item.id === inputId);
+  const [answered, setAnswered] = useState(false);
+
+  useEffect(() => {
+    const currentQuestion = quesData.initialQues[data.initialQues - 1];
+    const question = currentCategoryQuestions.find(
+      (item) => item.id === currentQuestion.quesId
+    );
 
     if (question) {
-      return question.ansId === "";
+      if (question.ansId !== "") setAnswered(true);
     } else {
-      return false;
+      setAnswered(false);
     }
-  }
+  }, [currentCategoryQuestions, data, quesData]);
 
   const setReviewHandler = (review) => {
     const currentQuestion = quesData.initialQues[data.initialQues - 1];
@@ -36,17 +41,14 @@ const TestFooter = () => {
         review,
       })
     );
-    // dispatch(setReview({ questionId: currentQuestion.quesId, review }));
   };
 
   const saveAndNext = () => {
-    const currentQuestion = quesData.initialQues[data.initialQues - 1];
-
-    if (isAnsIdEmpty(currentCategoryQuestions, currentQuestion.quesId)) {
+    if (!answered) {
       toast.error("Select an option");
       return;
     }
-    //change the review to false
+
     // submitAnswer(
     //   quesData.initialQues[data.initialQues - 1]._id,
     //   quesData.initialQues[data.initialQues - 1].quesId,
@@ -57,9 +59,11 @@ const TestFooter = () => {
   };
 
   const reviewAndNext = () => {
-    if (quesData.initialQues[data.initialQues - 1].ansId === "")
+    if (!answered) {
       toast.error("Select an option");
-    //change the review to true
+      return;
+    }
+
     // submitAnswer({
     //   id: quesData.initialQues[data.initialQues - 1]._id,
     //   quesId: quesData.initialQues[data.initialQues - 1].quesId,
