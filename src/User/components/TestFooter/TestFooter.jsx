@@ -3,20 +3,24 @@ import CircleIcon from "@mui/icons-material/Circle";
 import { Button } from "@mui/material";
 import { nextQues } from "../../../store/slices/PrevNextSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setVisited, toggleReview } from "../../../store/slices/QuestionsSlice";
+import { setVisited } from "../../../store/slices/QuestionsSlice";
+
 import axios from "axios";
+import { setReview } from "../../../store/slices/ReviewSlice";
 
 const TestFooter = () => {
   const dispatch = useDispatch();
   const quesData = useSelector((state) => state.quesList);
   const data = useSelector((state) => state.prevNext);
   console.log(quesData.initialQues[data.initialQues - 1], data.initialQues);
-  const setReview = (review) => {
+
+  const setReviewHandler = (review) => {
     // Set the review property for the current question
     const currentQuestion = quesData.initialQues[data.initialQues - 1];
-    console.log(currentQuestion.question);
-    dispatch(toggleReview({ question: currentQuestion.question, review }));
+    console.log(currentQuestion.quesId);
+    dispatch(setReview({ questionId: currentQuestion.quesId, review }));
   };
+
   const saveAndNext = () => {
     if (quesData.initialQues[data.initialQues - 1].ansId === "") return;
     //change the review to false
@@ -25,10 +29,11 @@ const TestFooter = () => {
       quesData.initialQues[data.initialQues - 1].quesId,
       quesData.initialQues[data.initialQues - 1].ansId
     );
-    setReview(false);
+    setReviewHandler(false);
     markVisited();
     dispatch(nextQues(quesData.initialQues));
   };
+
   const reviewAndNext = () => {
     if (quesData.initialQues[data.initialQues - 1].ansId === "") return;
     //change the review to true
@@ -37,7 +42,7 @@ const TestFooter = () => {
       quesId: quesData.initialQues[data.initialQues - 1].quesId,
       ansId: quesData.initialQues[data.initialQues - 1].ansId,
     });
-    setReview(true);
+    setReviewHandler(true);
     markVisited();
     dispatch(nextQues(quesData.initialQues));
   };

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Timer = () => {
   const [timeRemaining, setTimeRemaining] = useState(0); // Total time remaining in seconds
   const studentNumber = localStorage.getItem("studentNumber");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedTime = parseFloat(localStorage.getItem("savedTime"));
@@ -25,6 +27,7 @@ const Timer = () => {
           .post(`http://13.48.30.130/accounts/submit/${studentNumber}`)
           .then((res) => {
             console.log(res);
+            nav("/feedback");
           })
           .catch((err) => {
             console.log(err);

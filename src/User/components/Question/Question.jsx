@@ -39,7 +39,7 @@ const Question = () => {
   };
 
   return (
-    <div className="m-4 pl-3">
+    <div className="m-4 pl-3 overflow-y-auto h-30vh">
       <Typography variant="h6">Question {data.initialQues}</Typography>
       <Divider />
       <Typography variant="body">

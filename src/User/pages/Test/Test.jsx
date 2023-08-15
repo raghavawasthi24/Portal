@@ -31,14 +31,14 @@ const Test = () => {
         <Question />
         <TestFooter />
       </div>
-      <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-between">
+      <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-start">
         <div>
           <Timer />
           <QuesNumbers />
         </div>
         <Button
           type="submit"
-          className="!bg-submitColor !text-white w-4 !mx-auto !px-16 !py-2 absolute -bottom-10"
+          className="!bg-submitColor !text-white w-4 !mx-auto !px-16 !py-2 fixed -bottom-10"
         >
           Submit
         </Button>

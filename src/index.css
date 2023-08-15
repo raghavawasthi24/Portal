@@ -6,14 +6,36 @@
 body{    
     background-image: url(Images/Background_portal.png);
     background-size: cover;
+    /* Preventing selection of text */
+    -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+    
 }
 html{
     font-family: 'Poppins', sans-serif;
 }
 
-::-webkit-scrollbar{
+/* ::-webkit-scrollbar{
     display: none;
+    width: 5px;
+    background-color: rgba(128, 128, 128, 0.656);
+} */
+/* Apply hiding of scrollbar in your component please not globally. */
+::-webkit-scrollbar {
+    width: 4px;
 }
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+
 .hide{
     display: none;
 }

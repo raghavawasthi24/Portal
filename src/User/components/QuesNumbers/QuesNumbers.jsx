@@ -21,8 +21,12 @@ const QuesNumbers = () => {
         spacing={2}
         gap={1}
         justifyContent="center"
-        alignItems="center"
-        sx={{ mt: "10px" }}
+        alignItems="start"
+        sx={{
+          mt: "10px",
+          overflowY: "auto",
+          height: "32vh",
+        }}
       >
         {quesdata.initialQues?.map((ques, id) => {
           const visited = ques?.visited;

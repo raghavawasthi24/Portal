@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setReview } from "./ReviewSlice";
 
 const initialState = {
   initialQues: [
@@ -23,13 +24,11 @@ const QuestionsSlice = createSlice({
   reducers: {
     quesList: (state, action) => {
       const newQuestions = action.payload.map((newQuestion) => {
-        // Check if the question already exists in the state
         const existingQuestion = state.initialQues.find(
           (question) => question.question === newQuestion.question
         );
 
         if (existingQuestion) {
-          // If the question exists, preserve its review status
           return {
             ...newQuestion,
             visited: existingQuestion.visited,
@@ -37,7 +36,6 @@ const QuestionsSlice = createSlice({
             ansId: existingQuestion.ansId,
           };
         } else {
-          // If the question is new, set its review status to false
           return {
             ...newQuestion,
             visited: false,
@@ -49,6 +47,12 @@ const QuestionsSlice = createSlice({
 
       state.initialQues = newQuestions;
       f = newQuestions; // Update the local variable if needed
+
+      // Dispatch the review data to the new slice
+      newQuestions.forEach((question) => {
+        const { review, ansId, visited } = question;
+        setReview({ question: question.question, review, ansId, visited });
+      });
     },
 
     toggleQuestion: (state, action) => {
