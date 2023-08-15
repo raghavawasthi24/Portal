@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setAnsId } from "../../../store/slices/QuestionsSlice";
+import { markAnsId } from "../../../store/slices/QuestionsSlice";
 
 const Question = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Question = () => {
   const data = useSelector((state) => state.prevNext);
   const quesData = useSelector((state) => state.quesList);
   console.log(quesData.initialQues[data.initialQues - 1]?.ansId);
-
+  const category = quesData.quesCategory;
   // const defaultAnswerId = quesData.initialQues[data.initialQues - 1]?.ansId;
 
   const [selectedValue, setSelectedValue] = useState("");
@@ -34,7 +34,11 @@ const Question = () => {
     const newSelectedValue = e.target.value;
     setSelectedValue(newSelectedValue);
     dispatch(
-      setAnsId({ index: data.initialQues - 1, ansId: newSelectedValue })
+      markAnsId({
+        categoryId: category,
+        questionId: quesName,
+        ansId: newSelectedValue,
+      })
     );
   };
 

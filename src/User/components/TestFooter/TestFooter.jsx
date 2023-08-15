@@ -3,35 +3,58 @@ import CircleIcon from "@mui/icons-material/Circle";
 import { Button } from "@mui/material";
 import { nextQues } from "../../../store/slices/PrevNextSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setVisited } from "../../../store/slices/QuestionsSlice";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { setReview } from "../../../store/slices/ReviewSlice";
+import { markReview } from "../../../store/slices/ReviewSlice";
 
 const TestFooter = () => {
   const dispatch = useDispatch();
   const quesData = useSelector((state) => state.quesList);
+  const category = quesData.quesCategory;
+  const quesState = useSelector((state) => state.review.categories);
+  const currentCategoryQuestions =
+    quesState.find((item) => item.category === category)?.questions || [];
   const data = useSelector((state) => state.prevNext);
   console.log(quesData.initialQues[data.initialQues - 1], data.initialQues);
 
+  function isAnsIdEmpty(questionsArray, inputId) {
+    const question = questionsArray.find((item) => item.id === inputId);
+
+    if (question) {
+      console.log("quesFound");
+      return question.ansId === "";
+    } else {
+      return false;
+    }
+  }
+
   const setReviewHandler = (review) => {
-    // Set the review property for the current question
     const currentQuestion = quesData.initialQues[data.initialQues - 1];
-    console.log(currentQuestion.quesId);
-    dispatch(setReview({ questionId: currentQuestion.quesId, review }));
+    // Set the review property for the current question
+    dispatch(
+      markReview({
+        categoryId: currentQuestion.category,
+        questionId: currentQuestion.quesId,
+        review,
+      })
+    );
+    // dispatch(setReview({ questionId: currentQuestion.quesId, review }));
   };
 
   const saveAndNext = () => {
-    if (quesData.initialQues[data.initialQues - 1].ansId === "")
+    const currentQuestion = quesData.initialQues[data.initialQues - 1];
+
+    if (isAnsIdEmpty(currentCategoryQuestions, currentQuestion.quesId)) {
       toast.error("Select an option");
+      return;
+    }
     //change the review to false
-    submitAnswer(
-      quesData.initialQues[data.initialQues - 1]._id,
-      quesData.initialQues[data.initialQues - 1].quesId,
-      quesData.initialQues[data.initialQues - 1].ansId
-    );
+    // submitAnswer(
+    //   quesData.initialQues[data.initialQues - 1]._id,
+    //   quesData.initialQues[data.initialQues - 1].quesId,
+    //   quesData.initialQues[data.initialQues - 1].ansId
+    // );
     setReviewHandler(false);
-    markVisited();
     dispatch(nextQues(quesData.initialQues));
   };
 
@@ -39,18 +62,15 @@ const TestFooter = () => {
     if (quesData.initialQues[data.initialQues - 1].ansId === "")
       toast.error("Select an option");
     //change the review to true
-    submitAnswer({
-      id: quesData.initialQues[data.initialQues - 1]._id,
-      quesId: quesData.initialQues[data.initialQues - 1].quesId,
-      ansId: quesData.initialQues[data.initialQues - 1].ansId,
-    });
+    // submitAnswer({
+    //   id: quesData.initialQues[data.initialQues - 1]._id,
+    //   quesId: quesData.initialQues[data.initialQues - 1].quesId,
+    //   ansId: quesData.initialQues[data.initialQues - 1].ansId,
+    // });
     setReviewHandler(true);
-    markVisited();
     dispatch(nextQues(quesData.initialQues));
   };
-  const markVisited = () => {
-    dispatch(setVisited({ index: data?.initialQues - 1 }));
-  };
+
   const submitAnswer = ({ id, quesId, ansId }) => {
     axios
       .post(`https://csi-examportal.onrender.com/api/v1/postResponse/:${id}`, {

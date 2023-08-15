@@ -2,21 +2,82 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-const ReviewSlice = createSlice({
-  name: "review",
-  initialState: [
+const optionalCategory = localStorage.getItem("language");
+
+const initialState = {
+  categories: [
     {
-      category: "",
-      quesDetails: { questionId: { review: false, visited: false, ansId: "" } },
+      category: "HTML",
+      questions: [],
+    },
+    {
+      category: "CSS",
+      questions: [],
+    },
+    {
+      category: "JavaScript",
+      questions: [],
+    },
+    {
+      category: "Aptitude",
+      questions: [],
+    },
+    {
+      category: optionalCategory || "C",
+      questions: [],
     },
   ],
+};
+
+const ReviewSlice = createSlice({
+  name: "quesStates",
+  initialState,
+
   reducers: {
-    setReview: (state, action) => {
-      const { questionId, review, visited, ansId } = action.payload;
-      state[questionId] = { review, visited, ansId };
+    markReview: (state, action) => {
+      const { categoryId, questionId, review } = action.payload;
+      const category = state.categories.find(
+        (cat) => cat.category === categoryId
+      );
+      if (category) {
+        const question = category.questions.find(
+          (ques) => ques.id === questionId
+        );
+        if (question) {
+          question.review = review;
+        } else {
+          category.questions.push({
+            id: questionId,
+            review: review,
+            visited: true,
+            ansId: "",
+          });
+        }
+      }
+    },
+    markAnsId: (state, action) => {
+      const { categoryId, questionId, ansId } = action.payload;
+      const category = state.categories.find(
+        (cat) => cat.category === categoryId
+      );
+      if (category) {
+        const question = category.questions.find(
+          (ques) => ques.id === questionId
+        );
+        if (question) {
+          question.ansId = ansId;
+        } else {
+          category.questions.push({
+            id: questionId,
+            review: false,
+            visited: true,
+            ansId: ansId,
+          });
+        }
+      }
     },
   },
 });
 
-export const { setReview } = ReviewSlice.actions;
+export const { markAnsId, markReview } = ReviewSlice.actions;
 export default ReviewSlice.reducer;
