@@ -8,15 +8,18 @@ import { quesCtgSel } from '../../../../../store/slices/QuestionsSlice';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import { quesList } from '../../../../../store/slices/QuestionsSlice';
 import axios from 'axios';
+import Loader from "../../../../../Loader/Loader"
 import { useState } from 'react';
 
 const GetQuestions = () => {
     
     useEffect(()=>{
+        setLoader(true)
         axios.get("https://csi-examportal.onrender.com/api/v1/getquestions")
         .then((res)=>{
             dispatch(quesList(res.data.msg))
             dispatch(quesCtgSel('HTML'))
+            setLoader(false)
         })
         .catch((err)=>{
             console.log(err)
@@ -24,6 +27,7 @@ const GetQuestions = () => {
     },[])
    
     const data = useSelector(state => state.prevNext)
+    const [loader,setLoader]=useState(false)
     const questionDisplay= useSelector(state=>state.quesList)
     const showEdit= useSelector(state=>state.editShow)
     const [correctAns,setCorrectAns]=useState()
@@ -40,6 +44,7 @@ const GetQuestions = () => {
     },[questionDisplay.initialQues[data.initialQues-1]?.question])
 
   return (
+    <>
     <div className='p-10 flex flex-col justify-between h-full'>
         
         <div className=''>
@@ -74,6 +79,10 @@ const GetQuestions = () => {
           
        
     </div>
+    <div className='absolute top-0' style={{marginLeft:"-2rem", display:loader?"":"none"}}>
+        <Loader/>
+    </div>
+    </>
   )
 }
 

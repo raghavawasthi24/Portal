@@ -1,9 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 // const data= ;
 
 const initialState = {
   initialQues: 1,
+  currentCtg:true,
 };
 
 const prevNextSlice = createSlice({
@@ -17,7 +18,13 @@ const prevNextSlice = createSlice({
       } else state.initialQues--;
     },
     nextQues: (state, action) => {
-      if (state.initialQues == action.payload.length) state.initialQues = 1;
+      if (state.initialQues == action.payload.length){
+      //    if(state.currentCtg)
+      //    state.currentCtg=false;
+      //   else
+      //   state.currentCtg=true
+         state.initialQues = 1;
+      }
       else state.initialQues++;
       // console.log(action.payload)
     },
