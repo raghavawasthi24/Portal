@@ -1,4 +1,4 @@
-import { MarkedAns } from "./MarkedAns";
 import getLoginTime from "./getTime";
+import SubmitAns from "./SubmitAns";
 
-export { MarkedAns, getLoginTime };
+export { SubmitAns, getLoginTime };
