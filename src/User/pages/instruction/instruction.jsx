@@ -51,7 +51,7 @@ const Instruction = () => {
     navigate("/animation");
   };
   return (
-    <Box style={{ overflow: "hidden" }}>
+    <Box className="instructions">
       <Grid container spacing={2} margin={5}>
         <Grid item xs={8}>
           <div className="instructionLeft">
@@ -114,11 +114,12 @@ const Instruction = () => {
                     borderRadius: "7px",
                     boxShadow: "4px 4px 10px 0px #00000040",
                     justifyContent: "center",
-                    paddingLeft: "6vw",
+                    paddingLeft:"6vw",
                   }}
                   variant="standard"
                   type="text"
                   value={start}
+                  autoComplete="off"
                   onChange={handleInput}
                   disabled={!enabletextfield}
                   InputProps={{
