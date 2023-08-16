@@ -7,9 +7,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
+import { useNavigate } from "react-router-dom";
+import Tabtable from "./Tabtable";
 
 const LeaderBoard = () => {
   const [students, setStudents] = useState([]);
+  const navigate=useNavigate();
   
   useEffect(() => {
     // const socket = io("https://csi-examportal.onrender.com");
