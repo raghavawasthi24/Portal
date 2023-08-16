@@ -26,7 +26,8 @@ const FeedbackCard = (props) => {
       <Box className="emojiFlex">
 
         <Button style={{ display: "grid" }} disabled={disable} onClick={(e) => selectEmojiFn(e, 'Bad')}>
-          <img className="emoji" src="src\User\assets\Confounded face.svg" ></img>
+         
+          <img className="emoji" src="src\User\assets\Confounded face.svg"  ></img>
           <p className='emojiHead'>Poor</p>
         </Button>
 
