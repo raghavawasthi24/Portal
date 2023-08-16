@@ -52,15 +52,16 @@ const LeaderBoard = () => {
               <TableRow>
                 <TableCell sx={{textAlign:"center"}}>Rank</TableCell>
                 <TableCell sx={{textAlign:"center"}}>Student Number</TableCell>
-                <TableCell sx={{textAlign:"center"}}>Score</TableCell>
+                <TableCell sx={{textAlign:"center"}}>Student Name</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {students.map((student, index) => (
                 <TableRow key={index}>
                   <TableCell sx={{textAlign:"center"}}>{index+1}</TableCell>
+
                   <TableCell sx={{textAlign:"center"}}>{student.studentNo}</TableCell>
-                  <TableCell sx={{textAlign:"center"}}>{student.totalScore}</TableCell>
+                  <TableCell sx={{textAlign:"center"}}>{student.name}</TableCell>
         
                 </TableRow>
               ))}
