@@ -86,7 +86,7 @@ const TestFooter = () => {
     console.log(submitData);
     axios
       .get(
-        `https://csi-examportal.onrender.com/api/v1/postResponse/${id}`,
+        `https://csi-examportal.onrender.com/api/v1/postResponse/${id}?ansId=${ansId}&quesId=${quesId}&status=${status}`,
         submitData
       )
       .then((res) => console.log(res))
