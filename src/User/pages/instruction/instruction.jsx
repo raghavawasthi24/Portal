@@ -51,7 +51,7 @@ const Instruction = () => {
     navigate("/animation");
   };
   return (
-    <Box style={{ overflow: "hidden" }}>
+    <Box className="instructions">
       <Grid container spacing={2} margin={5}>
         <Grid item xs={8}>
           <div className="instructionLeft">
@@ -66,7 +66,7 @@ const Instruction = () => {
                 <p className="instruction_heading">Instructions</p>
               </div>
               {arr.map((link, i) => (
-                <div style={{ overflow: "scroll" }}>
+                <div key={link.id}>
                   <List className="instruction_list">
                     <ListItemIcon className="listCircle">
                       <Circle
@@ -79,7 +79,7 @@ const Instruction = () => {
                         }}
                       />
                     </ListItemIcon>
-                    <ListItem className="listPoints" key={link.id}>
+                    <ListItem className="listPoints">
                       {link.point}
                     </ListItem>
                   </List>
@@ -116,11 +116,12 @@ const Instruction = () => {
                     borderRadius: "7px",
                     boxShadow: "4px 4px 10px 0px #00000040",
                     justifyContent: "center",
-                    paddingLeft: "6vw",
+                    paddingLeft:"6vw",
                   }}
                   variant="standard"
                   type="text"
                   value={start}
+                  autoComplete="off"
                   onChange={handleInput}
                   disabled={!enabletextfield}
                   InputProps={{

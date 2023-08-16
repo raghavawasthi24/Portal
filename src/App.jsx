@@ -24,19 +24,22 @@ const App = () => {
     <FullScreen handle={handle}>
       <BrowserRouter>
         <Routes>
-         <Route exact path="/animation" element={<LandingPage/>}></Route>
           <Route exact path="/" element={<Login />}></Route>
-          <Route exact path="test" element={<Test/>}></Route>
+          
+          {/* User */}
+          <Route exact path="loader" element={<Loader />} />
+          <Route exact path="instruction" element={<Instruction />} />
+          <Route exact path="/animation" element={<LandingPage />}></Route>
+          <Route exact path="test" element={<Test />}></Route>
+          <Route exact path="feedback" element={<Feedback />} />
+          <Route exact path="Thankyou" element={<Thankyou />} />
+          {/*Admin */}
+          <Route exact path="admin" element={<AdminHome />} />
           <Route exact path="leaderboard" element={<LeaderBoard />} />
-          <Route exact path="admin" element={<AdminHome/>} />
           <Route exact path="getCandidate" element={<GetCandidates />} />
-          <Route exact path="instruction" element={<Instruction/>}/>
-          <Route exact path="feedback" element={<Feedback/>}/>
-          <Route exact path="Thankyou" element={<Thankyou/>}/>
-          <Route exact path="addQuestions" element={<AddQuestions/>}/>
-          <Route exact path="addfeedback" element={<AddFeedback/>}/>
-          <Route exact path="getfeedback" element={<GetFeedback/>}/>
-          <Route exact path="loader" element={<Loader/>}/>
+          <Route exact path="addQuestions" element={<AddQuestions />} />
+          <Route exact path="addfeedback" element={<AddFeedback />} />
+          <Route exact path="getfeedback" element={<GetFeedback />} />
           {/* <Route exact path="admin" element={<AdminHome />} /> */}
         </Routes>
       </BrowserRouter>

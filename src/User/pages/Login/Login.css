@@ -29,24 +29,27 @@ align-self: center;
 .login_form_header{
     font-size: x-large;
     font-weight: bold;
-    margin-top: 3vh;
+    margin: 3vh auto 2vh auto;
 }
 .login_field{
     width:80%;
-    align-self: center;
+    /* align-self: center; */
 }
 .input_field{
-    margin:1rem 0 1.5rem 0; 
+    margin:1rem 0 0 0; 
+    height: 10vh;
+    /* border: 1px solid green; */
 }
 .error{
     color: red;
+    width:40%;
     font-size: smaller;
-   margin: 0;
 }
 .login_btn{
     width:40%;
     align-self: center;
 }
+
 .imageSection{
     width: 50%;
     text-align: center;

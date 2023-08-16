@@ -93,9 +93,7 @@ axios.post("http://13.48.30.130/accounts/login/",values)
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.student_no}
-                // sx={{
-                //   margin: "2rem auto",
-                // }}
+                
                 InputProps={{
                   style: {
                     borderRadius: "8px",
@@ -118,7 +116,7 @@ axios.post("http://13.48.30.130/accounts/login/",values)
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.password}
-                // sx={{ margin: "0 auto 1rem auto" }}
+        
                 InputProps={{
                   style: {
                     borderRadius: "8px",
@@ -134,7 +132,8 @@ axios.post("http://13.48.30.130/accounts/login/",values)
               variant="contained"
               className="login_btn"
               type="submit"
-              sx={{ backgroundColor: "#543BA0" }}
+              sx={{ backgroundColor: "#543BA0" ,"&:hover":{backgroundColor:"#543BA0"}}}
+              
             >
               LOGIN
             </Button>

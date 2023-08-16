@@ -1,9 +1,10 @@
-.instructionPage{
+/* .instructionPage{
     display: flex;  
     align-items: center;
     justify-content: center;
-   
-    
+} */
+.instructions{
+    overflow: hidden;
 }
 .instructionLeft{
     display: flex;
@@ -18,7 +19,7 @@
 .instruction_box{
     align-self: center;
   height: 60vh;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
 }
 .instructionRight{
     display: flex;
