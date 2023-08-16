@@ -1,9 +1,9 @@
 import React from 'react';
 import Question from "./components/Question"
 import QuesControl from './components/QuesControl';
-import QuesTab from './components/QuesTab';
-import Dropdown from '../../../components/Dropdown';
-import Header from '../../../components/Header/Header';
+import QuesTab from '../../../components/QuesTab';
+import Dropdown from './components/Dropdown';
+import Header from "../../../components/Header"
 
 
 const GetQuestions = () => {

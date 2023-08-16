@@ -1,111 +1,188 @@
-import { Circle, KeyboardArrowDown } from '@mui/icons-material';
-import { Box, Button, Card, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import arr from '../../constants/InstructionContent';
-import "./instruction.css"
-import styled from 'styled-components';
-
+import { Circle } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Card,
+  FormControl,
+  Grid,
+  InputLabel,
+  List,
+  ListItem,
+  ListItemIcon,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import arr from "../../constants/InstructionContent";
+import "./instruction.css";
+import { useNavigate } from "react-router-dom";
+import { getLoginTime } from "../../utils/index";
 
 const Instruction = () => {
+  const navigate = useNavigate();
+  const [Language, setLanguage] = useState("");
+  const [enabletextfield, setEnabletextfield] = useState(false);
+  const [start, setStart] = useState("");
+  const [enableSavebtn, setEnableSavebtn] = useState(false);
 
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-      
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+  const handleChange = (event) => {
+    setLanguage(event.target.value);
+    if (setLanguage == null) {
+      setEnabletextfield(false);
+    } else {
+      setEnabletextfield(true);
+    }
+  };
+  const handleInput = (e) => {
+    setStart(e.target.value);
+    var regex = /^START$/;
+    if (regex.test(e.target.value)) {
+      setEnableSavebtn(true);
+    } else {
+      setEnableSavebtn(false);
+    }
+  };
+
+  const handleSave = () => {
+    localStorage.setItem("language", Language);
+    getLoginTime();
+    navigate("/animation");
+  };
   return (
-    <Box overflow={'hidden'}>
-       <Grid container spacing={2} margin={5}>
+    <Box style={{ overflow: "hidden" }}>
+      <Grid container spacing={2} margin={5}>
         <Grid item xs={8}>
-          <div className='instructionLeft'>
-               <Card className='instruction_box'style={{backgroundColor:"transparent",boxShadow:"4px 4px 10px 0px #00000040"}}>
-                  <div className='instruction_header'>
-                  <p className='instruction_heading'>
-                    Instructions
-                    </p>
-                  </div>
-                  {arr.map((link, i) => (
-                  <div>
-                    <List className='instruction_list'>
-                         <ListItemIcon className='listCircle'><Circle style={{fontSize:"10px",alignSelf:"center",color:"black",minWidth:"2vw",marginLeft:"2.5vw"}} /></ListItemIcon>
-                        <ListItem className='listPoints' key={link.id}>{link.point}</ListItem>
-                    </List>
-                  </div>
-                  ))}
-               </Card>
-               </div>
-               <div>
-               <Card className='confirm_box' style={{backgroundColor:"transparent",boxShadow:"4px 4px 10px 0px #00000040"}}>
-                 <Typography style={{fontWeight:"bold",margin:"3vh"}}>I hereby confirm that I have read all the instructions and ready to begin my test. </Typography>
-                 <div style={{margin:"5vh"}}>
-                    <Typography style={{color:"lightgray",fontSize:"small",margin:"0.5vh"}}>Write START to start your exam</Typography>
-                    <TextField style={{width:"15vw",height:"5vh",borderRadius:"7px",boxShadow:"4px 4px 10px 0px #00000040",justifyContent:"center"}} variant="standard"
- InputProps={{
-        disableUnderline: true,
-      }}/>
-                 </div>
-               </Card>
-               </div>
-               
+          <div className="instructionLeft">
+            <Card
+              className="instruction_box"
+              style={{
+                backgroundColor: "transparent",
+                boxShadow: "4px 4px 10px 0px #00000040",
+              }}
+            >
+              <div className="instruction_header">
+                <p className="instruction_heading">Instructions</p>
+              </div>
+              {arr.map((link, i) => (
+                <div style={{ overflow: "scroll" }}>
+                  <List className="instruction_list">
+                    <ListItemIcon className="listCircle">
+                      <Circle
+                        style={{
+                          fontSize: "10px",
+                          alignSelf: "center",
+                          color: "black",
+                          minWidth: "2vw",
+                          marginLeft: "2.5vw",
+                        }}
+                      />
+                    </ListItemIcon>
+                    <ListItem className="listPoints" key={link.id}>
+                      {link.point}
+                    </ListItem>
+                  </List>
+                </div>
+              ))}
+            </Card>
+          </div>
+          <div>
+            <Card
+              className="confirm_box"
+              style={{
+                backgroundColor: "transparent",
+                boxShadow: "4px 4px 10px 0px #00000040",
+              }}
+            >
+              <Typography style={{ fontWeight: "bold", margin: "3vh" }}>
+                I hereby confirm that I have read all the instructions and ready
+                to begin my test.{" "}
+              </Typography>
+              <div style={{ margin: "5vh" }}>
+                <Typography
+                  style={{
+                    color: "lightgray",
+                    fontSize: "small",
+                    margin: "0.5vh",
+                  }}
+                >
+                  Write START to start your exam
+                </Typography>
+                <TextField
+                  style={{
+                    width: "15vw",
+                    height: "5vh",
+                    borderRadius: "7px",
+                    boxShadow: "4px 4px 10px 0px #00000040",
+                    justifyContent: "center",
+                    paddingLeft: "6vw",
+                  }}
+                  variant="standard"
+                  type="text"
+                  value={start}
+                  onChange={handleInput}
+                  disabled={!enabletextfield}
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                />
+              </div>
+            </Card>
+          </div>
         </Grid>
-        <Grid item xs={3} className='instructionRight'>
-        
-<Card className='instruction_lang_box' style={{backgroundColor:"transparent",boxShadow:"4px 4px 10px 0px #00000040"}}>
-<div className='language_btn'>
-<Button
-        id="demo-positioned-button"
-        aria-controls={open ? 'demo-positioned-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        variant='contained'
-        endIcon={<KeyboardArrowDown />}
-        style={{height:"6vh",width:"20vw",color:"black",backgroundColor:"#A7B9F48F",fontWeight:"bold"}}
-      >
-        Select a Language
-      </Button>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-       
-      >
-     
-        <MenuItem onClick={handleClose} >C</MenuItem>
-        <Divider/>
-        <MenuItem onClick={handleClose}>C++</MenuItem>
-        <Divider />
-        <MenuItem onClick={handleClose}>Python</MenuItem>
-        <Divider/>
-        <MenuItem onClick={handleClose}>Java</MenuItem>
-        
-      </Menu>
-</div> 
-<div className='Save_btn'>
-<Button variant="contained" disabled style={{height:"7vh",width:"20vw",color:"#8D8686",fontWeight:"bold"}}>
-        Save & Next
-      </Button>
-</div>
-</Card>
+        <Grid item xs={3} className="instructionRight">
+          <Card
+            className="instruction_lang_box"
+            style={{
+              backgroundColor: "transparent",
+              boxShadow: "4px 4px 10px 0px #00000040",
+            }}
+          >
+            <div className="language_btn">
+              <FormControl
+                style={{
+                  width: "20vw",
+                  backgroundColor: "rgba(167, 185, 244, 0.56)",
+                }}
+              >
+                <InputLabel
+                  id="demo-simple-select-label"
+                  style={{ fontWeight: "bold", color: "black" }}
+                >
+                  Select a Language
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={Language}
+                  label="Select a Language"
+                  onChange={handleChange}
+                  required
+                >
+                  <MenuItem value="C">C</MenuItem>
+                  <MenuItem value="C++">C++</MenuItem>
+                  <MenuItem value="Java">Java</MenuItem>
+                  <MenuItem value="Python">Python</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <div className="Save_btn">
+              <Button
+                variant="contained"
+                disabled={!enableSavebtn}
+                style={{ height: "7vh", width: "20vw", fontWeight: "bold" }}
+                color="success"
+                onClick={handleSave}
+              >
+                Save & Next
+              </Button>
+            </div>
+          </Card>
         </Grid>
-       </Grid>
-        
+      </Grid>
     </Box>
-  )
-}
+  );
+};
 
-export default Instruction
+export default Instruction;

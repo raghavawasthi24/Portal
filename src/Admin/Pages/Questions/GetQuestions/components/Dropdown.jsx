@@ -1,5 +1,9 @@
 import { FormControl,Select,MenuItem} from '@mui/material';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { quesCtgSel } from '../../../../../store/slices/QuestionsSlice';
+import { moveQues } from '../../../../../store/slices/prevNextSlice';
+import { useEffect } from 'react';
 
 const Dropdown = () => {
 
@@ -7,13 +11,25 @@ const Dropdown = () => {
     const [selTech,setSelTech]=useState(techArr[0])
     const handleTech=(e)=>{
      setSelTech(e.target.value)
+     dispatch(moveQues(1))
+     dispatch(quesCtgSel(e.target.value))
     }
+
+    const currentdata= useSelector(state=>state.quesList)
+    // const currentCtg =useSelector(state=>state.prevNext)
+
+    useEffect(()=>{
+      //console.log(currentdata.initialQues[0].question)
+      dispatch(quesCtgSel(selTech))
+    },[currentdata.initialQues[0].question])
+    const dispatch=useDispatch();
   return (
     <div className='w-full bg-gradient-to-r from-dropdownGrad1 via-dropdownGrad2 to-dropdownGrad3'>
         <FormControl sx={{width:"100%"}}>
             <Select 
             value={selTech}
-            onChange={handleTech}>
+            onChange={handleTech}
+            sx={{textAlign:"center"}}>
             {techArr.map((item,key)=>{
                 return(<MenuItem key={key} value={item}>{item}</MenuItem>)
             })}

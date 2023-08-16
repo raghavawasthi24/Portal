@@ -1,49 +1,51 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from 'axios';
 
 const initialState = {
-  initialQues: [{
-    question:"What is Your Name?",
-    answer:["Ram","Shyam","Dana","moore"],
-    correctAns:"Ram",
-},
-{
-    question:"What is Your Adress?",
-    answer:["Rfnfrknf","Sgfkfrkfhyam","fkmnfkDana","mfnkjfnoore"],
-    correctAns:"Sgfkfrkfhyam",
-},{
-    question:"What is Your Father's name?",
-    answer:["Ram","Shyam","Dana","moore"],
-    correctAns:"Ram",
-},{
-    question:"What is Your mother's Name?",
-    answer:["Ram","Shyam","Dana","moore"],
-    correctAns:"Ram",
-},{
-    question:"What is Your son's Name?",
-    answer:["Ram","Shyam","Dana","moore"],
-    correctAns:"Ram",
-}],
+  initialQues: [
+    {
+      question: "N/A",
+      category: "HTML",
+      options: ["N/A", "N/A", "N/A", "N/A"],
+      correctAns: "N/A",
+    },
+  ],
+  submitQuestion: true,
+  quesCategory: "HTML",
+  flag: 0,
 };
-
+let f = initialState.initialQues;
 const QuestionsSlice = createSlice({
   name: "questionFetch",
   initialState,
   reducers: {
-    quesList: (state) => {
-      axios.get("https://csiexamportal-eb0u.onrender.com/api/v1/getquestions")
-        .then((res)=>{
-            console.log(res.data.msg)
-          
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-      state.initialQues=state.initialQues
+    quesList: (state, action) => {
+      let newQuestions = action.payload;
+
+      state.initialQues = newQuestions;
+      f = newQuestions; // Update the local variable if needed
+    },
+
+    toggleQuestion: (state, action) => {
+      if (state.submitQuestion) state.submitQuestion = false;
+      else state.submitQuestion = true;
+      state.flag = 1;
+    },
+    quesCtgSel: (state, action) => {
+      state.initialQues = f.filter(
+        (student) => student.category == action.payload
+      );
+      state.quesCategory = action.payload;
+      console.log(action.payload)
     },
   },
 });
 
 export default QuestionsSlice.reducer;
-export const { quesList } = QuestionsSlice.actions;
- 
+export const {
+  quesList,
+  toggleQuestion,
+  quesCtgSel,
+  toggleReview,
+  setVisited,
+  setAnsId,
+} = QuestionsSlice.actions;

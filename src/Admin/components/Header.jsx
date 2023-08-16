@@ -66,6 +66,7 @@ const Header = () => {
     >
       <MenuItem onClick={()=>{handleClose2,navigate("/admin")}}>Questions</MenuItem>
       <MenuItem onClick={()=>{handleClose2,navigate("/getCandidate")}}>Candidates</MenuItem>
+      <MenuItem onClick={()=>{handleClose2,navigate("/getfeedback")}}>Feedback</MenuItem>
       <MenuItem onClick={()=>{handleClose2,navigate("/leaderboard")}}>Leaderboard</MenuItem>
     </Menu>
         
@@ -92,7 +93,7 @@ const Header = () => {
         >
           <MenuItem onClick={()=>{handleClose,navigate("/addQuestions")}}>Questions</MenuItem>
           <MenuItem onClick={()=>{handleClose,navigate("/admin")}}>Candidates</MenuItem>
-          <MenuItem onClick={()=>{handleClose,navigate("/admin")}}>Feedback</MenuItem>
+          <MenuItem onClick={()=>{handleClose,navigate("/addfeedback")}}>Feedback</MenuItem>
         </Menu>
 
         <div className="mr-9">

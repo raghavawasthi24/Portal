@@ -10,6 +10,9 @@ import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useSelector} from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const EditQuestion = () => {
   
@@ -19,26 +22,47 @@ const EditQuestion = () => {
     opt2:"",
     opt3:"",
     opt4:"",
-    correctAns:""
+    correctAns:"",
+    category:""
   }
+
+  const techArr=["HTML","CSS","JavaScript","Aptitude","C","C++","Java"];
 
     const dispatch=useDispatch();
     const data = useSelector(state => state.prevNext)
     const questionDisplay= useSelector(state=>state.quesList)
-
-
+    
+    const [value1,setvalue1]=useState([]);
+    // const [value2,setvalue2]=useState();
+    // const [value3,setvalue3]=useState();
+    // const [value4,setvalue4]=useState();
+  
   const [formvalues,setFormvalues]=useState(questionDisplay.initialQues[data.initialQues-1]);
 
   useEffect(()=>{
-    console.log(questionDisplay.initialQues[data.initialQues-1])
-    initialValues.question=questionDisplay.initialQues[data.initialQues-1].question;
-    initialValues.opt1=questionDisplay.initialQues[data.initialQues-1].answer[0];
-    initialValues.opt2=questionDisplay.initialQues[data.initialQues-1].answer[1];
-    initialValues.opt3=questionDisplay.initialQues[data.initialQues-1].answer[2];
-    initialValues.opt4=questionDisplay.initialQues[data.initialQues-1].answer[3];
-    initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].correctAns;
+    // console.log(questionDisplay.initialQues[data.initialQues-1])
+    initialValues.question=questionDisplay.initialQues[data.initialQues-1]?.question;
+    initialValues.opt1=questionDisplay.initialQues[data.initialQues-1]?.options[0].name;
+    initialValues.opt2=questionDisplay.initialQues[data.initialQues-1]?.options[1].name;
+    initialValues.opt3=questionDisplay.initialQues[data.initialQues-1]?.options[2].name;
+    initialValues.opt4=questionDisplay.initialQues[data.initialQues-1]?.options[3].name;
+    initialValues.category=questionDisplay.initialQues[data.initialQues-1].category;
+    // setvalue1(questionDisplay.initialQues[data.initialQues-1]?.ansId);
+    // let options=questionDisplay.initialQues[data.initialQues-1]?.options
+    // let ansId=questionDisplay.initialQues[data.initialQues-1]?.ansId
+    // let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
+    // let index=ansId?.indexOf(correctId)
+
+    // initialValues.correctAns=options[index]
+    // setCorrectAns(options[index])
+    // initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].question.correct_ans;
+    let options=questionDisplay.initialQues[data.initialQues-1]?.options
+        let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
+        let index=options?.findIndex(x=>x.ansId==correctId)
+        console.log(index,options[index].name)
+        initialValues.correctAns=options[index].name
     setFormvalues(initialValues)
-  },[data.initialQues])
+  },[questionDisplay.initialQues[data.initialQues-1]?.question])
 
  
 
@@ -46,87 +70,165 @@ const EditQuestion = () => {
       const {name,value}=e.target;
       setFormvalues({...formvalues,[name]:value})
     }
+
+    const updateQues=()=>{
+      if(formvalues.question.trim()!="" && formvalues.opt1.trim()!="" && formvalues.opt2.trim()!="" && formvalues.opt3.trim()!="" && formvalues.opt4.trim()!="" && formvalues.correctAns.trim()!=""){
+      let arr=[formvalues.opt1,formvalues.opt2,formvalues.opt3,formvalues.opt4]
+      let options=questionDisplay.initialQues[data.initialQues-1]?.options
+        let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
+        let index=arr.indexOf(formvalues.correctAns)
+        console.log(index,options[index].ansId)
+        // initialValues.correctAns=options[index].name
+
+      console.log(formvalues)
+      axios.patch(`https://csi-examportal.onrender.com/api/v1/updatequestion/${questionDisplay.initialQues[data.initialQues-1]._id}`,{
+        "question":formvalues.question.trim(),
+        "category":formvalues.category,
+        "correctId":options[index].ansId,
+        "quesId":questionDisplay.initialQues[data.initialQues-1]?.quesId,
+        "options":[{"name":formvalues.opt1.trim(),"ansId":questionDisplay.initialQues[data.initialQues-1].options[0].ansId},{"name":formvalues.opt2.trim(),"ansId":questionDisplay.initialQues[data.initialQues-1].options[1].ansId},{"name":formvalues.opt3.trim(),"ansId":questionDisplay.initialQues[data.initialQues-1].options[2].ansId},{"name":formvalues.opt4.trim(),"ansId":questionDisplay.initialQues[data.initialQues-1].options[3].ansId}]
+      })
+      .then((res)=>{
+        console.log(res)
+        toast.success("Question updated successfully")
+        setTimeout(()=>{
+          window.location.reload()
+        },5000)
+        
+      }).catch(()=>{
+        toast.error("Something went wrong!")
+      })
+    }
+    else{
+      toast.error("Invalid fields!")
+    }
+      
+    }
   return (
-    <div className='flex flex-col w-2/3 m-auto mt-3 p-5 rounded bg-white' style={{boxShadow:"1px 1px 5px grey"}}>
+    <div className='flex flex-col w-2/3 m-auto p-5 rounded bg-white' style={{boxShadow:"1px 1px 5px grey"}}>
       <CancelIcon onClick={()=>dispatch(toggleEditOpt())} className='self-end' style={{cursor:"pointer"}}/>
 
     {/* {
       console.log(questionDisplay.initialQues)
     } */}
         <TextField
-          id="outlined-multiline-flexible"
+          id="standard-multiline-flexible"
           label="Question"
           multiline
           maxRows={4}
           value={formvalues.question}
           name="question"
         onChange={inputHandler}
-          sx={{margin:"1rem 0"}}
+        variant="standard"
+          sx={{margin:"0.8rem 0"}}
         />
 
 
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 1"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt1}
-          name="opt1"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 2"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt2}
-          name="opt2"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 3"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt3}
-          name="opt3"
-        onChange={inputHandler}
-        />
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Option 4"
-          multiline
-          maxRows={4}
-          sx={{margin:"1rem 0"}}
-          value={formvalues.opt4}
-          name="opt4"
-        onChange={inputHandler}
-        />
-
-
-<FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Correct Option</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={formvalues.correctAns}
-          name='correctAns'
-          label="Correct Option"
+        <div className='flex justify-between'>
+          <TextField
+            id="standard-multiline-flexible"
+            label="Option 1"
+            multiline
+            maxRows={4}
+            sx={{width:"45%",margin:"0.8rem 0"}}
+            value={formvalues.opt1}
+            name="opt1"
           onChange={inputHandler}
-        >
-        <MenuItem value={formvalues.opt1}>{formvalues.opt1}</MenuItem>
-        <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
-        <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
-        <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
-        </Select>
-      </FormControl>
+          variant="standard"
+          />
+          <TextField
+            id="standard-multiline-flexible"
+            label="Option 2"
+            multiline
+            maxRows={4}
+            sx={{width:"45%",margin:"0.8rem 0"}}
+            value={formvalues.opt2}
+            name="opt2"
+          onChange={inputHandler}
+          variant="standard"
+          />
+        </div>
 
-      <Button variant="outlined" sx={{width:"8rem",margin:"0.8rem auto"}} endIcon={<SendIcon />}>
+        <div className='flex justify-between'>
+          <TextField
+            id="standard-multiline-flexible"
+            label="Option 3"
+            multiline
+            maxRows={4}
+            sx={{width:"45%",margin:"0.8rem 0"}}
+            value={formvalues.opt3}
+            name="opt3"
+          onChange={inputHandler}
+          variant="standard"
+          />
+          <TextField
+            id="standard-multiline-flexible"
+            label="Option 4"
+            multiline
+            maxRows={4}
+            sx={{width:"45%",margin:"0.8rem 0"}}
+            value={formvalues.opt4}
+            name="opt4"
+          onChange={inputHandler}
+          variant="standard"
+          />
+        </div>
+
+
+<div className='flex justify-between'>
+  <FormControl sx={{width:"45%",margin:"0.8rem 0"}}>
+          <InputLabel id="demo-simple-select-label" variant="standard">Correct Option</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={formvalues.correctAns}
+            name='correctAns'
+            label="Correct Option"
+            onChange={inputHandler}
+            
+            variant="standard"
+          >
+  
+          <MenuItem value={formvalues.opt1}>{formvalues.opt1}</MenuItem>
+          <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
+          <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
+          <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
+  
+          </Select>
+        </FormControl>
+  
+        <FormControl sx={{width:"45%",margin:"0.8rem 0"}}>
+          <InputLabel id="demo-simple-select-label" variant="standard">Category</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={formvalues.category}
+            name='category'
+            label="Category"
+            onChange={inputHandler}
+            variant="standard"
+          >
+  
+          {
+            techArr.map((item)=>{
+              return(
+                <MenuItem value={item}>{item}</MenuItem>
+              )
+              
+            })
+          }
+  
+          </Select>
+        </FormControl>
+</div>
+
+
+
+      <Button variant="outlined" sx={{width:"8rem",margin:"0.8rem auto"}} endIcon={<SendIcon />} onClick={updateQues}>
         Update
       </Button>
+
+      <ToastContainer />
      
     </div>
   )

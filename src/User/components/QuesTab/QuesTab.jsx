@@ -1,19 +1,47 @@
 import { Tab, Tabs } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { quesCtgSel } from "../../../store/slices/QuestionsSlice";
+import { moveQues } from "../../../store/slices/PrevNextSlice";
 
-const QuesTab = ({ setSection }) => {
-  const quesType = ["HTML", "CSS", "SQL", "Aptitude", "C"];
+const QuesTab = () => {
+  const optionalCategory = localStorage.getItem("language");
+  const quesCtg=useSelector(state=>state.prevNext);
+  const [quesType, setQuesType] = useState([
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Aptitude",
+  ]);
+
+  // useEffect(()=>{
+  //    console.log("hiiiiiiii")
+  //    setValue(value+1)
+  //    setSelTech(quesType[value+1])
+  //    console.log(quesType[value+1])
+  //    dispatch(quesCtgSel(quesType[value+1]));
+  // },[quesCtg.currentCtg])
+
+  useEffect(() => {
+    const optionalCategory = localStorage.getItem("language");
+    setQuesType(["HTML", "CSS", "JavaScript", "Aptitude", optionalCategory]);
+  }, [optionalCategory]);
+
+  const [selTech, setSelTech] = useState(quesType[0]);
   const [value, setValue] = useState(0);
+  const dispatch = useDispatch();
+  const currentdata = useSelector((state) => state?.quesList);
 
-  // useEffect(() => {
-  //   setSection(quesType.values.toLowerCase());
-  // }, [value]);
+  useEffect(() => {
+    // console.log(currentdata.initialQues[0].question)
+    dispatch(quesCtgSel(selTech));
+  }, [currentdata?.initialQues[0]?.question]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    setSection(quesType[newValue].toLowerCase());
-
-    // console.log(newValue, section);
+    setSelTech(quesType[newValue]);
+    dispatch(quesCtgSel(quesType[newValue]));
+    dispatch(moveQues(1));
   };
   return (
     <div className="mt-0 mb-6  shadow-md shadow-gray-600 mx-32">

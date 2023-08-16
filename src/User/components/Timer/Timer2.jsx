@@ -1,32 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { getLoginTime } from "../../utils/index";
 
 const Timer = () => {
-  const [hours, setHours] = useState(2);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [timeRemaining, setTimeRemaining] = useState(0); // Total time remaining in seconds
+  const studentNumber = localStorage.getItem("studentNo");
+  const nav = useNavigate();
 
   useEffect(() => {
+    const savedTime = parseFloat(localStorage.getItem("savedTime"));
+    if (!savedTime) getLoginTime();
+  }, []);
+
+  useEffect(() => {
+    const savedTime = parseFloat(localStorage.getItem("savedTime"));
+
+    const currentTime = Math.floor(Date.now() / 1000); // Convert current time to seconds
+    if (savedTime) {
+      const elapsedTime = currentTime - savedTime;
+      setTimeRemaining(Math.max(3 * 60 * 60 - elapsedTime, 0)); // 3 hours in seconds
+    }
+
     const timer = setInterval(() => {
-      if (hours === 0 && minutes === 0 && seconds === 0) {
+      if (timeRemaining > 0) {
+        setTimeRemaining((prevTime) => prevTime - 1);
+      } else {
         clearInterval(timer);
         // Timer has reached 0, perform any desired action here
-      } else {
-        if (minutes === 0 && seconds === 0) {
-          setHours((prevHours) => prevHours - 1);
-          setMinutes(59);
-          setSeconds(59);
-        } else if (seconds === 0) {
-          setMinutes((prevMinutes) => prevMinutes - 1);
-          setSeconds(59);
-        } else {
-          setSeconds((prevSeconds) => prevSeconds - 1);
-        }
+        // Submit the test api
+        axios
+          .post(`http://13.48.30.130/accounts/submit/${studentNumber}`)
+          .then((res) => {
+            console.log(res);
+            nav("/feedback");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [hours, minutes, seconds]);
+  }, [timeRemaining]);
+
+  const hours = Math.floor(timeRemaining / 3600);
+  const minutes = Math.floor((timeRemaining % 3600) / 60);
+  const seconds = Math.floor(timeRemaining % 60);
 
   return (
     <div className="flex flex-col mt-4 !text-center align-middle border bg-red-500 h-48">
@@ -38,7 +59,6 @@ const Timer = () => {
       </Typography>
       <Grid
         container
-        // spacing={2}
         gap={6}
         justifyContent="center"
         alignItems="center"
