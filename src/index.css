@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 body{    
-    background-image: url(/public/Images/portalBg.png);
+    background-image: url(/Images/portalBg.png);
     background-size: cover;
     /* Preventing selection of text */
     -webkit-user-select: none; /* Safari */
