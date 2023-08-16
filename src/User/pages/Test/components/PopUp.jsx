@@ -31,7 +31,7 @@ export default function BasicModal() {
       .post(`http://13.48.30.130/accounts/submit/${studentNumber}`)
       .then((res) => {
         console.log(res);
-        nav("/feedback");
+        nav("/result");
       })
       .catch((err) => {
         console.log(err);
