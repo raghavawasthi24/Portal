@@ -35,7 +35,7 @@ const QuestionsSlice = createSlice({
         (student) => student.category == action.payload
       );
       state.quesCategory = action.payload;
-      console.log(action.payload)
+      // console.log(action.payload)
     },
   },
 });

@@ -6,21 +6,13 @@ import { moveQues } from "../../../store/slices/PrevNextSlice";
 
 const QuesTab = () => {
   const optionalCategory = localStorage.getItem("language");
-  const quesCtg=useSelector(state=>state.prevNext);
+  // const quesCtg = useSelector((state) => state.prevNext);
   const [quesType, setQuesType] = useState([
     "HTML",
     "CSS",
     "JavaScript",
     "Aptitude",
   ]);
-
-  // useEffect(()=>{
-  //    console.log("hiiiiiiii")
-  //    setValue(value+1)
-  //    setSelTech(quesType[value+1])
-  //    console.log(quesType[value+1])
-  //    dispatch(quesCtgSel(quesType[value+1]));
-  // },[quesCtg.currentCtg])
 
   useEffect(() => {
     const optionalCategory = localStorage.getItem("language");

@@ -4,8 +4,8 @@ import { Button } from "@mui/material";
 import { nextQues } from "../../../store/slices/PrevNextSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
 import { markReview } from "../../../store/slices/ReviewSlice";
+import SubmitAnswer from "../../utils/SubmitAns";
 
 const TestFooter = () => {
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const TestFooter = () => {
       return;
     }
     setReviewHandler(false);
-    submitAnswer({
+    SubmitAnswer({
       status: 0,
       quesId: quesData.initialQues[data.initialQues - 1].quesId,
       ansId: currentAnsId,
@@ -67,30 +67,13 @@ const TestFooter = () => {
       return;
     }
 
-    submitAnswer({
+    SubmitAnswer({
       status: 1,
       quesId: quesData.initialQues[data.initialQues - 1].quesId,
       ansId: currentAnsId,
     });
     setReviewHandler(true);
     dispatch(nextQues(quesData.initialQues));
-  };
-
-  const submitAnswer = ({ status, quesId, ansId }) => {
-    const id = localStorage.getItem("id");
-    const submitData = {
-      quesId: quesId,
-      status: status,
-      ansId: ansId,
-    };
-    console.log(submitData);
-    axios
-      .get(
-        `https://csi-examportal.onrender.com/api/v1/postResponse/${id}?ansId=${ansId}&quesId=${quesId}&status=${status}`,
-        submitData
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
   };
 
   return (
