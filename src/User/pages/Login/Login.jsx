@@ -44,7 +44,21 @@ axios.post("http://13.48.30.130/accounts/login/",values)
   localStorage.setItem("Name",res.data.name)
   localStorage.setItem("studentNo",res.data.studentNo)
   localStorage.setItem("id",res.data._id)
-  navigate('/instruction');
+  
+  if (res.data.isAdmin===true){
+    navigate('/admin')
+  }
+  else if (res.data.isRelogin===true){
+    navigate('/test')
+
+  }
+  else if (res.data.isSubmit===true){
+    navigate('/Thankyou')
+  }
+  else{
+    navigate('/instruction')
+  }
+  
 }).catch((err)=>{
   console.log(err)
   alert('Incorrect Username or Password');

@@ -42,13 +42,13 @@ const LeaderBoard = () => {
     <ArrowCircleUpRoundedIcon sx={{width:"3rem",height:"3rem",rotate:"270deg",color:"rgba(84, 59, 160, 1)"}} onClick={()=>navigate("/admin")}/>
    </div>
     <div className="p-4 mt-5">
-    <h1 className=" font-sans font-bold text-3xl text-center mb-5  tracking-widest  whitespace-pre  text-leaderboardColor">
+    <h1 className=" font-sans font-bold text-3xl text-center mb-5  tracking-widest  whitespace-pre  text-leaderboardColor ">
           Leader Board
         </h1>
       <div  className=" mx-auto">
         <TableContainer component={Paper} sx={{ width: "50rem",backgroundColor:"rgba(255, 255, 255, 0.489)" }}>
           <Table>
-            <TableHead  sx={{ backgroundColor:"rgba(242, 241, 252, 1)"}}>
+            <TableHead>
               <TableRow>
                 <TableCell sx={{textAlign:"center"}}>Rank</TableCell>
                 <TableCell sx={{textAlign:"center"}}>Student Number</TableCell>
