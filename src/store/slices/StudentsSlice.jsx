@@ -4,7 +4,7 @@ const initialState = {
   initialValue: [],
 };
 
-let f = initialState.initialValue;
+  let f=initialState.initialValue;
 
 const StudentSlice = createSlice({
   name: "searchStudent",

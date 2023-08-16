@@ -17,6 +17,7 @@ const TestFooter = () => {
   const data = useSelector((state) => state.prevNext);
 
   const [answered, setAnswered] = useState(false);
+  const [currentAnsId, setCurrentAnsId] = useState("");
 
   useEffect(() => {
     const currentQuestion = quesData.initialQues[data.initialQues - 1];
@@ -25,7 +26,10 @@ const TestFooter = () => {
     );
 
     if (question) {
-      if (question.ansId !== "") setAnswered(true);
+      if (question.ansId !== "") {
+        setAnswered(true);
+        setCurrentAnsId(question.ansId);
+      }
     } else {
       setAnswered(false);
     }
@@ -48,13 +52,12 @@ const TestFooter = () => {
       toast.error("Select an option");
       return;
     }
-
-    // submitAnswer(
-    //   quesData.initialQues[data.initialQues - 1]._id,
-    //   quesData.initialQues[data.initialQues - 1].quesId,
-    //   quesData.initialQues[data.initialQues - 1].ansId
-    // );
     setReviewHandler(false);
+    submitAnswer({
+      status: 0,
+      quesId: quesData.initialQues[data.initialQues - 1].quesId,
+      ansId: currentAnsId,
+    });
     dispatch(nextQues(quesData.initialQues));
   };
 
@@ -64,21 +67,28 @@ const TestFooter = () => {
       return;
     }
 
-    // submitAnswer({
-    //   id: quesData.initialQues[data.initialQues - 1]._id,
-    //   quesId: quesData.initialQues[data.initialQues - 1].quesId,
-    //   ansId: quesData.initialQues[data.initialQues - 1].ansId,
-    // });
+    submitAnswer({
+      status: 1,
+      quesId: quesData.initialQues[data.initialQues - 1].quesId,
+      ansId: currentAnsId,
+    });
     setReviewHandler(true);
     dispatch(nextQues(quesData.initialQues));
   };
 
-  const submitAnswer = ({ id, quesId, ansId }) => {
+  const submitAnswer = ({ status, quesId, ansId }) => {
+    const id = localStorage.getItem("id");
+    const submitData = {
+      quesId: quesId,
+      status: status,
+      ansId: ansId,
+    };
+    console.log(submitData);
     axios
-      .post(`https://csi-examportal.onrender.com/api/v1/postResponse/:${id}`, {
-        quesId,
-        ansId,
-      })
+      .get(
+        `https://csi-examportal.onrender.com/api/v1/postResponse/${id}?ansId=${ansId}&quesId=${quesId}&status=${status}`,
+        submitData
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
