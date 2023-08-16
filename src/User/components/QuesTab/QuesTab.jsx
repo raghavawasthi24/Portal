@@ -5,7 +5,28 @@ import { quesCtgSel } from "../../../store/slices/QuestionsSlice";
 import { moveQues } from "../../../store/slices/PrevNextSlice";
 
 const QuesTab = () => {
-  const quesType = ["HTML", "CSS", "JavaScript", "Aptitude", "C"];
+  const optionalCategory = localStorage.getItem("language");
+  const quesCtg=useSelector(state=>state.prevNext);
+  const [quesType, setQuesType] = useState([
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Aptitude",
+  ]);
+
+  // useEffect(()=>{
+  //    console.log("hiiiiiiii")
+  //    setValue(value+1)
+  //    setSelTech(quesType[value+1])
+  //    console.log(quesType[value+1])
+  //    dispatch(quesCtgSel(quesType[value+1]));
+  // },[quesCtg.currentCtg])
+
+  useEffect(() => {
+    const optionalCategory = localStorage.getItem("language");
+    setQuesType(["HTML", "CSS", "JavaScript", "Aptitude", optionalCategory]);
+  }, [optionalCategory]);
+
   const [selTech, setSelTech] = useState(quesType[0]);
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();

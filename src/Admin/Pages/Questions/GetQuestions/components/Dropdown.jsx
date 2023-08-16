@@ -16,9 +16,10 @@ const Dropdown = () => {
     }
 
     const currentdata= useSelector(state=>state.quesList)
+    // const currentCtg =useSelector(state=>state.prevNext)
 
     useEffect(()=>{
-      // console.log(currentdata.initialQues[0].question)
+      //console.log(currentdata.initialQues[0].question)
       dispatch(quesCtgSel(selTech))
     },[currentdata.initialQues[0].question])
     const dispatch=useDispatch();

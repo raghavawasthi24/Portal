@@ -4,7 +4,31 @@ const initialState = {
   initialValue: [],
 };
 
+<<<<<<< HEAD
+const initialState =
+  {
+    initialValue:[
+      {
+        Name:"Shipra Tripathi",
+        Number:"2110321",
+        hosteler:"yes",
+      },
+      {
+        Name:"Raghav Awasthi",
+        Number:"2110158"
+    },
+    {
+      Name:"Abhinav Tripathi",
+      Number:"21103212"
+    },
+    
+    ]
+  };
+
+  let f=initialState.initialValue;
+=======
 let f = initialState.initialValue;
+>>>>>>> a3cc9cc11a45112350dc10306bce86898a474733
 
 const StudentSlice = createSlice({
   name: "searchStudent",
@@ -16,6 +40,11 @@ const StudentSlice = createSlice({
       f = action.payload;
     },
     searchStudent: (state, action) => {
+      
+    axios.get("https://exam-portal-django.onrender.com/accounts/StudentList/")
+    .then((response) => setStudents(response.data))
+    .catch((error) => console.error(error));                                   
+
       state.initialValue = f;
       state.initialValue = state.initialValue.filter((student) =>
         student.name.toLowerCase().includes(action.payload.toLowerCase())
@@ -35,5 +64,31 @@ const StudentSlice = createSlice({
 });
 
 export default StudentSlice.reducer;
+<<<<<<< HEAD
+export const { searchStudent,categoryStudent } = StudentSlice.actions;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
 export const { searchStudent, categoryStudent, studentList } =
   StudentSlice.actions;
+>>>>>>> a3cc9cc11a45112350dc10306bce86898a474733
