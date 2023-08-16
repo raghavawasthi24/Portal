@@ -40,26 +40,5 @@ const StudentSlice = createSlice({
 });
 
 export default StudentSlice.reducer;
-export const { searchStudent,categoryStudent,studentList } = StudentSlice.actions;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export const { searchStudent, categoryStudent, studentList } =
+  StudentSlice.actions;
