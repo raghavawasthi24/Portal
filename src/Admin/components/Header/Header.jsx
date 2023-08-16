@@ -3,10 +3,12 @@ import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 
 const Header = () => {
   const [addTarget, setaddTarget] = React.useState(null);
+  const navigate=useNavigate();
   const on = Boolean(addTarget);
   const addClick = (event) => {
     setaddTarget(event.currentTarget);
@@ -42,7 +44,7 @@ const Header = () => {
       >
         <div className="ml-2 text-gray-600">CSI Exam Portal</div>
       </Typography>
-      <div className="flex justify-between  ">
+      <div className="flex justify-between">
       <Button
       id="basic-button2"
       aria-controls={open2 ? "basic-menu" : undefined}
@@ -62,9 +64,9 @@ const Header = () => {
         "aria-labelledby": "basic-button",
       }}
     >
-      <MenuItem onClick={handleClose2}>Questions</MenuItem>
-      <MenuItem onClick={handleClose2}>Candidates</MenuItem>
-      <MenuItem onClick={handleClose2}>Leaderboard</MenuItem>
+      <MenuItem onClick={()=>{handleClose2,navigate("/admin")}}>Questions</MenuItem>
+      <MenuItem onClick={()=>{handleClose2,navigate("/getCandidate")}}>Candidates</MenuItem>
+      <MenuItem onClick={()=>{handleClose2,navigate("/leaderboard")}}>Leaderboard</MenuItem>
     </Menu>
         
 
@@ -88,9 +90,9 @@ const Header = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Questions</MenuItem>
-          <MenuItem onClick={handleClose}>Candidates</MenuItem>
-          <MenuItem onClick={handleClose}>Feedback</MenuItem>
+          <MenuItem onClick={()=>{handleClose,navigate("/addQuestions")}}>Questions</MenuItem>
+          <MenuItem onClick={()=>{handleClose,navigate("/admin")}}>Candidates</MenuItem>
+          <MenuItem onClick={()=>{handleClose,navigate("/admin")}}>Feedback</MenuItem>
         </Menu>
 
         <div className="mr-9">

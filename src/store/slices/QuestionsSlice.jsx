@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from 'axios';
 
 const initialState = {
   initialQues: [{
@@ -30,6 +31,14 @@ const QuestionsSlice = createSlice({
   initialState,
   reducers: {
     quesList: (state) => {
+      axios.get("https://csiexamportal-eb0u.onrender.com/api/v1/getquestions")
+        .then((res)=>{
+            console.log(res.data.msg)
+          
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
       state.initialQues=state.initialQues
     },
   },

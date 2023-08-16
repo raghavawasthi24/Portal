@@ -4,11 +4,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
-import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import CancelIcon from '@mui/icons-material/Cancel';
-import {useSelector} from "react-redux";
+
 
 const EditQuestion = () => {
   
@@ -21,9 +19,6 @@ const EditQuestion = () => {
     correctAns:""
   }
 
-    // const dispatch=useDispatch();
-    // const data = useSelector(state => state.prevNext)
-    // const questionDisplay= useSelector(state=>state.quesList)
 
 
   const [formvalues,setFormvalues]=useState(initialValues);
