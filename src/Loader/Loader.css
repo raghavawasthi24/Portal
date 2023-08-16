@@ -2,9 +2,13 @@
     width: 100vw;
     height: 100vh;
     display: flex;
+    overflow: hidden;
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.489);
+    margin: 0;
+    padding: 0;
 }
 .small{
     width: 10rem;
