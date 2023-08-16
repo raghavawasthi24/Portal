@@ -48,7 +48,7 @@ const LeaderBoard = () => {
       <div  className=" mx-auto">
         <TableContainer component={Paper} sx={{ width: "50rem",backgroundColor:"rgba(255, 255, 255, 0.489)" }}>
           <Table>
-            <TableHead>
+            <TableHead sx={{backgroundColor: "rgba(242, 241, 252, 1)"}}>
               <TableRow>
                 <TableCell sx={{textAlign:"center"}}>Rank</TableCell>
                 <TableCell sx={{textAlign:"center"}}>Student Number</TableCell>
