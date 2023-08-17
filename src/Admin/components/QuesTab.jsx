@@ -18,7 +18,7 @@ const QuesTab = () => {
         {
             data.initialQues.map((item,key)=>{
                 return(<div key={key} onClick={()=>dispatch(moveQues(key+1))}>
-                    <Button variant='contained' sx={{margin:"0.5rem",backgroundColor:quesNo.initialQues==key+1?'#3e4a61':''}}>{key+1}</Button>
+                    <Button variant='contained' sx={{margin:"0.5rem",backgroundColor:quesNo.initialQues==key+1?'#3e4a61':'',zIndex:"-1"}}>{key+1}</Button>
                 </div>)
             })
         }

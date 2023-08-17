@@ -26,6 +26,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Login />}></Route>
+          <Route exact path="/*" element={<Login />}></Route>
           
           {/* User */}
           <Route exact path="loader" element={<Loader />} />

@@ -19,11 +19,13 @@ margin:0 auto;
 align-self: center;
 }
 .login_form{
+    background-color: rgba(255, 255, 255, 0.447);
     display: flex;
     flex-direction: column;
-    height: 50vh;
+    box-shadow: 1px 1px 5px grey;
+    /* height: 50vh; */
     width: 30vw;
-      margin:0 auto;
+      margin: auto;
     align-self: center;
 }
 .login_form_header{
@@ -36,17 +38,21 @@ align-self: center;
     /* align-self: center; */
 }
 .input_field{
-    margin:1rem 0 0 0; 
+    margin:1.5rem 0 0 0; 
     height: 10vh;
     /* border: 1px solid green; */
 }
 .error{
     color: red;
-    width:40%;
+    font-weight: 500;
+    width:80%;
+    margin: auto;
+    text-align: left;
     font-size: smaller;
 }
 .login_btn{
     width:40%;
+    margin: 10rem 0;
     align-self: center;
 }
 
