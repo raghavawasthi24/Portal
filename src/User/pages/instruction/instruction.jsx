@@ -51,7 +51,7 @@ const Instruction = () => {
     navigate("/animation");
   };
   return (
-    <Box className="instructions">
+    <div className="instructions">
       <Grid container spacing={2} margin={5}>
         <Grid item xs={8}>
           <div className="instructionLeft">
@@ -65,24 +65,26 @@ const Instruction = () => {
               <div className="instruction_header">
                 <p className="instruction_heading">Instructions</p>
               </div>
-              {arr.map((link, i) => (
-                <div style={{ overflow: "scroll" }} key={link.id}>
-                  <List className="instruction_list">
-                    <ListItemIcon className="listCircle">
-                      <Circle
-                        style={{
-                          fontSize: "10px",
-                          alignSelf: "center",
-                          color: "black",
-                          minWidth: "2vw",
-                          marginLeft: "2.5vw",
-                        }}
-                      />
-                    </ListItemIcon>
-                    <ListItem className="listPoints">{link.point}</ListItem>
-                  </List>
-                </div>
-              ))}
+              <div style={{height:"23rem",overflow:"scroll"}}>
+                {arr.map((link, i) => (
+                
+                    <div className="instruction_list">
+                      <ListItemIcon className="listCircle">
+                        <Circle
+                          style={{
+                            fontSize: "10px",
+                            alignSelf: "center",
+                            color: "black",
+                            minWidth: "2vw",
+                            marginLeft: "2.5vw",
+                          }}
+                        />
+                      </ListItemIcon>
+                      <ListItem className="listPoints">{link.point}</ListItem>
+                    </div>
+                
+                ))}
+              </div>
             </Card>
           </div>
           <div>
@@ -97,15 +99,15 @@ const Instruction = () => {
                 I hereby confirm that I have read all the instructions and ready
                 to begin my test.{" "}
               </Typography>
-              <div style={{ margin: "5vh" }}>
+              <div style={{ margin: "3vh" }}>
                 <Typography
                   style={{
-                    color: "lightgray",
+                    color: "gray",
                     fontSize: "small",
                     margin: "0.5vh",
                   }}
                 >
-                  Write START to start your exam
+                  Write 'START' to start your exam
                 </Typography>
                 <TextField
                   style={{
@@ -114,7 +116,7 @@ const Instruction = () => {
                     borderRadius: "7px",
                     boxShadow: "4px 4px 10px 0px #00000040",
                     justifyContent: "center",
-                    paddingLeft:"6vw",
+                    padding:"0 1rem",
                   }}
                   variant="standard"
                   type="text"
@@ -180,7 +182,7 @@ const Instruction = () => {
           </Card>
         </Grid>
       </Grid>
-    </Box>
+    </div>
   );
 };
 

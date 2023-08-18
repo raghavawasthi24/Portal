@@ -4,6 +4,8 @@
     justify-content: center;
 } */
 .instructions{
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
 }
 .instructionLeft{
@@ -14,11 +16,12 @@
 .instruction_list{
     display: flex;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 500;
+    
 }
 .instruction_box{
     align-self: center;
-  height: 60vh;
+  
   overflow-y: scroll;
 }
 .instructionRight{
@@ -39,8 +42,8 @@
 }
 .confirm_box{
     text-align: center;
-    height: 25vh;
-    margin-top: 5vh;
+    /* height: 25vh; */
+    margin-top: 2vh;
    
 }
 
