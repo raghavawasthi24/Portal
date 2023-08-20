@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import prevNextSlice from "./slices/PrevNextSlice";
+import prevNextSlice from "./slices/PrevNextSlice.jsx";
 import EditContSlice from "./slices/EditContSlice";
 import QuestionsSlice from "./slices/QuestionsSlice";
 import StudentsSlice from "./slices/StudentsSlice";
