@@ -8,8 +8,6 @@ import "./Feedback.css";
 import axios from "axios";
 import Loader from "../../../Loader/Loader";
 
-
-
 const Feedback = () => {
   const [apiData, setApiData] = useState([]);
   const [formvValue, setFormValue] = useState([]);
@@ -17,42 +15,38 @@ const Feedback = () => {
   const [uniqueAnswers, setUniqueAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
-
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get("http://13.48.30.130/feedback/get-f-question/")
-      
-        .then((res) => {
-          setApiData(res.data); 
-          setLoading(false)
-        } ).catch(()=>{
-          setLoading(false);
-       
+
+      .then((res) => {
+        setApiData(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
       });
   }, []);
 
   useEffect(() => {
     uniquefn();
-   
   }, [formvValue]);
 
   const handlevalue = (data) => {
-    console.log(data)
+    // console.log(data)
     setFormValue((prevFormValue) => [...prevFormValue, data]);
   };
 
   const uniquefn = () => {
-    let disableflag = false
+    let disableflag = false;
     const uniqueAnswers = formvValue.reduce((acc, current) => {
       const existingIndex = acc.findIndex(
-        (item) => (item.question_id === current.question_id)
-        
+        (item) => item.question_id === current.question_id
       );
-      if(!current.answer_text){
-        disableflag=true
+      if (!current.answer_text) {
+        disableflag = true;
       }
       if (existingIndex === -1) {
         acc.push(current);
@@ -63,32 +57,31 @@ const Feedback = () => {
       return acc;
     }, []);
     setUniqueAnswers(uniqueAnswers);
-    if(formvValue.length){
-    setDisable(disableflag)
-    }
-    else{
-    setDisable(true)
-
+    if (formvValue.length) {
+      setDisable(disableflag);
+    } else {
+      setDisable(true);
     }
     // setDisable(uniqueAnswers.length !== apiData.length ||(apiData.length === 0 && uniqueAnswers.length ===0));
   };
-  console.log(uniqueAnswers);
+  // console.log(uniqueAnswers);
   const handlesubmit = () => {
     axios
       .post("http://13.48.30.130/feedback/add-f-answer/", {
         student_number: localStorage.getItem("studentNo"),
         answers: uniqueAnswers,
       })
-      .then(() =>{
-       navigate("/thankyou")});
+      .then(() => {
+        navigate("/thankyou");
+      });
   };
 
   return loading ? (
-    <Loader/>):(
+    <Loader />
+  ) : (
     <>
       {apiData.length ? (
         <Container className="FeedbackMain">
-            
           <Typography className="FeedbackHead">Feedback</Typography>
           <Box>
             {apiData.map((ques, i) =>
@@ -124,8 +117,8 @@ const Feedback = () => {
           </Box>
         </Container>
       ) : null}
-    </>)
-  
+    </>
+  );
 };
 
 export default Feedback;
