@@ -66,7 +66,7 @@ const Instruction = () => {
                 <p className="instruction_heading">Instructions</p>
               </div>
               {arr.map((link, i) => (
-                <div style={{ overflow: "scroll" }} key={link.id}>
+                <div  key={link.id}>
                   <List className="instruction_list">
                     <ListItemIcon className="listCircle">
                       <Circle

@@ -8,7 +8,13 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const Login = () => {
+const Login = ({setLoggedIn,setAdmin}) => {
+  // const handleUserAdmin = (userType) => {
+  //   handleAdmin(userType);
+  // };
+  // const handleUserLogin=(login)=>{
+  //   handleLogin(login);
+  // }
   const navigate=useNavigate();
 const initialValues = {
   student_no: "",
@@ -41,11 +47,14 @@ const onSubmit = (values) => {
 axios.post("http://13.48.30.130/accounts/login/",values)
 .then((res)=>{
   console.log(res)
+  setLoggedIn(true);
   localStorage.setItem("Name",res.data.name)
   localStorage.setItem("studentNo",res.data.studentNo)
   localStorage.setItem("id",res.data._id)
   
   if (res.data.isAdmin===true){
+    // handleUserAdmin(true)
+    setAdmin(true)
     navigate('/admin')
   }
   else if (res.data.isRelogin===true){
@@ -133,7 +142,6 @@ axios.post("http://13.48.30.130/accounts/login/",values)
               className="login_btn"
               type="submit"
               sx={{ backgroundColor: "#543BA0" ,"&:hover":{backgroundColor:"#543BA0"}}}
-              
             >
               LOGIN
             </Button>
