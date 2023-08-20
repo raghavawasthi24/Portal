@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import prevNextSlice from "./slices/PrevNextSlice.jsx";
 import EditContSlice from "./slices/EditContSlice";
 import QuestionsSlice from "./slices/QuestionsSlice";
 import StudentsSlice from "./slices/StudentsSlice";
 import FeedbackSlice from "./slices/FeedbackSlice";
 import ReviewReducer from "./slices/ReviewSlice";
+import prevNextSlice from "./slices/PrevNextSlice.jsx";
 
 const store = configureStore({
   reducer: {
