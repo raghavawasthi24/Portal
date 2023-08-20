@@ -26,7 +26,7 @@ const Dropdown = () => {
     const dispatch=useDispatch();
   return (
     <div className='w-full bg-gradient-to-r from-dropdownGrad1 via-dropdownGrad2 to-dropdownGrad3'>
-        <FormControl sx={{width:"100%",zIndex:"-1"}}>
+        <FormControl sx={{width:"100%"}}>
             <Select 
             value={selTech}
             onChange={handleTech}

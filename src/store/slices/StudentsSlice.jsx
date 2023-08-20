@@ -16,11 +16,6 @@ const StudentSlice = createSlice({
       f = action.payload;
     },
     searchStudent: (state, action) => {
-      
-    axios.get("https://exam-portal-django.onrender.com/accounts/StudentList/")
-    .then((response) => setStudents(response.data))
-    .catch((error) => console.error(error));                                   
-
       state.initialValue = f;
       state.initialValue = state.initialValue.filter((student) =>
         student.name.toLowerCase().includes(action.payload.toLowerCase())
