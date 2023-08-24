@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import {useSelector,useDispatch} from "react-redux";
 
-import { prevQues,nextQues } from '../../../../../store/slices/PrevNextSlice';
+import { prevQues,nextQues } from '../../../../../store/slices/PrevnextSlice';
 import { Button } from '@mui/material';
 import { quesList } from '../../../../../store/slices/QuestionsSlice';
 
