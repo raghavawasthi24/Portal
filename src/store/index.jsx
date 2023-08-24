@@ -8,11 +8,11 @@ import PrevNextSlice from "./slices/PrevNextSlice.jsx";
 
 const store = configureStore({
   reducer: {
-    prevNext: PrevNextSlice,
     editShow: EditContSlice,
     quesList: QuestionsSlice,
     student: StudentsSlice,
     feedback: FeedbackSlice,
+    prevNext: PrevNextSlice,
     review: ReviewReducer,
   },
 });
