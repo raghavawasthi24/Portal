@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import Table from "@mui/material/Table";
@@ -51,6 +48,7 @@ const LeaderBoard = () => {
             <TableHead sx={{backgroundColor: "rgba(242, 241, 252, 1)"}}>
               <TableRow>
                 <TableCell sx={{textAlign:"center"}}>Rank</TableCell>
+                <TableCell sx={{textAlign:"center"}}>Total Score</TableCell>
                 <TableCell sx={{textAlign:"center"}}>Student Number</TableCell>
                 <TableCell sx={{textAlign:"center"}}>Student Name</TableCell>
               </TableRow>
@@ -59,7 +57,7 @@ const LeaderBoard = () => {
               {students.map((student, index) => (
                 <TableRow key={index}>
                   <TableCell sx={{textAlign:"center"}}>{index+1}</TableCell>
-
+                  <TableCell sx={{textAlign:"center"}}>{student.calculatedTotalScore}</TableCell>
                   <TableCell sx={{textAlign:"center"}}>{student.studentNo}</TableCell>
                   <TableCell sx={{textAlign:"center"}}>{student.name}</TableCell>
         
