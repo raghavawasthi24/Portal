@@ -57,6 +57,7 @@ const TestFooter = () => {
       status: 0,
       quesId: quesData.initialQues[data.initialQues - 1].quesId,
       ansId: currentAnsId,
+      category: currentQuestion.category,
     });
     dispatch(nextQues(quesData.initialQues));
   };
@@ -71,6 +72,7 @@ const TestFooter = () => {
       status: 1,
       quesId: quesData.initialQues[data.initialQues - 1].quesId,
       ansId: currentAnsId,
+      category: currentQuestion.category,
     });
     setReviewHandler(true);
     dispatch(nextQues(quesData.initialQues));
