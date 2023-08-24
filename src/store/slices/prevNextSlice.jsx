@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   initialQues: 1,
-  currentCtg: true,
 };
 
 const PrevNextSlice = createSlice({
