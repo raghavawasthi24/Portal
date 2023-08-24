@@ -4,11 +4,11 @@ import QuestionsSlice from "./slices/QuestionsSlice";
 import StudentsSlice from "./slices/StudentsSlice";
 import FeedbackSlice from "./slices/FeedbackSlice";
 import ReviewReducer from "./slices/ReviewSlice";
-import prevNextSlice from "./slices/PrevNextSlice.jsx";
+import PrevNextSlice from "./slices/PrevNextSlice.jsx";
 
 const store = configureStore({
   reducer: {
-    prevNext: prevNextSlice,
+    prevNext: PrevNextSlice,
     editShow: EditContSlice,
     quesList: QuestionsSlice,
     student: StudentsSlice,
