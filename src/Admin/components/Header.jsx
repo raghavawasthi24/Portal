@@ -92,7 +92,7 @@ const Header = () => {
           }}
         >
           <MenuItem onClick={()=>{handleClose,navigate("/addQuestions")}}>Questions</MenuItem>
-          <MenuItem onClick={()=>{handleClose,navigate("/admin")}}>Candidates</MenuItem>
+          <MenuItem onClick={()=>{handleClose,navigate("/addCandidate")}}>Candidates</MenuItem>
           <MenuItem onClick={()=>{handleClose,navigate("/addfeedback")}}>Feedback</MenuItem>
         </Menu>
 

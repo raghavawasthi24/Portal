@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { moveQues } from '../../store/slices/PrevNextSlice';
+import { moveQues } from '../../store/slices/PrevnextSlice';
 import { Button } from '@mui/material';
 // import { quesCtgSel } from '../../store/slices/QuestionsSlice';
 
