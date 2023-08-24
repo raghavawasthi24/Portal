@@ -16,6 +16,7 @@ import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
 import LandingPage from "./User/pages/LandingPage/LandingPage";
 import Loader from "./Loader/Loader";
 import TestResult from "./User/pages/TestResult/TestResult";
+import AddCandidates from "./Admin/Pages/Candidates/AddCandidates/AddCandidates";
 
 const App = () => {
   const handle = useFullScreenHandle();
@@ -43,6 +44,7 @@ const App = () => {
           <Route exact path="addfeedback" element={<AddFeedback />} />
           <Route exact path="getfeedback" element={<GetFeedback />} />
           <Route exact path="result" element={<TestResult />} />
+          <Route exact path="addCandidate" element={<AddCandidates/>} />
 
           {/* <Route exact path="admin" element={<AdminHome />} /> */}
         </Routes>
