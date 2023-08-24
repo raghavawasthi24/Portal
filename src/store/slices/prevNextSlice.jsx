@@ -4,7 +4,7 @@ const initialState = {
   initialQues: 1,
 };
 
-const PrevNextSlice = createSlice({
+const PrevnextSlice = createSlice({
   name: "changeQues",
   initialState,
   reducers: {
@@ -24,5 +24,5 @@ const PrevNextSlice = createSlice({
   },
 });
 
-export default PrevNextSlice.reducer;
-export const { prevQues, nextQues, moveQues } = PrevNextSlice.actions;
+export default PrevnextSlice.reducer;
+export const { prevQues, nextQues, moveQues } = PrevnextSlice.actions;
