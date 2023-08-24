@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const PrevNextSlice = createSlice({
-  name: "prevNext",
+  name: "changeQues",
   initialState,
   reducers: {
     prevQues: (state) => {
