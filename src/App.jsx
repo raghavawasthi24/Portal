@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Test from "./User/pages/Test/Test";
 import Login from "./User/pages/Login/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -16,40 +16,67 @@ import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
 import LandingPage from "./User/pages/LandingPage/LandingPage";
 import Loader from "./Loader/Loader";
 import TestResult from "./User/pages/TestResult/TestResult";
-import AddCandidates from "./Admin/Pages/Candidates/AddCandidates/AddCandidates";
 
 const App = () => {
-  const handle = useFullScreenHandle();
-
   useEffect(() => handle.enter, []);
+  const handle = useFullScreenHandle();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+  useEffect(() => {
+    // Check for authentication status in cookies
+    const cookieIsLoggedIn = Cookies.get("isLoggedIn") === "true";
+    const cookieIsAdmin = Cookies.get("isAdmin") === "true";
+    setIsLoggedIn(cookieIsLoggedIn);
+    setIsAdmin(cookieIsAdmin);
+  }, []);
+
+  const ProtectedUserRoutes = () => (
+   <Routes>
+     {/* <Route exact path="loader" element={<Loader />} /> */}
+ <Route exact path="/" element={<Instruction />} />
+  <Route exact path="animation" element={<LandingPage />}></Route>
+ <Route exact path="test" element={<Test />}></Route>
+  <Route exact path="feedback" element={<Feedback />} />
+  <Route exact path="Thankyou" element={<Thankyou />} />
+   </Routes>
+  );
+  const ProtectedAdminRoutes = () => (
+    <Routes>
+      <Route path="/" element={<AdminHome />} />
+      <Route path="leaderboard" element={<LeaderBoard />} />
+      <Route path="getCandidate" element={<GetCandidates />} />
+      <Route path="addQuestions" element={<AddQuestions />} />
+      <Route path="addfeedback" element={<AddFeedback />} />
+      <Route path="getfeedback" element={<GetFeedback />} />
+      <Route exact path="result" element={<TestResult />} />
+    </Routes>
+  );
+
   return (
     <FullScreen handle={handle}>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Login />}></Route>
-          <Route exact path="/*" element={<Login />}></Route>
-          
-          {/* User */}
-          <Route exact path="loader" element={<Loader />} />
-          <Route exact path="instruction" element={<Instruction />} />
-          <Route exact path="/animation" element={<LandingPage />}></Route>
-          <Route exact path="test" element={<Test />}></Route>
-          <Route exact path="feedback" element={<Feedback />} />
-          <Route exact path="Thankyou" element={<Thankyou />} />
-          {/*Admin */}
-          <Route exact path="admin" element={<AdminHome />} />
-          <Route exact path="leaderboard" element={<LeaderBoard />} />
-          <Route exact path="getCandidate" element={<GetCandidates />} />
-          <Route exact path="addQuestions" element={<AddQuestions />} />
-          <Route exact path="addfeedback" element={<AddFeedback />} />
-          <Route exact path="getfeedback" element={<GetFeedback />} />
-          <Route exact path="result" element={<TestResult />} />
-          <Route exact path="addCandidate" element={<AddCandidates/>} />
-
-          {/* <Route exact path="admin" element={<AdminHome />} /> */}
+        <Route
+            path="/*"
+            element={
+              isLoggedIn ? (
+                isAdmin ? (
+                  <ProtectedAdminRoutes />
+                ) : (
+                  <ProtectedUserRoutes />
+                )
+              ) : (
+                <Login 
+                 />
+              )
+            }
+          />
+         
+         
         </Routes>
       </BrowserRouter>
-    </FullScreen>
+     </FullScreen>
   );
 };
 

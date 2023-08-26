@@ -7,9 +7,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
-
-
-const Login = () => {
+  import Cookies from "js-cookie";
+  
+const Login = ({handleLogin}) => {
+  // const handleUserAdmin = (userType) => {
+  //   handleAdmin(userType);
+  // };
+  // const handleUserLogin=(login)=>{
+  //   handleLogin(login);
+  // }
   const navigate=useNavigate();
 const initialValues = {
   student_no: "",
@@ -42,11 +48,16 @@ const onSubmit = (values) => {
 axios.post("http://13.48.30.130/accounts/login/",values)
 .then((res)=>{
   console.log(res)
+  Cookies.set("isLoggedIn",true); // Set isLoggedIn cookie
+  // setIsLoggedIn(true);
   localStorage.setItem("Name",res.data.name)
   localStorage.setItem("studentNo",res.data.studentNo)
   localStorage.setItem("id",res.data._id)
   
   if (res.data.isAdmin===true){
+    // handleUserAdmin(true)
+    // setIsAdmin(true)
+    Cookies.set("isAdmin",true);
     navigate('/admin')
   }
   else if (res.data.isRelogin===true){
