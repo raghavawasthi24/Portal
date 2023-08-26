@@ -4,7 +4,7 @@ import QuestionsSlice from "./slices/QuestionsSlice";
 import StudentsSlice from "./slices/StudentsSlice";
 import FeedbackSlice from "./slices/FeedbackSlice";
 import ReviewReducer from "./slices/ReviewSlice";
-import PrevnextSlice from "./slices/PrevnextSlice";
+// import PrevnextSlice from "./slices/PrevnextSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,7 +12,7 @@ const store = configureStore({
     quesList: QuestionsSlice,
     student: StudentsSlice,
     feedback: FeedbackSlice,
-    prevNext: PrevnextSlice,
+    // prevNext: PrevnextSlice,
     review: ReviewReducer,
   },
 });

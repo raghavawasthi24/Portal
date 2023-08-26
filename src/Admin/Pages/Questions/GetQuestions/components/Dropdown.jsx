@@ -2,7 +2,7 @@ import { FormControl,Select,MenuItem} from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { quesCtgSel } from '../../../../../store/slices/QuestionsSlice';
-import { moveQues } from '../../../../../store/slices/PrevnextSlice';
+import { moveQues } from '../../../../../store/slices/QuestionsSlice';
 import { useEffect } from 'react';
 import zIndex from '@mui/material/styles/zIndex';
 

@@ -12,6 +12,7 @@ const initialState = {
   submitQuestion: true,
   quesCategory: "HTML",
   flag: 0,
+  initialQuesNo: 1,
 };
 let f = initialState.initialQues;
 const QuestionsSlice = createSlice({
@@ -37,6 +38,19 @@ const QuestionsSlice = createSlice({
       state.quesCategory = action.payload;
       // console.log(action.payload)
     },
+    prevQues: (state) => {
+      if (state.initialQuesNo < 2) {
+        state.initialQuesNo = 1;
+      } else state.initialQuesNo--;
+    },
+    nextQues: (state, action) => {
+      if (state.initialQuesNo == action.payload.length) {
+        state.initialQuesNo = 1;
+      } else state.initialQuesNo++;
+    },
+    moveQues: (state, action) => {
+      state.initialQuesNo = action.payload;
+    },
   },
 });
 
@@ -48,4 +62,7 @@ export const {
   toggleReview,
   setVisited,
   setAnsId,
+  prevQues,
+  nextQues,
+  moveQues
 } = QuestionsSlice.actions;

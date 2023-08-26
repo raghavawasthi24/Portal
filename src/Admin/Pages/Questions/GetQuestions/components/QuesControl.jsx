@@ -4,13 +4,13 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import {useSelector,useDispatch} from "react-redux";
 
-import { prevQues,nextQues } from '../../../../../store/slices/PrevnextSlice';
+import { prevQues,nextQues } from '../../../../../store/slices/QuestionsSlice';
 import { Button } from '@mui/material';
 import { quesList } from '../../../../../store/slices/QuestionsSlice';
 
 const QuesControl = () => {
 
-  const data = useSelector(state => state.prevNext)
+  // const data = useSelector(state => state.prevNext)
   const dispatch=useDispatch();
 
   const quesdata= useSelector(state=>state.quesList);
