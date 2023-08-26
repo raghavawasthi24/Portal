@@ -25,7 +25,7 @@ const validate = (values) => {
   let errors = {};
   if (!values.student_no) {
     errors.student_no = "Please Enter Student Number";
-  } else if (!/^2([1-2]){1}([0-9]{5,6})$/i.test(values.student_no)) {
+  } else if (!/^22([0-9]{5,6})$/i.test(values.student_no)) {
     errors.student_no = "Enter Correct Student Number";
   }
   // else {

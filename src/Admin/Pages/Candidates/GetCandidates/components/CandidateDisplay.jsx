@@ -16,7 +16,7 @@ const CandidateDisplay=()=>{
   const dispatch=useDispatch();
 
   useEffect(()=>{
-      axios.get("https://exam-portal-django.onrender.com/accounts/StudentList/")
+      axios.get("http://13.48.30.130/accounts/StudentList/")
        .then((res)=>{console.log(res.data);
         dispatch(studentList(res.data))
         // state.initialValue=res.data;
@@ -35,14 +35,14 @@ const CandidateDisplay=()=>{
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow sx={{ backgroundColor: "rgba(222, 234, 254, 1)" }}>
+              <TableRow sx={{ backgroundColor: "rgba(222, 234, 254, 0.5)" }}>
                 <TableCell>Student Name</TableCell>
                 <TableCell>Student Number</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.initialValue.map((student, index) => (
-                <TableRow key={index}>
+                <TableRow key={index}sx={{ backgroundColor: "rgb(255, 255, 255)" }}>
                   <TableCell>{student.name}</TableCell>
                   <TableCell>{student.studentNo}</TableCell>
                 </TableRow>

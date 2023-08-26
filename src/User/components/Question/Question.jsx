@@ -26,7 +26,7 @@ const Question = () => {
   const [quesName, setQuesName] = useState("");
 
   useEffect(() => {
-    setQuesName(quesData.initialQues[data.initialQues - 1]?.quesId);
+    setQuesName(quesData.initialQues[quesData.initialQuesNo - 1]?.quesId);
     const defaultAnswerId = currentCategoryQuestions.find(
       (item) => item.id === quesName
     );
@@ -47,15 +47,15 @@ const Question = () => {
 
   return (
     <div className="m-4 pl-3 overflow-y-auto h-30vh">
-      <Typography variant="h6">Question {data.initialQues}</Typography>
+      <Typography variant="h6">Question {quesData.initialQuesNo}</Typography>
       <Divider />
       <Typography variant="body">
-        {quesData.initialQues[data.initialQues - 1]?.question}
+        {quesData.initialQues[quesData.initialQuesNo - 1]?.question}
       </Typography>
       <br />
       <FormControl>
         <RadioGroup value={selectedValue} name={quesName} onChange={handleAns}>
-          {quesData.initialQues[data.initialQues - 1]?.options.map(
+          {quesData.initialQues[quesData.initialQuesNo - 1]?.options.map(
             (option, id) => {
               return (
                 <FormControlLabel

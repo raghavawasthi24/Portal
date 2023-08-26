@@ -35,13 +35,13 @@ const GetQuestions = () => {
 
 
     useEffect(()=>{  
-        console.log(questionDisplay.initialQues[data.initialQues-1])
-        let options=questionDisplay.initialQues[data.initialQues-1]?.options
-        let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
+        console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo-1])
+        let options=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options
+        let correctId=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.correctId
         let index=options?.findIndex(x=>x.ansId==correctId)
         console.log(index,options)
         setCorrectAns(options[index].name)
-    },[questionDisplay.initialQues[data.initialQues-1]?.question])
+    },[questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.question])
 
   return (
     <>
@@ -49,16 +49,15 @@ const GetQuestions = () => {
         
         <div className=''>
         <div className='flex justify-between my-3'>
-            <p>Question-{data.initialQues}</p>
+            <p>Question-{questionDisplay?.initialQuesNo}</p>
             <EditIcon onClick={()=>dispatch(toggleEditOpt())} style={{cursor:"pointer"}}/>
         </div>
         <hr/>
-            <p>{questionDisplay.initialQues[data.initialQues-1]?.question}</p>
-            
+            <p>{questionDisplay.initialQues[questionDisplay?.initialQuesNo-1]?.question}</p>
             
             <FormControl>
                 <RadioGroup>
-                {questionDisplay.initialQues[data.initialQues-1]?.options.map((item,key)=>{
+                {questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options.map((item,key)=>{
                     return(<FormControlLabel key={key} checked={item.name===correctAns} value={item} control={<Radio/>} label={item.name}/>)
                 })}
                 {/* <FormControlLabel value="HTML11" checked control={<Radio/>} label="HTML11"/> */}

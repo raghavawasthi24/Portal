@@ -2,7 +2,7 @@ import { FormControl,Select,MenuItem} from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { quesCtgSel } from '../../../../../store/slices/QuestionsSlice';
-import { moveQues } from '../../../../../store/slices/prevNextSlice';
+import { moveQues } from '../../../../../store/slices/QuestionsSlice';
 import { useEffect } from 'react';
 import zIndex from '@mui/material/styles/zIndex';
 
@@ -26,7 +26,7 @@ const Dropdown = () => {
     const dispatch=useDispatch();
   return (
     <div className='w-full bg-gradient-to-r from-dropdownGrad1 via-dropdownGrad2 to-dropdownGrad3'>
-        <FormControl sx={{width:"100%",zIndex:"-1"}}>
+        <FormControl sx={{width:"100%"}}>
             <Select 
             value={selTech}
             onChange={handleTech}
