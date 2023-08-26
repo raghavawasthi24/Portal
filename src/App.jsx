@@ -15,59 +15,67 @@ import AddFeedback from "./Admin/Pages/Feedback/AddFeedback/AddFeedback";
 import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
 import LandingPage from "./User/pages/LandingPage/LandingPage";
 import Loader from "./Loader/Loader";
+import TestResult from "./User/pages/TestResult/TestResult";
+import Cookies from "js-cookie";
+// import PrivateRoutes from "./ProtectedRoutes";
 
 const App = () => {
   useEffect(() => handle.enter, []);
   const handle = useFullScreenHandle();
-  const [admin, setAdmin] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   
+  useEffect(() => {
+    // Check for authentication status in cookies
+    const cookieIsLoggedIn = Cookies.get("isLoggedIn") === "true";
+    const cookieIsAdmin = Cookies.get("isAdmin") === "true";
+    setIsLoggedIn(cookieIsLoggedIn);
+    setIsAdmin(cookieIsAdmin);
+  }, []);
+
+  const ProtectedUserRoutes = () => (
+   <Routes>
+     {/* <Route exact path="loader" element={<Loader />} /> */}
+ <Route exact path="/" element={<Instruction />} />
+  <Route exact path="animation" element={<LandingPage />}></Route>
+ <Route exact path="test" element={<Test />}></Route>
+  <Route exact path="feedback" element={<Feedback />} />
+  <Route exact path="Thankyou" element={<Thankyou />} />
+   </Routes>
+  );
+  const ProtectedAdminRoutes = () => (
+    <Routes>
+      <Route path="/" element={<AdminHome />} />
+      <Route path="leaderboard" element={<LeaderBoard />} />
+      <Route path="getCandidate" element={<GetCandidates />} />
+      <Route path="addQuestions" element={<AddQuestions />} />
+      <Route path="addfeedback" element={<AddFeedback />} />
+      <Route path="getfeedback" element={<GetFeedback />} />
+      <Route exact path="result" element={<TestResult />} />
+    </Routes>
+  );
 
   return (
     <FullScreen handle={handle}>
       <BrowserRouter>
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <Login setAdmin={setAdmin} setLoggedIn={setLoggedIn} />
-            }/>
-          <Route
-            exact
+        <Route
             path="/*"
             element={
-              // <Login handleAdmin={handleAdmin} handleLogin={handleLogin} />
-              <Login setAdmin={setAdmin} setLoggedIn={setLoggedIn} />
-
+              isLoggedIn ? (
+                isAdmin ? (
+                  <ProtectedAdminRoutes />
+                ) : (
+                  <ProtectedUserRoutes />
+                )
+              ) : (
+                <Login 
+                 />
+              )
             }
-          ></Route>
-
-          {/* Admin */}
-          {admin && loggedIn && (
-            <>
-              <Route exact path="/admin" element={<AdminHome />} />
-              <Route exact path="/*" element={<AdminHome />} />
-              <Route exact path="/leaderboard" element={<LeaderBoard />} />
-              <Route exact path="/getCandidate" element={<GetCandidates />} />
-              <Route exact path="/addQuestions" element={<AddQuestions />} />
-              <Route exact path="/addfeedback" element={<AddFeedback />} />
-              <Route exact path="/getfeedback" element={<GetFeedback />} />
-          
-            </>
-          ) }
-          {!admin && loggedIn && (
-            
-            <>
-              {/* <Route exact path="/loader" element={<Loader />} /> */}
-              <Route exact path="/*" element={<Instruction />} />
-              <Route exact path="/instruction" element={<Instruction />} />
-              <Route exact path="/animation" element={<LandingPage />}></Route>
-              <Route exact path="/test" element={<Test />}></Route>
-              <Route exact path="/feedback" element={<Feedback />} />
-              <Route exact path="/Thankyou" element={<Thankyou />} />
-            </>
-          )}
+          />
+         
+         
         </Routes>
       </BrowserRouter>
      </FullScreen>

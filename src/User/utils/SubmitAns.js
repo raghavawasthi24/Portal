@@ -7,13 +7,14 @@ const SubmitAnswer = ({ status, quesId, ansId }) => {
     status: status,
     ansId: ansId,
   };
-  console.log(submitData);
   axios
     .get(
       `https://csi-examportal.onrender.com/api/v1/postResponse/${id}?ansId=${ansId}&quesId=${quesId}&status=${status}`,
       submitData
     )
-    .then((res) => console.log(res))
+    .then((res) =>
+      localStorage.setItem("totalScoreStatus", JSON.stringify(res.data))
+    )
     .catch((err) => console.log(err));
 };
 

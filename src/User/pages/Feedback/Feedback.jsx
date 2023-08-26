@@ -6,39 +6,79 @@ import FeedbackCard from "../../components/Feedback/FeedbackCard";
 import FeedbackQues from "../../components/Feedback/FeedbackQues";
 import "./Feedback.css";
 import axios from "axios";
+import Loader from "../../../Loader/Loader";
 
 const Feedback = () => {
-  const [apiData, setApiData] = useState({});
+  const [apiData, setApiData] = useState([]);
   const [formvValue, setFormValue] = useState([]);
-  const [disable, setedisable] = useState(true);
+  const [disable, setDisable] = useState(true);
+  const [uniqueAnswers, setUniqueAnswers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get("http://13.48.30.130/feedback/get-f-question/")
-      .then((res) => setApiData(res.data));
+
+      .then((res) => {
+        setApiData(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, []);
 
+  useEffect(() => {
+    uniquefn();
+  }, [formvValue]);
+
   const handlevalue = (data) => {
-    console.log(data);
-    setFormValue([...formvValue, data]);
-    if (formvValue.length + 1 === apiData.length) {
-      setedisable(false);
-    } else {
-      setedisable(true);
-    }
+    // console.log(data)
+    setFormValue((prevFormValue) => [...prevFormValue, data]);
   };
+
+  const uniquefn = () => {
+    let disableflag = false;
+    const uniqueAnswers = formvValue.reduce((acc, current) => {
+      const existingIndex = acc.findIndex(
+        (item) => item.question_id === current.question_id
+      );
+      if (!current.answer_text) {
+        disableflag = true;
+      }
+      if (existingIndex === -1) {
+        acc.push(current);
+      } else {
+        acc[existingIndex] = current;
+      }
+
+      return acc;
+    }, []);
+    setUniqueAnswers(uniqueAnswers);
+    if (formvValue.length) {
+      setDisable(disableflag);
+    } else {
+      setDisable(true);
+    }
+    // setDisable(uniqueAnswers.length !== apiData.length ||(apiData.length === 0 && uniqueAnswers.length ===0));
+  };
+  // console.log(uniqueAnswers);
   const handlesubmit = () => {
     axios
       .post("http://13.48.30.130/feedback/add-f-answer/", {
         student_number: localStorage.getItem("studentNo"),
-        answers: formvValue,
+        answers: uniqueAnswers,
       })
-      .then(navigate("/thankyou"));
+      .then(() => {
+        navigate("/thankyou");
+      });
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <>
       {apiData.length ? (
         <Container className="FeedbackMain">
@@ -62,11 +102,11 @@ const Feedback = () => {
               )
             )}
 
-            {disable ? (
+            {disable && (
               <p style={{ color: "red", marginBottom: "1rem" }}>
                 Fill The Feedback Form Before Submitting
               </p>
-            ) : null}
+            )}
             <button
               className="FeedbackBtn"
               disabled={disable}

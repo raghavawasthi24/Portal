@@ -5,10 +5,11 @@ import { Button, Paper, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-
-
-const Login = ({setLoggedIn,setAdmin}) => {
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+  import Cookies from "js-cookie";
+  
+const Login = ({handleLogin}) => {
   // const handleUserAdmin = (userType) => {
   //   handleAdmin(userType);
   // };
@@ -23,16 +24,16 @@ const initialValues = {
 const validate = (values) => {
   let errors = {};
   if (!values.student_no) {
-    errors.student_no = "**Required";
+    errors.student_no = "Please Enter Student Number";
   } else if (!/^2([1-2]){1}([0-9]{5,6})$/i.test(values.student_no)) {
-    errors.student_no = "Invalid Student No.";
+    errors.student_no = "Enter Correct Student Number";
   }
   // else {
   //   errors.student_no=''
   // }
 
   if (!values.password) {
-    errors.password = "**Required";
+    errors.password = "Please Enter Password";
   } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/i.test(values.password)) {
     errors.password =
       "Invalid Password";
@@ -47,14 +48,16 @@ const onSubmit = (values) => {
 axios.post("http://13.48.30.130/accounts/login/",values)
 .then((res)=>{
   console.log(res)
-  setLoggedIn(true);
+  Cookies.set("isLoggedIn",true); // Set isLoggedIn cookie
+  // setIsLoggedIn(true);
   localStorage.setItem("Name",res.data.name)
   localStorage.setItem("studentNo",res.data.studentNo)
   localStorage.setItem("id",res.data._id)
   
   if (res.data.isAdmin===true){
     // handleUserAdmin(true)
-    setAdmin(true)
+    // setIsAdmin(true)
+    Cookies.set("isAdmin",true);
     navigate('/admin')
   }
   else if (res.data.isRelogin===true){
@@ -70,7 +73,7 @@ axios.post("http://13.48.30.130/accounts/login/",values)
   
 }).catch((err)=>{
   console.log(err)
-  alert('Incorrect Username or Password');
+  toast.error('Invalid Student No or Password');
 })
 };
   const formik = useFormik({ initialValues,
@@ -90,14 +93,13 @@ axios.post("http://13.48.30.130/accounts/login/",values)
       />
       <div className="login">
         <form className="formSection" onSubmit={formik.handleSubmit} >
-          <Paper elevation={3} className="login_form">
+          <div elevation={3} className="login_form">
             <h3 className="login_form_header">CINE-2023</h3>
             <div className="input_field">
               <TextField
-                label="Enter Your Student No."
+                label="Enter Your Student Number"
                 variant="outlined"
                 className="login_field"
-                required
                 name="student_no"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -117,7 +119,6 @@ axios.post("http://13.48.30.130/accounts/login/",values)
             <div className="input_field">
               <TextField
                 label="Enter Your Password"
-                required
                 name="password"
                 variant="outlined"
                 className="login_field"
@@ -141,16 +142,18 @@ axios.post("http://13.48.30.130/accounts/login/",values)
               variant="contained"
               className="login_btn"
               type="submit"
-              sx={{ backgroundColor: "#543BA0" ,"&:hover":{backgroundColor:"#543BA0"}}}
+              sx={{ backgroundColor: "#543BA0" ,"&:hover":{backgroundColor:"#543BA0"}, margin:"2rem 0"}}
+              
             >
               LOGIN
             </Button>
-          </Paper>
+          </div>
         </form>
         <div className="imageSection">
           <img src={LoginGif} style={{ height: "70vh" }} alt="login" />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

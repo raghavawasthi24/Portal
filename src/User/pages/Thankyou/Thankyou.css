@@ -1,16 +1,26 @@
+
+
 .ThankMain{
-    margin-top: 4rem;
-    text-align: center !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  width: 100% !important;
+  background-image: url(Images/Background_portal.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center !important;
 }
 .ThankImg{
-   
+    margin-top: 15vh;
     display: flex !important; 
     justify-content: center;
     align-items: center;
 }
 .ThankHead{
-    padding: 2rem;
-    font-size: 3rem;
+padding: 2rem;
+font-size: 3rem;
     font-family: poppins;
     font-weight: 900;
     background: linear-gradient(180deg, #7BCEEF 0%, rgba(117, 63, 229, 0.8) 100%);

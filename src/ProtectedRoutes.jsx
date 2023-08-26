@@ -1,15 +1,46 @@
-import React from "react";
-import { Route } from "react-router-dom";
+// import React, { useEffect } from 'react'
+// import { useNavigate } from 'react-router-dom';
 
-function ProtectedRoute({ }) {
+// const ProtectedRoutes = (props) => {
+//   const {Component}=props;
+//   const navigate=useNavigate();
+//   useEffect(()=>{
+//     let login=localStorage.getItem("isLoggedIn");
+//     if(!login){
+// navigate('login');
+//     }
+//   });
+//   return (
+//     <div> 
+//        <Component />
+//     </div>
+//   )
+// }
+
+// export default ProtectedRoutes
+import React from 'react';
+import { Navigate, Route } from 'react-router-dom';
+
+// Utils
+
+const PrivateRoutes = ({ component: Component, ...rest }) => {  
+  var session_token=localStorage.getItem('isLoggedIn')
+
   return (
-    <Route
-      {...restOfProps}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/signin" />
-      }
+    <Route {...rest} render={props => (
+     session_token !== false ? (
+      < Component  {...props} />
+      ) : (
+            <Navigate to={{
+              pathname: '/login',
+              state: { from: props.location }
+              }}
+            />
+          )
+      )} 
     />
-  );
-}
+  )
+};
 
-export default ProtectedRoute;
+
+export default PrivateRoutes;
