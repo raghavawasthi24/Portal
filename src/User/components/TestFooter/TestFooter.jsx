@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Button } from "@mui/material";
-import { nextQues } from "../../../store/slices/PrevNextSlice";
+import { nextQues } from "../../../store/slices/QuestionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { markReview } from "../../../store/slices/ReviewSlice";
@@ -14,13 +14,13 @@ const TestFooter = () => {
   const quesState = useSelector((state) => state.review.categories);
   const currentCategoryQuestions =
     quesState.find((item) => item.category === category)?.questions || [];
-  const data = useSelector((state) => state.prevNext);
+  // const data = useSelector((state) => state.prevNext);
 
   const [answered, setAnswered] = useState(false);
   const [currentAnsId, setCurrentAnsId] = useState("");
 
   useEffect(() => {
-    const currentQuestion = quesData.initialQues[data.initialQues - 1];
+    const currentQuestion = quesData.initialQues[quesData.initialQuesNo - 1];
     const question = currentCategoryQuestions.find(
       (item) => item.id === currentQuestion.quesId
     );
@@ -33,10 +33,10 @@ const TestFooter = () => {
     } else {
       setAnswered(false);
     }
-  }, [currentCategoryQuestions, data, quesData]);
+  }, [currentCategoryQuestions, quesData]);
 
   const setReviewHandler = (review) => {
-    const currentQuestion = quesData.initialQues[data.initialQues - 1];
+    const currentQuestion = quesData.initialQues[quesData.initialQuesNo - 1];
     // Set the review property for the current question
     dispatch(
       markReview({
@@ -55,7 +55,7 @@ const TestFooter = () => {
     setReviewHandler(false);
     SubmitAnswer({
       status: 0,
-      quesId: quesData.initialQues[data.initialQues - 1].quesId,
+      quesId: quesData.initialQues[quesData.initialQuesNo-1].quesId,
       ansId: currentAnsId,
     });
     dispatch(nextQues(quesData.initialQues));
@@ -69,7 +69,7 @@ const TestFooter = () => {
 
     SubmitAnswer({
       status: 1,
-      quesId: quesData.initialQues[data.initialQues - 1].quesId,
+      quesId: quesData.initialQues[quesData.initialQuesNo - 1].quesId,
       ansId: currentAnsId,
     });
     setReviewHandler(true);

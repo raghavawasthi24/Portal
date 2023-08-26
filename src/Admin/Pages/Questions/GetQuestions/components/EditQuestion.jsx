@@ -37,32 +37,32 @@ const EditQuestion = () => {
     // const [value3,setvalue3]=useState();
     // const [value4,setvalue4]=useState();
   
-  const [formvalues,setFormvalues]=useState(questionDisplay.initialQues[data.initialQues-1]);
+  const [formvalues,setFormvalues]=useState(questionDisplay.initialQues[questionDisplay.initialQuesNo-1]);
 
   useEffect(()=>{
-    // console.log(questionDisplay.initialQues[data.initialQues-1])
-    initialValues.question=questionDisplay.initialQues[data.initialQues-1]?.question;
-    initialValues.opt1=questionDisplay.initialQues[data.initialQues-1]?.options[0].name;
-    initialValues.opt2=questionDisplay.initialQues[data.initialQues-1]?.options[1].name;
-    initialValues.opt3=questionDisplay.initialQues[data.initialQues-1]?.options[2].name;
-    initialValues.opt4=questionDisplay.initialQues[data.initialQues-1]?.options[3].name;
-    initialValues.category=questionDisplay.initialQues[data.initialQues-1].category;
-    // setvalue1(questionDisplay.initialQues[data.initialQues-1]?.ansId);
-    // let options=questionDisplay.initialQues[data.initialQues-1]?.options
-    // let ansId=questionDisplay.initialQues[data.initialQues-1]?.ansId
-    // let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
+    // console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo-1])
+    initialValues.question=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.question;
+    initialValues.opt1=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options[0].name;
+    initialValues.opt2=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options[1].name;
+    initialValues.opt3=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options[2].name;
+    initialValues.opt4=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options[3].name;
+    initialValues.category=questionDisplay.initialQues[questionDisplay.initialQuesNo-1].category;
+    // setvalue1(questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.ansId);
+    // let options=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options
+    // let ansId=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.ansId
+    // let correctId=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.correctId
     // let index=ansId?.indexOf(correctId)
 
     // initialValues.correctAns=options[index]
     // setCorrectAns(options[index])
-    // initialValues.correctAns=questionDisplay.initialQues[data.initialQues-1].question.correct_ans;
-    let options=questionDisplay.initialQues[data.initialQues-1]?.options
-        let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
+    // initialValues.correctAns=questionDisplay.initialQues[questionDisplay.initialQuesNo-1].question.correct_ans;
+    let options=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options
+        let correctId=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.correctId
         let index=options?.findIndex(x=>x.ansId==correctId)
         console.log(index,options[index].name)
         initialValues.correctAns=options[index].name
     setFormvalues(initialValues)
-  },[questionDisplay.initialQues[data.initialQues-1]?.question])
+  },[questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.question])
 
  
 
@@ -74,19 +74,19 @@ const EditQuestion = () => {
     const updateQues=()=>{
       if(formvalues.question.trim()!="" && formvalues.opt1.trim()!="" && formvalues.opt2.trim()!="" && formvalues.opt3.trim()!="" && formvalues.opt4.trim()!="" && formvalues.correctAns.trim()!=""){
       let arr=[formvalues.opt1,formvalues.opt2,formvalues.opt3,formvalues.opt4]
-      let options=questionDisplay.initialQues[data.initialQues-1]?.options
-        let correctId=questionDisplay.initialQues[data.initialQues-1]?.correctId
+      let options=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options
+        let correctId=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.correctId
         let index=arr.indexOf(formvalues.correctAns)
         console.log(index,options[index].ansId)
         // initialValues.correctAns=options[index].name
 
       console.log(formvalues)
-      axios.patch(`https://csi-examportal.onrender.com/api/v1/updatequestion/${questionDisplay.initialQues[data.initialQues-1]._id}`,{
+      axios.patch(`https://csi-examportal.onrender.com/api/v1/updatequestion/${questionDisplay.initialQues[questionDisplay.initialQuesNo-1]._id}`,{
         "question":formvalues.question.trim(),
         "category":formvalues.category,
         "correctId":options[index].ansId,
-        "quesId":questionDisplay.initialQues[data.initialQues-1]?.quesId,
-        "options":[{"name":formvalues.opt1.trim(),"ansId":questionDisplay.initialQues[data.initialQues-1].options[0].ansId},{"name":formvalues.opt2.trim(),"ansId":questionDisplay.initialQues[data.initialQues-1].options[1].ansId},{"name":formvalues.opt3.trim(),"ansId":questionDisplay.initialQues[data.initialQues-1].options[2].ansId},{"name":formvalues.opt4.trim(),"ansId":questionDisplay.initialQues[data.initialQues-1].options[3].ansId}]
+        "quesId":questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.quesId,
+        "options":[{"name":formvalues.opt1.trim(),"ansId":questionDisplay.initialQues[questionDisplay.initialQuesNo-1].options[0].ansId},{"name":formvalues.opt2.trim(),"ansId":questionDisplay.initialQues[questionDisplay.initialQuesNo-1].options[1].ansId},{"name":formvalues.opt3.trim(),"ansId":questionDisplay.initialQues[questionDisplay.initialQuesNo-1].options[2].ansId},{"name":formvalues.opt4.trim(),"ansId":questionDisplay.initialQues[questionDisplay.initialQuesNo-1].options[3].ansId}]
       })
       .then((res)=>{
         console.log(res)

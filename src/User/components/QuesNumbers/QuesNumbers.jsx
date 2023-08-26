@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { moveQues } from "../../../store/slices/PrevnextSlice";
+import { moveQues } from "../../../store/slices/QuestionsSlice";
 
 const QuesNumbers = () => {
   const quesdata = useSelector((state) => state.quesList);
