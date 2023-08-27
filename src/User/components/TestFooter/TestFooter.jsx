@@ -19,8 +19,9 @@ const TestFooter = () => {
   const [answered, setAnswered] = useState(false);
   const [currentAnsId, setCurrentAnsId] = useState("");
 
+  const currentQuestion = quesData.initialQues[quesData.initialQuesNo - 1];
+
   useEffect(() => {
-    const currentQuestion = quesData.initialQues[quesData.initialQuesNo - 1];
     const question = currentCategoryQuestions.find(
       (item) => item.id === currentQuestion.quesId
     );
@@ -36,7 +37,6 @@ const TestFooter = () => {
   }, [currentCategoryQuestions, quesData]);
 
   const setReviewHandler = (review) => {
-    const currentQuestion = quesData.initialQues[quesData.initialQuesNo - 1];
     // Set the review property for the current question
     dispatch(
       markReview({
@@ -52,13 +52,15 @@ const TestFooter = () => {
       toast.error("Select an option");
       return;
     }
+
     setReviewHandler(false);
     SubmitAnswer({
       status: 0,
-      quesId: quesData.initialQues[quesData.initialQuesNo-1].quesId,
+      quesId: quesData.initialQues[quesData.initialQuesNo - 1].quesId,
       ansId: currentAnsId,
+      category: category,
     });
-    dispatch(nextQues(quesData.initialQues));
+    dispatch(nextQues(quesData.initialQuesNo - 1));
   };
 
   const reviewAndNext = () => {
@@ -71,9 +73,10 @@ const TestFooter = () => {
       status: 1,
       quesId: quesData.initialQues[quesData.initialQuesNo - 1].quesId,
       ansId: currentAnsId,
+      category: currentQuestion.category,
     });
     setReviewHandler(true);
-    dispatch(nextQues(quesData.initialQues));
+    dispatch(nextQues(quesData.initialQuesNo - 1));
   };
 
   return (
