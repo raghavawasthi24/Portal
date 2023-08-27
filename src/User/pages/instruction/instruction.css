@@ -21,7 +21,6 @@
 }
 .instruction_box{
     align-self: center;
-  
   overflow-y: scroll;
 }
 .instructionRight{
@@ -43,7 +42,7 @@
 .confirm_box{
     text-align: center;
     /* height: 25vh; */
-    margin-top: 2vh;
+    margin-top: 4vh;
    
 }
 
