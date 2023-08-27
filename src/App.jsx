@@ -16,67 +16,65 @@ import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
 import LandingPage from "./User/pages/LandingPage/LandingPage";
 import Loader from "./Loader/Loader";
 import TestResult from "./User/pages/TestResult/TestResult";
+import Cookies from "js-cookie";
+import { isLoggedin } from "./User/pages/Login/Login";
+import UserRoutes from "./User/utils/UserRoutes";
+import AdminRoutes from "./User/utils/AdminRoutes";
 
 const App = () => {
   useEffect(() => handle.enter, []);
   const handle = useFullScreenHandle();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  
+
   useEffect(() => {
     // Check for authentication status in cookies
+    console.log("hiii");
     const cookieIsLoggedIn = Cookies.get("isLoggedIn") === "true";
     const cookieIsAdmin = Cookies.get("isAdmin") === "true";
     setIsLoggedIn(cookieIsLoggedIn);
     setIsAdmin(cookieIsAdmin);
   }, []);
 
-  const ProtectedUserRoutes = () => (
-   <Routes>
-     {/* <Route exact path="loader" element={<Loader />} /> */}
- <Route exact path="/" element={<Instruction />} />
-  <Route exact path="animation" element={<LandingPage />}></Route>
- <Route exact path="test" element={<Test />}></Route>
-  <Route exact path="feedback" element={<Feedback />} />
-  <Route exact path="Thankyou" element={<Thankyou />} />
-   </Routes>
-  );
-  const ProtectedAdminRoutes = () => (
-    <Routes>
-      <Route path="/" element={<AdminHome />} />
-      <Route path="leaderboard" element={<LeaderBoard />} />
-      <Route path="getCandidate" element={<GetCandidates />} />
-      <Route path="addQuestions" element={<AddQuestions />} />
-      <Route path="addfeedback" element={<AddFeedback />} />
-      <Route path="getfeedback" element={<GetFeedback />} />
-      <Route exact path="result" element={<TestResult />} />
-    </Routes>
-  );
+  // const ProtectedUserRoutes = () => (
+  //   <Routes>
+  //     {/* <Route exact path="loader" element={<Loader />} /> */}
+
+  //     <Route path="/*" element={<Login />} />
+  //   </Routes>
+  // );
+
+  // const ProtectedAdminRoutes = () => (
+  //   <Routes>
+
+  //     <Route path="/*" element={<Login />} />
+  //   </Routes>
+  // );
 
   return (
     <FullScreen handle={handle}>
       <BrowserRouter>
         <Routes>
-        <Route
-            path="/*"
-            element={
-              isLoggedIn ? (
-                isAdmin ? (
-                  <ProtectedAdminRoutes />
-                ) : (
-                  <ProtectedUserRoutes />
-                )
-              ) : (
-                <Login 
-                 />
-              )
-            }
-          />
-         
-         
+          <Route path="/*" element={<Login />} />
+          <Route element={<UserRoutes />}>
+            <Route exact path="/instruction" element={<Instruction />} />
+            <Route exact path="/animation" element={<LandingPage />} />
+            <Route exact path="/test" element={<Test />} />
+            <Route exact path="/feedback" element={<Feedback />} />
+            <Route exact path="/result" element={<TestResult />} />
+            <Route exact path="/Thankyou" element={<Thankyou />} />
+          </Route>
+          <Route element={<AdminRoutes />}>
+            <Route exact path="/admin" element={<AdminHome />} />
+            <Route exact path="/leaderboard" element={<LeaderBoard />} />
+            <Route exact path="/getCandidate" element={<GetCandidates />} />
+            <Route exact path="/addQuestions" element={<AddQuestions />} />
+            <Route exact path="/addfeedback" element={<AddFeedback />} />
+            <Route exact path="/getfeedback" element={<GetFeedback />} />
+          </Route>
         </Routes>
       </BrowserRouter>
-     </FullScreen>
+    </FullScreen>
   );
 };
 
