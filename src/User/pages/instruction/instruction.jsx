@@ -51,8 +51,8 @@ const Instruction = () => {
     const id = localStorage.getItem("id");
     axios
       .get(`https://csi-examportal.onrender.com/api/v1/${id}/${Language}`)
-      .then(() => {
-        localStorage.setItem("language", Language);
+      .then((res) => {
+        localStorage.setItem("language", res.data.category);
         getLoginTime();
         navigate("/animation");
       })

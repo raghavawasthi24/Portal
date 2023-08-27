@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { quesCtgSel } from "../../../store/slices/QuestionsSlice";
 import { moveQues } from "../../../store/slices/QuestionsSlice";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const QuesTab = () => {
   const optionalCategory = localStorage.getItem("language");
@@ -16,6 +18,17 @@ const QuesTab = () => {
 
   useEffect(() => {
     const optionalCategory = localStorage.getItem("language");
+    const id = localStorage.getItem("id");
+    if (!optionalCategory) {
+      axios
+        .get(`https://csi-examportal.onrender.com/api/v1/${id}`)
+        .then(() => {
+          localStorage.setItem("language", Language);
+        })
+        .catch(() => {
+          toast.error("Something went wrong");
+        });
+    }
     setQuesType(["HTML", "CSS", "JavaScript", "Aptitude", optionalCategory]);
   }, [optionalCategory]);
 
