@@ -7,6 +7,7 @@ import FeedbackQues from "../../components/Feedback/FeedbackQues";
 import "./Feedback.css";
 import axios from "axios";
 import Loader from "../../../Loader/Loader";
+import Cookies from "js-cookie";
 
 const Feedback = () => {
   const [apiData, setApiData] = useState([]);
@@ -16,6 +17,13 @@ const Feedback = () => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const check = Cookies.get("spage3");
+    if (!check || check == "false") {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
     axios
@@ -72,6 +80,8 @@ const Feedback = () => {
         answers: uniqueAnswers,
       })
       .then(() => {
+        Cookies.set("spage4", true);
+        Cookies.remove("spage3");
         navigate("/thankyou");
       });
   };

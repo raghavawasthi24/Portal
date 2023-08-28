@@ -9,8 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 
-export let isLoggedin=false;
-export let isAdmin=false;
+export let isLoggedin = false;
+export let isAdmin = false;
 
 const Login = ({ handleLogin }) => {
   // const handleUserAdmin = (userType) => {
@@ -19,6 +19,14 @@ const Login = ({ handleLogin }) => {
   // const handleUserLogin=(login)=>{
   //   handleLogin(login);
   // }
+
+  useEffect(() => {
+    Cookies.remove("spage1");
+    Cookies.remove("spage2");
+    Cookies.remove("spage3");
+    Cookies.remove("spage4");
+  }, []);
+
   const navigate = useNavigate();
   const initialValues = {
     student_no: "",
@@ -51,8 +59,8 @@ const Login = ({ handleLogin }) => {
         console.log(res);
         Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
         // setIsLoggedIn(true);
-        isLoggedin=true;
-        localStorage.setItem("Name", res.data.name);
+        Cookies.set("spage1", true);
+        isLoggedin = true;
         localStorage.setItem("studentNo", res.data.studentNo);
         localStorage.setItem("id", res.data._id);
 

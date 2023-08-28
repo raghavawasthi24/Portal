@@ -19,8 +19,10 @@ import arr from "../../constants/InstructionContent";
 import "./instruction.css";
 import { useNavigate } from "react-router-dom";
 import { getLoginTime } from "../../utils/index";
-import { toast } from "react-toastify";
-import axios from "axios";
+// import { toast } from "react-toastify";
+// import axios from "axios";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 const Instruction = () => {
   const navigate = useNavigate();
@@ -28,6 +30,15 @@ const Instruction = () => {
   const [enabletextfield, setEnabletextfield] = useState(false);
   const [start, setStart] = useState("");
   const [enableSavebtn, setEnableSavebtn] = useState(false);
+
+  useEffect(() => {
+    const check = Cookies.get("spage1");
+    console.log(check);
+    if (!check || check == "false") {
+      console.log(check, "2");
+      navigate("/login");
+    }
+  }, []);
 
   const handleChange = (event) => {
     setLanguage(event.target.value);
@@ -49,19 +60,21 @@ const Instruction = () => {
 
   const handleSave = () => {
     // const id = localStorage.getItem("id");
+    Cookies.set("spage2", true);
+    Cookies.remove("spage1");
     localStorage.setItem("language", Language);
     getLoginTime();
     navigate("/animation");
-    // axios
-    //   .get(`https://csi-examportal.onrender.com/api/v1/${id}/${Language}`)
-    //   .then((res) => {
-    //     console.log(res.data.category);
-    //     // localStorage.setItem("language", res.data.category);
-    //   })
-    //   .catch(() => {
-    //     toast.error("Something went wrong");
-    //   });
+    axios
+      .get(`https://csi-examportal.onrender.com/api/v1/${id}/${Language}`)
+      .then(() => {
+        // toast.success("Test Started");
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      });
   };
+
   return (
     <div className="instructions">
       <Grid container spacing={2} margin={5}>

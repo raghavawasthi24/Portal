@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 const style = {
   position: "absolute",
@@ -25,13 +27,22 @@ export default function BasicModal() {
   const studentNumber = localStorage.getItem("studentNo");
   const nav = useNavigate();
 
+  useEffect(() => {
+    const check = Cookies.get("spage2");
+    if (!check) {
+      nav("/login");
+    }
+  }, []);
+
   const submitHandler = () => {
     //   nav("/feedback");
     axios
       .post(`http://13.48.30.130/accounts/submit/${studentNumber}`)
       .then((res) => {
         console.log(res);
-        nav("/result");
+        Cookies.set("spage3", true);
+        Cookies.remove("spage2");
+        nav("/feedback");
       })
       .catch((err) => {
         console.log(err);
