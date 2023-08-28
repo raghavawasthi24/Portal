@@ -10,10 +10,18 @@ import Paper from "@mui/material/Paper";
 import ArrowCircleUpRoundedIcon from "@mui/icons-material/ArrowCircleUpRounded";
 import { useNavigate } from "react-router-dom";
 import Tabtable from "./Tabtable";
+import Cookies from "js-cookie";
+import updateCookies from "../../utils/updateCookies";
 
 const LeaderBoard = () => {
   const [students, setStudents] = useState([]);
   const navigate = useNavigate();
+  useEffect(() => {
+    const check = Cookies.get("apage4");
+    if (!check) {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
     // const socket = io("https://csi-examportal.onrender.com");
@@ -43,7 +51,9 @@ const LeaderBoard = () => {
             rotate: "270deg",
             color: "rgba(84, 59, 160, 1)",
           }}
-          onClick={() => navigate("/admin")}
+          onClick={() => {
+            updateCookies(1), navigate("/admin");
+          }}
         />
       </div>
       <div className="p-4 mt-5">

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
+import { deleteCookies } from "../../../Admin/utils/updateCookies";
 
 export let isLoggedin = false;
 export let isAdmin = false;
@@ -21,10 +22,7 @@ const Login = ({ handleLogin }) => {
   // }
 
   useEffect(() => {
-    Cookies.remove("spage1");
-    Cookies.remove("spage2");
-    Cookies.remove("spage3");
-    Cookies.remove("spage4");
+    deleteCookies();
   }, []);
 
   const navigate = useNavigate();
@@ -59,7 +57,6 @@ const Login = ({ handleLogin }) => {
         console.log(res);
         Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
         // setIsLoggedIn(true);
-        Cookies.set("spage1", true);
         isLoggedin = true;
         localStorage.setItem("studentNo", res.data.studentNo);
         localStorage.setItem("id", res.data._id);
@@ -68,12 +65,16 @@ const Login = ({ handleLogin }) => {
           // handleUserAdmin(true)
           // setIsAdmin(true)
           Cookies.set("isAdmin", true);
+          Cookies.set("apage1", true);
           navigate("/admin");
         } else if (res.data.isRelogin === true) {
+          Cookies.set("spage2", true);
           navigate("/test");
         } else if (res.data.isSubmit === true) {
+          Cookies.set("spage4", true);
           navigate("/Thankyou");
         } else {
+          Cookies.set("spage1", true);
           navigate("/instruction");
         }
       })
