@@ -48,17 +48,19 @@ const Instruction = () => {
   };
 
   const handleSave = () => {
-    const id = localStorage.getItem("id");
-    axios
-      .get(`https://csi-examportal.onrender.com/api/v1/${id}/${Language}`)
-      .then((res) => {
-        localStorage.setItem("language", res.data.category);
-        getLoginTime();
-        navigate("/animation");
-      })
-      .catch(() => {
-        toast.error("Something went wrong");
-      });
+    // const id = localStorage.getItem("id");
+    localStorage.setItem("language", Language);
+    getLoginTime();
+    navigate("/animation");
+    // axios
+    //   .get(`https://csi-examportal.onrender.com/api/v1/${id}/${Language}`)
+    //   .then((res) => {
+    //     console.log(res.data.category);
+    //     // localStorage.setItem("language", res.data.category);
+    //   })
+    //   .catch(() => {
+    //     toast.error("Something went wrong");
+    //   });
   };
   return (
     <div className="instructions">
