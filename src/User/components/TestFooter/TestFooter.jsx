@@ -23,7 +23,7 @@ const TestFooter = () => {
 
   useEffect(() => {
     const question = currentCategoryQuestions.find(
-      (item) => item.id === currentQuestion.quesId
+      (item) => item.id === currentQuestion?.quesId
     );
 
     if (question) {
@@ -56,7 +56,7 @@ const TestFooter = () => {
     setReviewHandler(false);
     SubmitAnswer({
       status: 0,
-      quesId: quesData.initialQues[quesData.initialQuesNo - 1].quesId,
+      quesId: quesData.initialQues[quesData.initialQuesNo - 1]?.quesId,
       ansId: currentAnsId,
       category: category,
     });
@@ -71,7 +71,7 @@ const TestFooter = () => {
 
     SubmitAnswer({
       status: 1,
-      quesId: quesData.initialQues[quesData.initialQuesNo - 1].quesId,
+      quesId: quesData.initialQues[quesData.initialQuesNo - 1]?.quesId,
       ansId: currentAnsId,
       category: currentQuestion.category,
     });
