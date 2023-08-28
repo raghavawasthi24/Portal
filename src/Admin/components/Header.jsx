@@ -4,8 +4,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import updateCookies from "../utils/updateCookies";
+import updateCookies, { deleteCookies } from "../utils/updateCookies";
 
 const Header = () => {
   const [addTarget, setaddTarget] = React.useState(null);
@@ -137,7 +136,7 @@ const Header = () => {
           <Button
             variant="contained"
             onClick={() => {
-              updateCookies(), navigate("/");
+              deleteCookies(), navigate("/");
             }}
           >
             Logout
