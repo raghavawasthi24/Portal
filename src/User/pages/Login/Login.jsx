@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
 import LoginGif from "../../assets/Coding workshop (1).gif";
-import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  Paper,
+  TextField,
+} from "@mui/material";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +30,7 @@ const Login = ({ handleLogin }) => {
   // const handleUserLogin=(login)=>{
   //   handleLogin(login);
   // }
-  const [showPassword, setShowPassword] =useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -111,8 +120,8 @@ const Login = ({ handleLogin }) => {
               <TextField
                 label="Enter Your Student Number"
                 variant="outlined"
-                className="login_field"
                 name="student_no"
+                sx={{width:"20rem"}}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.student_no}
@@ -128,35 +137,45 @@ const Login = ({ handleLogin }) => {
               ) : null}
             </div>
             <div className="input_field">
-           <FormControl sx={{  borderRadius: "8px",borderLeft: "4px solid #543BA0",width:"23rem"}} variant="outlined" >
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            name="password"
-            type={showPassword ? 'text' : 'password'}
-            onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.password}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                 
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-          />
-          </FormControl>
-          {formik.touched.password && formik.errors.password ? (
+              <FormControl
+                sx={{
+                  borderRadius: "8px",
+                  borderLeft: "4px solid #543BA0",
+                  width:"20rem"
+                }}
+                className="login_field"
+                variant="outlined"
+              >
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  name="password"
+                  className="login_field"
+                  type={showPassword ? "text" : "password"}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
+              {formik.touched.password && formik.errors.password ? (
                 <p className="error">{formik.errors.password}</p>
               ) : null}
-          </div>
+            </div>
             {/* <div className="input_field">
               <TextField
                 label="Enter Your Password"
@@ -178,7 +197,7 @@ const Login = ({ handleLogin }) => {
                 <p className="error">{formik.errors.password}</p>
               ) : null}
             </div> */}
-            
+
             <Button
               variant="contained"
               className="login_btn"
