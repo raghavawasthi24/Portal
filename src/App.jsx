@@ -17,7 +17,6 @@ import LandingPage from "./User/pages/LandingPage/LandingPage";
 import TestResult from "./User/pages/TestResult/TestResult";
 import UserRoutes from "./User/utils/UserRoutes";
 import AdminRoutes from "./User/utils/AdminRoutes";
-
 const App = () => {
   useEffect(() => handle.enter, []);
   const handle = useFullScreenHandle();
