@@ -1,13 +1,14 @@
 import React from "react";
 import "./Login.css";
 import LoginGif from "../../assets/Coding workshop (1).gif";
-import { Button, Paper, TextField } from "@mui/material";
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
   import Cookies from "js-cookie";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
   
 const Login = ({handleLogin}) => {
   // const handleUserAdmin = (userType) => {
@@ -16,6 +17,13 @@ const Login = ({handleLogin}) => {
   // const handleUserLogin=(login)=>{
   //   handleLogin(login);
   // }
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const navigate=useNavigate();
 const initialValues = {
   student_no: "",
@@ -104,10 +112,9 @@ axios.post("http://13.48.30.130/accounts/login/",values)
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.student_no}
-                
                 InputProps={{
                   style: {
-                    borderRadius: "8px",
+                    borderRadius: "8px 4px 4px 8px",
                     borderLeft: "4px solid #543BA0",
                   },
                 }}
@@ -117,6 +124,36 @@ axios.post("http://13.48.30.130/accounts/login/",values)
               ) : null}
             </div>
             <div className="input_field">
+           <FormControl sx={{  borderRadius: "8px",borderLeft: "4px solid #543BA0",width:"23rem"}} variant="outlined" >
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            name="password"
+            type={showPassword ? 'text' : 'password'}
+            onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.password}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                 
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+          </FormControl>
+          {formik.touched.password && formik.errors.password ? (
+                <p className="error">{formik.errors.password}</p>
+              ) : null}
+          </div>
+            {/* <div className="input_field">
               <TextField
                 label="Enter Your Password"
                 name="password"
@@ -137,7 +174,8 @@ axios.post("http://13.48.30.130/accounts/login/",values)
               {formik.touched.password && formik.errors.password ? (
                 <p className="error">{formik.errors.password}</p>
               ) : null}
-            </div>
+            </div> */}
+            
             <Button
               variant="contained"
               className="login_btn"

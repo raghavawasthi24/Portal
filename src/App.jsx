@@ -16,6 +16,7 @@ import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
 import LandingPage from "./User/pages/LandingPage/LandingPage";
 import Loader from "./Loader/Loader";
 import TestResult from "./User/pages/TestResult/TestResult";
+import Cookies from "js-cookie";
 
 const App = () => {
   useEffect(() => handle.enter, []);
