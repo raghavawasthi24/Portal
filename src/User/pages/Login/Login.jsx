@@ -1,92 +1,96 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import LoginGif from "../../assets/Coding workshop (1).gif";
 import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
-  import Cookies from "js-cookie";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-  
-const Login = ({handleLogin}) => {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
+import { deleteCookies } from "../../../Admin/utils/updateCookies";
+
+export let isLoggedin = false;
+export let isAdmin = false;
+
+const Login = ({ handleLogin }) => {
   // const handleUserAdmin = (userType) => {
   //   handleAdmin(userType);
   // };
   // const handleUserLogin=(login)=>{
   //   handleLogin(login);
   // }
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] =useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const navigate=useNavigate();
-const initialValues = {
-  student_no: "",
-  password: "",
-};
-const validate = (values) => {
-  let errors = {};
-  if (!values.student_no) {
-    errors.student_no = "Please Enter Student Number";
-  } else if (!/^22([0-9]{5,6})$/i.test(values.student_no)) {
-    errors.student_no = "Enter Correct Student Number";
-  }
-  // else {
-  //   errors.student_no=''
-  // }
+  useEffect(() => {
+    deleteCookies();
+  }, []);
 
-  if (!values.password) {
-    errors.password = "Please Enter Password";
-  } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/i.test(values.password)) {
-    errors.password =
-      "Invalid Password";
-  }
-  // else {
-  //   errors.password=''
-  // }
-  return errors;
-};
-const onSubmit = (values) => {
-  console.log(values);
-axios.post("http://13.48.30.130/accounts/login/",values)
-.then((res)=>{
-  console.log(res)
-  Cookies.set("isLoggedIn",true); // Set isLoggedIn cookie
-  // setIsLoggedIn(true);
-  localStorage.setItem("Name",res.data.name)
-  localStorage.setItem("studentNo",res.data.studentNo)
-  localStorage.setItem("id",res.data._id)
-  
-  if (res.data.isAdmin===true){
-    // handleUserAdmin(true)
-    // setIsAdmin(true)
-    Cookies.set("isAdmin",true);
-    navigate('/admin')
-  }
-  else if (res.data.isRelogin===true){
-    navigate('/test')
+  const navigate = useNavigate();
+  const initialValues = {
+    student_no: "",
+    password: "",
+  };
+  const validate = (values) => {
+    let errors = {};
+    if (!values.student_no) {
+      errors.student_no = "Please Enter Student Number";
+    } else if (!/^22([0-9]{5,6})$/i.test(values.student_no)) {
+      errors.student_no = "Enter Correct Student Number";
+    }
+    if (!values.password) {
+      errors.password = "Please Enter Password";
+    } else if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/i.test(
+        values.password
+      )
+    ) {
+      errors.password = "Invalid Password";
+    }
 
-  }
-  else if (res.data.isSubmit===true){
-    navigate('/Thankyou')
-  }
-  else{
-    navigate('/instruction')
-  }
-  
-}).catch((err)=>{
-  console.log(err)
-  toast.error('Invalid Student No or Password');
-})
-};
-  const formik = useFormik({ initialValues,
-    validate 
-    , onSubmit });
+    return errors;
+  };
+  const onSubmit = (values) => {
+    console.log(values);
+    axios
+      .post("http://13.48.30.130/accounts/login/", values)
+      .then((res) => {
+        console.log(res);
+        Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
+        // setIsLoggedIn(true);
+        isLoggedin = true;
+        localStorage.setItem("studentNo", res.data.studentNo);
+        localStorage.setItem("id", res.data._id);
+
+        if (res.data.isAdmin === true) {
+          // handleUserAdmin(true)
+          // setIsAdmin(true)
+          Cookies.set("isAdmin", true);
+          Cookies.set("apage1", true);
+          navigate("/admin");
+        } else if (res.data.isRelogin === true) {
+          Cookies.set("spage2", true);
+          navigate("/test");
+        } else if (res.data.isSubmit === true) {
+          Cookies.set("spage4", true);
+          navigate("/Thankyou");
+        } else {
+          Cookies.set("spage1", true);
+          navigate("/instruction");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Invalid Student No or Password");
+      });
+  };
+  const formik = useFormik({ initialValues, validate, onSubmit });
   // console.log('form data',formik.values)
   // console.log('form errors',formik.errors)
   // console.log("Visited fields", formik.touched);
@@ -100,7 +104,7 @@ axios.post("http://13.48.30.130/accounts/login/",values)
         className="loginLogo"
       />
       <div className="login">
-        <form className="formSection" onSubmit={formik.handleSubmit} >
+        <form className="formSection" onSubmit={formik.handleSubmit}>
           <div elevation={3} className="login_form">
             <h3 className="login_form_header">CINE-2023</h3>
             <div className="input_field">
@@ -163,7 +167,6 @@ axios.post("http://13.48.30.130/accounts/login/",values)
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.password}
-        
                 InputProps={{
                   style: {
                     borderRadius: "8px",
@@ -180,8 +183,11 @@ axios.post("http://13.48.30.130/accounts/login/",values)
               variant="contained"
               className="login_btn"
               type="submit"
-              sx={{ backgroundColor: "#543BA0" ,"&:hover":{backgroundColor:"#543BA0"}, margin:"2rem 0"}}
-              
+              sx={{
+                backgroundColor: "#543BA0",
+                "&:hover": { backgroundColor: "#543BA0" },
+                margin: "2rem 0",
+              }}
             >
               LOGIN
             </Button>

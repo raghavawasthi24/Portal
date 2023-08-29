@@ -4,8 +4,19 @@ import axios from "axios";
 import "./AddCandidates.css";
 import Header from "../../../components/Header";
 import { Button } from "@mui/material";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddCandidates = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const check = Cookies.get("apage6");
+    if (!check) {
+      navigate("/login");
+    }
+  }, []);
   const initial = {
     name: "",
     email: "",
@@ -22,8 +33,25 @@ const AddCandidates = () => {
     { label: "Branch", name: "branch", value: formvalues.branch },
     { label: "Student Number", name: "studentNo", value: formvalues.studentNo },
     { label: "Mobile Number", name: "mobileNo", value: formvalues.mobileNo },
-    { label: "Is Hosteler", name: "isHosteler", value: formvalues.isHosteler,options:[{name:"True",value:"true"},{name:"False",value:"false"}] },
-    { label: "Gender", name: "gender", value: formvalues.gender,options:[{name:"Male",value:"male"},{name:"Female",value:"female"},{name:"Others",value:"others"}]  },
+    {
+      label: "Is Hosteler",
+      name: "isHosteler",
+      value: formvalues.isHosteler,
+      options: [
+        { name: "True", value: "true" },
+        { name: "False", value: "false" },
+      ],
+    },
+    {
+      label: "Gender",
+      name: "gender",
+      value: formvalues.gender,
+      options: [
+        { name: "Male", value: "male" },
+        { name: "Female", value: "female" },
+        { name: "Others", value: "others" },
+      ],
+    },
   ];
 
   const inputHandler = (e) => {
@@ -52,25 +80,42 @@ const AddCandidates = () => {
             return (
               <div className="flex m-2">
                 <label className="w-40">{item.label}</label>
-                {
-                    item.name==="gender" || item.name==="isHosteler"?<select style={{ width: "20rem", border: "1px solid #1976d2", outline:"none",padding:"2px",borderRadius:"5px",textIndent:"5px"}}>
-                        {
-                            item.options.map((opt)=>{
-                                return(<option value={opt.value} >{opt.name}</option>)
-                            })
-                        }
-                    </select>:<input
+                {item.name === "gender" || item.name === "isHosteler" ? (
+                  <select
+                    style={{
+                      width: "20rem",
+                      border: "1px solid #1976d2",
+                      outline: "none",
+                      padding: "2px",
+                      borderRadius: "5px",
+                      textIndent: "5px",
+                    }}
+                  >
+                    {item.options.map((opt) => {
+                      return <option value={opt.value}>{opt.name}</option>;
+                    })}
+                  </select>
+                ) : (
+                  <input
                     name={item.name}
                     value={item.value}
                     onChange={inputHandler}
-                    style={{ width: "20rem", border: "1px solid #1976d2", outline:"none",padding:"2px",borderRadius:"5px",textIndent:"5px"}}
+                    style={{
+                      width: "20rem",
+                      border: "1px solid #1976d2",
+                      outline: "none",
+                      padding: "2px",
+                      borderRadius: "5px",
+                      textIndent: "5px",
+                    }}
                   />
-                }
-                
+                )}
               </div>
             );
           })}
-          <Button variant="contained" type="submit" sx={{margin:"0.5rem"}}>Submit</Button>
+          <Button variant="contained" type="submit" sx={{ margin: "0.5rem" }}>
+            Submit
+          </Button>
         </form>
       </div>
     </div>

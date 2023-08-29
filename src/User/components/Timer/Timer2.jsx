@@ -3,6 +3,7 @@ import { Typography, Grid } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getLoginTime } from "../../utils/index";
+import Cookies from "js-cookie";
 
 const Timer = () => {
   const [timeRemaining, setTimeRemaining] = useState(0); // Total time remaining in seconds
@@ -34,6 +35,8 @@ const Timer = () => {
           .post(`http://13.48.30.130/accounts/submit/${studentNumber}`)
           .then((res) => {
             console.log(res);
+            Cookies.set("spage3", true);
+            Cookies.remove("spage2");
             nav("/feedback");
           })
           .catch((err) => {

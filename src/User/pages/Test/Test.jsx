@@ -11,10 +11,20 @@ import { quesList } from "../../../store/slices/QuestionsSlice";
 import BasicModal from "./components/PopUp";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "../../../Loader/Loader";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Test = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const check = Cookies.get("spage2");
+    if (!check || check == "false") {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
     axios

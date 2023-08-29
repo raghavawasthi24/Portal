@@ -47,6 +47,10 @@ const QuestionsSlice = createSlice({
       if (state.initialQuesNo == action.payload.length) {
         state.initialQuesNo = 1;
       } else state.initialQuesNo++;
+
+      // if last ques then go to next category
+      // const optionalCategory = localStorage.getItem("Language");
+      //state.quesCategory === "HTML" ? state.quesCategory = "CSS" : state.quesCategory = "CSS"? state.quesCategory = "SQL" : state.quesCategory = "SQL"? state.quesCategory = "Aptitude" : state.quesCategory = "Aptitude"? state.quesCategory = optionalCategory : "";
     },
     moveQues: (state, action) => {
       state.initialQuesNo = action.payload;
@@ -64,5 +68,5 @@ export const {
   setAnsId,
   prevQues,
   nextQues,
-  moveQues
+  moveQues,
 } = QuestionsSlice.actions;

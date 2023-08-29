@@ -1,8 +1,18 @@
 import { Container, Box } from "@mui/material";
 
 import "./Thankyou.css";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Thankyou = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const check = Cookies.get("spage4");
+    if (!check || check == "false") {
+      navigate("/login");
+    }
+  }, []);
   return (
     <div className="ThankMain">
       <Box className="ThankImg">
