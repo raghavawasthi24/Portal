@@ -19,8 +19,8 @@ import arr from "../../constants/InstructionContent";
 import "./instruction.css";
 import { useNavigate } from "react-router-dom";
 import { getLoginTime } from "../../utils/index";
-// import { toast } from "react-toastify";
-// import axios from "axios";
+import { toast } from "react-toastify";
+import axios from "axios";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 
