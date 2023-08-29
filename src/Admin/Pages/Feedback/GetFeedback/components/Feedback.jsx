@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {useSelector} from "react-redux";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-// import EditQuestion from './EditFeedback';
+import EditQuestion from './EditFeedback';
 import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import EditFeedback from './EditFeedback';
@@ -26,38 +26,19 @@ const Feedback = () => {
         })
         
     },[])
-    // const delFeedback=(id)=>{
-    //     axios.delete(`http://13.48.30.130/feedback/delete-f-question/${id}`)
-    //     .then((res)=>{
-    //         console.log(res)
-    //         toast.success("Question deleted successfully")
-    //         axios.get("http://13.48.30.130/feedback/get-f-question/")
-    //     .then((res)=>{
-    //         console.log(res)
-    //         // dispatch(feedbacklist(res.data))
-    //     })
-    //         // dispatch(feedbacklist(res.data))
-    //     })
-    // }
-    // const feedvalue = useSelector(state => state.feedback)
-    // const data = useSelector(state => state.prevNext)
-    // const feedbackList=useSelector(state => state.feedback)
-    // // const questionDisplay= useSelector(state=>state.quesList)
-    // const showEdit= useSelector(state=>state.editShow)
-    // const dispatch=useDispatch();
 
   return (
-    <div className='flex flex-col'>
+    <div className='w-[90%] h-3/4 flex flex-col overflow-y-scroll'>
         {
            feedbackList?.map((response,index)=>{
             return (
-                <div className='border'>
-                    <p>Student No. <span>{response.studentNo}</span></p>
+                <div className='border p-5'>
+                    <p className='font-400'>Student No : <span className='text-green-500'>{response.studentNo}</span></p>
                                 {
                     response.responses?.map((item,index)=>{
                         return(
-                            <div>
-                                <p>{item.question_text}</p>
+                            <div className='flex'>
+                                <p className='mr-2 font-bold'>{item.question_text}</p>
                                 <p>{item.answer_text}</p>
                             </div>
                         )

@@ -49,7 +49,7 @@ const AddFeedback = () => {
     }
     
   return (
-    <div className='flex flex-col'>
+    <div className='w-2/3 bg-white p-5 flex flex-col mx-auto mt-5'>
       
         <TextField
           id="outlined-multiline-flexible"
