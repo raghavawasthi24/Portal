@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {useSelector} from "react-redux";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-// import EditQuestion from './EditFeedback';
+import EditQuestion from './EditFeedback';
 import { useDispatch } from 'react-redux';
 import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 import EditFeedback from './EditFeedback';
