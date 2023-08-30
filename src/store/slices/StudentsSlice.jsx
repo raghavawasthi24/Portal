@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   initialValue: [],
+  currentStudent: [],
 };
 
-  let f=initialState.initialValue;
+let f = initialState.initialValue;
 
 const StudentSlice = createSlice({
   name: "searchStudent",
@@ -20,9 +21,22 @@ const StudentSlice = createSlice({
       state.initialValue = state.initialValue.filter((student) =>
         student.name.toLowerCase().includes(action.payload.toLowerCase())
       );
+      console.log(state.initialValue);
+      if (state.initialValue == "") {
+        console.log("nnnn");
+        state.initialValue = f;
+        console.log(state.initialValue);
+        state.initialValue = state.initialValue.filter(
+          (student) => student.studentNo == action.payload
+        );
+      }
     },
     categoryStudent: (state, action) => {
       // console.log(action.payload.gender,action.payload.isHosteler)
+      if (action.payload.category == "All") {
+        state.initialValue = f;
+      }
+      else{
       state.initialValue = f;
       state.initialValue = state.initialValue.filter((student) =>
         student.gender.includes(action.payload.gender)
@@ -30,10 +44,16 @@ const StudentSlice = createSlice({
       state.initialValue = state.initialValue.filter(
         (student) => student.isHosteler.toString() == action.payload.isHosteler
       );
+      }
     },
+  },
+  findStudent: (state, action) => {
+    state.currentStudent = state.initialValue.filter(
+      (student) => student.studentNo == action.payload
+    );
   },
 });
 
 export default StudentSlice.reducer;
-export const { searchStudent, categoryStudent, studentList } =
+export const { searchStudent, categoryStudent, studentList, findStudent } =
   StudentSlice.actions;

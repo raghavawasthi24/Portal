@@ -8,6 +8,10 @@ import { categoryStudent } from "../../../../../store/slices/StudentsSlice";
 const Buttons = () => {
   const candidateBtn = [
     {
+      category:"All",
+     
+    },
+    {
       category:"Boy",
       gender:"Male",
       hosteler:"Hosteler",

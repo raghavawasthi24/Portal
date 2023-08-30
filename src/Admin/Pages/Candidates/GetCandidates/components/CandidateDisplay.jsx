@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import { studentList } from "../../../../../store/slices/StudentsSlice";
@@ -38,6 +39,7 @@ const CandidateDisplay=()=>{
               <TableRow sx={{ backgroundColor: "rgba(222, 234, 254, 0.5)" }}>
                 <TableCell>Student Name</TableCell>
                 <TableCell>Student Number</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -45,6 +47,9 @@ const CandidateDisplay=()=>{
                 <TableRow key={index}sx={{ backgroundColor: "rgb(255, 255, 255)" }}>
                   <TableCell>{student.name}</TableCell>
                   <TableCell>{student.studentNo}</TableCell>
+                  <TableCell>
+                    <Button size="small">Get Details</Button>
+                  </TableCell>
                 </TableRow>
               ))}
               
