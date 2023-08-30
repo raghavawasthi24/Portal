@@ -11,24 +11,56 @@ import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
+import EditFeedback from "./components/EditFeedback";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleEditOpt } from "../../../../store/slices/EditContSlice";
 
 const AddFeedback = () => {
   const navigate = useNavigate();
   const [feedQues, setFeedQues] = useState([]);
   const [open, setOpen] = useState(false);
+  const [editable,setEditable]=useState({});
+  // const [edit,setEdit]=useState(false)
+
+  const edit = useSelector(state=>state.editShow.initialValue)
+  const dispatch =useDispatch();
 
   useEffect(() => {
     const check = Cookies.get("apage7");
     if (!check) {
       navigate("/login");
     }
+  
     axios.get("http://13.48.30.130/feedback/get-f-question/").then((res) => {
       console.log(res.data);
       setFeedQues(res.data);
     });
   }, []);
+
+  const editQuestion=(id,question,type)=>{
+     setEditable({
+      "id":id,
+      "question":question,
+      "type":type
+     })
+    dispatch(toggleEditOpt());
+
+  }
+  const delFeedback=(id)=>{
+    axios.delete(`http://13.48.30.130/feedback/delete-f-question/${id}`)
+    .then((res)=>{
+        console.log(res)
+        // toast.success("Question deleted successfully")
+        axios.get("http://13.48.30.130/feedback/get-f-question/")
+    .then((res)=>{
+        console.log(res)
+        setFeedQues(res.data);
+    })
+        // dispatch(feedbacklist(res.data))
+    })
+}
   return (
-    <div>
+    <div className="">
       <Header />
       <div className="w-[90%] mx-auto" style={{ marginTop: "7rem" }}>
         <div className="grid grid-cols-3 gap-10">
@@ -40,8 +72,9 @@ const AddFeedback = () => {
                   <div>
                     <ModeEditOutlinedIcon
                       sx={{ color: "grey", marginRight: "5px" }}
+                      onClick={e=>{editQuestion(val.id,val.question_text, val.question_type)}}
                     />
-                    <DeleteOutlineOutlinedIcon sx={{ color: "#f95959" }} />
+                    <DeleteOutlineOutlinedIcon sx={{ color: "#f95959" }} onClick={e=>{delFeedback(val.id)}}/>
                   </div>
                 </div>
                 <hr className="my-1" />
@@ -52,9 +85,13 @@ const AddFeedback = () => {
           })}
         </div>
 
-        <div style={{ display: open ? "block" : "none", width:"100%",position:"absolute",top:"0",overflow:"hidden"}}>
+        <div style={{ display: open ? "block" : "none"}}>
           <Feedback />
         </div>
+        <div  style={{ display: edit ? "block" : "none"}}>
+          <EditFeedback feedQues={editable}/>
+        </div>
+
         <div
           style={{ display: open ? "block" : "none" }}
           onClick={(e) => {
