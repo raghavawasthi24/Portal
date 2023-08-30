@@ -46,12 +46,13 @@ const StudentSlice = createSlice({
       );
       }
     },
+    findStudent: (state, action) => {
+      state.currentStudent = state.initialValue.filter(
+        student => student.studentNo == action.payload
+      );
+    },
   },
-  findStudent: (state, action) => {
-    state.currentStudent = state.initialValue.filter(
-      (student) => student.studentNo == action.payload
-    );
-  },
+  
 });
 
 export default StudentSlice.reducer;

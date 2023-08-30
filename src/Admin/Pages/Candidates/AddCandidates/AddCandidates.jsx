@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import "./AddCandidates.css";
+// import "./AddCandidates.css";
 import Header from "../../../components/Header";
 import { Button } from "@mui/material";
 import Cookies from "js-cookie";
