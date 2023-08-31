@@ -77,8 +77,33 @@ const ReviewSlice = createSlice({
         }
       }
     },
+    setStatus(state, action) {
+      const questions = action.payload;
+      questions.forEach((question) => {
+        const category = state.categories.find(
+          (cat) => cat.category === question.category
+        );
+        if (category) {
+          const ques = category.questions.find(
+            (ques) => ques.id === question.quesId
+          );
+          if (ques) {
+            ques.ansId = question.ansId;
+            ques.review = question.review;
+            ques.visited = question.visited;
+          } else {
+            category.questions.push({
+              id: question.quesId,
+              ansId: question.ansId,
+              review: question.review,
+              visited: question.visited,
+            });
+          }
+        }
+      });
+    },
   },
 });
 
-export const { markAnsId, markReview } = ReviewSlice.actions;
+export const { markAnsId, markReview, setStatus } = ReviewSlice.actions;
 export default ReviewSlice.reducer;

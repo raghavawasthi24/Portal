@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { nextQues } from "../../../store/slices/QuestionsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import { markReview } from "../../../store/slices/ReviewSlice";
+import { markReview, setStatus } from "../../../store/slices/ReviewSlice";
 import SubmitAnswer from "../../utils/SubmitAns";
 
 const TestFooter = () => {
@@ -59,7 +59,15 @@ const TestFooter = () => {
       quesId: quesData.initialQues[quesData.initialQuesNo - 1]?.quesId,
       ansId: currentAnsId,
       category: category,
-    });
+    })
+      .then((responseData) => {
+        // Dispatch the response data to Redux using dispatch
+        dispatch(setStatus(responseData)); // Replace with your actual Redux action
+      })
+      .catch((error) => {
+        // Handle error if needed
+        console.error("Error submitting answer:", error);
+      });
     dispatch(nextQues(quesData.initialQuesNo - 1));
   };
 
