@@ -1,13 +1,12 @@
 import axios from "axios";
 
-const SubmitAnswer = ({ status, quesId, ansId, category }) => {
+const SubmitAnswer = ({ status, quesId, ansId }) => {
   const id = localStorage.getItem("id");
   const submitData = {
     quesId: quesId,
     status: status,
     ansId: ansId,
   };
-
   return axios
     .get(
       `https://csi-examportal.onrender.com/api/v1/postResponse/${id}?ansId=${ansId}&quesId=${quesId}&status=${status}`,

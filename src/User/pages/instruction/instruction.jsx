@@ -59,7 +59,7 @@ const Instruction = () => {
   };
 
   const handleSave = () => {
-    // const id = localStorage.getItem("id");
+    const id = localStorage.getItem("id");
     Cookies.set("spage2", true);
     Cookies.remove("spage1");
     localStorage.setItem("language", Language);

@@ -4,6 +4,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const optionalCategory = localStorage.getItem("language");
 
+const reviewAndVisitedHandler = (status, question) => {
+  status === 3 || status === -2
+    ? ((question.review = true), (question.visited = true))
+    : status === -1 || status === 2
+    ? ((question.review = false), (question.visited = true))
+    : ((question.review = false), (question.visited = false));
+};
+
 const initialState = {
   categories: [
     {
@@ -34,28 +42,28 @@ const ReviewSlice = createSlice({
   initialState,
 
   reducers: {
-    markReview: (state, action) => {
-      const { categoryId, questionId, review } = action.payload;
-      const category = state.categories.find(
-        (cat) => cat.category === categoryId
-      );
-      if (category) {
-        const question = category.questions.find(
-          (ques) => ques.id === questionId
-        );
-        if (question) {
-          question.review = review;
-          question.visited = true;
-        } else {
-          category.questions.push({
-            id: questionId,
-            review: review,
-            visited: true,
-            ansId: "",
-          });
-        }
-      }
-    },
+    // markReview: (state, action) => {
+    //   const { categoryId, questionId, review } = action.payload;
+    //   const category = state.categories.find(
+    //     (cat) => cat.category === categoryId
+    //   );
+    //   if (category) {
+    //     const question = category.questions.find(
+    //       (ques) => ques.id === questionId
+    //     );
+    //     if (question) {
+    //       question.review = review;
+    //       question.visited = true;
+    //     } else {
+    //       category.questions.push({
+    //         id: questionId,
+    //         review: review,
+    //         visited: true,
+    //         ansId: "",
+    //       });
+    //     }
+    //   }
+    // },
     markAnsId: (state, action) => {
       const { categoryId, questionId, ansId } = action.payload;
       const category = state.categories.find(
@@ -89,9 +97,11 @@ const ReviewSlice = createSlice({
           );
           if (ques) {
             ques.ansId = question.ansId;
+            reviewAndVisitedHandler(question.ansStatus, question);
             ques.review = question.review;
             ques.visited = question.visited;
           } else {
+            reviewAndVisitedHandler(question.ansStatus, question);
             category.questions.push({
               id: question.quesId,
               ansId: question.ansId,
@@ -105,5 +115,5 @@ const ReviewSlice = createSlice({
   },
 });
 
-export const { markAnsId, markReview, setStatus } = ReviewSlice.actions;
+export const { markAnsId, setStatus } = ReviewSlice.actions;
 export default ReviewSlice.reducer;
