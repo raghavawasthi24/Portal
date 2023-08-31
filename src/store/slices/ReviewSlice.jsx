@@ -42,28 +42,29 @@ const ReviewSlice = createSlice({
   initialState,
 
   reducers: {
-    // markReview: (state, action) => {
-    //   const { categoryId, questionId, review } = action.payload;
-    //   const category = state.categories.find(
-    //     (cat) => cat.category === categoryId
-    //   );
-    //   if (category) {
-    //     const question = category.questions.find(
-    //       (ques) => ques.id === questionId
-    //     );
-    //     if (question) {
-    //       question.review = review;
-    //       question.visited = true;
-    //     } else {
-    //       category.questions.push({
-    //         id: questionId,
-    //         review: review,
-    //         visited: true,
-    //         ansId: "",
-    //       });
-    //     }
-    //   }
-    // },
+    markVisited: (state, action) => {
+      const { categoryId, questionId } = action.payload;
+      console.log(categoryId, questionId, "markVisited");
+      const category = state.categories.find(
+        (cat) => cat.category === categoryId
+      );
+      if (category) {
+        const question = category.questions.find(
+          (ques) => ques.id === questionId
+        );
+        if (question) {
+          question.visited = true;
+          console.log(question.visited, "visited");
+        } else {
+          category.questions.push({
+            id: questionId,
+            review: false,
+            visited: true,
+            ansId: "",
+          });
+        }
+      }
+    },
     markAnsId: (state, action) => {
       const { categoryId, questionId, ansId } = action.payload;
       const category = state.categories.find(
@@ -115,5 +116,5 @@ const ReviewSlice = createSlice({
   },
 });
 
-export const { markAnsId, setStatus } = ReviewSlice.actions;
+export const { markAnsId, setStatus, markVisited } = ReviewSlice.actions;
 export default ReviewSlice.reducer;

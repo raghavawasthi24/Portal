@@ -2,6 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { moveQues } from "../../../store/slices/QuestionsSlice";
+import { markVisited } from "../../../store/slices/ReviewSlice";
 
 const QuesNumbers = () => {
   const quesdata = useSelector((state) => state.quesList);
@@ -18,11 +19,12 @@ const QuesNumbers = () => {
 
     if (question) {
       return {
+        answered: question.ansId !== "",
         visited: question.visited,
         review: question.review,
       };
     } else {
-      return { visited: false, review: false };
+      return { visited: false, review: false, answered: false };
     }
   }
 
@@ -47,7 +49,7 @@ const QuesNumbers = () => {
         }}
       >
         {quesdata.initialQues?.map((ques, id) => {
-          const { visited, review } = findVisitedStatus(
+          const { visited, review, answered } = findVisitedStatus(
             ques.quesId,
             currentCategoryQuestions
           );
@@ -56,10 +58,25 @@ const QuesNumbers = () => {
               <Button
                 color="error"
                 className={
-                  visited ? (review ? "!bg-reviewColor" : "!bg-saveColor") : ""
+                  visited
+                    ? answered
+                      ? review
+                        ? "!bg-reviewColor"
+                        : "!bg-saveColor"
+                      : ""
+                    : "!bg-orange-500"
                 }
                 variant="contained"
-                onClick={() => dispatch(moveQues(id + 1))}
+                onClick={() => {
+                  console.log("ckicked"),
+                    dispatch(
+                      markVisited({
+                        categoryId: ques.category,
+                        questionId: ques.quesId,
+                      })
+                    ),
+                    dispatch(moveQues(id + 1));
+                }}
               >
                 {id + 1}
               </Button>
