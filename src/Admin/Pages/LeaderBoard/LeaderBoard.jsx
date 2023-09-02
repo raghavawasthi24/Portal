@@ -73,13 +73,13 @@ const LeaderBoard = () => {
                 <TableRow>
                   <TableCell sx={{ textAlign: "center" }}>Rank</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
-                    Total Score
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
                     Student Number
                   </TableCell>
                   <TableCell sx={{ textAlign: "center" }}>
                     Student Name
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    Total Score
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -89,9 +89,6 @@ const LeaderBoard = () => {
                     <TableCell sx={{ textAlign: "center" }}>
                       {index + 1}
                     </TableCell>
-                    <TableCell sx={{ textAlign: "center" }}>
-                      {student.calculatedTotalScore}
-                    </TableCell>
                     {/* <TableCell sx={{ textAlign: "center" }}>
                       {student.totalScore}
                     </TableCell> */}
@@ -100,6 +97,9 @@ const LeaderBoard = () => {
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
                       {student.name}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>
+                      {student.calculatedTotalScore}
                     </TableCell>
                   </TableRow>
                 ))}

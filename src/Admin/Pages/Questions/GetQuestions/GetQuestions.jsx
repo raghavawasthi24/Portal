@@ -4,9 +4,26 @@ import QuesControl from "./components/QuesControl";
 import QuesTab from "../../../components/QuesTab";
 import Dropdown from "./components/Dropdown";
 import Header from "../../../components/Header";
+import Loader from "../../../../Loader/Loader"
+import { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const GetQuestions = () => {
+
+  const data = useSelector((state) => state.quesList);
+
+  const [loader,setLoader]=useState(false)
+  useEffect(()=>{
+    if(data.initialQues[0].question==="N/A")
+    setLoader(true)
+  else
+  setLoader(false)
+
+  },[data.initialQues])
+
   return (
+    <>
     <div className="w-screen h-screen flex flex-col justify-evenly">
       <Header />
       <div className="flex px-8 pt-20 w-screen h-screen justify-evenly">
@@ -20,6 +37,10 @@ const GetQuestions = () => {
         </div>
       </div>
     </div>
+    <div className='absolute top-0' style={{marginLeft:"-2rem", display:loader?"":"none"}}>
+        <Loader/>
+    </div>
+    </>
   );
 };
 

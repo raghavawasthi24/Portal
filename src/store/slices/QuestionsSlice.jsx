@@ -52,6 +52,7 @@ const QuestionsSlice = createSlice({
       } else state.initialQuesNo--;
     },
     nextQues: (state, action) => {
+      console.log(action.payload)
       if (state.initialQuesNo == action.payload.length) {
         state.initialQuesNo = 1;
       } else state.initialQuesNo++;

@@ -67,7 +67,7 @@ const TestFooter = () => {
         // Handle error if needed
         console.error("Error submitting answer:", error);
       });
-    dispatch(nextQues(quesData.initialQuesNo - 1));
+    dispatch(nextQues(quesData.initialQues));
   };
 
   const reviewAndNext = () => {
@@ -90,7 +90,7 @@ const TestFooter = () => {
         console.error("Error submitting answer:", error);
       });
     // setReviewHandler(true);
-    dispatch(nextQues(quesData.initialQuesNo - 1));
+    dispatch(nextQues(quesData.initialQues));
   };
 
   return (
