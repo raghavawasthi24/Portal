@@ -24,14 +24,26 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const Feedback = () => {
   const [feedbackList, setFeedbackList] = useState([]);
+  const [localVar, setLocalVar] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios.get("http://13.48.30.130/accounts/feedback-response/").then((res) => {
       console.log(res);
       setFeedbackList(res.data);
-      // dispatch(feedbacklist(res.data))
+      setLocalVar(res.data);
     });
   }, []);
+
+  const inputHandler = (e) => {
+    // console.log(e.target.value, search, feedbackList);
+    setSearch(e.target.value);
+    if (e.target.value == "") setFeedbackList(localVar);
+    else
+      setFeedbackList(
+        localVar.filter((state) => state.studentNo == e.target.value)
+      );
+  };
 
   return (
     <div className="w-[90%] h-[85%]">
@@ -43,6 +55,8 @@ const Feedback = () => {
           sx={{ ml: 1, flex: 1 }}
           placeholder="Enter Student No"
           inputProps={{ "aria-label": "search google maps" }}
+          value={search}
+          onChange={inputHandler}
         />
         <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
           <SearchIcon />
