@@ -14,12 +14,12 @@ import { useState } from 'react';
 const GetQuestions = () => {
     
     useEffect(()=>{
-        setLoader(true)
+        // setLoader(true)
         axios.get("https://csi-examportal.onrender.com/api/v1/getquestions")
         .then((res)=>{
             dispatch(quesList(res.data.msg))
             dispatch(quesCtgSel('HTML'))
-            setLoader(false)
+            // setLoader(false)
         })
         .catch((err)=>{
             console.log(err)
@@ -78,9 +78,9 @@ const GetQuestions = () => {
           
        
     </div>
-    <div className='absolute top-0' style={{marginLeft:"-2rem", display:loader?"":"none"}}>
+    {/* <div className='absolute top-0' style={{marginLeft:"-2rem", display:loader?"":"none"}}>
         <Loader/>
-    </div>
+    </div> */}
     </>
   )
 }
