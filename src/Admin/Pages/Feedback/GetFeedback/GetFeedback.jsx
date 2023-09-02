@@ -18,7 +18,7 @@ const GetFeedback = () => {
   return (
     <div className="w-screen h-screen flex overflow-hidden">
       <Header />
-      <div className="w-full h-screen mt-5 flex justify-center items-center mx-auto overflow-x-hidden">
+      <div className="w-full h-screen mt-14 flex justify-center items-center mx-auto overflow-x-hidden">
         <Feedback />
       </div>
     </div>

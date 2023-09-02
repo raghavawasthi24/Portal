@@ -17,7 +17,10 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { feedbacklist } from "../../../../../store/slices/FeedbackSlice";
-// import { quesList } from '../../../../../store/slices/QuestionsSlice';
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Feedback = () => {
   const [feedbackList, setFeedbackList] = useState([]);
@@ -31,25 +34,41 @@ const Feedback = () => {
   }, []);
 
   return (
-    <div className="w-[90%] h-3/4 flex flex-col overflow-y-scroll">
-      {feedbackList?.map((response, index) => {
-        return (
-          <div className="border p-5">
-            <p className="font-400">
-              Student No :{" "}
-              <span className="text-green-500">{response.studentNo}</span>
-            </p>
-            {response.responses?.map((item, index) => {
-              return (
-                <div className="flex">
-                  <p className="mr-2 font-bold">{item.question_text}</p>
-                  <p>{item.answer_text}</p>
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
+    <div className="w-[90%] h-[85%]">
+      <Paper
+        component="form"
+        sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 300 }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Enter Student No"
+          inputProps={{ "aria-label": "search google maps" }}
+        />
+        <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
+
+      <div className=" h-[85%] flex flex-col overflow-y-scroll border-2 mt-2">
+        {feedbackList?.map((response, index) => {
+          return (
+            <div className="border p-5">
+              <p className="font-400">
+                Student No :{" "}
+                <span className="text-green-500">{response.studentNo}</span>
+              </p>
+              {response.responses?.map((item, index) => {
+                return (
+                  <div className="flex">
+                    <p className="mr-2 font-bold">{item.question_text}</p>
+                    <p>{item.answer_text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
 
       <ToastContainer />
     </div>
