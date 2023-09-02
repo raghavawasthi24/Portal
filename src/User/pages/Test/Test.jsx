@@ -5,7 +5,7 @@ import QuesNumbers from "../../components/QuesNumbers/QuesNumbers";
 import Timer from "../../components/Timer/Timer2";
 import TestFooter from "../../components/TestFooter/TestFooter";
 import TestHeader from "../../components/TestHeader/TestHeader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { quesList } from "../../../store/slices/QuestionsSlice";
 import BasicModal from "./components/PopUp";
@@ -26,9 +26,11 @@ const Test = () => {
     }
   }, []);
 
+  const category = useSelector((state) => state.quesList.quesCategory);
   useEffect(() => {
     axios
-      .get("https://csi-examportal.onrender.com/api/v1/getquestions")
+      // .get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
+      .get(`https://csi-examportal.onrender.com/api/v1/getquestions`)
       .then((res) => {
         // console.log(res)
         dispatch(quesList(res.data.msg));
@@ -39,7 +41,7 @@ const Test = () => {
         setLoading(false);
         toast.error("Something went wrong");
       });
-  }, []);
+  }, [category]);
   return loading ? (
     <Loader />
   ) : (

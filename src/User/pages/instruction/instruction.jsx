@@ -19,8 +19,8 @@ import arr from "../../constants/InstructionContent";
 import "./instruction.css";
 import { useNavigate } from "react-router-dom";
 import { getLoginTime } from "../../utils/index";
-// import { toast } from "react-toastify";
-// import axios from "axios";
+import { toast } from "react-toastify";
+import axios from "axios";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 
@@ -59,7 +59,7 @@ const Instruction = () => {
   };
 
   const handleSave = () => {
-    // const id = localStorage.getItem("id");
+    const id = localStorage.getItem("id");
     Cookies.set("spage2", true);
     Cookies.remove("spage1");
     localStorage.setItem("language", Language);
