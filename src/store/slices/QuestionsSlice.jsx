@@ -52,14 +52,27 @@ const QuestionsSlice = createSlice({
       } else state.initialQuesNo--;
     },
     nextQues: (state, action) => {
-      console.log(action.payload)
       if (state.initialQuesNo == action.payload.length) {
-        state.initialQuesNo = 1;
-      } else state.initialQuesNo++;
+        // if last ques then go to next category
 
-      // if last ques then go to next category
-      // const optionalCategory = localStorage.getItem("Language");
-      //state.quesCategory === "HTML" ? state.quesCategory = "CSS" : state.quesCategory = "CSS"? state.quesCategory = "SQL" : state.quesCategory = "SQL"? state.quesCategory = "Aptitude" : state.quesCategory = "Aptitude"? state.quesCategory = optionalCategory : "";
+        const optionalCategory = localStorage.getItem("language");
+        console.log(state.quesCategory, action.payload.length);
+        switch (state.quesCategory) {
+          case "HTML":
+            state.quesCategory = "CSS";
+            break;
+          case "CSS":
+            state.quesCategory = "JavaScript";
+            break;
+          case "JavaScript":
+            state.quesCategory = "Aptitude";
+            break;
+          case "Aptitude":
+            state.quesCategory = optionalCategory;
+            break;
+        }
+        if (state.quesCategory !== optionalCategory) state.initialQuesNo = 1;
+      } else state.initialQuesNo++;
     },
     moveQues: (state, action) => {
       state.initialQuesNo = action.payload;
