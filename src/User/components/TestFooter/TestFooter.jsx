@@ -77,7 +77,7 @@ const TestFooter = () => {
     }
 
     SubmitAnswer({
-      status: 0,
+      status: 1,
       quesId: quesData.initialQues[quesData.initialQuesNo - 1]?.quesId,
       ansId: currentAnsId,
     })
