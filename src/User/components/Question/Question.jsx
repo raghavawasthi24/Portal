@@ -20,6 +20,7 @@ const Question = () => {
   const quesState = useSelector((state) => state.review.categories);
   const currentCategoryQuestions =
     quesState.find((item) => item.category === category)?.questions || [];
+
   // const defaultAnswerId = quesData.initialQues[data.initialQues - 1]?.ansId;
 
   const [selectedValue, setSelectedValue] = useState("");
@@ -28,10 +29,12 @@ const Question = () => {
   useEffect(() => {
     setQuesName(quesData.initialQues[quesData.initialQuesNo - 1]?.quesId);
     const defaultAnswerId = currentCategoryQuestions.find(
+      // const defaultAnswerId = quesData.initialQues.find(
       (item) => item.id === quesName
     );
     setSelectedValue(defaultAnswerId?.ansId || "");
   }, [data, quesData, currentCategoryQuestions, quesName]);
+  // }, [data, quesData, quesName]);
 
   const handleAns = (e) => {
     const newSelectedValue = e.target.value;

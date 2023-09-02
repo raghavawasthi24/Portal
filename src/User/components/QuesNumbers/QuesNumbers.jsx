@@ -2,6 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { moveQues } from "../../../store/slices/QuestionsSlice";
+// import { markVisited } from "../../../store/slices/ReviewSlice";
 
 const QuesNumbers = () => {
   const quesdata = useSelector((state) => state.quesList);
@@ -18,6 +19,7 @@ const QuesNumbers = () => {
 
     if (question) {
       return {
+        // answered: question.ansId !== "",
         visited: question.visited,
         review: question.review,
       };
@@ -46,9 +48,9 @@ const QuesNumbers = () => {
           height: "32vh",
         }}
       >
-        {quesdata.initialQues?.map((ques, id) => {
+        {quesdata.initialQues.map((ques, id) => {
           const { visited, review } = findVisitedStatus(
-            ques.quesId,
+            ques?.quesId,
             currentCategoryQuestions
           );
           return (
@@ -56,10 +58,25 @@ const QuesNumbers = () => {
               <Button
                 color="error"
                 className={
-                  visited ? (review ? "!bg-reviewColor" : "!bg-saveColor") : ""
+                  visited
+                    ? // ? answered
+                      review
+                      ? "!bg-reviewColor"
+                      : "!bg-saveColor"
+                    : ""
+                  // : ""
                 }
                 variant="contained"
-                onClick={() => dispatch(moveQues(id + 1))}
+                onClick={() => {
+                  // console.log("ckicked"),
+                  // dispatch(
+                  //   markVisited({
+                  //     categoryId: ques.category,
+                  //     questionId: ques.quesId,
+                  //   })
+                  // ),
+                  dispatch(moveQues(id + 1));
+                }}
               >
                 {id + 1}
               </Button>

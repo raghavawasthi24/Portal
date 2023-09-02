@@ -42,8 +42,9 @@ const ReviewSlice = createSlice({
   initialState,
 
   reducers: {
-    // markReview: (state, action) => {
-    //   const { categoryId, questionId, review } = action.payload;
+    // markVisited: (state, action) => {
+    //   const { categoryId, questionId } = action.payload;
+    //   console.log(categoryId, questionId, "markVisited");
     //   const category = state.categories.find(
     //     (cat) => cat.category === categoryId
     //   );
@@ -52,12 +53,12 @@ const ReviewSlice = createSlice({
     //       (ques) => ques.id === questionId
     //     );
     //     if (question) {
-    //       question.review = review;
     //       question.visited = true;
+    //       console.log(question.visited, "visited");
     //     } else {
     //       category.questions.push({
     //         id: questionId,
-    //         review: review,
+    //         review: false,
     //         visited: true,
     //         ansId: "",
     //       });

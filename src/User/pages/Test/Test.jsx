@@ -29,8 +29,8 @@ const Test = () => {
   const category = useSelector((state) => state.quesList.quesCategory);
   useEffect(() => {
     axios
-      // .get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
-      .get(`https://csi-examportal.onrender.com/api/v1/getquestions`)
+      .get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
+      // .get(`https://csi-examportal.onrender.com/api/v1/getquestions`)
       .then((res) => {
         // console.log(res)
         dispatch(quesList(res.data.msg));
