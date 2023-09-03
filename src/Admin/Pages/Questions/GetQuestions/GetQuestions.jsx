@@ -15,10 +15,10 @@ const GetQuestions = () => {
 
   const [loader,setLoader]=useState(false)
   useEffect(()=>{
-    if(data.initialQues[0].question==="N/A")
-    setLoader(true)
-  else
-  setLoader(false)
+    // if(data.initialQues[0].question==="N/A")
+    // setLoader(true)
+  // else
+  // setLoader(false)
 
   },[data.initialQues])
 

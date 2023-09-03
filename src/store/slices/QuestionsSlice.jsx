@@ -20,7 +20,7 @@ const QuestionsSlice = createSlice({
   initialState,
   reducers: {
     quesList: (state, action) => {
-      console.log(action.payload)
+      // console.log(action.payload)
       let newQuestions = action.payload;
       let newUptdatedQuestions = [];
       newQuestions.map((question) => {
@@ -41,9 +41,10 @@ const QuestionsSlice = createSlice({
       state.flag = 1;
     },
     quesCtgSel: (state, action) => {
-      state.initialQues = f.filter(
-        (student) => student.category == action.payload
-      );
+      console.log(action.payload)
+      // state.initialQues = f.filter(
+      //   (student) => student.category == action.payload
+      // );
       state.quesCategory = action.payload;
       // console.log(action.payload)
     },
@@ -75,7 +76,12 @@ const QuestionsSlice = createSlice({
             state.quesCategory = optionalCategory;
             break;
         }
-        console.log(state.quesCategory, "vhanged");
+        console.log(state.quesCategory, "changed");
+      } else state.initialQuesNo++;
+    },
+    nextQuesAdmin:(state,action)=>{
+      if (state.initialQuesNo == action.payload.length) {
+        state.initialQuesNo = 1;
       } else state.initialQuesNo++;
     },
     moveQues: (state, action) => {
@@ -95,4 +101,5 @@ export const {
   prevQues,
   nextQues,
   moveQues,
+  nextQuesAdmin
 } = QuestionsSlice.actions;

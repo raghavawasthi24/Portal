@@ -9,13 +9,13 @@ const QuesTab = () => {
   // const quesNo=["1","2","3","4","5","6","7","8","9","10"]
   const dispatch = useDispatch();
   const data = useSelector((state) => state.quesList);
-
+ console.log(data)
 
   // const quesNo=useSelector(state=>state.prevNext)
 
   return (
     <div className="flex w-full flex-wrap justify-center mt-5">
-      {data.initialQues.map((item, key) => {
+      {data.initialQues?.map((item, key) => {
         return (
           <div key={key} onClick={() => dispatch(moveQues(key + 1))}>
             <Button

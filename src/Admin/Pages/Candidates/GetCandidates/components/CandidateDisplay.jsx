@@ -76,15 +76,15 @@ const CandidateDisplay = () => {
       </TableContainer>
       <div style={{display:showdetails?"block":"none"}}>
         <div className="w-screen h-screen absolute top-0 left-0 flex justify-center items-center" onClick={()=>setShowdetails(false)}>
-          <div className="bg-white p-4 border shadow-md border-t-indigo-600">
-            <p className="m-1">Name : {data.currentStudent[0]?.name}</p>
-            <p className="m-1">Student No : {data.currentStudent[0]?.studentNo}</p>
-            <p className="m-1">Email : {data.currentStudent[0]?.email}</p>
-            <p className="m-1">Mobile No : {data.currentStudent[0]?.mobileNo}</p>
-            <p className="m-1">Hosteler : {data.currentStudent[0]?.isHosteler?"Yes":"No"}</p>
-            <p className="m-1">Gender : {data.currentStudent[0]?.gender}</p>
-            <p className="m-1">Branch : {data.currentStudent[0]?.branch}</p>
-            <p className="m-1">Score : {data.currentStudent[0]?.totalScore}</p>
+          <div className="bg-white p-4 border shadow-xl border-t-indigo-700 grid gap-5">
+            <p className="border-b w-full">Name : {data.currentStudent[0]?.name}</p>
+            <p className="border-b w-full">Student No : {data.currentStudent[0]?.studentNo}</p>
+            <p className="border-b w-full">Email : {data.currentStudent[0]?.email}</p>
+            <p className="border-b w-full">Mobile No : {data.currentStudent[0]?.mobileNo}</p>
+            <p className="border-b w-full">Hosteler : {data.currentStudent[0]?.isHosteler?"Yes":"No"}</p>
+            <p className="border-b w-full">Gender : {data.currentStudent[0]?.gender}</p>
+            <p className="border-b w-full">Branch : {data.currentStudent[0]?.branch}</p>
+            <p className="border-b w-full">Score : {data.currentStudent[0]?.totalScore}</p>
           </div>
         </div>
       </div>

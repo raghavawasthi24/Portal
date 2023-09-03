@@ -22,7 +22,7 @@ const Dropdown = () => {
     useEffect(()=>{
       //console.log(currentdata.initialQues[0].question)
       dispatch(quesCtgSel(selTech))
-    },[currentdata.initialQues[0].question])
+    },[currentdata.initialQues[0]?.question])
     const dispatch=useDispatch();
   return (
     <div className='w-full bg-gradient-to-r from-dropdownGrad1 via-dropdownGrad2 to-dropdownGrad3'>
