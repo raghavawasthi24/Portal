@@ -20,6 +20,7 @@ const QuestionsSlice = createSlice({
   initialState,
   reducers: {
     quesList: (state, action) => {
+      console.log(action.payload)
       let newQuestions = action.payload;
       let newUptdatedQuestions = [];
       newQuestions.map((question) => {

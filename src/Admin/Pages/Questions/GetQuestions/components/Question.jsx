@@ -12,19 +12,23 @@ import Loader from "../../../../../Loader/Loader"
 import { useState } from 'react';
 
 const GetQuestions = () => {
+    const category = useSelector((state) => state.quesList.quesCategory);
     
-    useEffect(()=>{
-        // setLoader(true)
-        axios.get("https://csi-examportal.onrender.com/api/v1/getquestions")
-        .then((res)=>{
-            dispatch(quesList(res.data.msg))
-            dispatch(quesCtgSel('HTML'))
-            // setLoader(false)
-        })
-        .catch((err)=>{
-            console.log(err)
-        }) 
-    },[])
+    useEffect(() => {
+        axios
+          .get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
+          // .get(`https://csi-examportal.onrender.com/api/v1/getquestions`)
+          .then((res) => {
+            // console.log(res)
+            dispatch(quesList(res.data.msg));
+            // setLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            // setLoading(false);
+            // toast.error("Something went wrong");
+          });
+      }, [category]);
    
     const data = useSelector(state => state.prevNext)
     const [loader,setLoader]=useState(false)
