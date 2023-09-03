@@ -58,6 +58,9 @@ const QuestionsSlice = createSlice({
 
         const optionalCategory = localStorage.getItem("language");
         console.log(state.quesCategory, action.payload.length);
+
+        if (state.quesCategory !== optionalCategory) state.initialQuesNo = 1;
+
         switch (state.quesCategory) {
           case "HTML":
             state.quesCategory = "CSS";
@@ -72,7 +75,7 @@ const QuestionsSlice = createSlice({
             state.quesCategory = optionalCategory;
             break;
         }
-        if (state.quesCategory !== optionalCategory) state.initialQuesNo = 1;
+        console.log(state.quesCategory, "vhanged");
       } else state.initialQuesNo++;
     },
     moveQues: (state, action) => {

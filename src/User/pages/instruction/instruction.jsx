@@ -33,9 +33,7 @@ const Instruction = () => {
 
   useEffect(() => {
     const check = Cookies.get("spage1");
-    console.log(check);
     if (!check || check == "false") {
-      console.log(check, "2");
       navigate("/login");
     }
   }, []);
@@ -64,15 +62,15 @@ const Instruction = () => {
     Cookies.remove("spage1");
     localStorage.setItem("language", Language);
     getLoginTime();
-    navigate("/animation");
     axios
       .get(`https://csi-examportal.onrender.com/api/v1/${id}/${Language}`)
       .then(() => {
-        // toast.success("Test Started");
+        toast.info("Test Started");
       })
       .catch(() => {
         toast.error("Something went wrong");
       });
+    navigate("/animation");
   };
 
   return (
