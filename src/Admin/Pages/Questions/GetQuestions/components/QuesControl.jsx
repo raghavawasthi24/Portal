@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { prevQues, nextQues } from "../../../../../store/slices/QuestionsSlice";
+import { prevQues, nextQuesAdmin } from "../../../../../store/slices/QuestionsSlice";
 import { Button } from "@mui/material";
 // import { quesList } from "../../../../../store/slices/QuestionsSlice";
 
@@ -26,7 +26,7 @@ const QuesControl = () => {
       <Button
         variant="text"
         className="!text-white !bg-reviewColor !mx-2"
-        onClick={() => dispatch(nextQues(quesdata.initialQues))}
+        onClick={() => dispatch(nextQuesAdmin(quesdata.initialQues))}
         endIcon={<ArrowForwardIosIcon />}
       >
         Next Question

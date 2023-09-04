@@ -1,7 +1,7 @@
 import { FormControlLabel, FormLabel, RadioGroup,FormControl, Radio } from '@mui/material'
 import React, { useEffect } from 'react'
 import {useSelector} from "react-redux";
-import EditIcon from '@mui/icons-material/Edit';
+import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import EditQuestion from './EditQuestion';
 import { useDispatch } from 'react-redux';
 import { quesCtgSel } from '../../../../../store/slices/QuestionsSlice';
@@ -10,21 +10,29 @@ import { quesList } from '../../../../../store/slices/QuestionsSlice';
 import axios from 'axios';
 import Loader from "../../../../../Loader/Loader"
 import { useState } from 'react';
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GetQuestions = () => {
+    const category = useSelector((state) => state.quesList.quesCategory);
     
-    useEffect(()=>{
-        // setLoader(true)
-        axios.get("https://csi-examportal.onrender.com/api/v1/getquestions")
-        .then((res)=>{
-            dispatch(quesList(res.data.msg))
-            dispatch(quesCtgSel('HTML'))
-            // setLoader(false)
-        })
-        .catch((err)=>{
-            console.log(err)
-        }) 
-    },[])
+    useEffect(() => {
+        axios
+          .get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
+          // .get(`https://csi-examportal.onrender.com/api/v1/getquestions`)
+          .then((res) => {
+            console.log(res)
+            dispatch(quesList(res.data.msg));
+            // setLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            // setLoading(false);
+            // toast.error("Something went wrong");
+          });
+      }, [category]);
    
     const data = useSelector(state => state.prevNext)
     const [loader,setLoader]=useState(false)
@@ -43,6 +51,20 @@ const GetQuestions = () => {
         setCorrectAns(options[index].name)
     },[questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.question])
 
+    const delQuestion=(id)=>{
+      axios.delete(`https://csi-examportal.onrender.com/api/v1/deletequestions/${id}`)
+      .then((res)=>{
+          console.log(res)
+          toast.success("Question deleted successfully")
+          axios.get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
+      .then((res)=>{
+          console.log(res)
+          dispatch(quesList(res.data.msg));
+      })
+          // dispatch(feedbacklist(res.data))
+      })
+  }
+
   return (
     <>
     <div className='p-10 flex flex-col justify-between h-full'>
@@ -50,7 +72,10 @@ const GetQuestions = () => {
         <div className=''>
         <div className='flex justify-between my-3'>
             <p>Question-{questionDisplay?.initialQuesNo}</p>
-            <EditIcon onClick={()=>dispatch(toggleEditOpt())} style={{cursor:"pointer"}}/>
+            <div>
+              <ModeEditOutlinedIcon sx={{cursor:"pointer"}} onClick={()=>dispatch(toggleEditOpt())} style={{cursor:"pointer"}}/>
+              <DeleteOutlineOutlinedIcon sx={{ color: "#f95959", marginLeft:"1rem",cursor:"pointer" }} onClick={e=>{delQuestion(questionDisplay.initialQues[questionDisplay?.initialQuesNo-1]?._id)}}/>
+            </div>
         </div>
         <hr/>
             <p>{questionDisplay.initialQues[questionDisplay?.initialQuesNo-1]?.question}</p>
@@ -76,7 +101,7 @@ const GetQuestions = () => {
             </div>
 
           
-       
+            <ToastContainer />
     </div>
     {/* <div className='absolute top-0' style={{marginLeft:"-2rem", display:loader?"":"none"}}>
         <Loader/>
