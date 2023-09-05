@@ -44,27 +44,27 @@ const Feedback = () => {
   }, [formvValue]);
 
   const handlevalue = (data) => {
-    console.log("====data", data);
+    
     let tempFormValues = [...formvValue];
     const existingIndex = formvValue.findIndex(
       (item) => item.question_id === data.question_id
     );
-    console.log("=====existingIndex", existingIndex);
+  
     if (existingIndex === -1) {
       tempFormValues = [...tempFormValues, data];
     } else {
       tempFormValues[existingIndex] = data;
     }
-    console.log("====tempFormValues", tempFormValues);
+ 
     setFormValue(tempFormValues);
   };
 
   const uniquefn = () => {
     let disableflag = false;
-    console.log("========", formvValue, apiData);
+ 
     if (formvValue.length === apiData.length) {
       formvValue.forEach((ans) => {
-        console.log("==ans", ans);
+      
         if (!ans.answer_text) {
           disableflag = true;
         }

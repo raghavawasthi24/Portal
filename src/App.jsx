@@ -33,6 +33,8 @@ const App = () => {
             <Route exact path="/feedback" element={<Feedback />} />
             <Route exact path="/Thankyou" element={<Thankyou />} />
           </Route>
+        
+
           <Route element={<AdminRoutes />}>
             <Route exact path="/admin" element={<AdminHome />} />
             <Route exact path="/leaderboard" element={<LeaderBoard />} />

@@ -1,9 +1,9 @@
-import { Container, Box } from "@mui/material";
+import { Box } from "@mui/material";
 
 import "./Thankyou.css";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 const Thankyou = () => {
   const navigate = useNavigate();
