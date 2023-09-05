@@ -68,7 +68,7 @@ const Login = ({ handleLogin }) => {
   const onSubmit = (values) => {
     console.log(values);
     axios
-      .post("http://13.48.30.130/accounts/login/", values)
+      .post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/login/`, values)
       .then((res) => {
         console.log(res);
         Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
@@ -121,7 +121,7 @@ const Login = ({ handleLogin }) => {
                 label="Enter Your Student Number"
                 variant="outlined"
                 name="student_no"
-                sx={{width:"20rem"}}
+                sx={{ width: "20rem" }}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.student_no}
@@ -141,7 +141,7 @@ const Login = ({ handleLogin }) => {
                 sx={{
                   borderRadius: "8px",
                   borderLeft: "4px solid #543BA0",
-                  width:"20rem"
+                  width: "20rem",
                 }}
                 className="login_field"
                 variant="outlined"

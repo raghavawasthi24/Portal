@@ -21,7 +21,7 @@ const QuesTab = () => {
     const id = localStorage.getItem("id");
     if (!optionalCategory) {
       axios
-        .get(`https://csi-examportal.onrender.com/api/v1/${id}`)
+        .get(`${import.meta.env.VITE_APP_NODE_URL}/${id}`)
         .then(() => {
           localStorage.setItem("language", Language);
         })

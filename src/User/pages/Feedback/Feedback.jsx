@@ -26,10 +26,12 @@ const Feedback = () => {
 
   useEffect(() => {
     axios
-      .get("http://13.48.30.130/feedback/get-f-question/")
+      .get(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`)
 
       .then((res) => {
-        setApiData(res.data.sort((a, b) => (a.question_type > b.question_type) ? 1 : -1));
+        setApiData(
+          res.data.sort((a, b) => (a.question_type > b.question_type ? 1 : -1))
+        );
         setLoading(false);
       })
       .catch(() => {
@@ -42,40 +44,39 @@ const Feedback = () => {
   }, [formvValue]);
 
   const handlevalue = (data) => {
-    console.log("====data",data)
-    let tempFormValues = [...formvValue]
+    console.log("====data", data);
+    let tempFormValues = [...formvValue];
     const existingIndex = formvValue.findIndex(
-          (item) => item.question_id === data.question_id
-        );
-        console.log("=====existingIndex",existingIndex)
-        if (existingIndex === -1) {
-          tempFormValues = [...tempFormValues,data]
-        } else {
-          tempFormValues[existingIndex] = data;
-        }
-        console.log("====tempFormValues",tempFormValues)
+      (item) => item.question_id === data.question_id
+    );
+    console.log("=====existingIndex", existingIndex);
+    if (existingIndex === -1) {
+      tempFormValues = [...tempFormValues, data];
+    } else {
+      tempFormValues[existingIndex] = data;
+    }
+    console.log("====tempFormValues", tempFormValues);
     setFormValue(tempFormValues);
   };
 
   const uniquefn = () => {
     let disableflag = false;
-    console.log("========",formvValue,apiData)
-    if (formvValue.length === apiData.length){
-      formvValue.forEach(ans =>{
-        console.log("==ans",ans)
-          if (!ans.answer_text) {
-            disableflag = true;
-          }
-        })
-    }else{
-      disableflag = true
+    console.log("========", formvValue, apiData);
+    if (formvValue.length === apiData.length) {
+      formvValue.forEach((ans) => {
+        console.log("==ans", ans);
+        if (!ans.answer_text) {
+          disableflag = true;
+        }
+      });
+    } else {
+      disableflag = true;
     }
-    setDisable(disableflag)
-   
+    setDisable(disableflag);
   };
   const handlesubmit = () => {
     axios
-      .post("http://13.48.30.130/feedback/add-f-answer/", {
+      .post(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/add-f-answer/`, {
         student_number: localStorage.getItem("studentNo"),
         answers: formvValue,
       })

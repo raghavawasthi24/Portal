@@ -2,14 +2,23 @@ import axios from "axios";
 
 const SubmitAnswer = ({ status, quesId, ansId }) => {
   const id = localStorage.getItem("id");
+  console.log(
+    quesId.includes("C++"),
+    "check",
+    quesId.replace("C++", "Cpp"),
+    quesId
+  );
   const submitData = {
-    quesId: quesId,
+    quesId: quesId.includes("C++") ? quesId.replace("C++", "Cpp") : quesId,
     status: status,
-    ansId: ansId,
+    ansId: ansId.includes("C++") ? ansId.replace("C++", "Cpp") : ansId,
   };
+  console.log(submitData);
   return axios
     .get(
-      `https://csi-examportal.onrender.com/api/v1/postResponse/${id}?ansId=${ansId}&quesId=${quesId}&status=${status}`,
+      `${import.meta.env.VITE_APP_NODE_URL}/postResponse/${id}?ansId=${
+        submitData.ansId
+      }&quesId=${submitData.quesId}&status=${status}`,
       submitData
     )
     .then((res) => {
