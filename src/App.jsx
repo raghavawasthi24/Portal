@@ -14,7 +14,6 @@ import AddQuestions from "./Admin/Pages/Questions/AddQuestions/AddQuestions";
 import AddFeedback from "./Admin/Pages/Feedback/AddFeedback/AddFeedback";
 import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
 import LandingPage from "./User/pages/LandingPage/LandingPage";
-import TestResult from "./User/pages/TestResult/TestResult";
 import UserRoutes from "./User/utils/UserRoutes";
 import AdminRoutes from "./User/utils/AdminRoutes";
 const App = () => {
@@ -33,7 +32,6 @@ const App = () => {
             <Route exact path="/feedback" element={<Feedback />} />
             <Route exact path="/Thankyou" element={<Thankyou />} />
           </Route>
-        
 
           <Route element={<AdminRoutes />}>
             <Route exact path="/admin" element={<AdminHome />} />
