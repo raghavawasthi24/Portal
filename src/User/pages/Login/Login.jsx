@@ -68,7 +68,7 @@ const Login = ({ handleLogin }) => {
   const onSubmit = (values) => {
     console.log(values);
     axios
-      .post("http://13.48.30.130/accounts/login/", values)
+      .post(`${import.meta.env.VITE_SOME_VALUE}/accounts/login/`, values)
       .then((res) => {
         console.log(res);
         Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
