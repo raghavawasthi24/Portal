@@ -20,8 +20,8 @@ const GetQuestions = () => {
     
     useEffect(() => {
         axios
-          .get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
-          // .get(`https://csi-examportal.onrender.com/api/v1/getquestions`)
+          .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${category}`)
+          // .get(`${import.meta.env.VITE_APP_NODE_URL}/getquestions`)
           .then((res) => {
             console.log(res)
             dispatch(quesList(res.data.msg));
@@ -52,11 +52,11 @@ const GetQuestions = () => {
     },[questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.question])
 
     const delQuestion=(id)=>{
-      axios.delete(`https://csi-examportal.onrender.com/api/v1/deletequestions/${id}`)
+      axios.delete(`${import.meta.env.VITE_APP_NODE_URL}/deletequestions/${id}`)
       .then((res)=>{
           console.log(res)
           toast.success("Question deleted successfully")
-          axios.get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
+          axios.get(`${import.meta.env.VITE_APP_NODE_URL}/category/${category}`)
       .then((res)=>{
           console.log(res)
           dispatch(quesList(res.data.msg));

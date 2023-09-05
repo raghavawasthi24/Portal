@@ -75,6 +75,7 @@ const ReviewSlice = createSlice({
           (ques) => ques.id === questionId
         );
         if (question) {
+          console.log(question);
           question.ansId = ansId;
         } else {
           category.questions.push({

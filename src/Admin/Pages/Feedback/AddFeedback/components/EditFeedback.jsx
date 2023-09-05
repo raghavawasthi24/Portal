@@ -39,7 +39,7 @@ const EditFeedback = (props) => {
   const updateQues = () => {
     if (formvalues.question.trim() != "" && formvalues.category.trim() != "") {
       axios
-        .patch(`http://13.48.30.130/feedback/${props.feedQues.id}/update/`, {
+        .patch(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/${props.feedQues.id}/update/`, {
           question_text: formvalues.question.trim(),
           question_type: formvalues.category,
         })

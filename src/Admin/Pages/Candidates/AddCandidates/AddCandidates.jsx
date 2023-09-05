@@ -62,7 +62,7 @@ const AddCandidates = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post("http://13.48.30.130/accounts/add-candidate/", formvalues)
+      .post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/add-candidate/`, formvalues)
       .then((res) => {
         console.log(res);
       });

@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LeaderBoard from "./Admin/Pages/LeaderBoard/LeaderBoard";
 import AdminHome from "./Admin/AdminHome";
 import GetCandidates from "./Admin/Pages/Candidates/GetCandidates/GetCandidates";
-import AddCandidate from "./Admin/Pages/Candidates/AddCandidates/AddCandidates"
+import AddCandidate from "./Admin/Pages/Candidates/AddCandidates/AddCandidates";
 import Instruction from "./User/pages/instruction/instruction";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Feedback from "./User/pages/Feedback/Feedback";
@@ -31,14 +31,15 @@ const App = () => {
             <Route exact path="/animation" element={<LandingPage />} />
             <Route exact path="/test" element={<Test />} />
             <Route exact path="/feedback" element={<Feedback />} />
-            <Route exact path="/result" element={<TestResult />} />
             <Route exact path="/Thankyou" element={<Thankyou />} />
           </Route>
+        
+
           <Route element={<AdminRoutes />}>
             <Route exact path="/admin" element={<AdminHome />} />
             <Route exact path="/leaderboard" element={<LeaderBoard />} />
             <Route exact path="/getCandidate" element={<GetCandidates />} />
-            <Route exact path="/addCandidate" element={<AddCandidate/>} />
+            <Route exact path="/addCandidate" element={<AddCandidate />} />
             <Route exact path="/addQuestions" element={<AddQuestions />} />
             <Route exact path="/addfeedback" element={<AddFeedback />} />
             <Route exact path="/getfeedback" element={<GetFeedback />} />

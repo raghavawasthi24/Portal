@@ -63,7 +63,7 @@ const Instruction = () => {
     localStorage.setItem("language", Language);
     getLoginTime();
     axios
-      .get(`https://csi-examportal.onrender.com/api/v1/${id}/${Language}`)
+      .get(`${import.meta.env.VITE_APP_NODE_URL}/${id}/${Language}`)
       .then(() => {
         toast.info("Test Started");
       })

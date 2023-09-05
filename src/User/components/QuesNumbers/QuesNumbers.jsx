@@ -8,6 +8,7 @@ const QuesNumbers = () => {
   const quesdata = useSelector((state) => state.quesList);
   const category = quesdata.quesCategory;
   const quesState = useSelector((state) => state.review.categories);
+  const currentBtnIndex = quesdata.initialQuesNo;
   const currentCategoryQuestions =
     quesState.find((item) => item.category === category)?.questions || [];
   // console.log(currentCategoryQuestions, category);
@@ -53,28 +54,26 @@ const QuesNumbers = () => {
             ques?.quesId,
             currentCategoryQuestions
           );
+          const active = id === currentBtnIndex - 1;
+
           return (
             <Grid item key={id}>
               <Button
                 color="error"
                 className={
-                  visited
-                    ? // ? answered
-                      review
+                  active
+                    ? "!bg-white !text-blue-600 !border !border-blue-600"
+                    : visited
+                    ? review
                       ? "!bg-reviewColor"
                       : "!bg-saveColor"
                     : ""
-                  // : ""
                 }
+                sx={{
+                  border: active ? " 2px solid" : "",
+                }}
                 variant="contained"
                 onClick={() => {
-                  // console.log("ckicked"),
-                  // dispatch(
-                  //   markVisited({
-                  //     categoryId: ques.category,
-                  //     questionId: ques.quesId,
-                  //   })
-                  // ),
                   dispatch(moveQues(id + 1));
                 }}
               >

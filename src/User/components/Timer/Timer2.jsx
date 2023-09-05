@@ -32,7 +32,11 @@ const Timer = () => {
         // Timer has reached 0, perform any desired action here
         // Submit the test api
         axios
-          .post(`http://13.48.30.130/accounts/submit/${studentNumber}`)
+          .post(
+            `${
+              import.meta.env.VITE_APP_DJANGO_URL
+            }/accounts/submit/${studentNumber}`
+          )
           .then((res) => {
             console.log(res);
             Cookies.set("spage3", true);
