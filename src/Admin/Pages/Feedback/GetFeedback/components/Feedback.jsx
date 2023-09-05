@@ -28,7 +28,7 @@ const Feedback = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    axios.get("http://13.48.30.130/accounts/feedback-response/").then((res) => {
+    axios.get(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/feedback-response/`).then((res) => {
       console.log(res);
       setFeedbackList(res.data);
       setLocalVar(res.data);

@@ -31,7 +31,7 @@ const AddFeedback = () => {
       navigate("/login");
     }
   
-    axios.get("http://13.48.30.130/feedback/get-f-question/").then((res) => {
+    axios.get(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`).then((res) => {
       console.log(res.data);
       setFeedQues(res.data);
     });
@@ -47,11 +47,11 @@ const AddFeedback = () => {
 
   }
   const delFeedback=(id)=>{
-    axios.delete(`http://13.48.30.130/feedback/delete-f-question/${id}`)
+    axios.delete(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/delete-f-question/${id}`)
     .then((res)=>{
         console.log(res)
         // toast.success("Question deleted successfully")
-        axios.get("http://13.48.30.130/feedback/get-f-question/")
+        axios.get(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`)
     .then((res)=>{
         console.log(res)
         setFeedQues(res.data);

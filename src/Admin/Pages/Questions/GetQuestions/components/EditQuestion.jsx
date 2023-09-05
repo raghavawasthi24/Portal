@@ -115,7 +115,7 @@ const EditQuestion = () => {
       console.log(formvalues);
       axios
         .patch(
-          `https://csi-examportal.onrender.com/api/v1/updatequestion/${
+          `${import.meta.env.VITE_APP_NODE_URL}/updatequestion/${
             questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]._id
           }`,
           {

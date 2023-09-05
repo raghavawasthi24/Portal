@@ -22,7 +22,7 @@ const CandidateDisplay = () => {
 
   useEffect(() => {
     axios
-      .get("http://13.48.30.130/accounts/StudentData/")
+      .get(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/StudentData/`)
       .then((res) => {
         console.log(res.data);
         dispatch(studentList(res.data));

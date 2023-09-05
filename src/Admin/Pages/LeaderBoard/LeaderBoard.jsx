@@ -9,13 +9,32 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import ArrowCircleUpRoundedIcon from "@mui/icons-material/ArrowCircleUpRounded";
 import { useNavigate } from "react-router-dom";
-import Tabtable from "./Tabtable";
+// import Tabtable from "./Tabtable";
 import Cookies from "js-cookie";
 import updateCookies from "../../utils/updateCookies";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const LeaderBoard = () => {
   const [students, setStudents] = useState([]);
+  const [studentlist, setStudentlist] = useState([]);
   const navigate = useNavigate();
+  const [count, setCount] = useState(1);
+  const [page, setPage] = React.useState(1);
+
+  const inputHandler = (event,value) => {
+    
+    setPage(value);
+    localStorage.setItem("oyo",value)
+    console.log(page,value,"calling");
+    // let newStudentArray = [];
+    // for (let i = 1; i <= 10; i++) {
+    //   console.log(page, (page - 1) * 10 + i);
+    //   newStudentArray.push(studentlist[(value - 1) * 10 + i]);
+    // }
+    // setStudents(newStudentArray);
+  };
+
   useEffect(() => {
     const check = Cookies.get("apage4");
     if (!check) {
@@ -24,17 +43,41 @@ const LeaderBoard = () => {
   }, []);
 
   useEffect(() => {
-    // const socket = io("https://csi-examportal.onrender.com");
-
     const socket = io.connect("https://csi-examportal.onrender.com", {
       transports: ["websocket"],
     });
+    // console.log("outside")
+    // localStorage.setItem("oyo",1)
 
-    socket.on("leaderboard", (data) => {
-      setStudents(data);
+    // socket.on("leaderboard", (data) => {
+    //   setStudentlist(data);
+    //   console.log(data);
+    //   // console.log(page)
+    //   let dd=localStorage.getItem("oyo")
+    //   let newStudentArray = [];
+    //   for (let i = 1; i <= 10; i++) {
+    //     console.log(dd, (dd - 1) * 10 + i);
+    //     newStudentArray.push(data[(dd - 1) * 10 + i]);
+    //   }
+    //   setStudents(newStudentArray);
+
+    //   if (data.length % 10 == 0) setCount(data.length % 10);
+    //   else setCount((data.length % 10) + 1);
+    // });
+
+    // socket.emit("leaderboard");
+
+    socket.on("page", (pageData) => {
+      console.log("hiii",pageData)
     });
 
-    socket.emit("leaderboard");
+    const pageData={
+      page:1,
+      itemsPerPage:10
+    }
+
+
+    socket.emit("page",pageData)
 
     return () => {
       socket.disconnect();
@@ -89,17 +132,14 @@ const LeaderBoard = () => {
                     <TableCell sx={{ textAlign: "center" }}>
                       {index + 1}
                     </TableCell>
-                    {/* <TableCell sx={{ textAlign: "center" }}>
-                      {student.totalScore}
-                    </TableCell> */}
                     <TableCell sx={{ textAlign: "center" }}>
-                      {student.studentNo}
+                      {student?.studentNo}
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
-                      {student.name}
+                      {student?.name}
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
-                      {student.calculatedTotalScore}
+                      {student?.calculatedTotalScore}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -109,7 +149,7 @@ const LeaderBoard = () => {
         </div>
       </div>
       <div className="flex items-center justify-center mb-9">
-        <Tabtable />
+        <Pagination count={count} page={page} onChange={inputHandler} />
       </div>
     </div>
   );

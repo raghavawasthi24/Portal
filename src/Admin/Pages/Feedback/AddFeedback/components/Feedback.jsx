@@ -28,7 +28,7 @@ const AddFeedback = () => {
   const addQues = () => {
     if (formvalues.question.trim() != "" && formvalues.category != "") {
       axios
-        .post("http://13.48.30.130/feedback/add-f-question/", [
+        .post(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/add-f-question/`, [
           {
             question_text: formvalues.question.trim(),
             question_type: formvalues.category,
