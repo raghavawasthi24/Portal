@@ -41,7 +41,7 @@ const QuestionsSlice = createSlice({
       state.flag = 1;
     },
     quesCtgSel: (state, action) => {
-      console.log(action.payload)
+      // console.log(action.payload)
       // state.initialQues = f.filter(
       //   (student) => student.category == action.payload
       // );
@@ -58,7 +58,7 @@ const QuestionsSlice = createSlice({
         // if last ques then go to next category
 
         const optionalCategory = localStorage.getItem("language");
-        console.log(state.quesCategory, action.payload.length);
+        // console.log(state.quesCategory, action.payload.length);
 
         if (state.quesCategory !== optionalCategory) state.initialQuesNo = 1;
 
@@ -76,10 +76,10 @@ const QuestionsSlice = createSlice({
             state.quesCategory = optionalCategory;
             break;
         }
-        console.log(state.quesCategory, "changed");
+        // console.log(state.quesCategory, "changed");
       } else state.initialQuesNo++;
     },
-    nextQuesAdmin:(state,action)=>{
+    nextQuesAdmin: (state, action) => {
       if (state.initialQuesNo == action.payload.length) {
         state.initialQuesNo = 1;
       } else state.initialQuesNo++;
@@ -101,5 +101,5 @@ export const {
   prevQues,
   nextQues,
   moveQues,
-  nextQuesAdmin
+  nextQuesAdmin,
 } = QuestionsSlice.actions;
