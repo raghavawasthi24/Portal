@@ -58,7 +58,7 @@ const Question = () => {
       console.log(dropdownData)
       if(dropdownData.flag==1){
       if(formvalues.question.trim()!="" && formvalues.opt1.trim()!="" && formvalues.opt2.trim()!="" && formvalues.opt3.trim()!="" && formvalues.opt4.trim()!="" && formvalues.correctAns.trim()!=""){
-        axios.post("https://csi-examportal.onrender.com/api/v1/addquestions",{
+        axios.post(`${import.meta.env.VITE_APP_NODE_URL}/addquestions`,{
           "question":formvalues.question.trim(),
           "category":ctg,
           "correctId":formvalues.correctAns,
