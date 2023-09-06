@@ -38,11 +38,6 @@ const Question = () => {
 
   const handleAns = (e) => {
     const newSelectedValue = e.target.value;
-    console.log({
-      categoryId: category,
-      questionId: quesName,
-      ansId: newSelectedValue,
-    });
     setSelectedValue(newSelectedValue);
     dispatch(
       markAnsId({

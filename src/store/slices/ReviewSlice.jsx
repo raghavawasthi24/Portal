@@ -6,10 +6,10 @@ const optionalCategory = localStorage.getItem("language");
 
 const reviewAndVisitedHandler = (status, question) => {
   status === 3 || status === -2
-    ? ((question.review = true), (question.visited = true))
+    ? ((question.review = true), (question.answered = true))
     : status === -1 || status === 2
-    ? ((question.review = false), (question.visited = true))
-    : ((question.review = false), (question.visited = false));
+    ? ((question.review = false), (question.answered = true))
+    : ((question.review = false), (question.answered = false));
 };
 
 const initialState = {
@@ -81,7 +81,7 @@ const ReviewSlice = createSlice({
           category.questions.push({
             id: questionId,
             review: false,
-            visited: false,
+            answered: false,
             ansId: ansId,
           });
         }
@@ -101,14 +101,14 @@ const ReviewSlice = createSlice({
             ques.ansId = question.ansId;
             reviewAndVisitedHandler(question.ansStatus, question);
             ques.review = question.review;
-            ques.visited = question.visited;
+            ques.answered = question.answered;
           } else {
             reviewAndVisitedHandler(question.ansStatus, question);
             category.questions.push({
               id: question.quesId,
               ansId: question.ansId,
               review: question.review,
-              visited: question.visited,
+              answered: question.answered,
             });
           }
         }

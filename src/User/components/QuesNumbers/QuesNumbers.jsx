@@ -21,11 +21,11 @@ const QuesNumbers = () => {
     if (question) {
       return {
         // answered: question.ansId !== "",
-        visited: question.visited,
+        answered: question.answered,
         review: question.review,
       };
     } else {
-      return { visited: false, review: false };
+      return { answered: false, review: false };
     }
   }
 
@@ -50,7 +50,7 @@ const QuesNumbers = () => {
         }}
       >
         {quesdata.initialQues.map((ques, id) => {
-          const { visited, review } = findVisitedStatus(
+          const { answered, review } = findVisitedStatus(
             ques?.quesId,
             currentCategoryQuestions
           );
@@ -62,8 +62,8 @@ const QuesNumbers = () => {
                 color="error"
                 className={
                   active
-                    ? "!bg-white !text-blue-600 !border !border-blue-600"
-                    : visited
+                    ? "!bg-blue-200 !text-blue-600 !border !border-blue-600"
+                    : answered
                     ? review
                       ? "!bg-reviewColor"
                       : "!bg-saveColor"
