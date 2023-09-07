@@ -90,7 +90,7 @@ const Instruction = () => {
               </div>
               <div style={{ height: "23rem", overflow: "scroll" }}>
                 {arr.map((link, i) => (
-                  <div className="instruction_list">
+                  <div className="instruction_list" key={i}>
                     <ListItemIcon className="listCircle">
                       <Circle
                         style={{

@@ -14,7 +14,6 @@
 // import updateCookies from "../../utils/updateCookies";
 // import Pagination from "@mui/material/Pagination";
 
-
 // const LeaderBoard = () => {
 //   const [students, setStudents] = useState(["1"]);
 //   const [studentlist, setStudentlist] = useState([]);
@@ -28,7 +27,7 @@
 //   console.log(useSelector(state=>state.quesList.submitQuestion))
 
 //   const inputHandler = (event,value) => {
-    
+
 //     setPage(value);
 //     localStorage.setItem("oyo",value)
 //     console.log(page,value,"calling");
@@ -81,7 +80,6 @@
 //       itemsPerPage:10
 //     }
 
-
 //     socket.emit("page",pageData)
 
 //     return () => {
@@ -89,7 +87,6 @@
 //     };
 //   }, []);
 
- 
 //   return (
 //     <div className="flex flex-col items-center justify-between min-h-screen">
 //       <div className="absolute" style={{ top: "3rem", left: "3rem" }}>
@@ -152,7 +149,7 @@
 //                       {/* {student?.calculatedTotalScore} */}
 //                       10
 //                     </TableCell>
-                   
+
 //                   </TableRow>
 //                 ))}
 //               </TableBody>
@@ -164,13 +161,11 @@
 //         <Pagination count={count} page={page} onChange={inputHandler} />
 //       </div>
 
-      
 //     </div>
 //   );
 // };
 
 // export default LeaderBoard;
-
 
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
@@ -184,36 +179,49 @@ import Paper from "@mui/material/Paper";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Responses from "./Responses";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { quesList, toggleQuestion } from "../../../store/slices/QuestionsSlice";
 import axios from "axios";
-import { findResponse, uploadResponse } from "../../../store/slices/ResponseSlice";
-
-
+import {
+  findResponse,
+  uploadResponse,
+} from "../../../store/slices/ResponseSlice";
+import Cookies from "js-cookie";
+import updateCookies from "../../utils/updateCookies";
 
 const LeaderBoard = () => {
   const [students, setStudents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10); // Number of items per page
   const navigate = useNavigate();
-  const [responseData,setResponseData]=useState([])
+  const [responseData, setResponseData] = useState([]);
 
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const check = Cookies.get("apage4");
+    if (!check) {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
-    const socket = io.connect("https://fluttering-lumber-production.up.railway.app", {
-      transports: ["websocket"],
-    });
+    const socket = io.connect(
+      "https://fluttering-lumber-production.up.railway.app",
+      {
+        transports: ["websocket"],
+      }
+    );
 
-
-    axios.get("https://fluttering-lumber-production.up.railway.app/api/v1/getquestions").then((res)=>{
-      setResponseData(res.data.msg)
-      dispatch(findResponse(res.data.msg))
-    })
-
-   
+    axios
+      .get(
+        "https://fluttering-lumber-production.up.railway.app/api/v1/getquestions"
+      )
+      .then((res) => {
+        setResponseData(res.data.msg);
+        dispatch(findResponse(res.data.msg));
+      });
 
     socket.on("leaderboard", (data) => {
       // console.log(data);
@@ -229,25 +237,24 @@ const LeaderBoard = () => {
     };
   }, []);
 
-
-
   // Calculate the start and end indices for the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentStudents = students.slice(startIndex, endIndex);
   const totalPages = Math.ceil(students.length / itemsPerPage);
 
-
-
-  const openResponses=(studentNo)=>{
-    axios.get(`https://fluttering-lumber-production.up.railway.app/api/v1/responses/ques/${studentNo}`).then((res)=>{
-      // console.log(res.data.questions)
-      dispatch(uploadResponse(res.data.questions))
-      dispatch(findResponse(responseData))
-    })
-    dispatch(toggleQuestion())
-  }
-
+  const openResponses = (studentNo) => {
+    axios
+      .get(
+        `https://fluttering-lumber-production.up.railway.app/api/v1/responses/ques/${studentNo}`
+      )
+      .then((res) => {
+        // console.log(res.data.questions)
+        dispatch(uploadResponse(res.data.questions));
+        dispatch(findResponse(responseData));
+      });
+    dispatch(toggleQuestion());
+  };
 
   return (
     <div className="flex flex-col items-center justify-between min-h-screen">
@@ -257,9 +264,10 @@ const LeaderBoard = () => {
             width: "3rem",
             height: "3rem",
             color: "rgba(84, 59, 160, 1)",
+            cursor: "pointer",
           }}
           onClick={() => {
-            navigate("/admin");
+            updateCookies(1), navigate("/admin");
           }}
         />
       </div>
@@ -282,14 +290,22 @@ const LeaderBoard = () => {
                   <TableCell sx={{ textAlign: "center" }}>
                     Student Number
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>Student Name</TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>Total Score</TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    Student Name
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    Total Score
+                  </TableCell>
                   <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {currentStudents.map((student, index) => (
-                  <TableRow key={index} onClick={e=>openResponses(student.studentNo)} className="cursor-pointer">
+                  <TableRow
+                    key={index}
+                    onClick={(e) => openResponses(student.studentNo)}
+                    className="cursor-pointer"
+                  >
                     <TableCell sx={{ textAlign: "center" }}>
                       {startIndex + index + 1}
                     </TableCell>
@@ -303,7 +319,7 @@ const LeaderBoard = () => {
                       {student.calculatedTotalScore}
                     </TableCell>
                     <TableCell>
-                       <ArrowRightIcon/>
+                      <ArrowRightIcon />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -330,9 +346,15 @@ const LeaderBoard = () => {
         </button>
       </div>
       {/* Include your Tabtable component here */}
-      <div style={{display:useSelector(state=>state.quesList.submitQuestion)?"none":"block"}}>
+      <div
+        style={{
+          display: useSelector((state) => state.quesList.submitQuestion)
+            ? "none"
+            : "block",
+        }}
+      >
         <div className="w-screen h-screen absolute top-0 right-0 overflow-hidden">
-          <Responses/>
+          <Responses />
         </div>
       </div>
     </div>
