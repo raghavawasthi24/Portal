@@ -35,11 +35,12 @@ const Question = () => {
     console.log(dropdownData.quesCategory);
     axios
       .get(
-        `${import.meta.env.VITE_APP_NODE_URL}/counts?category=${
+        `https://csi-examportal.onrender.com/api/v1/counts?category=${
           dropdownData.quesCategory
         }`
       )
       .then((res) => {
+        console.log(res)
         // console.log(res.data.msg.categoryResponse[res.data.msg.categoryResponse.length-1].count)
         // console.log(res.data.msg.categoryResponse.length-1)
         if (res.data.msg.categoryResponse.length != 0)
