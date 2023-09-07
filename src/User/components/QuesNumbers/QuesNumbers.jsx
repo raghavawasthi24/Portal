@@ -61,7 +61,7 @@ const QuesNumbers = () => {
             VisitedStatus({ category, quesId: ques?.quesId })
               .then((res) => {
                 if (res.data.questions.length > 0)
-                  dispatch(markVisited(res.data.questions));
+                  dispatch(markVisited(res.data));
               })
               .catch((err) => {
                 console.log(err);

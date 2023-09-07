@@ -43,30 +43,29 @@ const ReviewSlice = createSlice({
 
   reducers: {
     markVisited: (state, action) => {
-      console.log(action.payload, "markVisited");
-      // const questions = action.payload;
-      // questions.forEach((question) => {
-      // const { categoryId, questionId } = action.payload;
-      // console.log(categoryId, questionId, "markVisited");
-      // const category = state.categories.find(
-      //   (cat) => cat.category === categoryId
-      // );
-      // if (category) {
-      //   const question = category.questions.find(
-      //     (ques) => ques.id === questionId
-      //   );
-      //   if (question) {
-      //     question.visited = true;
-      //     console.log(question.visited, "visited");
-      //   } else {
-      //     category.questions.push({
-      //       id: questionId,
-      //       review: false,
-      //       visited: true,
-      //       ansId: "",
-      //     });
-      //   }
-      // }
+      const questions = action.payload;
+      questions.forEach((question) => {
+        const { category: categoryId, quesId: questionId } = question;
+        const category = state.categories.find(
+          (cat) => cat.category === categoryId
+        );
+        if (category) {
+          const question = category.questions.find(
+            (ques) => ques.id === questionId
+          );
+          if (question) {
+            question.visited = true;
+          } else {
+            category.questions.push({
+              id: questionId,
+              review: false,
+              visited: true,
+              answered: false,
+              ansId: "",
+            });
+          }
+        }
+      });
     },
     markAnsId: (state, action) => {
       const { categoryId, questionId, ansId } = action.payload;
