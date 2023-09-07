@@ -3,10 +3,8 @@ import axios from "axios";
 const VisitedStatus = async ({ category, quesId }) => {
   const id = localStorage.getItem("id");
   const sendData = {
-    quesId: quesId.includes("C++") ? quesId.replace("C++", "Cpp") : quesId,
-    category: category.includes("C++")
-      ? category.replace("C++", "Cpp")
-      : category,
+    quesId: quesId,
+    category: category,
   };
   try {
     const res = await axios.get(

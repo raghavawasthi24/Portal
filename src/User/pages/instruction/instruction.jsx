@@ -63,7 +63,7 @@ const Instruction = () => {
     localStorage.setItem("language", Language);
     getLoginTime();
     axios
-      .get(`${import.meta.env.VITE_APP_NODE_URL}/${id}/${Language}`)
+      .get(`${import.meta.env.VITE_APP_NODE_URL}/${id}/category/${Language}`)
       .then(() => {
         toast.info("Test Started");
       })
@@ -183,7 +183,7 @@ const Instruction = () => {
                   required
                 >
                   <MenuItem value="C">C</MenuItem>
-                  <MenuItem value="C++">C++</MenuItem>
+                  <MenuItem value="Cpp">Cpp</MenuItem>
                   <MenuItem value="Java">Java</MenuItem>
                   <MenuItem value="Python">Python</MenuItem>
                 </Select>

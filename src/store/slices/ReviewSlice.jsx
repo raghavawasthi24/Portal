@@ -78,8 +78,10 @@ const ReviewSlice = createSlice({
         );
         if (question) {
           console.log(question);
+          question.visited = true;
           question.ansId = ansId;
         } else {
+          console.log(question, "ques pushed from ansId");
           category.questions.push({
             id: questionId,
             review: false,
