@@ -207,9 +207,10 @@ const LeaderBoard = () => {
       transports: ["websocket"],
     });
 
-    axios.get("https://fluttering-lumber-production.up.railway.app/api/v1/responses/ques/2215460").then((res)=>{
-      // console.log(res.data.questions)
-      dispatch(uploadResponse(res.data.questions))
+
+    axios.get("https://fluttering-lumber-production.up.railway.app/api/v1/getquestions").then((res)=>{
+      setResponseData(res.data.msg)
+      dispatch(findResponse(res.data.msg))
     })
 
    
@@ -238,10 +239,11 @@ const LeaderBoard = () => {
 
 
 
-  const openResponses=()=>{
-    axios.get("https://fluttering-lumber-production.up.railway.app/api/v1/getquestions").then((res)=>{
-      // console.log(res.data.msg)
-      dispatch(findResponse(res.data.msg))
+  const openResponses=(studentNo)=>{
+    axios.get(`https://fluttering-lumber-production.up.railway.app/api/v1/responses/ques/${studentNo}`).then((res)=>{
+      // console.log(res.data.questions)
+      dispatch(uploadResponse(res.data.questions))
+      dispatch(findResponse(responseData))
     })
     dispatch(toggleQuestion())
   }
@@ -287,7 +289,7 @@ const LeaderBoard = () => {
               </TableHead>
               <TableBody>
                 {currentStudents.map((student, index) => (
-                  <TableRow key={index} onClick={openResponses} className="cursor-pointer">
+                  <TableRow key={index} onClick={e=>openResponses(student.studentNo)} className="cursor-pointer">
                     <TableCell sx={{ textAlign: "center" }}>
                       {startIndex + index + 1}
                     </TableCell>
