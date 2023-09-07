@@ -10,7 +10,7 @@ import { Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Chip from '@mui/material/Chip';
-import { nextQues, prevQues } from "../../../store/slices/ResponseSlice";
+import { findResponse, nextQues, prevQues } from "../../../store/slices/ResponseSlice";
 
 
 const Responses = (props) => {
@@ -20,6 +20,7 @@ const Responses = (props) => {
   };
 
   const data=useSelector(state=>state.responses.currentQues)
+  const all_questions=useSelector(state=>state.responses)
 
   return (
     <div className="w-1/3 flex flex-col gap-2 mt-12 mx-auto bg-white p-5 rounded-lg shadow-lg relative border-t-yellow-800">
@@ -28,20 +29,20 @@ const Responses = (props) => {
         onClick={closeResponses}
       />
       <div className="flex justify-between items-center mt-5">
-        <p className="font-semibold"> Question-1</p>
+        <p className="font-semibold"> Question-{all_questions?.currentQuesNo+1}</p>
         {
-          (data.ansStatus==2)?<Chip label="correct" color="success" variant="outlined" />:<Chip label="wrong" color="error" variant="outlined" />
+          (data?.ansStatus>0)?<Chip label="correct" color="success" variant="outlined" />:<Chip label="wrong" color="error" variant="outlined" />
           
         }
         
       </div>
       <hr />
-      <p>{data.question}</p>
+      <p>{data?.question}</p>
       <FormControl>
         <RadioGroup
         >
           {
-            data.options?.map((row,index)=>{
+            data?.options?.map((row,index)=>{
               return(
                 <FormControlLabel value={row.name} checked={row.name===data.user_ans.name} control={<Radio />} label={row.name} key={index}/>
             )
@@ -55,14 +56,14 @@ const Responses = (props) => {
       <div className="mt-8 text-green-700 font-semibold">
         <p>Correct Answer</p>
         <hr />
-        <p>{data.correctAns?.name}</p>
+        <p>{data?.correctAns?.name}</p>
       </div>
 
       <div className="flex justify-between my-4">
         <Button
           variant="text"
           sx={{ color: "black",backgroundColor:"#ececec" }}
-          onClick={() => dispatch(prevQues())}
+          onClick={() => {dispatch(prevQues()),dispatch(findResponse(all_questions.all_questions))}}
           startIcon={<ArrowBackIosNewIcon />}
         >
           PREV
@@ -70,7 +71,7 @@ const Responses = (props) => {
         <Button
           variant="text"
           sx={{ color: "black",backgroundColor:"#ececec" }}
-          onClick={() => dispatch(nextQues())}
+          onClick={() => {dispatch(nextQues()),dispatch(findResponse(all_questions.all_questions))}}
           endIcon={<ArrowForwardIosIcon />}
         >
           NEXT
