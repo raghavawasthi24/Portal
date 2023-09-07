@@ -5,22 +5,17 @@ import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedIn
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff , Person } from "@mui/icons-material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 import { deleteCookies } from "../../../Admin/utils/updateCookies";
+import Loader from "../../../Loader/Loader";
 
 export let isLoggedin = false;
 export let isAdmin = false;
 
 const Login = ({ handleLogin }) => {
-  // const handleUserAdmin = (userType) => {
-  //   handleAdmin(userType);
-  // };
-  // const handleUserLogin=(login)=>{
-  //   handleLogin(login);
-  // }
   const [showPassword, setShowPassword] =useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -63,14 +58,11 @@ const Login = ({ handleLogin }) => {
       .then((res) => {
         console.log(res);
         Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
-        // setIsLoggedIn(true);
         isLoggedin = true;
         localStorage.setItem("studentNo", res.data.studentNo);
         localStorage.setItem("id", res.data._id);
 
         if (res.data.isAdmin === true) {
-          // handleUserAdmin(true)
-          // setIsAdmin(true)
           Cookies.set("isAdmin", true);
           Cookies.set("apage1", true);
           navigate("/admin");
@@ -91,9 +83,6 @@ const Login = ({ handleLogin }) => {
       });
   };
   const formik = useFormik({ initialValues, validate, onSubmit });
-  // console.log('form data',formik.values)
-  // console.log('form errors',formik.errors)
-  // console.log("Visited fields", formik.touched);
 
   return (
     <div className="loginPage">
@@ -122,13 +111,15 @@ const Login = ({ handleLogin }) => {
                     borderLeft: "4px solid #543BA0",
                   },
                 }}
+          
+            
               />
               {formik.touched.student_no && formik.errors.student_no ? (
                 <p className="error">{formik.errors.student_no}</p>
               ) : null}
             </div>
             <div className="input_field">
-           <FormControl sx={{  borderRadius: "8px",borderLeft: "4px solid #543BA0",width:"23rem"}} variant="outlined" >
+           <FormControl sx={{  borderRadius: "8px",borderLeft: "4px solid #543BA0", width:"23rem"}} variant="outlined" >
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
@@ -157,29 +148,7 @@ const Login = ({ handleLogin }) => {
                 <p className="error">{formik.errors.password}</p>
               ) : null}
           </div>
-            {/* <div className="input_field">
-              <TextField
-                label="Enter Your Password"
-                name="password"
-                variant="outlined"
-                className="login_field"
-                type="password"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.password}
-                InputProps={{
-                  style: {
-                    borderRadius: "8px",
-                    borderLeft: "4px solid #543BA0",
-                  },
-                }}
-              />
-              {formik.touched.password && formik.errors.password ? (
-                <p className="error">{formik.errors.password}</p>
-              ) : null}
-            </div> */}
-            
-            <Button
+             <Button
               variant="contained"
               className="login_btn"
               type="submit"
