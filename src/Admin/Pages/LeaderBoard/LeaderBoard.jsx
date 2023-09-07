@@ -187,13 +187,18 @@ import { useNavigate } from "react-router-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Responses from "./Responses";
 import { useDispatch,useSelector } from "react-redux";
-import { toggleQuestion } from "../../../store/slices/QuestionsSlice";
+import { quesList, toggleQuestion } from "../../../store/slices/QuestionsSlice";
+import axios from "axios";
+import { findResponse, uploadResponse } from "../../../store/slices/ResponseSlice";
+
+
 
 const LeaderBoard = () => {
   const [students, setStudents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10); // Number of items per page
   const navigate = useNavigate();
+  const [responseData,setResponseData]=useState([])
 
   const dispatch=useDispatch()
 
@@ -202,8 +207,15 @@ const LeaderBoard = () => {
       transports: ["websocket"],
     });
 
+    axios.get("https://fluttering-lumber-production.up.railway.app/api/v1/responses/ques/2215460").then((res)=>{
+      // console.log(res.data.questions)
+      dispatch(uploadResponse(res.data.questions))
+    })
+
+   
+
     socket.on("leaderboard", (data) => {
-      console.log(data);
+      // console.log(data);
       setStudents(data);
     });
 
@@ -216,14 +228,21 @@ const LeaderBoard = () => {
     };
   }, []);
 
+
+
   // Calculate the start and end indices for the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentStudents = students.slice(startIndex, endIndex);
-
   const totalPages = Math.ceil(students.length / itemsPerPage);
 
+
+
   const openResponses=()=>{
+    axios.get("https://fluttering-lumber-production.up.railway.app/api/v1/getquestions").then((res)=>{
+      // console.log(res.data.msg)
+      dispatch(findResponse(res.data.msg))
+    })
     dispatch(toggleQuestion())
   }
 
