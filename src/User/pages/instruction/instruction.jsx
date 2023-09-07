@@ -19,8 +19,8 @@ import arr from "../../constants/InstructionContent";
 import "./instruction.css";
 import { useNavigate } from "react-router-dom";
 import { getLoginTime } from "../../utils/index";
-// import { toast } from "react-toastify";
-// import axios from "axios";
+import { toast } from "react-toastify";
+import axios from "axios";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 
@@ -33,9 +33,7 @@ const Instruction = () => {
 
   useEffect(() => {
     const check = Cookies.get("spage1");
-    console.log(check);
     if (!check || check == "false") {
-      console.log(check, "2");
       navigate("/login");
     }
   }, []);
@@ -59,20 +57,20 @@ const Instruction = () => {
   };
 
   const handleSave = () => {
-    // const id = localStorage.getItem("id");
+    const id = localStorage.getItem("id");
     Cookies.set("spage2", true);
     Cookies.remove("spage1");
     localStorage.setItem("language", Language);
     getLoginTime();
-    navigate("/animation");
     axios
-      .get(`https://csi-examportal.onrender.com/api/v1/${id}/${Language}`)
+      .get(`${import.meta.env.VITE_APP_NODE_URL}/${id}/${Language}`)
       .then(() => {
-        // toast.success("Test Started");
+        toast.info("Test Started");
       })
       .catch(() => {
         toast.error("Something went wrong");
       });
+    navigate("/animation");
   };
 
   return (

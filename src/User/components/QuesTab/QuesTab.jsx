@@ -21,7 +21,7 @@ const QuesTab = () => {
     const id = localStorage.getItem("id");
     if (!optionalCategory) {
       axios
-        .get(`https://csi-examportal.onrender.com/api/v1/${id}`)
+        .get(`${import.meta.env.VITE_APP_NODE_URL}/${id}`)
         .then(() => {
           localStorage.setItem("language", Language);
         })
@@ -48,6 +48,15 @@ const QuesTab = () => {
     dispatch(quesCtgSel(quesType[newValue]));
     dispatch(moveQues(1));
   };
+
+  useEffect(() => {
+    const index = quesType.findIndex(
+      (item) => item === currentdata.quesCategory
+    );
+    setValue(index);
+    setSelTech(currentdata.quesCategory);
+  }, [currentdata.quesCategory]);
+
   return (
     <div className="mt-0 mb-6  shadow-md shadow-gray-600 mx-32">
       <Tabs value={value} onChange={handleChange} variant="fullWidth">

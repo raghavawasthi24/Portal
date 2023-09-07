@@ -15,6 +15,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
+  borderRadius: "5px",
   //   border: "2px solid #000",
   //   boxShadow: 24,
   p: 4,
@@ -37,7 +38,11 @@ export default function BasicModal() {
   const submitHandler = () => {
     //   nav("/feedback");
     axios
-      .post(`http://13.48.30.130/accounts/submit/${studentNumber}`)
+      .post(
+        `${
+          import.meta.env.VITE_APP_DJANGO_URL
+        }/accounts/submit/${studentNumber}`
+      )
       .then((res) => {
         console.log(res);
         Cookies.set("spage3", true);

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getLoginTime = () => {
   axios
-    .post(`http://13.48.30.130/accounts/loginInfo/`, {
+    .post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/loginInfo/`, {
       studentNo: localStorage.getItem("studentNo"),
     })
     .then((res) => {

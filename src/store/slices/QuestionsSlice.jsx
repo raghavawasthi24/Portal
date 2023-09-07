@@ -20,10 +20,19 @@ const QuestionsSlice = createSlice({
   initialState,
   reducers: {
     quesList: (state, action) => {
+      // console.log(action.payload)
       let newQuestions = action.payload;
-
-      state.initialQues = newQuestions;
-      f = newQuestions; // Update the local variable if needed
+      let newUptdatedQuestions = [];
+      newQuestions.map((question) => {
+        if (!question.category) {
+          question.category = state.quesCategory;
+          newUptdatedQuestions.push(question);
+        }
+      });
+      state.initialQues = newUptdatedQuestions;
+      f = newUptdatedQuestions; // Update the local variable if needed
+      // state.initialQues = newQuestions;
+      // f = newQuestions; // Update the local variable if needed
     },
 
     toggleQuestion: (state, action) => {
@@ -32,9 +41,10 @@ const QuestionsSlice = createSlice({
       state.flag = 1;
     },
     quesCtgSel: (state, action) => {
-      state.initialQues = f.filter(
-        (student) => student.category == action.payload
-      );
+      // console.log(action.payload)
+      // state.initialQues = f.filter(
+      //   (student) => student.category == action.payload
+      // );
       state.quesCategory = action.payload;
       // console.log(action.payload)
     },
@@ -45,12 +55,34 @@ const QuestionsSlice = createSlice({
     },
     nextQues: (state, action) => {
       if (state.initialQuesNo == action.payload.length) {
+        // if last ques then go to next category
+
+        const optionalCategory = localStorage.getItem("language");
+        // console.log(state.quesCategory, action.payload.length);
+
+        if (state.quesCategory !== optionalCategory) state.initialQuesNo = 1;
+
+        switch (state.quesCategory) {
+          case "HTML":
+            state.quesCategory = "CSS";
+            break;
+          case "CSS":
+            state.quesCategory = "JavaScript";
+            break;
+          case "JavaScript":
+            state.quesCategory = "Aptitude";
+            break;
+          case "Aptitude":
+            state.quesCategory = optionalCategory;
+            break;
+        }
+        // console.log(state.quesCategory, "changed");
+      } else state.initialQuesNo++;
+    },
+    nextQuesAdmin: (state, action) => {
+      if (state.initialQuesNo == action.payload.length) {
         state.initialQuesNo = 1;
       } else state.initialQuesNo++;
-
-      // if last ques then go to next category
-      // const optionalCategory = localStorage.getItem("Language");
-      //state.quesCategory === "HTML" ? state.quesCategory = "CSS" : state.quesCategory = "CSS"? state.quesCategory = "SQL" : state.quesCategory = "SQL"? state.quesCategory = "Aptitude" : state.quesCategory = "Aptitude"? state.quesCategory = optionalCategory : "";
     },
     moveQues: (state, action) => {
       state.initialQuesNo = action.payload;
@@ -69,4 +101,5 @@ export const {
   prevQues,
   nextQues,
   moveQues,
+  nextQuesAdmin,
 } = QuestionsSlice.actions;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import "./AddCandidates.css";
+// import "./AddCandidates.css";
 import Header from "../../../components/Header";
 import { Button } from "@mui/material";
 import Cookies from "js-cookie";
@@ -47,9 +47,9 @@ const AddCandidates = () => {
       name: "gender",
       value: formvalues.gender,
       options: [
-        { name: "Male", value: "male" },
-        { name: "Female", value: "female" },
-        { name: "Others", value: "others" },
+        { name: "Male", value: "Male" },
+        { name: "Female", value: "Female" },
+        { name: "Others", value: "Others" },
       ],
     },
   ];
@@ -62,7 +62,7 @@ const AddCandidates = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post("http://13.48.30.130/accounts/add-candidate/", formvalues)
+      .post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/add-candidate/`, formvalues)
       .then((res) => {
         console.log(res);
       });
@@ -90,6 +90,8 @@ const AddCandidates = () => {
                       borderRadius: "5px",
                       textIndent: "5px",
                     }}
+                    onChange={inputHandler}
+                    name={item.name}
                   >
                     {item.options.map((opt) => {
                       return <option value={opt.value}>{opt.name}</option>;

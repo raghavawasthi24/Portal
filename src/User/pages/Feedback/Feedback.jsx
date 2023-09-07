@@ -13,7 +13,6 @@ const Feedback = () => {
   const [apiData, setApiData] = useState([]);
   const [formvValue, setFormValue] = useState([]);
   const [disable, setDisable] = useState(true);
-  const [uniqueAnswers, setUniqueAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -27,10 +26,12 @@ const Feedback = () => {
 
   useEffect(() => {
     axios
-      .get("http://13.48.30.130/feedback/get-f-question/")
+      .get(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`)
 
       .then((res) => {
-        setApiData(res.data);
+        setApiData(
+          res.data.sort((a, b) => (a.question_type > b.question_type ? 1 : -1))
+        );
         setLoading(false);
       })
       .catch(() => {
@@ -43,41 +44,41 @@ const Feedback = () => {
   }, [formvValue]);
 
   const handlevalue = (data) => {
-    // console.log(data)
-    setFormValue((prevFormValue) => [...prevFormValue, data]);
+    
+    let tempFormValues = [...formvValue];
+    const existingIndex = formvValue.findIndex(
+      (item) => item.question_id === data.question_id
+    );
+  
+    if (existingIndex === -1) {
+      tempFormValues = [...tempFormValues, data];
+    } else {
+      tempFormValues[existingIndex] = data;
+    }
+ 
+    setFormValue(tempFormValues);
   };
 
   const uniquefn = () => {
     let disableflag = false;
-    const uniqueAnswers = formvValue.reduce((acc, current) => {
-      const existingIndex = acc.findIndex(
-        (item) => item.question_id === current.question_id
-      );
-      if (!current.answer_text) {
-        disableflag = true;
-      }
-      if (existingIndex === -1) {
-        acc.push(current);
-      } else {
-        acc[existingIndex] = current;
-      }
-
-      return acc;
-    }, []);
-    setUniqueAnswers(uniqueAnswers);
-    if (formvValue.length) {
-      setDisable(disableflag);
+ 
+    if (formvValue.length === apiData.length) {
+      formvValue.forEach((ans) => {
+      
+        if (!ans.answer_text) {
+          disableflag = true;
+        }
+      });
     } else {
-      setDisable(true);
+      disableflag = true;
     }
-    // setDisable(uniqueAnswers.length !== apiData.length ||(apiData.length === 0 && uniqueAnswers.length ===0));
+    setDisable(disableflag);
   };
-  // console.log(uniqueAnswers);
   const handlesubmit = () => {
     axios
-      .post("http://13.48.30.130/feedback/add-f-answer/", {
+      .post(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/add-f-answer/`, {
         student_number: localStorage.getItem("studentNo"),
-        answers: uniqueAnswers,
+        answers: formvValue,
       })
       .then(() => {
         Cookies.set("spage4", true);

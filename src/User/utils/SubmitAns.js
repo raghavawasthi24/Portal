@@ -1,25 +1,27 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
-const SubmitAnswer = ({ status, quesId, ansId, category }) => {
-  // const dispatch = useDispatch();
+const SubmitAnswer = ({ status, quesId, ansId }) => {
   const id = localStorage.getItem("id");
   const submitData = {
-    quesId: quesId,
+    quesId: quesId.includes("C++") ? quesId.replace("C++", "Cpp") : quesId,
     status: status,
-    ansId: ansId,
+    ansId: ansId.includes("C++") ? ansId.replace("C++", "Cpp") : ansId,
   };
-  axios;
-  axios
+  // console.log(submitData);
+  return axios
     .get(
-      `https://csi-examportal.onrender.com/api/v1/postResponse/${id}?ansId=${ansId}&quesId=${quesId}&status=${status}`,
+      `${import.meta.env.VITE_APP_NODE_URL}/postResponse/${id}?ansId=${
+        submitData.ansId
+      }&quesId=${submitData.quesId}&status=${status}`,
       submitData
     )
     .then((res) => {
-      // dispatch(setStudentStatus(res.data));
-      localStorage.setItem("totalScoreStatus", JSON.stringify(res.data));
+      return res.data.user; // Return the response data
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      throw err; // Rethrow the error to handle it in the calling function if needed
+    });
 };
 
 export default SubmitAnswer;
