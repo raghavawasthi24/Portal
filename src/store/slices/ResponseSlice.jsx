@@ -61,7 +61,7 @@ const ResponseSlice = createSlice({
       console.log(state.currentQues)
     },
     prevQues: (state, action) => {
-      if (state.currentQuesNo < 2) state.currentQuesNo = 1;
+      if (state.currentQuesNo < 1) state.currentQuesNo = 1;
       else state.currentQuesNo--;
       findResponse(state.all_questions)
     },
