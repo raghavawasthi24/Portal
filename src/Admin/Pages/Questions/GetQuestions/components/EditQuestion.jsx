@@ -37,47 +37,39 @@ const EditQuestion = () => {
   // const [value4,setvalue4]=useState();
 
   const [formvalues, setFormvalues] = useState(
-    questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]
+    questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
   );
 
   useEffect(() => {
-    console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo-1])
+    // console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo-1])
     initialValues.question =
-      questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]?.question;
+      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.question;
     initialValues.opt1 =
-      questionDisplay.initialQues[
+      questionDisplay?.initialQues[
         questionDisplay.initialQuesNo - 1
       ]?.options[0].name;
     initialValues.opt2 =
-      questionDisplay.initialQues[
+      questionDisplay?.initialQues[
         questionDisplay.initialQuesNo - 1
       ]?.options[1].name;
     initialValues.opt3 =
-      questionDisplay.initialQues[
+      questionDisplay?.initialQues[
         questionDisplay.initialQuesNo - 1
       ]?.options[2].name;
     initialValues.opt4 =
-      questionDisplay.initialQues[
+      questionDisplay?.initialQues[
         questionDisplay.initialQuesNo - 1
       ]?.options[3].name;
     initialValues.category =
-      questionDisplay.initialQues[questionDisplay.initialQuesNo - 1].category;
-    // setvalue1(questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.ansId);
-    // let options=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options
-    // let ansId=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.ansId
-    // let correctId=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.correctId
-    // let index=ansId?.indexOf(correctId)
-
-    // initialValues.correctAns=options[index]
-    // setCorrectAns(options[index])
-    // initialValues.correctAns=questionDisplay.initialQues[questionDisplay.initialQuesNo-1].question.correct_ans;
+      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1].category;
+   
     let options =
-      questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]?.options;
+      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.options;
     let correctId =
-      questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]?.correctId;
+      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.correctId;
     let index = options?.findIndex((x) => x.ansId == correctId);
-    console.log(index, options[index].name);
-    initialValues.correctAns = options[index].name;
+
+    initialValues.correctAns = options[index]?.name;
     setFormvalues(initialValues);
   }, [
     questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]?.question,
@@ -104,12 +96,12 @@ const EditQuestion = () => {
         formvalues.opt4,
       ];
       let options =
-        questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]?.options;
+        questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.options;
       let correctId =
-        questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]
+        questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
           ?.correctId;
       let index = arr.indexOf(formvalues.correctAns);
-      console.log(index, options[index].ansId);
+      // console.log(index, options[index].ansId);
       // initialValues.correctAns=options[index].name
 
       console.log(formvalues);
@@ -186,7 +178,7 @@ const EditQuestion = () => {
         label="Question"
         multiline
         maxRows={4}
-        value={formvalues.question}
+        value={formvalues?.question}
         name="question"
         onChange={inputHandler}
         variant="standard"
@@ -200,7 +192,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{ width: "45%", margin: "0.8rem 0" }}
-          value={formvalues.opt1}
+          value={formvalues?.opt1}
           name="opt1"
           onChange={inputHandler}
           variant="standard"
@@ -211,7 +203,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{ width: "45%", margin: "0.8rem 0" }}
-          value={formvalues.opt2}
+          value={formvalues?.opt2}
           name="opt2"
           onChange={inputHandler}
           variant="standard"
@@ -225,7 +217,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{ width: "45%", margin: "0.8rem 0" }}
-          value={formvalues.opt3}
+          value={formvalues?.opt3}
           name="opt3"
           onChange={inputHandler}
           variant="standard"
@@ -236,7 +228,7 @@ const EditQuestion = () => {
           multiline
           maxRows={4}
           sx={{ width: "45%", margin: "0.8rem 0" }}
-          value={formvalues.opt4}
+          value={formvalues?.opt4}
           name="opt4"
           onChange={inputHandler}
           variant="standard"
@@ -257,10 +249,10 @@ const EditQuestion = () => {
             onChange={inputHandler}
             variant="standard"
           >
-            <MenuItem value={formvalues.opt1}>{formvalues.opt1}</MenuItem>
-            <MenuItem value={formvalues.opt2}>{formvalues.opt2}</MenuItem>
-            <MenuItem value={formvalues.opt3}>{formvalues.opt3}</MenuItem>
-            <MenuItem value={formvalues.opt4}>{formvalues.opt4}</MenuItem>
+            <MenuItem value={formvalues?.opt1}>{formvalues?.opt1}</MenuItem>
+            <MenuItem value={formvalues?.opt2}>{formvalues?.opt2}</MenuItem>
+            <MenuItem value={formvalues?.opt3}>{formvalues?.opt3}</MenuItem>
+            <MenuItem value={formvalues?.opt4}>{formvalues?.opt4}</MenuItem>
           </Select>
         </FormControl>
 
@@ -271,14 +263,14 @@ const EditQuestion = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={formvalues.category}
+            value={formvalues?.category}
             name="category"
             label="Category"
             onChange={inputHandler}
             variant="standard"
           >
-            {techArr.map((item) => {
-              return <MenuItem value={item}>{item}</MenuItem>;
+            {techArr.map((item,index) => {
+              return <MenuItem value={item} key={index}>{item}</MenuItem>;
             })}
           </Select>
         </FormControl>

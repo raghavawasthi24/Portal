@@ -8,8 +8,45 @@ import zIndex from '@mui/material/styles/zIndex';
 
 const Dropdown = () => {
 
-    const techArr=["HTML","CSS","JavaScript","Aptitude","C","C++","Java"];
-    const [selTech,setSelTech]=useState(techArr[0])
+  const techArr = [
+    {
+      value: "HTML",
+      label: "HTML",
+    },
+    {
+      value: "CSS",
+      label: "CSS",
+    },
+    {
+      value: "JavaScript",
+      label: "JavaScript",
+    },
+    {
+      value: "Aptitude",
+      label: "Aptitude",
+    },
+    {
+      value: "Sql",
+      label: "SQL",
+    },
+    {
+      value: "C",
+      label: "C",
+    },
+    {
+      value: "Cpp",
+      label: "C++",
+    },
+    {
+      value: "Java",
+      label: "Java",
+    },
+    {
+      value: "Python",
+      label: "Python",
+    },
+  ];
+    const [selTech,setSelTech]=useState(techArr[0].value)
     const handleTech=(e)=>{
      setSelTech(e.target.value)
      dispatch(moveQues(1))
@@ -32,7 +69,7 @@ const Dropdown = () => {
             onChange={handleTech}
             sx={{textAlign:"center"}}>
             {techArr.map((item,key)=>{
-                return(<MenuItem key={key} value={item}>{item}</MenuItem>)
+                return(<MenuItem key={key} value={item.value}>{item.label}</MenuItem>)
             })}
             </Select> 
         </FormControl>

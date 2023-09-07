@@ -43,13 +43,13 @@ const GetQuestions = () => {
 
 
     useEffect(()=>{  
-        console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo-1])
-        let options=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options
-        let correctId=questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.correctId
+        console.log(questionDisplay?.initialQues[questionDisplay.initialQuesNo-1])
+        let options=questionDisplay?.initialQues[questionDisplay.initialQuesNo-1]?.options
+        let correctId=questionDisplay?.initialQues[questionDisplay.initialQuesNo-1]?.correctId
         let index=options?.findIndex(x=>x.ansId==correctId)
-        console.log(index,options)
-        setCorrectAns(options[index].name)
-    },[questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.question])
+        // console.log(index,options)
+        setCorrectAns(options[index]?.name)
+    },[questionDisplay?.initialQues[questionDisplay.initialQuesNo-1]?.question])
 
     const delQuestion=(id)=>{
       axios.delete(`${import.meta.env.VITE_APP_NODE_URL}/deletequestions/${id}`)
@@ -78,11 +78,11 @@ const GetQuestions = () => {
             </div>
         </div>
         <hr/>
-            <p>{questionDisplay.initialQues[questionDisplay?.initialQuesNo-1]?.question}</p>
+            <p>{questionDisplay?.initialQues[questionDisplay?.initialQuesNo-1]?.question}</p>
             
             <FormControl>
                 <RadioGroup>
-                {questionDisplay.initialQues[questionDisplay.initialQuesNo-1]?.options.map((item,key)=>{
+                {questionDisplay?.initialQues[questionDisplay.initialQuesNo-1]?.options.map((item,key)=>{
                     return(<FormControlLabel key={key} checked={item.name===correctAns} value={item} control={<Radio/>} label={item.name}/>)
                 })}
                 {/* <FormControlLabel value="HTML11" checked control={<Radio/>} label="HTML11"/> */}
