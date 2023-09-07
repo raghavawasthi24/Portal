@@ -10,7 +10,7 @@ const VisitedStatus = async ({ category, quesId }) => {
     const res = await axios.get(
       `${import.meta.env.VITE_APP_NODE_URL}/isVisited/user/${id}?quesId=${
         sendData.quesId
-      }?&category=${sendData.category}`
+      }&category=${sendData.category}`
     );
     return res.data;
   } catch (err) {

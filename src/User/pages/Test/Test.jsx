@@ -28,7 +28,7 @@ const Test = () => {
 
   const category = useSelector((state) => state.quesList.quesCategory);
   useEffect(() => {
-    const postCategory = category.includes("C++") ? "Cpp" : category;
+    const postCategory = category;
     axios
       .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${postCategory}`)
       .then((res) => {

@@ -14,7 +14,7 @@ import {
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Visibility, VisibilityOff , Person } from "@mui/icons-material";
+import { Visibility, VisibilityOff, Person } from "@mui/icons-material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
@@ -32,7 +32,7 @@ const Login = ({ handleLogin }) => {
   //   handleLogin(login);
   // }
   const [showPassword, setShowPassword] = useState(false);
-  const [loader,setLoader]=useState(false);
+  const [loader, setLoader] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -95,14 +95,16 @@ const Login = ({ handleLogin }) => {
         }
       })
       .catch((err) => {
-        setLoader(true);
+        setLoader(false);
         console.log(err);
         toast.error("Invalid Student No or Password");
       });
   };
   const formik = useFormik({ initialValues, validate, onSubmit });
 
-  return loader?(<Loader/>):(
+  return loader ? (
+    <Loader />
+  ) : (
     <div className="loginPage">
       <img
         src="/Images/csiLogo.svg"
@@ -129,8 +131,6 @@ const Login = ({ handleLogin }) => {
                     borderLeft: "4px solid #543BA0",
                   },
                 }}
-          
-            
               />
               {formik.touched.student_no && formik.errors.student_no ? (
                 <p className="error">{formik.errors.student_no}</p>
@@ -175,7 +175,7 @@ const Login = ({ handleLogin }) => {
               {formik.touched.password && formik.errors.password ? (
                 <p className="error">{formik.errors.password}</p>
               ) : null}
-          </div> 
+            </div>
             <Button
               variant="contained"
               className="login_btn"

@@ -17,7 +17,7 @@ const QuesNumbers = () => {
   const dispatch = useDispatch();
 
   function findVisitedStatus(inputId, questionsArray) {
-    const question = questionsArray.find((item) => item.id === inputId);
+    const question = questionsArray.find((item) => item.id === `${inputId}`);
 
     if (question) {
       return {
@@ -51,12 +51,13 @@ const QuesNumbers = () => {
         }}
       >
         {quesdata.initialQues.map((ques, id) => {
+          const active = id === currentBtnIndex - 1;
+
           const { answered, review, visited } = findVisitedStatus(
             ques?.quesId,
             currentCategoryQuestions
           );
-          const active = id === currentBtnIndex - 1;
-
+          console.log(answered, review, visited, ques?.quesId);
           if (active) {
             VisitedStatus({ category, quesId: ques?.quesId })
               .then((res) => {
