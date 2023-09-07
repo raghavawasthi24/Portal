@@ -43,10 +43,10 @@ const Question = () => {
         console.log(res)
         // console.log(res.data.msg.categoryResponse[res.data.msg.categoryResponse.length-1].count)
         // console.log(res.data.msg.categoryResponse.length-1)
-        if (res.data.msg.categoryResponse.length != 0)
+        if (res.data.msg.count.length != 0)
           setCount(
-            res.data.msg.categoryResponse[
-              res.data.msg.categoryResponse.length - 1
+            res.data.msg.count[
+              res.data.msg.count.length - 1
             ].count + 1
           );
         else setCount(1);
