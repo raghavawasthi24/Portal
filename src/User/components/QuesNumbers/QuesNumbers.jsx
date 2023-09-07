@@ -60,8 +60,7 @@ const QuesNumbers = () => {
           if (active) {
             VisitedStatus({ category, quesId: ques?.quesId })
               .then((res) => {
-                if (res.data.questions.length > 0)
-                  dispatch(markVisited(res.data.questions));
+                if (res) dispatch(markVisited(res));
               })
               .catch((err) => {
                 console.log(err);
@@ -80,7 +79,7 @@ const QuesNumbers = () => {
                       ? "!bg-reviewColor"
                       : "!bg-saveColor"
                     : visited
-                    ? ""
+                    ? "!bg-red-600 !bg-text-white"
                     : "!bg-white !text-blue-600 !border !border-blue-600"
                 }
                 sx={{

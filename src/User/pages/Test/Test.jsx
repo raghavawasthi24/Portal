@@ -28,10 +28,9 @@ const Test = () => {
 
   const category = useSelector((state) => state.quesList.quesCategory);
   useEffect(() => {
-    // .get(`https://csi-examportal.onrender.com/api/v1/getquestions`)
-    // .get(`https://csi-examportal.onrender.com/api/v1/category/${category}`)
+    const postCategory = category.includes("C++") ? "Cpp" : category;
     axios
-      .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${category}`)
+      .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${postCategory}`)
       .then((res) => {
         // console.log(res)
         dispatch(quesList(res.data.msg));
