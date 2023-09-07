@@ -5,7 +5,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleQuestion } from "../../../store/slices/QuestionsSlice";
+// import { toggleQuestion } from "../../../store/slices/QuestionsSlice";
+import { toggleEditOpt } from "../../../store/slices/EditContSlice";
 import { Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -16,7 +17,7 @@ import { findResponse, nextQues, prevQues } from "../../../store/slices/Response
 const Responses = (props) => {
   const dispatch = useDispatch();
   const closeResponses = () => {
-    dispatch(toggleQuestion());
+    dispatch(toggleEditOpt());
   };
 
   const data=useSelector(state=>state.responses.currentQues)
