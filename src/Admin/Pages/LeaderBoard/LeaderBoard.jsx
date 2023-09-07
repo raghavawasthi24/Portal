@@ -44,7 +44,7 @@ const [filteredStudents, setFilteredStudents] = useState([]); // State variable 
 
   useEffect(() => {
     const socket = io.connect(
-      "https://fluttering-lumber-production.up.railway.app",
+      `${import.meta.env.VITE_APP_NODE_URL}`,
       {
         transports: ["websocket"],
       }
@@ -52,7 +52,7 @@ const [filteredStudents, setFilteredStudents] = useState([]); // State variable 
 
     axios
       .get(
-        "https://fluttering-lumber-production.up.railway.app/api/v1/getquestions"
+        `${import.meta.env.VITE_APP_NODE_URL}/getquestions`
       )
       .then((res) => {
         setResponseData(res.data.msg);
@@ -88,7 +88,7 @@ const [filteredStudents, setFilteredStudents] = useState([]); // State variable 
   const openResponses = (studentNo) => {
     axios
       .get(
-        `https://fluttering-lumber-production.up.railway.app/api/v1/responses/ques/${studentNo}`
+        `${import.meta.env.VITE_APP_NODE_URL}/responses/ques/${studentNo}`
       )
       .then((res) => {
         // console.log(res.data.questions)
