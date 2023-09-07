@@ -35,7 +35,7 @@ const Question = () => {
     console.log(dropdownData.quesCategory);
     axios
       .get(
-        `https://csi-examportal.onrender.com/api/v1/counts?category=${
+        `${import.meta.env.VITE_APP_NODE_URL}/counts?category=${
           dropdownData.quesCategory
         }`
       )
