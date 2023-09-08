@@ -41,7 +41,7 @@ const EditQuestion = () => {
   );
 
   useEffect(() => {
-    // console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo-1])
+    console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo-1])
     initialValues.question =
       questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.question;
     initialValues.opt1 =
