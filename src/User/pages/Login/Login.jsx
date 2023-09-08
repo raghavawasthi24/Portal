@@ -73,7 +73,7 @@ const Login = ({ handleLogin }) => {
       .post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/login/`, values)
       .then((res) => {
         setLoader(true);
-        console.log(res);
+        // console.log(res);
         Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
         isLoggedin = true;
         localStorage.setItem("studentNo", res.data.studentNo);
@@ -83,7 +83,9 @@ const Login = ({ handleLogin }) => {
           Cookies.set("isAdmin", true);
           Cookies.set("apage1", true);
           navigate("/admin");
-        } else if (res.data.isRelogin === true) {
+        } else if (res.data.logintime) {
+          localStorage.setItem("savedTime", res.data.logintime.toString());
+          localStorage.setItem("language", res.data.category || "C");
           Cookies.set("spage2", true);
           navigate("/test");
         } else if (res.data.isSubmit === true) {
