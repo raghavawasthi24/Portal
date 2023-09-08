@@ -14,10 +14,10 @@ const GetQuestions = () => {
   const data = useSelector((state) => state.quesList);
   const dispatch=useDispatch()
   const [loader, setLoader] = useState(true);
-  useEffect(() => {
-    if (data.initialQues[0].question === "N/A") setLoader(true);
-    else setLoader(false);
-  }, [data.initialQues]);
+  // useEffect(() => {
+  //   if (data.initialQues[0].question === "N/A") setLoader(true);
+  //   else setLoader(false);
+  // }, [data.initialQues]);
 
   useEffect(()=>{
     dispatch(quesCtgSel("HTML"))
