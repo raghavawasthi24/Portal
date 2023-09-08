@@ -145,7 +145,7 @@ const LeaderBoard = () => {
                 <TableHead sx={{ backgroundColor: "rgba(242, 241, 252, 1)" }}>
                   <TableRow>
                     <TableCell className="w-[50px]"></TableCell>
-                    <TableCell sx={{ textAlign: "center" }}>Rank</TableCell>
+                    <TableCell sx={{ textAlign: "center",width:"30px" }}>Rank</TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
                       Student Number
                     </TableCell>
