@@ -13,7 +13,7 @@ import { quesCtgSel } from "../../../../store/slices/QuestionsSlice";
 const GetQuestions = () => {
   const data = useSelector((state) => state.quesList);
   const dispatch=useDispatch()
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   // useEffect(() => {
   //   if (data.initialQues[0].question === "N/A") setLoader(true);
   //   else setLoader(false);
