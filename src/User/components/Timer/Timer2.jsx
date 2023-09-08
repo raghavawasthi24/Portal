@@ -6,7 +6,7 @@ import { getLoginTime } from "../../utils/index";
 import Cookies from "js-cookie";
 
 const Timer = () => {
-  const [timeRemaining, setTimeRemaining] = useState(0); // Total time remaining in seconds
+  const [timeRemaining, setTimeRemaining] = useState(10800); // Total time remaining in seconds
   const studentNumber = localStorage.getItem("studentNo");
   const nav = useNavigate();
 

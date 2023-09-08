@@ -16,7 +16,7 @@ const TestFooter = () => {
     quesState.find((item) => item.category === category)?.questions || [];
   // const data = useSelector((state) => state.prevNext);
 
-  const [answered, setAnswered] = useState(false);
+  const [isAnswered, setIsAnswered] = useState(false);
   const [currentAnsId, setCurrentAnsId] = useState("");
 
   const currentQuestion = quesData.initialQues[quesData.initialQuesNo - 1];
@@ -28,11 +28,11 @@ const TestFooter = () => {
 
     if (question) {
       if (question.ansId !== "") {
-        setAnswered(true);
+        setIsAnswered(true);
         setCurrentAnsId(question.ansId);
       }
     } else {
-      setAnswered(false);
+      setIsAnswered(false);
     }
   }, [currentCategoryQuestions, quesData]);
 
@@ -48,7 +48,7 @@ const TestFooter = () => {
   // };
 
   const saveAndNext = () => {
-    if (!answered) {
+    if (!isAnswered) {
       toast.error("Select an option");
       return;
     }
@@ -71,7 +71,7 @@ const TestFooter = () => {
   };
 
   const reviewAndNext = () => {
-    if (!answered) {
+    if (!isAnswered) {
       toast.error("Select an option");
       return;
     }
