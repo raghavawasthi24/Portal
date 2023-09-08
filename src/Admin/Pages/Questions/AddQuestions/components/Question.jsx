@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../../../../Loader/Loader";
+
 
 const Question = () => {
   let initialValues = {
@@ -23,17 +25,18 @@ const Question = () => {
   const [count, setCount] = useState(1);
   const [ctg, setCtg] = useState("");
   const [firstCount,setFirstCount]=useState(true)
+  const [loader, setLoader] = useState(false);
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
     setFormvalues({ ...formvalues, [name]: value });
-    console.log(formvalues);
+    // console.log(formvalues);
   };
 
   const dropdownData = useSelector((state) => state.quesList);
   useEffect(() => {
     setCtg(dropdownData.quesCategory);
-    console.log(dropdownData.quesCategory);
+    // console.log(dropdownData.quesCategory);
     axios
       .get(
         `${import.meta.env.VITE_APP_NODE_URL}/counts?category=${
@@ -41,7 +44,7 @@ const Question = () => {
         }`
       )
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         // console.log(res.data.msg.categoryResponse[res.data.msg.categoryResponse.length-1].count)
         // console.log(res.data.msg.categoryResponse.length-1)
         if (res.data.msg.count.length != 0)
@@ -53,7 +56,7 @@ const Question = () => {
         else setCount(1);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, [dropdownData.quesCategory]);
 
@@ -70,6 +73,7 @@ const Question = () => {
         formvalues.opt4.trim() != "" &&
         formvalues.correctAns.trim() != ""
       ) {
+        setLoader(true)
         axios
           .post(`${import.meta.env.VITE_APP_NODE_URL}/addquestions`, {
             question: formvalues.question.trim(),
@@ -96,13 +100,15 @@ const Question = () => {
             ],
           })
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             setCount(count + 1);
             toast.success("Question saved successfully");
+            setLoader(false)
             setFormvalues(initialValues);
           })
           .catch(() => {
-            toast.err("Something Went Wrong");
+            setLoader(false)
+            toast.error("Question Already Exits");
             // alert(err)
           });
       } else toast.error("Please fill all deatils");
@@ -200,6 +206,12 @@ const Question = () => {
           </MenuItem>
         </Select>
       </FormControl>
+      <div
+        className="absolute top-0"
+        style={{ marginLeft: "-2rem", display: loader ? "" : "none" }}
+      >
+        <Loader />
+      </div>
 
       <ToastContainer />
     </div>

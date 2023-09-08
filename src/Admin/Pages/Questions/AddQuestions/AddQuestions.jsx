@@ -19,7 +19,7 @@ const AddQuestions = () => {
     if (!check) {
       navigate("/login");
     }
-    console.log("add")
+    // console.log("add")
   }, []);
   const dispatch = useDispatch();
   return (
