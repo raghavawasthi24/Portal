@@ -46,14 +46,16 @@ const Dropdown = () => {
       label: "Python",
     },
   ];
-    const [selTech,setSelTech]=useState(techArr[0].value)
+
+  const currentdata= useSelector(state=>state.quesList)
+    const [selTech,setSelTech]=useState(currentdata.quesCategory)
     const handleTech=(e)=>{
      setSelTech(e.target.value)
      dispatch(moveQues(1))
      dispatch(quesCtgSel(e.target.value))
     }
 
-    const currentdata= useSelector(state=>state.quesList)
+    
     // const currentCtg =useSelector(state=>state.prevNext)
 
     useEffect(()=>{

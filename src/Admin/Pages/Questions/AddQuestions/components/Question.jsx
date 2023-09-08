@@ -22,6 +22,7 @@ const Question = () => {
   const [formvalues, setFormvalues] = useState(initialValues);
   const [count, setCount] = useState(1);
   const [ctg, setCtg] = useState("");
+  const [firstCount,setFirstCount]=useState(true)
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -57,8 +58,10 @@ const Question = () => {
   }, [dropdownData.quesCategory]);
 
   useEffect(() => {
-    console.log(dropdownData);
-    if (dropdownData.flag == 1) {
+      if(firstCount){
+        setFirstCount(false)
+        return
+      }
       if (
         formvalues.question.trim() != "" &&
         formvalues.opt1.trim() != "" &&
@@ -103,7 +106,7 @@ const Question = () => {
             // alert(err)
           });
       } else toast.error("Please fill all deatils");
-    }
+    
   }, [dropdownData.submitQuestion]);
 
   return (

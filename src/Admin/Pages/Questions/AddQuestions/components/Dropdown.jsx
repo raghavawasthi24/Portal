@@ -44,14 +44,15 @@ const Dropdown = () => {
       label: "Python",
     },
   ];
-  const [selTech, setSelTech] = useState(techArr[0].value);
+  const currentdata = useSelector((state) => state.quesList);
+  const [selTech, setSelTech] = useState(currentdata.quesCategory);
   const handleTech = (e) => {
     setSelTech(e.target.value);
     //  dispatch(moveQues(1))
     dispatch(quesCtgSel(e.target.value));
   };
 
-  const currentdata = useSelector((state) => state.quesList);
+
 
   const dispatch = useDispatch();
   return (
@@ -60,7 +61,7 @@ const Dropdown = () => {
         <Select value={selTech} onChange={handleTech}>
           {techArr.map((item, key) => {
             return (
-              <MenuItem key={key} value={item.value}>
+              <MenuItem key={key} value={item.value} className="text-center">
                 {item.label}
               </MenuItem>
             );

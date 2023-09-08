@@ -9,14 +9,17 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
 const AddQuestions = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
     const check = Cookies.get("apage5");
     if (!check) {
       navigate("/login");
     }
+    console.log("add")
   }, []);
   const dispatch = useDispatch();
   return (
