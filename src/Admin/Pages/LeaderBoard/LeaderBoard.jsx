@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import Table from "@mui/material/Table";
@@ -14,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Responses from "./Responses";
 import { useDispatch, useSelector } from "react-redux";
-import { quesList, toggleQuestion } from "../../../store/slices/QuestionsSlice";
 import { toggleEditOpt } from "../../../store/slices/EditContSlice";
 import axios from "axios";
 import {
@@ -23,7 +21,8 @@ import {
 } from "../../../store/slices/ResponseSlice";
 import Cookies from "js-cookie";
 import updateCookies from "../../utils/updateCookies";
-
+import Loader from "../../../Loader/Loader";
+// import Trophy from "../../../../public/Images/trophy-star"
 
 const LeaderBoard = () => {
   const [students, setStudents] = useState([]);
@@ -32,7 +31,8 @@ const LeaderBoard = () => {
   const navigate = useNavigate();
   const [responseData, setResponseData] = useState([]);
   const [filterText, setFilterText] = useState(""); // State variable to store the filter text
-const [filteredStudents, setFilteredStudents] = useState([]); // State variable to store filtered students
+  const [filteredStudents, setFilteredStudents] = useState([]); // State variable to store filtered students
+  const [loader, setLoader] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -42,19 +42,19 @@ const [filteredStudents, setFilteredStudents] = useState([]); // State variable 
     }
   }, []);
 
+
+  //SOCKET.io
+
   useEffect(() => {
-    const socket = io.connect(
-      `${import.meta.env.VITE_APP_NODE_URL}`,
-      {
-        transports: ["websocket"],
-      }
-    );
+    setLoader(true);
+    const socket = io.connect(`${import.meta.env.VITE_APP_LEADER_URL}`, {
+      transports: ["websocket"],
+    });
 
     axios
-      .get(
-        `${import.meta.env.VITE_APP_NODE_URL}/getquestions`
-      )
+      .get(`${import.meta.env.VITE_APP_NODE_URL}/getquestions`)
       .then((res) => {
+        setLoader(false);
         setResponseData(res.data.msg);
         dispatch(findResponse(res.data.msg));
       });
@@ -65,7 +65,7 @@ const [filteredStudents, setFilteredStudents] = useState([]); // State variable 
     });
 
     socket.on("connect_error", (error) => {
-      console.error("Socket connection error:", error);
+      // console.error("Socket connection error:", error);
     });
 
     return () => {
@@ -87,9 +87,7 @@ const [filteredStudents, setFilteredStudents] = useState([]); // State variable 
 
   const openResponses = (studentNo) => {
     axios
-      .get(
-        `${import.meta.env.VITE_APP_NODE_URL}/responses/ques/${studentNo}`
-      )
+      .get(`${import.meta.env.VITE_APP_NODE_URL}/responses/ques/${studentNo}`)
       .then((res) => {
         // console.log(res.data.questions)
         dispatch(uploadResponse(res.data.questions));
@@ -98,132 +96,148 @@ const [filteredStudents, setFilteredStudents] = useState([]); // State variable 
     dispatch(toggleEditOpt());
   };
 
-
   const handleFilter = (e) => {
-    setFilterText(e.target.value)
+    setFilterText(e.target.value);
     const filtered = students.filter((student) =>
-      student.studentNo.includes(filterText)
+      student.studentNo.includes(e.target.value)
     );
     setFilteredStudents(filtered);
   };
 
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen">
-      <div className="absolute" style={{ top: "3rem", left: "3rem" }}>
-        <ArrowBackIcon
-          sx={{
-            width: "3rem",
-            height: "3rem",
-            color: "rgba(84, 59, 160, 1)",
-            cursor: "pointer",
-          }}
-          onClick={() => {
-            updateCookies(1), navigate("/admin");
-          }}
-        />
-      </div>
-      <div className="absolute" style={{ top: "3rem", right: "3rem" }}>
-        <input
-          type="text"
-          placeholder="Filter by Student Number"
-          value={filterText}
-          onChange={(e) => handleFilter(e)}
-          className="p-1 outline-none border"
-        />
-      </div>
-      <div className="p-4 mt-5">
-        <h1 className="font-sans font-bold text-3xl text-center mb-5 tracking-widest whitespace-pre text-leaderboardColor">
-          Leader Board
-        </h1>
-        <div className="mx-auto">
-          <TableContainer
-            component={Paper}
+    <>
+      <div className="flex flex-col items-center justify-between min-h-screen">
+        <div className="absolute" style={{ top: "3rem", left: "3rem" }}>
+          <ArrowBackIcon
             sx={{
-              width: "50rem",
-              backgroundColor: "rgba(255, 255, 255, 0.489)",
+              width: "3rem",
+              height: "3rem",
+              color: "rgba(84, 59, 160, 1)",
+              cursor: "pointer",
             }}
-          >
-            <Table>
-              <TableHead sx={{ backgroundColor: "rgba(242, 241, 252, 1)" }}>
-                <TableRow>
-                  <TableCell sx={{ textAlign: "center" }}>Rank</TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    Student Number
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    Student Name
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    Total Score
-                  </TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {currentStudents.map((student, index) => (
-                  <TableRow
-                    key={index}
-                    onClick={(e) => openResponses(student.studentNo)}
-                    className="cursor-pointer"
-                  >
+            onClick={() => {
+              updateCookies(1), navigate("/admin");
+            }}
+          />
+        </div>
+        <div className="absolute" style={{ top: "3rem", right: "3rem" }}>
+          <input
+            type="text"
+            placeholder="Filter by Student Number"
+            value={filterText}
+            onChange={(e) => handleFilter(e)}
+            className="p-1 outline-none border"
+          />
+        </div>
+        <div className="p-4 mt-5">
+          <h1 className="font-sans font-bold text-3xl text-center mb-5 tracking-widest whitespace-pre text-leaderboardColor">
+            Leader Board
+          </h1>
+          <div className="mx-auto">
+            <TableContainer
+              component={Paper}
+              sx={{
+                width: "50rem",
+                backgroundColor: "rgba(255, 255, 255, 0.489)",
+              }}
+            >
+              <Table>
+                <TableHead sx={{ backgroundColor: "rgba(242, 241, 252, 1)" }}>
+                  <TableRow>
+                    <TableCell className="w-[50px]"></TableCell>
+                    <TableCell sx={{ textAlign: "center" }}>Rank</TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
-                      {startIndex + index + 1}
+                      Student Number
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
-                      {student.studentNo}
+                      Student Name
                     </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
-                      {student.name}
+                      Total Score
                     </TableCell>
-                    <TableCell sx={{ textAlign: "center" }}>
-                      {student.calculatedTotalScore}
-                    </TableCell>
-                    <TableCell>
-                      <ArrowRightIcon />
-                    </TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {currentStudents.map((student, index) => (
+                    <TableRow
+                      key={index}
+                      onClick={(e) => openResponses(student.studentNo)}
+                      className="cursor-pointer"
+                    >
+                      <TableCell className="w-[50px]">
+                      { Array.prototype.findIndex.call(
+                          students,
+                          (x) => x.studentNo == student.studentNo
+                        )==0?<img src="Images/trophy-star.png" className="w-4 h-4 mr-2"/>:""}
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center"}}>
+                        {Array.prototype.findIndex.call(
+                          students,
+                          (x) => x.studentNo == student.studentNo
+                        ) + 1}
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        {student.studentNo}
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        {student.name}
+                      </TableCell>
+                      <TableCell sx={{ textAlign: "center" }}>
+                        {student.calculatedTotalScore}
+                      </TableCell>
+                      <TableCell>
+                        <ArrowRightIcon />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </div>
+        <div className="flex items-center justify-center my-7">
+          <button
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            <ArrowBackIcon />
+          </button>
+          <span className="mx-2">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            <ArrowForwardIcon />
+          </button>
+        </div>
+        {/* Include your Tabtable component here */}
+        <div
+          style={{
+            display:
+              useSelector((state) => state.editShow.initialValue) == 0
+                ? "none"
+                : "block",
+          }}
+        >
+          <div
+            className="w-screen h-screen absolute top-0 right-0 overflow-hidden z-99"
+            style={{ backgroundColor: " #fafafa7a" }}
+          >
+            <Responses />
+          </div>
         </div>
       </div>
-      <div className="flex items-center justify-center my-7">
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          <ArrowBackIcon />
-        </button>
-        <span className="mx-2">
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          <ArrowForwardIcon />
-        </button>
-      </div>
-      {/* Include your Tabtable component here */}
       <div
-        style={{
-          display: useSelector((state) => state.editShow.initialValue)==0
-            ? "none"
-            : "block",
-        }}
+        className="absolute top-0"
+        style={{ marginLeft: "-2rem", display: loader ? "" : "none" }}
       >
-        <div className="w-screen h-screen absolute top-0 right-0 overflow-hidden z-99" style={{backgroundColor:" #fafafa7a"}}>
-          <Responses />
-        </div>
+        <Loader />
       </div>
-    </div>
+    </>
   );
 };
 
 export default LeaderBoard;
-
-
-
-
-
