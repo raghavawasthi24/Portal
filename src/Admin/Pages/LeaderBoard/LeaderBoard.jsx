@@ -47,7 +47,7 @@ const LeaderBoard = () => {
 
   useEffect(() => {
     setLoader(true);
-    const socket = io.connect(`${import.meta.env.VITE_APP_LEADER_URL}`, {
+    const socket = io.connect("https://fluttering-lumber-production.up.railway.app/", {
       transports: ["websocket"],
     });
 
