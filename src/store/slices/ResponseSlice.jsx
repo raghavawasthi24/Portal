@@ -68,7 +68,7 @@ const ResponseSlice = createSlice({
     },
     nextQues: (state, action) => {
       console.log("cakkkkk")
-      if (state.currentQuesNo == state.studentResponses.length)
+      if (state.currentQuesNo == state.studentResponses.length-1)
         state.currentQuesNo = 0;
       else state.currentQuesNo++;
       console.log(state.currentQuesNo)

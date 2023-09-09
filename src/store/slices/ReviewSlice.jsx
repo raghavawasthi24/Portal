@@ -69,15 +69,24 @@ const ReviewSlice = createSlice({
     },
     markAnsId: (state, action) => {
       const { categoryId, questionId, ansId } = action.payload;
+      console.log(categoryId,questionId,ansId)
+      if(categoryId==="C" || categoryId==="Cpp" || categoryId==="Python" || categoryId==="Java")
+      {
+        state.categories[4].category=categoryId
+      }
+      
       const category = state.categories.find(
         (cat) => cat.category === categoryId
       );
+    
+      console.log(category)
       if (category) {
         const question = category.questions.find(
           (ques) => ques.id === questionId
         );
+        console.log(question)
         if (question) {
-          console.log(question);
+          // console.log(question);
           question.visited = true;
           question.ansId = ansId;
         } else {
