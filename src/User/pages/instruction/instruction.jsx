@@ -63,7 +63,7 @@ const Instruction = () => {
     localStorage.setItem("language", Language);
     getLoginTime();
     axios
-      .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${id}/${Language}`)
+      .get(`${import.meta.env.VITE_APP_NODE_URL}/category/user/${id}?category=${Language}`)
       .then(() => {
         toast.info("Test Started");
       })
@@ -74,7 +74,7 @@ const Instruction = () => {
   };
 
   return (
-    <div className="instructions">
+    <div className="instructions overflow-y-auto">
       <Grid container spacing={2} margin={5}>
         <Grid item xs={8}>
           <div className="instructionLeft">
@@ -183,7 +183,7 @@ const Instruction = () => {
                   required
                 >
                   <MenuItem value="C">C</MenuItem>
-                  <MenuItem value="Cpp">Cpp</MenuItem>
+                  <MenuItem value="Cpp">C++</MenuItem>
                   <MenuItem value="Java">Java</MenuItem>
                   <MenuItem value="Python">Python</MenuItem>
                 </Select>
