@@ -32,7 +32,7 @@ const Test = () => {
     axios
       .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${postCategory}`)
       .then((res) => {
-        // console.log(res)
+        console.log(res)
         dispatch(quesList(res.data.msg));
         setLoading(false);
       })
