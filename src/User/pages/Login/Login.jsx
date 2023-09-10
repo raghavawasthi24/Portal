@@ -69,10 +69,11 @@ const Login = ({ handleLogin }) => {
   };
   const onSubmit = (values) => {
     console.log(values);
+    setLoader(true)
     axios
       .post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/login/`, values)
       .then((res) => {
-        setLoader(true);
+        setLoader(false);
         // console.log(res);
         Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
         isLoggedin = true;
@@ -104,9 +105,8 @@ const Login = ({ handleLogin }) => {
   };
   const formik = useFormik({ initialValues, validate, onSubmit });
 
-  return loader ? (
-    <Loader />
-  ) : (
+  return (
+    <div>
     <div className="loginPage">
       <img
         src="/Images/csiLogo.svg"
@@ -197,6 +197,10 @@ const Login = ({ handleLogin }) => {
         </div>
       </div>
       <ToastContainer />
+    </div>
+    <div className='absolute top-0' style={{marginLeft:"-2rem", display:loader?"":"none"}}>
+        <Loader/>
+    </div>
     </div>
   );
 };

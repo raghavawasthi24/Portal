@@ -12,7 +12,7 @@ const store = configureStore({
     quesList: QuestionsSlice,
     student: StudentsSlice,
     feedback: FeedbackSlice,
-    responses:ResponseSlice,
+    responses: ResponseSlice,
     review: ReviewReducer,
   },
 });

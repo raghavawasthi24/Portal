@@ -12,6 +12,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { feedbacklist } from "../../../../../store/slices/FeedbackSlice";
 const EditFeedback = (props) => {
   let initialValues = {
     question: "",
@@ -31,21 +32,34 @@ const EditFeedback = (props) => {
       feedbakQues.initial[feedbackQuesNo.initialQues],
       feedbackQuesNo.initialQues
     );
-    initialValues.question=props.feedQues.question;
-    initialValues.category=props.feedQues.type;
+    initialValues.question = props.feedQues.question;
+    initialValues.category = props.feedQues.type;
     setFormvalues(initialValues);
   }, [props.feedQues.question]);
 
   const updateQues = () => {
     if (formvalues.question.trim() != "" && formvalues.category.trim() != "") {
       axios
-        .patch(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/${props.feedQues.id}/update/`, {
-          question_text: formvalues.question.trim(),
-          question_type: formvalues.category,
-        })
+        .patch(
+          `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/${
+            props.feedQues.id
+          }/update/`,
+          {
+            question_text: formvalues.question.trim(),
+            question_type: formvalues.category,
+          }
+        )
         .then((res) => {
           console.log(res);
-          window.location.reload();
+          axios
+            .get(
+              `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`
+            )
+            .then((res) => {
+              console.log(res.data);
+              // setFeedQues(res.data);
+              dispatch(feedbacklist(res.data));
+            });
         });
     } else toast.error("Please Fill Details");
   };
