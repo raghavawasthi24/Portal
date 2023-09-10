@@ -14,12 +14,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import EditFeedback from "./components/EditFeedback";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleEditOpt } from "../../../../store/slices/EditContSlice";
+import Loader from "../../../../Loader/Loader";
 
 const AddFeedback = () => {
   const navigate = useNavigate();
   const [feedQues, setFeedQues] = useState([]);
   const [open, setOpen] = useState(false);
   const [editable,setEditable]=useState({});
+  const [loader, setLoader] = useState(false);
   // const [edit,setEdit]=useState(false)
 
   const edit = useSelector(state=>state.editShow.initialValue)
@@ -50,7 +52,7 @@ const AddFeedback = () => {
     axios.delete(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/delete-f-question/${id}`)
     .then((res)=>{
         console.log(res)
-        // toast.success("Question deleted successfully")
+        toast.success("Question deleted successfully")
         axios.get(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`)
     .then((res)=>{
         console.log(res)
@@ -71,10 +73,10 @@ const AddFeedback = () => {
                   <p>Question: {index + 1}</p>
                   <div>
                     <ModeEditOutlinedIcon
-                      sx={{ color: "grey", marginRight: "5px" }}
+                      sx={{ color: "grey", marginRight: "5px" ,cursor:"pointer"}}
                       onClick={e=>{editQuestion(val.id,val.question_text, val.question_type)}}
                     />
-                    <DeleteOutlineOutlinedIcon sx={{ color: "#f95959" }} onClick={e=>{delFeedback(val.id)}}/>
+                    <DeleteOutlineOutlinedIcon sx={{ color: "#f95959",cursor:"pointer" }} onClick={e=>{delFeedback(val.id)}}/>
                   </div>
                 </div>
                 <hr className="my-1" />
@@ -130,6 +132,12 @@ const AddFeedback = () => {
             </Fab>
           </Box>
         </div>
+      </div>
+      <div
+        className="absolute top-0"
+        style={{ marginLeft: "-2rem", display: loader ? "" : "none" }}
+      >
+        <Loader />
       </div>
     </div>
   );

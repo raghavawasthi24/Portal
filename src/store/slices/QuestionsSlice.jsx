@@ -20,17 +20,17 @@ const QuestionsSlice = createSlice({
   initialState,
   reducers: {
     quesList: (state, action) => {
-      // console.log(action.payload)
-      let newQuestions = action.payload;
-      let newUptdatedQuestions = [];
-      newQuestions.map((question) => {
-        if (!question.category) {
-          question.category = state.quesCategory;
-          newUptdatedQuestions.push(question);
-        }
-      });
-      state.initialQues = newUptdatedQuestions;
-      f = newUptdatedQuestions; // Update the local variable if needed
+      console.log(action.payload)
+      // let newQuestions = action.payload;
+      // let newUptdatedQuestions = [];
+      // newQuestions.map((question) => {
+      //   if (!question.category) {
+      //     question.category = state.quesCategory;
+      //     newUptdatedQuestions.push(question);
+      //   }
+      // });
+      state.initialQues = action.payload;
+      f = action.payload; // Update the local variable if needed
       // state.initialQues = newQuestions;
       // f = newQuestions; // Update the local variable if needed
     },

@@ -25,7 +25,44 @@ const EditQuestion = () => {
     category: "",
   };
 
-  const techArr = ["HTML", "CSS", "JavaScript", "Aptitude", "C", "C++", "Java"];
+  const techArr = [
+    {
+      value: "HTML",
+      label: "HTML",
+    },
+    {
+      value: "CSS",
+      label: "CSS",
+    },
+    {
+      value: "JavaScript",
+      label: "JavaScript",
+    },
+    {
+      value: "Aptitude",
+      label: "Aptitude",
+    },
+    {
+      value: "Sql",
+      label: "SQL",
+    },
+    {
+      value: "C",
+      label: "C",
+    },
+    {
+      value: "Cpp",
+      label: "C++",
+    },
+    {
+      value: "Java",
+      label: "Java",
+    },
+    {
+      value: "Python",
+      label: "Python",
+    },
+  ];
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state.prevNext);
@@ -41,7 +78,7 @@ const EditQuestion = () => {
   );
 
   useEffect(() => {
-    console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo-1])
+    console.log(questionDisplay.initialQues[questionDisplay.initialQuesNo - 1]);
     initialValues.question =
       questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.question;
     initialValues.opt1 =
@@ -60,13 +97,13 @@ const EditQuestion = () => {
       questionDisplay?.initialQues[
         questionDisplay.initialQuesNo - 1
       ]?.options[3].name;
-    initialValues.category =
-      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1].category;
-   
+    initialValues.category = questionDisplay.quesCategory;
+
     let options =
       questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.options;
     let correctId =
-      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.correctId;
+      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
+        ?.correctId;
     let index = options?.findIndex((x) => x.ansId == correctId);
 
     initialValues.correctAns = options[index]?.name;
@@ -96,7 +133,8 @@ const EditQuestion = () => {
         formvalues.opt4,
       ];
       let options =
-        questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.options;
+        questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
+          ?.options;
       let correctId =
         questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
           ?.correctId;
@@ -170,9 +208,6 @@ const EditQuestion = () => {
         style={{ cursor: "pointer" }}
       />
 
-      {/* {
-      console.log(questionDisplay.initialQues)
-    } */}
       <TextField
         id="standard-multiline-flexible"
         label="Question"
@@ -269,8 +304,12 @@ const EditQuestion = () => {
             onChange={inputHandler}
             variant="standard"
           >
-            {techArr.map((item,index) => {
-              return <MenuItem value={item} key={index}>{item}</MenuItem>;
+            {techArr.map((item, index) => {
+              return (
+                <MenuItem value={item.value} key={index}>
+                  {item.label}
+                </MenuItem>
+              );
             })}
           </Select>
         </FormControl>

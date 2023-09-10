@@ -14,6 +14,7 @@ import { quesList } from "../../../../../store/slices/QuestionsSlice";
 import axios from "axios";
 import { useState } from "react";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { LineWave } from "react-loader-spinner";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,6 +23,7 @@ const GetQuestions = () => {
   const category = useSelector((state) => state.quesList.quesCategory);
 
   useEffect(() => {
+    setCircleLoader(true);
     axios
       .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${category}`)
       // .get(`${import.meta.env.VITE_APP_NODE_URL}/getquestions`)
@@ -29,11 +31,30 @@ const GetQuestions = () => {
         // console.log(res)
         dispatch(quesList(res.data.msg));
         // setLoading(false);
+        setCircleLoader(false);
       })
-      .catch(() => {
-        // console.log(err);
+      .catch((err) => {
+        console.log(err);
+        setCircleLoader(false);
         // setLoading(false);
-        // toast.error("Something went wrong");
+        dispatch(
+          quesList([
+            {
+              question: "N/A",
+              category: "N/A",
+              quesId: "N/A",
+              options: [
+                { name: "N/A", ansId: "N/A" },
+                { name: "N/A", ansId: "N/A" },
+                { name: "N/A", ansId: "N/A" },
+                { name: "N/A", ansId: "N/A" },
+              ],
+              correctId: "N/A",
+              _id: "N/A",
+            },
+          ])
+        );
+        toast.error("No Questions is this Category");
       });
   }, [category]);
 
@@ -41,32 +62,59 @@ const GetQuestions = () => {
   const showEdit = useSelector((state) => state.editShow);
   const [correctAns, setCorrectAns] = useState();
   const dispatch = useDispatch();
+  const [circleLoader, setCircleLoader] = useState(true);
 
   useEffect(() => {
-    // console.log(questionDisplay?.initialQues[questionDisplay.initialQuesNo-1])
+    console.log(
+      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
+    );
     let options =
       questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.options;
     let correctId =
       questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
         ?.correctId;
     let index = options?.findIndex((x) => x.ansId == correctId);
-    // console.log(index,options)
+    console.log(index, options);
     setCorrectAns(options[index]?.name);
   }, [
     questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.question,
   ]);
 
   const delQuestion = (id) => {
+    setCircleLoader(true);
     axios
       .delete(`${import.meta.env.VITE_APP_NODE_URL}/deletequestions/${id}`)
       .then(() => {
         //   console.log(res)
+
         toast.success("Question deleted successfully");
         axios
           .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${category}`)
           .then((res) => {
             //   console.log(res)
+            setCircleLoader(false);
             dispatch(quesList(res.data.msg));
+          })
+          .catch((err) => {
+            setCircleLoader(false);
+            dispatch(
+              quesList([
+                {
+                  question: "N/A",
+                  category: "N/A",
+                  quesId: "N/A",
+                  options: [
+                    { name: "N/A", ansId: "N/A" },
+                    { name: "N/A", ansId: "N/A" },
+                    { name: "N/A", ansId: "N/A" },
+                    { name: "N/A", ansId: "N/A" },
+                  ],
+                  correctId: "N/A",
+                  _id: "N/A",
+                },
+              ])
+            );
+            // toast.error("No Questions is this Category");
           });
         // dispatch(feedbacklist(res.data))
       });
@@ -74,7 +122,29 @@ const GetQuestions = () => {
 
   return (
     <>
-      <div className="p-10 flex flex-col justify-between h-full">
+      <div
+        className={
+          circleLoader ? "h-full flex justify-center items-center" : "hidden"
+        }
+      >
+        <LineWave
+          height="100"
+          width="100"
+          color="#2153F9"
+          ariaLabel="line-wave"
+          wrapperStyle={{}}
+          wrapperClass=""
+          firstLineColor=""
+          middleLineColor=""
+          lastLineColor=""
+        />
+      </div>
+
+      <div
+        className={
+          circleLoader ? "hidden" : "p-10 flex flex-col justify-between h-full"
+        }
+      >
         <div className="">
           <div className="flex justify-between my-3">
             <p>Question-{questionDisplay?.initialQuesNo}</p>
