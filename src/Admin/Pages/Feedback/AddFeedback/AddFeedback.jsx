@@ -68,7 +68,7 @@ const AddFeedback = () => {
         <div className="grid grid-cols-3 gap-10">
           {feedQues?.map((val, index) => {
             return (
-              <div className="border p-3 rounded-xl shadow-xl">
+              <div className="border p-3 rounded-xl shadow-xl border-lg">
                 <div className="flex justify-between">
                   <p>Question: {index + 1}</p>
                   <div>
