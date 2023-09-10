@@ -11,6 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useDispatch } from "react-redux";
 import { feedbacklist } from "../../../../../store/slices/FeedbackSlice";
+import { toggleLoader } from "../../../../../store/slices/LoaderSlice";
 // import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 // import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -30,6 +31,7 @@ const AddFeedback = () => {
 
   const addQues = () => {
     if (formvalues.question.trim() != "" && formvalues.category != "") {
+      dispatch(toggleLoader(true))
       axios
         .post(
           `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/add-f-question/`,
@@ -42,7 +44,6 @@ const AddFeedback = () => {
         )
         .then((res) => {
           console.log(res);
-
           toast.success("Question Saved Successfully");
           setFormvalues(initialValues);
           axios
@@ -52,10 +53,12 @@ const AddFeedback = () => {
             .then((res) => {
               console.log(res.data);
               // setFeedQues(res.data);
+              dispatch(toggleLoader(false))
               dispatch(feedbacklist(res.data));
             });
         })
         .catch((err) => {
+          dispatch(toggleLoader(false))
           console.log(err);
         });
     } else {

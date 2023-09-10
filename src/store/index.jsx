@@ -5,6 +5,7 @@ import StudentsSlice from "./slices/StudentsSlice";
 import FeedbackSlice from "./slices/FeedbackSlice";
 import ReviewReducer from "./slices/ReviewSlice";
 import ResponseSlice from "./slices/ResponseSlice";
+import LoaderSlice from "./slices/LoaderSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     feedback: FeedbackSlice,
     responses: ResponseSlice,
     review: ReviewReducer,
+    loader:LoaderSlice
   },
 });
 

@@ -16,17 +16,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleEditOpt } from "../../../../store/slices/EditContSlice";
 import Loader from "../../../../Loader/Loader";
 import { feedbacklist } from "../../../../store/slices/FeedbackSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toggleLoader } from "../../../../store/slices/LoaderSlice";
 
 const AddFeedback = () => {
   const navigate = useNavigate();
   const [feedQues, setFeedQues] = useState([]);
   const [open, setOpen] = useState(false);
   const [editable, setEditable] = useState({});
-  const [loader, setLoader] = useState(false);
+  // const [loader, setLoader] = useState(false);
   // const [edit,setEdit]=useState(false)
 
   const edit = useSelector((state) => state.editShow.initialValue);
   const editQues = useSelector((state) => state.feedback.initial);
+  const loader=useSelector(state=>state.loader.loader)
   console.log(editQues);
   const dispatch = useDispatch();
 
@@ -35,13 +39,17 @@ const AddFeedback = () => {
     if (!check) {
       navigate("/login");
     }
-
+    dispatch(toggleLoader(true))
     axios
       .get(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`)
       .then((res) => {
         console.log(res.data);
         setFeedQues(res.data);
+        dispatch(toggleLoader(false))
         dispatch(feedbacklist(res.data));
+      }).catch(()=>{
+        toast.error("Someting went wrong")
+        dispatch(toggleLoader(false))
       });
   }, []);
 
@@ -53,14 +61,17 @@ const AddFeedback = () => {
     });
     dispatch(toggleEditOpt());
   };
+  
   const delFeedback = (id) => {
+    dispatch(toggleLoader(true))
     axios
       .delete(
         `${
           import.meta.env.VITE_APP_DJANGO_URL
-        }/feedback/delete-f-question/${id}`
+        }/feedback/questionRUD/${id}`
       )
       .then((res) => {
+        if(res.status===204){
         console.log(res);
         toast.success("Question deleted successfully");
         axios
@@ -70,8 +81,18 @@ const AddFeedback = () => {
           .then((res) => {
             console.log(res);
             setFeedQues(res.data);
-          });
+            dispatch(feedbacklist(res.data));
+            dispatch(toggleLoader(false))
+          }).catch(()=>{
+            toast.error("Someting went wrong")
+            dispatch(toggleLoader(false))
+          })
+          
+        }
         // dispatch(feedbacklist(res.data))
+      }).catch(()=>{
+        toast.error("Someting went wrong")
+        dispatch(toggleLoader(false))
       });
   };
   return (
@@ -168,6 +189,7 @@ const AddFeedback = () => {
         <Loader />
       </div>
     </div>
+    
   );
 };
 

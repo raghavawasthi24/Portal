@@ -5,14 +5,17 @@ import Dropdown from "./components/Dropdown";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { toggleQuestion } from "../../../../store/slices/QuestionsSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useState } from "react";
+import Loader from "../../../../Loader/Loader";
 
 const AddQuestions = () => {
   const navigate = useNavigate();
+  const dispatch=useDispatch()
+  const loader=useSelector(state=>state.loader.loader)
 
   useEffect(() => {
     const check = Cookies.get("apage5");
@@ -21,8 +24,8 @@ const AddQuestions = () => {
     }
     // console.log("add")
   }, []);
-  const dispatch = useDispatch();
   return (
+    <>
     <div>
       <Header />
       <div className="flex" style={{ margin: "7rem 0 0 3rem" }}>
@@ -46,6 +49,13 @@ const AddQuestions = () => {
         </div>
       </div>
     </div>
+    <div
+        className=""
+        style={{  display: loader ? "" : "none" }}
+      >
+        <Loader />
+      </div>
+    </>
   );
 };
 

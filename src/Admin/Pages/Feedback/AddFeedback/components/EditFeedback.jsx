@@ -11,8 +11,13 @@ import { toggleEditOpt } from "../../../../../store/slices/EditContSlice";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { toast } from "react-toastify";
+
 import { feedbacklist } from "../../../../../store/slices/FeedbackSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toggleLoader } from "../../../../../store/slices/LoaderSlice";
+
+
 const EditFeedback = (props) => {
   let initialValues = {
     question: "",
@@ -23,6 +28,7 @@ const EditFeedback = (props) => {
   const data = useSelector((state) => state.prevNext);
   const feedbakQues = useSelector((state) => state.feedback);
   const feedbackQuesNo = useSelector((state) => state.editShow);
+  const loader=useSelector(state=>state.loader.loader)
 
   const [formvalues, setFormvalues] = useState(feedbakQues.initial);
   const [id, setId] = useState();
@@ -39,11 +45,12 @@ const EditFeedback = (props) => {
 
   const updateQues = () => {
     if (formvalues.question.trim() != "" && formvalues.category.trim() != "") {
+      dispatch(toggleLoader(true))
       axios
         .patch(
-          `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/${
+          `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/questionRUD/${
             props.feedQues.id
-          }/update/`,
+          }`,
           {
             question_text: formvalues.question.trim(),
             question_type: formvalues.category,
@@ -57,7 +64,9 @@ const EditFeedback = (props) => {
             )
             .then((res) => {
               console.log(res.data);
+              toast.success("Question Edited Successfully")
               // setFeedQues(res.data);
+              dispatch(toggleLoader(false))
               dispatch(feedbacklist(res.data));
             });
         });
@@ -121,6 +130,7 @@ const EditFeedback = (props) => {
           Update
         </Button>
       </div>
+      <ToastContainer />
     </div>
   );
 };
