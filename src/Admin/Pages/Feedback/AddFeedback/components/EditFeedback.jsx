@@ -11,7 +11,13 @@ import { toggleEditOpt } from "../../../../../store/slices/EditContSlice";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { toast } from "react-toastify";
+
+import { feedbacklist } from "../../../../../store/slices/FeedbackSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toggleLoader } from "../../../../../store/slices/LoaderSlice";
+
+
 const EditFeedback = (props) => {
   let initialValues = {
     question: "",
@@ -22,6 +28,7 @@ const EditFeedback = (props) => {
   const data = useSelector((state) => state.prevNext);
   const feedbakQues = useSelector((state) => state.feedback);
   const feedbackQuesNo = useSelector((state) => state.editShow);
+  const loader=useSelector(state=>state.loader.loader)
 
   const [formvalues, setFormvalues] = useState(feedbakQues.initial);
   const [id, setId] = useState();
@@ -31,21 +38,37 @@ const EditFeedback = (props) => {
       feedbakQues.initial[feedbackQuesNo.initialQues],
       feedbackQuesNo.initialQues
     );
-    initialValues.question=props.feedQues.question;
-    initialValues.category=props.feedQues.type;
+    initialValues.question = props.feedQues.question;
+    initialValues.category = props.feedQues.type;
     setFormvalues(initialValues);
   }, [props.feedQues.question]);
 
   const updateQues = () => {
     if (formvalues.question.trim() != "" && formvalues.category.trim() != "") {
+      dispatch(toggleLoader(true))
       axios
-        .patch(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/${props.feedQues.id}/update/`, {
-          question_text: formvalues.question.trim(),
-          question_type: formvalues.category,
-        })
+        .patch(
+          `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/questionRUD/${
+            props.feedQues.id
+          }`,
+          {
+            question_text: formvalues.question.trim(),
+            question_type: formvalues.category,
+          }
+        )
         .then((res) => {
           console.log(res);
-          window.location.reload();
+          axios
+            .get(
+              `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`
+            )
+            .then((res) => {
+              console.log(res.data);
+              toast.success("Question Edited Successfully")
+              // setFeedQues(res.data);
+              dispatch(toggleLoader(false))
+              dispatch(feedbacklist(res.data));
+            });
         });
     } else toast.error("Please Fill Details");
   };
@@ -107,6 +130,7 @@ const EditFeedback = (props) => {
           Update
         </Button>
       </div>
+      <ToastContainer />
     </div>
   );
 };

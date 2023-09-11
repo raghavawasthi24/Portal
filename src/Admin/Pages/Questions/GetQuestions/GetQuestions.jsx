@@ -13,7 +13,7 @@ import { quesCtgSel } from "../../../../store/slices/QuestionsSlice";
 const GetQuestions = () => {
   const data = useSelector((state) => state.quesList);
   const dispatch=useDispatch()
-  const [loader, setLoader] = useState(false);
+  const loader=useSelector(state=>state.loader.loader)
   // useEffect(() => {
   //   if (data.initialQues[0].question === "N/A") setLoader(true);
   //   else setLoader(false);
@@ -25,7 +25,7 @@ const GetQuestions = () => {
 
 
   return (
-    <>
+  <>
       <div className="w-screen h-screen flex flex-col justify-evenly">
         <Header />
         <div className="flex px-8 pt-20 w-screen h-screen justify-evenly">
@@ -40,12 +40,14 @@ const GetQuestions = () => {
         </div>
       </div>
       <div
-        className="absolute top-0"
-        style={{ marginLeft: "-2rem", display: loader ? "" : "none" }}
+        className=""
+        style={{  display: loader ? "" : "none" }}
       >
         <Loader />
       </div>
-    </>
+    
+      </>
+
   );
 };
 

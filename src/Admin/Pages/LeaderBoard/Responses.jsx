@@ -45,7 +45,7 @@ const Responses = (props) => {
           {
             data?.options?.map((row,index)=>{
               return(
-                <FormControlLabel value={row.name} checked={row.name===data.user_ans.name} control={<Radio />} label={row.name} key={index}/>
+                <FormControlLabel value={row?.name} checked={row?.name===data.user_ans?.name} control={<Radio />} label={row?.name} key={index}/>
             )
             })
             // console.log(data.options)

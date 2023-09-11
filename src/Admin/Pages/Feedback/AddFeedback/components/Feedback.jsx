@@ -9,6 +9,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useDispatch } from "react-redux";
+import { feedbacklist } from "../../../../../store/slices/FeedbackSlice";
+import { toggleLoader } from "../../../../../store/slices/LoaderSlice";
 // import {toggleEditOpt} from "../../../../../store/slices/EditContSlice"
 // import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -19,6 +22,7 @@ const AddFeedback = () => {
   };
 
   const [formvalues, setFormvalues] = useState(initialValues);
+  const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -27,25 +31,40 @@ const AddFeedback = () => {
 
   const addQues = () => {
     if (formvalues.question.trim() != "" && formvalues.category != "") {
+      dispatch(toggleLoader(true))
       axios
-        .post(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/add-f-question/`, [
-          {
-            question_text: formvalues.question.trim(),
-            question_type: formvalues.category,
-          },
-        ])
+        .post(
+          `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/add-f-question/`,
+          [
+            {
+              question_text: formvalues.question.trim(),
+              question_type: formvalues.category,
+            },
+          ]
+        )
         .then((res) => {
           console.log(res);
           toast.success("Question Saved Successfully");
           setFormvalues(initialValues);
+          axios
+            .get(
+              `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`
+            )
+            .then((res) => {
+              console.log(res.data);
+              // setFeedQues(res.data);
+              dispatch(toggleLoader(false))
+              dispatch(feedbacklist(res.data));
+            });
         })
         .catch((err) => {
+          dispatch(toggleLoader(false))
           console.log(err);
         });
     } else {
       toast.error("Please fill all details!");
     }
-  }; 
+  };
 
   return (
     <div className="w-full absolute top-0 overflow-hidden right-0 flex justify-center">
@@ -81,7 +100,11 @@ const AddFeedback = () => {
         </FormControl>
         <Button
           variant="contained"
-          sx={{ width: "20%", margin: "0.8rem 0 0.8rem auto", padding: "0.5rem" }}
+          sx={{
+            width: "20%",
+            margin: "0.8rem 0 0.8rem auto",
+            padding: "0.5rem",
+          }}
           endIcon={<SendIcon />}
           onClick={addQues}
         >

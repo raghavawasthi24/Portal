@@ -39,7 +39,9 @@ const Question = () => {
   // }, [data, quesData, quesName]);
 
   const handleAns = (e) => {
+    console.log("click")
     const newSelectedValue = e.target.value;
+    console.log(e.target.value,category,quesName)
     setSelectedValue(newSelectedValue);
     dispatch(
       markAnsId({

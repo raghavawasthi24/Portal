@@ -4,11 +4,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../../../../Loader/Loader";
+import { toggleLoader } from "../../../../../store/slices/LoaderSlice";
 
 
 const Question = () => {
@@ -25,7 +26,7 @@ const Question = () => {
   const [count, setCount] = useState(1);
   const [ctg, setCtg] = useState("");
   const [firstCount,setFirstCount]=useState(true)
-  const [loader, setLoader] = useState(false);
+  const dispatch=useDispatch()
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -37,6 +38,7 @@ const Question = () => {
   useEffect(() => {
     setCtg(dropdownData.quesCategory);
     // console.log(dropdownData.quesCategory);
+    dispatch(toggleLoader(true))
     axios
       .get(
         `${import.meta.env.VITE_APP_NODE_URL}/counts?category=${
@@ -47,6 +49,7 @@ const Question = () => {
         // console.log(res)
         // console.log(res.data.msg.categoryResponse[res.data.msg.categoryResponse.length-1].count)
         // console.log(res.data.msg.categoryResponse.length-1)
+        dispatch(toggleLoader(false))
         if (res.data.msg.count.length != 0)
           setCount(
             res.data.msg.count[
@@ -57,6 +60,7 @@ const Question = () => {
       })
       .catch((err) => {
         // console.log(err);
+        dispatch(toggleLoader(false))
       });
   }, [dropdownData.quesCategory]);
 
@@ -73,7 +77,7 @@ const Question = () => {
         formvalues.opt4.trim() != "" &&
         formvalues.correctAns.trim() != ""
       ) {
-        setLoader(true)
+        dispatch(toggleLoader(true))
         axios
           .post(`${import.meta.env.VITE_APP_NODE_URL}/addquestions`, {
             question: formvalues.question.trim(),
@@ -103,11 +107,11 @@ const Question = () => {
             // console.log(res);
             setCount(count + 1);
             toast.success("Question saved successfully");
-            setLoader(false)
+            dispatch(toggleLoader(false))
             setFormvalues(initialValues);
           })
           .catch(() => {
-            setLoader(false)
+            dispatch(toggleLoader(false))
             toast.error("Question Already Exits");
             // alert(err)
           });
@@ -117,10 +121,6 @@ const Question = () => {
 
   return (
     <div className="flex flex-col">
-      {
-        // console.log(dropdownData)
-      }
-
       <TextField
         id="outlined-multiline-flexible"
         label="Question"
@@ -206,12 +206,6 @@ const Question = () => {
           </MenuItem>
         </Select>
       </FormControl>
-      <div
-        className="absolute top-0"
-        style={{ marginLeft: "-2rem", display: loader ? "" : "none" }}
-      >
-        <Loader />
-      </div>
 
       <ToastContainer />
     </div>

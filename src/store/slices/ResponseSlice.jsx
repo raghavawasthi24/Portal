@@ -27,6 +27,7 @@ const ResponseSlice = createSlice({
   initialState,
   reducers: {
     uploadResponse: (state, action) => {
+      state.currentQuesNo=0
       state.studentResponses = action.payload;
       state.currentQues = action.payload[0];
       console.log(state.studentResponses)
@@ -61,14 +62,14 @@ const ResponseSlice = createSlice({
       console.log(state.currentQues)
     },
     prevQues: (state, action) => {
-      if (state.currentQuesNo < 1) state.currentQuesNo = 1;
+      if (state.currentQuesNo < 1) state.currentQuesNo = 0;
       else state.currentQuesNo--;
       findResponse(state.all_questions)
     },
     nextQues: (state, action) => {
       console.log("cakkkkk")
-      if (state.currentQuesNo == state.studentResponses.length)
-        state.currentQuesNo = 1;
+      if (state.currentQuesNo == state.studentResponses.length-1)
+        state.currentQuesNo = 0;
       else state.currentQuesNo++;
       console.log(state.currentQuesNo)
     },

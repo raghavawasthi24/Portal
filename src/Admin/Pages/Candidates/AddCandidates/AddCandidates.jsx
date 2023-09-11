@@ -115,7 +115,7 @@ const AddCandidates = () => {
 
 
   return (
-    <>
+    <div>
     <div>
       <Header />
       <div>
@@ -174,7 +174,7 @@ const AddCandidates = () => {
         <Loader/>
     </div>
     <ToastContainer />
-    </>
+    </div>
   );
 };
 
