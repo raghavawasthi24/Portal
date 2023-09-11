@@ -58,10 +58,10 @@ const ReviewSlice = createSlice({
           } else {
             category.questions.push({
               id: questionId,
-              review: false,
               visited: true,
-              answered: false,
-              ansId: "",
+              // review: false,
+              // answered: false,
+              // ansId: "",
             });
           }
         }
@@ -78,15 +78,15 @@ const ReviewSlice = createSlice({
         );
         if (question) {
           console.log(question);
-          question.visited = true;
+          // question.visited = true;
           question.ansId = ansId;
         } else {
           console.log(question, "ques pushed from ansId");
           category.questions.push({
             id: questionId,
-            review: false,
-            answered: false,
-            visited: true,
+            // review: false,
+            // answered: false,
+            // visited: true,
             ansId: ansId,
           });
         }
@@ -103,11 +103,12 @@ const ReviewSlice = createSlice({
             (ques) => ques.id === question.quesId
           );
           if (ques) {
+            console.log(ques.ansId, "review slice");
             ques.ansId = question.ansId;
             reviewAndAnsweredHandler(question.ansStatus, question);
             ques.review = question.review;
             ques.answered = question.answered;
-            ques.visited = true;
+            // ques.visited = true;
           } else {
             reviewAndAnsweredHandler(question.ansStatus, question);
             category.questions.push({
@@ -115,7 +116,7 @@ const ReviewSlice = createSlice({
               ansId: question.ansId,
               review: question.review,
               answered: question.answered,
-              visited: true,
+              // visited: true,
             });
           }
         }

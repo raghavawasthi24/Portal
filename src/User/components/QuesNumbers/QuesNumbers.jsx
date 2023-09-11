@@ -53,20 +53,21 @@ const QuesNumbers = () => {
         {quesdata.initialQues.map((ques, id) => {
           const active = id === currentBtnIndex - 1;
 
-          const { answered, review, visited } = findVisitedStatus(
-            ques?.quesId,
-            currentCategoryQuestions
-          );
-          console.log(answered, review, visited, ques?.quesId);
+          // console.log(answered, review, visited, ques?.quesId);
           if (active) {
             VisitedStatus({ category, quesId: ques?.quesId })
               .then((res) => {
+                console.log(res);
                 if (res) dispatch(markVisited(res));
               })
               .catch((err) => {
                 console.log(err);
               });
           }
+          const { answered, review, visited } = findVisitedStatus(
+            ques?.quesId,
+            currentCategoryQuestions
+          );
 
           return (
             <Grid item key={id}>

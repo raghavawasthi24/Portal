@@ -60,6 +60,7 @@ const TestFooter = () => {
       ansId: currentAnsId,
     })
       .then((responseData) => {
+        if (responseData === -1) toast.error("Select an option");
         // Dispatch the response data to Redux using dispatch
         dispatch(setStatus(responseData)); // Replace with your actual Redux action
       })

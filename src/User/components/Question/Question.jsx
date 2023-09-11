@@ -30,9 +30,11 @@ const Question = () => {
     setQuesName(quesData.initialQues[quesData.initialQuesNo - 1]?.quesId);
     const defaultAnswerId = currentCategoryQuestions.find(
       // const defaultAnswerId = quesData.initialQues.find(
-      (item) => item.id === quesName
+      (item) =>
+        item.id === quesData.initialQues[quesData.initialQuesNo - 1]?.quesId
     );
     setSelectedValue(defaultAnswerId?.ansId || "");
+    // setSelectedValue(defaultAnswerId?.ansId);
   }, [data, quesData, currentCategoryQuestions, quesName]);
   // }, [data, quesData, quesName]);
 
