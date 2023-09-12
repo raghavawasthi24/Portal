@@ -22,6 +22,7 @@ const Feedback = () => {
     if (!check || check == "false") {
       navigate("/login");
     }
+    localStorage.removeItem("savedTime");
   }, []);
 
   useEffect(() => {
@@ -44,27 +45,25 @@ const Feedback = () => {
   }, [formvValue]);
 
   const handlevalue = (data) => {
-    
     let tempFormValues = [...formvValue];
     const existingIndex = formvValue.findIndex(
       (item) => item.question_id === data.question_id
     );
-  
+
     if (existingIndex === -1) {
       tempFormValues = [...tempFormValues, data];
     } else {
       tempFormValues[existingIndex] = data;
     }
- 
+
     setFormValue(tempFormValues);
   };
 
   const uniquefn = () => {
     let disableflag = false;
- 
+
     if (formvValue.length === apiData.length) {
       formvValue.forEach((ans) => {
-      
         if (!ans.answer_text) {
           disableflag = true;
         }

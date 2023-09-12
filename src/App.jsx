@@ -21,15 +21,15 @@ const App = () => {
   const handle = useFullScreenHandle();
 
   // Restricting user to use keyboard shortcuts
-  // window.addEventListener("contextmenu", function (e) {
-  //   e.preventDefault();
-  // });
+  window.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
 
-  // document.addEventListener("keydown", function (e) {
-  //   if (e.ctrlKey || e.shiftKey || e.altKey) {
-  //     e.preventDefault();
-  //   }
-  // });
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.altKey) {
+      e.preventDefault();
+    }
+  });
   window.addEventListener("beforeunload", function (e) {
     e.preventDefault();
     e.returnValue =

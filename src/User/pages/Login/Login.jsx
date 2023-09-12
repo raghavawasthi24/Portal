@@ -31,6 +31,12 @@ const Login = ({ handleLogin }) => {
   // const handleUserLogin=(login)=>{
   //   handleLogin(login);
   // }
+
+  useEffect(() => {
+    const cookie = Cookies.get("spage2");
+    if (cookie) navigate("/test");
+  }, []);
+
   const [showPassword, setShowPassword] = useState(false);
   const [loader, setLoader] = useState(false);
 
@@ -69,7 +75,7 @@ const Login = ({ handleLogin }) => {
     return errors;
   };
   const onSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
     setLoader(true);
     axios
       .post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/login/`, values)
@@ -85,14 +91,14 @@ const Login = ({ handleLogin }) => {
           Cookies.set("isAdmin", true);
           Cookies.set("apage1", true);
           navigate("/admin");
+        } else if (res.data.isSubmit === true) {
+          Cookies.set("spage4", true);
+          navigate("/Thankyou");
         } else if (res.data.logintime !== 0) {
           localStorage.setItem("savedTime", res.data.logintime.toString());
           localStorage.setItem("language", res.data.category || "C");
           Cookies.set("spage2", true);
           navigate("/test");
-        } else if (res.data.isSubmit === true) {
-          Cookies.set("spage4", true);
-          navigate("/Thankyou");
         } else {
           Cookies.set("spage1", true);
           navigate("/instruction");

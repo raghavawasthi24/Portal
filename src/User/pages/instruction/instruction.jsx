@@ -61,14 +61,23 @@ const Instruction = () => {
     Cookies.set("spage2", true);
     Cookies.remove("spage1");
     localStorage.setItem("language", Language);
-    getLoginTime();
-    axios
-      .get(`${import.meta.env.VITE_APP_NODE_URL}/category/user/${id}?category=${Language}`)
+    getLoginTime()
       .then(() => {
-        toast.info("Test Started");
+        axios
+          .get(
+            `${
+              import.meta.env.VITE_APP_NODE_URL
+            }/category/user/${id}?category=${Language}`
+          )
+          .then(() => {
+            toast.info("Test Started");
+          })
+          .catch(() => {
+            toast.error("Something went wrong");
+          });
       })
-      .catch(() => {
-        toast.error("Something went wrong");
+      .catch((error) => {
+        console.error(error);
       });
     navigate("/animation");
   };

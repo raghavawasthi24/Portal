@@ -32,6 +32,7 @@ const Test = () => {
     if (cookie) navigate("/feedback");
   }, []);
 
+  //Remove while in development mode
   useEffect(() => {
     // For switching to different tab: submit api call
     if (timer === 0) {

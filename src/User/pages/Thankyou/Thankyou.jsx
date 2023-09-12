@@ -12,6 +12,7 @@ const Thankyou = () => {
     if (!check || check == "false") {
       navigate("/login");
     }
+    localStorage.removeItem("savedTime");
   }, []);
   return (
     <div className="ThankMain">

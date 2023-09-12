@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { getLoginTime } from "../../utils/index";
+// import { getLoginTime } from "../../utils/index";
 import Cookies from "js-cookie";
 
 const Timer = () => {
@@ -12,19 +12,19 @@ const Timer = () => {
 
   useEffect(() => {
     const savedTime = parseFloat(localStorage.getItem("savedTime"));
-    if (!savedTime) {
-      // If savedTime is not available, fetch it and set the timer only when it's available.
-      getLoginTime()
-        .then((savedTime) => {
-          handleTimer(savedTime);
-        })
-        .catch((error) => {
-          console.error("Error fetching saved time:", error);
-        });
-    } else {
-      // If savedTime is available, set the timer immediately.
-      handleTimer(savedTime);
-    }
+    // if (!savedTime) {
+    //   // If savedTime is not available, fetch it and set the timer only when it's available.
+    //   getLoginTime()
+    //     .then((savedTime) => {
+    //       handleTimer(savedTime);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching saved time:", error);
+    //     });
+    // } else {
+    // If savedTime is available, set the timer immediately.
+    handleTimer(savedTime);
+    // }
   }, []);
 
   const handleTimer = (savedTime) => {
