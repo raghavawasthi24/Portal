@@ -32,21 +32,21 @@ const Timer = () => {
         clearInterval(timer);
         // Timer has reached 0, perform any desired action here
         // Submit the test api
-        // axios
-        //   .post(
-        //     `${
-        //       import.meta.env.VITE_APP_DJANGO_URL
-        //     }/accounts/submit/${studentNumber}`
-        //   )
-        //   .then((res) => {
-        //     console.log(res);
-        //     Cookies.set("spage3", true);
-        //     Cookies.remove("spage2");
-        //     nav("/feedback");
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //   });
+        axios
+          .post(
+            `${
+              import.meta.env.VITE_APP_DJANGO_URL
+            }/accounts/submit/${studentNumber}`
+          )
+          .then((res) => {
+            console.log(res);
+            Cookies.set("spage3", true);
+            Cookies.remove("spage2");
+            nav("/feedback");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }, 1000);
 

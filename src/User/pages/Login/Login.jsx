@@ -69,7 +69,7 @@ const Login = ({ handleLogin }) => {
   };
   const onSubmit = (values) => {
     console.log(values);
-    setLoader(true)
+    setLoader(true);
     axios
       .post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/login/`, values)
       .then((res) => {
@@ -84,7 +84,7 @@ const Login = ({ handleLogin }) => {
           Cookies.set("isAdmin", true);
           Cookies.set("apage1", true);
           navigate("/admin");
-        } else if (res.data.logintime) {
+        } else if (res.data.logintime !== 0) {
           localStorage.setItem("savedTime", res.data.logintime.toString());
           localStorage.setItem("language", res.data.category || "C");
           Cookies.set("spage2", true);
@@ -107,100 +107,103 @@ const Login = ({ handleLogin }) => {
 
   return (
     <div>
-    <div className="loginPage">
-      <img
-        src="/Images/csiLogo.svg"
-        style={{ height: 70, width: 50 }}
-        alt="login"
-        className="loginLogo"
-      />
-      <div className="login">
-        <form className="formSection" onSubmit={formik.handleSubmit}>
-          <div elevation={3} className="login_form">
-            <h3 className="login_form_header">CINE-2023</h3>
-            <div className="input_field">
-              <TextField
-                label="Enter Your Student Number"
-                variant="outlined"
-                name="student_no"
-                sx={{ width: "20rem" }}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.student_no}
-                InputProps={{
-                  style: {
-                    borderRadius: "8px 4px 4px 8px",
-                    borderLeft: "4px solid #543BA0",
-                  },
-                }}
-              />
-              {formik.touched.student_no && formik.errors.student_no ? (
-                <p className="error">{formik.errors.student_no}</p>
-              ) : null}
-            </div>
-            <div className="input_field">
-              <FormControl
-                sx={{
-                  borderRadius: "8px",
-                  borderLeft: "4px solid #543BA0",
-                  width: "20rem",
-                }}
-                className="login_field"
-                variant="outlined"
-              >
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  name="password"
-                  className="login_field"
-                  type={showPassword ? "text" : "password"}
-                  onBlur={formik.handleBlur}
+      <div className="loginPage">
+        <img
+          src="/Images/csiLogo.svg"
+          style={{ height: 70, width: 50 }}
+          alt="login"
+          className="loginLogo"
+        />
+        <div className="login">
+          <form className="formSection" onSubmit={formik.handleSubmit}>
+            <div elevation={3} className="login_form">
+              <h3 className="login_form_header">CINE-2023</h3>
+              <div className="input_field">
+                <TextField
+                  label="Enter Your Student Number"
+                  variant="outlined"
+                  name="student_no"
+                  sx={{ width: "20rem" }}
                   onChange={formik.handleChange}
-                  value={formik.values.password}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
+                  onBlur={formik.handleBlur}
+                  value={formik.values.student_no}
+                  InputProps={{
+                    style: {
+                      borderRadius: "8px 4px 4px 8px",
+                      borderLeft: "4px solid #543BA0",
+                    },
+                  }}
                 />
-              </FormControl>
-              {formik.touched.password && formik.errors.password ? (
-                <p className="error">{formik.errors.password}</p>
-              ) : null}
+                {formik.touched.student_no && formik.errors.student_no ? (
+                  <p className="error">{formik.errors.student_no}</p>
+                ) : null}
+              </div>
+              <div className="input_field">
+                <FormControl
+                  sx={{
+                    borderRadius: "8px",
+                    borderLeft: "4px solid #543BA0",
+                    width: "20rem",
+                  }}
+                  className="login_field"
+                  variant="outlined"
+                >
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    name="password"
+                    className="login_field"
+                    type={showPassword ? "text" : "password"}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
+                {formik.touched.password && formik.errors.password ? (
+                  <p className="error">{formik.errors.password}</p>
+                ) : null}
+              </div>
+              <Button
+                variant="contained"
+                className="login_btn"
+                type="submit"
+                sx={{
+                  backgroundColor: "#543BA0",
+                  "&:hover": { backgroundColor: "#543BA0" },
+                  margin: "2rem 0",
+                }}
+              >
+                LOGIN
+              </Button>
             </div>
-            <Button
-              variant="contained"
-              className="login_btn"
-              type="submit"
-              sx={{
-                backgroundColor: "#543BA0",
-                "&:hover": { backgroundColor: "#543BA0" },
-                margin: "2rem 0",
-              }}
-            >
-              LOGIN
-            </Button>
+          </form>
+          <div className="imageSection">
+            <img src={LoginGif} style={{ height: "70vh" }} alt="login" />
           </div>
-        </form>
-        <div className="imageSection">
-          <img src={LoginGif} style={{ height: "70vh" }} alt="login" />
         </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
-    </div>
-    <div className='absolute top-0' style={{marginLeft:"-2rem", display:loader?"":"none"}}>
-        <Loader/>
-    </div>
+      <div
+        className="absolute top-0"
+        style={{ marginLeft: "-2rem", display: loader ? "" : "none" }}
+      >
+        <Loader />
+      </div>
     </div>
   );
 };
