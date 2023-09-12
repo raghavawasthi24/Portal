@@ -16,22 +16,22 @@
     align-items: center;
     justify-content: center;
 }
+.btn{
+    opacity: 0.6;
+}
 .emoji{
     width:5rem;
     padding: 0rem 1rem;
-    opacity: 0.6;
-
 }
 .selectedEmoji{
     opacity: 1;
 }
 .emojiHead{
+    pointer-events: none;
     font-size: 0.75rem !important;
     color:#3F3F3F;
 }
-.emoji:visited{
-    opacity: 1;
-}
+
 .emoji:hover{
     opacity: 1;
     /* Start the shake animation and make the animation last for 0.5 seconds */

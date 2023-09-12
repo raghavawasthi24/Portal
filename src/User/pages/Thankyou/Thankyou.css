@@ -5,7 +5,7 @@
     left: 0 !important;
     height: 100vh !important;
     width: 100% !important;
-    background-image: url(Images/Background_portal.png);
+    background-image: url(/Images/Background_portal.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

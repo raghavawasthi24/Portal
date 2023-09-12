@@ -18,7 +18,7 @@ const Thankyou = () => {
       <Box className="ThankImg">
         <img
           style={{ width: "12rem", height: "12rem" }}
-          src="src\User\assets\CSI LOGO.svg"
+          src="/Images/CSI LOGO.svg"
         />
       </Box>
       <p className="ThankHead">
