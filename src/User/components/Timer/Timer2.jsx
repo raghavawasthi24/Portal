@@ -12,12 +12,22 @@ const Timer = () => {
 
   useEffect(() => {
     const savedTime = parseFloat(localStorage.getItem("savedTime"));
-    if (!savedTime) getLoginTime();
+    if (!savedTime) {
+      // If savedTime is not available, fetch it and set the timer only when it's available.
+      getLoginTime()
+        .then((savedTime) => {
+          handleTimer(savedTime);
+        })
+        .catch((error) => {
+          console.error("Error fetching saved time:", error);
+        });
+    } else {
+      // If savedTime is available, set the timer immediately.
+      handleTimer(savedTime);
+    }
   }, []);
 
-  useEffect(() => {
-    const savedTime = parseFloat(localStorage.getItem("savedTime"));
-
+  const handleTimer = (savedTime) => {
     const currentTime = Math.floor(Date.now() / 1000); // Convert current time to seconds
     if (savedTime) {
       const elapsedTime = currentTime - savedTime;
@@ -49,9 +59,49 @@ const Timer = () => {
           });
       }
     }, 1000);
+  };
+  // useEffect(() => {
+  //   const savedTime = parseFloat(localStorage.getItem("savedTime"));
+  //   if (!savedTime) getLoginTime();
+  // }, []);
 
-    return () => clearInterval(timer);
-  }, [timeRemaining]);
+  // useEffect(() => {
+  //   const savedTime = parseFloat(localStorage.getItem("savedTime"));
+
+  //   const currentTime = Math.floor(Date.now() / 1000); // Convert current time to seconds
+  //   if (savedTime) {
+  //     const elapsedTime = currentTime - savedTime;
+  //     setTimeRemaining(Math.max(3 * 60 * 60 - elapsedTime, 0)); // 3 hours in seconds
+  //   }
+
+  //   const timer = setInterval(() => {
+  //     if (timeRemaining > 0) {
+  //       setTimeRemaining((prevTime) => prevTime - 1);
+  //     } else {
+  //       console.log("time up bitch");
+  //       clearInterval(timer);
+  //       // Timer has reached 0, perform any desired action here
+  //       // Submit the test api
+  //       axios
+  //         .post(
+  //           `${
+  //             import.meta.env.VITE_APP_DJANGO_URL
+  //           }/accounts/submit/${studentNumber}`
+  //         )
+  //         .then((res) => {
+  //           console.log(res);
+  //           Cookies.set("spage3", true);
+  //           Cookies.remove("spage2");
+  //           nav("/feedback");
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     }
+  //   }, 1000);
+
+  //   return () => clearInterval(timer);
+  // }, [timeRemaining]);
 
   const hours = Math.floor(timeRemaining / 3600);
   const minutes = Math.floor((timeRemaining % 3600) / 60);

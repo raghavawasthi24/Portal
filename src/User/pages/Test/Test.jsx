@@ -18,7 +18,7 @@ const Test = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [isActive, setIsActive] = useState(false); 
+  const [isActive, setIsActive] = useState(false);
   const [timer, setTimer] = useState(90);
 
   useEffect(() => {
@@ -27,35 +27,34 @@ const Test = () => {
     if (!check || check == "false") {
       navigate("/login");
     }
-    
   }, []);
-  
-  useEffect(() => {
 
-    if(timer===0){
+  useEffect(() => {
+    // For switching to different tab: submit api call
+    if (timer === 0) {
       axios
-      .post(
-        `${
-          import.meta.env.VITE_APP_DJANGO_URL
-        }/accounts/submit/${localStorage.getItem("studentNo")}`
-      )
-      .then(() => {
-      Cookies.remove("spage2");
-      Cookies.set("spage4", true);
-      navigate("/thankyou");
-      })
-      
+        .post(
+          `${
+            import.meta.env.VITE_APP_DJANGO_URL
+          }/accounts/submit/${localStorage.getItem("studentNo")}`
+        )
+        .then(() => {
+          Cookies.remove("spage2");
+          Cookies.set("spage4", true);
+          navigate("/thankyou");
+        });
     }
-  }, [timer])
-  
+  }, [timer]);
 
   const category = useSelector((state) => state.quesList.quesCategory);
+
+  // Retrieve the ques data from api
   useEffect(() => {
     const postCategory = category;
     axios
       .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${postCategory}`)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         dispatch(quesList(res.data.msg));
         setLoading(false);
       })
@@ -66,20 +65,17 @@ const Test = () => {
       });
   }, [category]);
 
-
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-       
         setIsActive(true);
       } else {
-        
         setIsActive(false);
       }
     };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
@@ -87,24 +83,23 @@ const Test = () => {
     let interval;
     if (isActive) {
       let timerTemp;
-        interval = setInterval(() => {
-        const time = localStorage.getItem('timer')
-        if(time>0){
-          timerTemp = time
+      interval = setInterval(() => {
+        const time = localStorage.getItem("timer");
+        if (time > 0) {
+          timerTemp = time;
+        } else {
+          timerTemp = 90;
+          localStorage.setItem("timer", timer);
         }
-        else{
-          timerTemp = 90
-          localStorage.setItem('timer',timer)
-        }
-        timerTemp -= 1
-        console.log(timerTemp)
-        setTimer(timerTemp)
-        localStorage.setItem('timer',timerTemp ); 
+        timerTemp -= 1;
+        console.log(timerTemp);
+        setTimer(timerTemp);
+        localStorage.setItem("timer", timerTemp);
         document.title = `InActive Tab - Countdown: ${timerTemp}s`;
       }, 1000);
     } else {
       clearInterval(interval);
-      document.title = 'CSI Exam Portal';
+      document.title = "CSI Exam Portal";
     }
     return () => {
       clearInterval(interval);
