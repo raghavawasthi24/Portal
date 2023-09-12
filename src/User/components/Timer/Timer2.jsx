@@ -38,7 +38,7 @@ const Timer = () => {
       if (timeRemaining > 0) {
         setTimeRemaining((prevTime) => prevTime - 1);
       } else {
-        console.log("time up bitch");
+        // console.log("time up bitch");
         clearInterval(timer);
         // Timer has reached 0, perform any desired action here
         // Submit the test api

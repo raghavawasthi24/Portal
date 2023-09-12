@@ -69,7 +69,7 @@ const ReviewSlice = createSlice({
     },
     markAnsId: (state, action) => {
       const { categoryId, questionId, ansId } = action.payload;
-      console.log(categoryId, questionId, ansId);
+      // console.log(categoryId, questionId, ansId);
       if (
         categoryId === "C" ||
         categoryId === "Cpp" ||
@@ -88,13 +88,13 @@ const ReviewSlice = createSlice({
         const question = category.questions.find(
           (ques) => ques.id === questionId
         );
-        console.log(question);
+        // console.log(question);
         if (question) {
-          console.log(question);
+          // console.log(question);
           // question.visited = true;
           question.ansId = ansId;
         } else {
-          console.log(question, "ques pushed from ansId");
+          // console.log(question, "ques pushed from ansId");
           category.questions.push({
             id: questionId,
             // review: false,
@@ -116,7 +116,7 @@ const ReviewSlice = createSlice({
             (ques) => ques.id === question.quesId
           );
           if (ques) {
-            console.log(ques.ansId, "review slice");
+            // console.log(ques.ansId, "review slice");
             ques.ansId = question.ansId;
             reviewAndAnsweredHandler(question.ansStatus, question);
             ques.review = question.review;

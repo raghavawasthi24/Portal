@@ -40,6 +40,7 @@ const Login = ({ handleLogin }) => {
     event.preventDefault();
   };
   useEffect(() => {
+    localStorage.removeItem("timer");
     deleteCookies();
   }, []);
 

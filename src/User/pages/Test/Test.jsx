@@ -23,10 +23,13 @@ const Test = () => {
 
   useEffect(() => {
     const check = Cookies.get("spage2");
-
     if (!check || check == "false") {
       navigate("/login");
     }
+  }, []);
+  useEffect(() => {
+    const cookie = Cookies.get("spage3");
+    if (cookie) navigate("/feedback");
   }, []);
 
   useEffect(() => {
