@@ -36,13 +36,13 @@ const App = () => {
     // Call the function on initial load
     checkMobileView();
 
-    // Listen for window resize events and recheck mobile view
-    window.addEventListener("resize", checkMobileView);
+    // // Listen for window resize events and recheck mobile view
+    // window.addEventListener("resize", checkMobileView);
 
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", checkMobileView);
-    };
+    // // Cleanup event listener on component unmount
+    // return () => {
+    //   window.removeEventListener("resize", checkMobileView);
+    // };
   }, []);
   useEffect(() => handle.enter, []);
   const handle = useFullScreenHandle();
