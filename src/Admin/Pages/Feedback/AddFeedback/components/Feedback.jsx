@@ -31,7 +31,7 @@ const AddFeedback = () => {
 
   const addQues = () => {
     if (formvalues.question.trim() != "" && formvalues.category != "") {
-      dispatch(toggleLoader(true))
+      dispatch(toggleLoader(true));
       axios
         .post(
           `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/add-f-question/`,
@@ -43,7 +43,7 @@ const AddFeedback = () => {
           ]
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           toast.success("Question Saved Successfully");
           setFormvalues(initialValues);
           axios
@@ -51,15 +51,15 @@ const AddFeedback = () => {
               `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`
             )
             .then((res) => {
-              console.log(res.data);
+              // console.log(res.data);
               // setFeedQues(res.data);
-              dispatch(toggleLoader(false))
+              dispatch(toggleLoader(false));
               dispatch(feedbacklist(res.data));
             });
         })
         .catch((err) => {
-          dispatch(toggleLoader(false))
-          console.log(err);
+          dispatch(toggleLoader(false));
+          console.error(err);
         });
     } else {
       toast.error("Please fill all details!");

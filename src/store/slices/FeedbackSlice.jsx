@@ -15,7 +15,7 @@ const FeedbackSlice = createSlice({
   initialState,
   reducers: {
     feedbacklist: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.initial = action.payload;
     },
   },

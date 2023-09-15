@@ -46,8 +46,12 @@ const Login = ({ handleLogin }) => {
     event.preventDefault();
   };
   useEffect(() => {
-    localStorage.removeItem("timer");
-    deleteCookies();
+    const cookie = Cookies.get("spage2");
+    if (cookie) navigate("/test");
+    else {
+      localStorage.removeItem("timer");
+      deleteCookies();
+    }
   }, []);
 
   const navigate = useNavigate();
@@ -106,7 +110,7 @@ const Login = ({ handleLogin }) => {
       })
       .catch((err) => {
         setLoader(false);
-        console.log(err);
+        console.error(err);
         toast.error("Invalid Student No or Password");
       });
   };

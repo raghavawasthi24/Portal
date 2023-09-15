@@ -49,13 +49,13 @@ const Timer = () => {
             }/accounts/submit/${studentNumber}`
           )
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             Cookies.set("spage3", true);
             Cookies.remove("spage2");
             nav("/feedback");
           })
           .catch((err) => {
-            console.log(err);
+            console.error(err);
           });
       }
     }, 1000);

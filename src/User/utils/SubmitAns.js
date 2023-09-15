@@ -14,7 +14,7 @@ const SubmitAnswer = ({ status, quesId, ansId }) => {
     status: status,
     ansId: ansId,
   };
-  console.log(submitData);
+  // console.log(submitData);
   return axios
     .get(
       `${import.meta.env.VITE_APP_NODE_URL}/postResponse/${id}?ansId=${
@@ -26,7 +26,7 @@ const SubmitAnswer = ({ status, quesId, ansId }) => {
       return res.data.user; // Return the response data
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       throw err; // Rethrow the error to handle it in the calling function if needed
     });
 };

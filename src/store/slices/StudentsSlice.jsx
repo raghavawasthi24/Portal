@@ -12,7 +12,7 @@ const StudentSlice = createSlice({
   initialState,
   reducers: {
     studentList: (state, action) => {
-      console.log("dekjb");
+      // console.log("dekjb");
       state.initialValue = action.payload;
       f = action.payload;
     },
@@ -21,11 +21,11 @@ const StudentSlice = createSlice({
       state.initialValue = state.initialValue.filter((student) =>
         student.name.toLowerCase().includes(action.payload.toLowerCase())
       );
-      console.log(state.initialValue);
+      // console.log(state.initialValue);
       if (state.initialValue == "") {
-        console.log("nnnn");
+        // console.log("nnnn");
         state.initialValue = f;
-        console.log(state.initialValue);
+        // console.log(state.initialValue);
         state.initialValue = state.initialValue.filter(
           (student) => student.studentNo == action.payload
         );
@@ -35,24 +35,23 @@ const StudentSlice = createSlice({
       // console.log(action.payload.gender,action.payload.isHosteler)
       if (action.payload.category == "All") {
         state.initialValue = f;
-      }
-      else{
-      state.initialValue = f;
-      state.initialValue = state.initialValue.filter((student) =>
-        student.gender.includes(action.payload.gender)
-      );
-      state.initialValue = state.initialValue.filter(
-        (student) => student.isHosteler.toString() == action.payload.isHosteler
-      );
+      } else {
+        state.initialValue = f;
+        state.initialValue = state.initialValue.filter((student) =>
+          student.gender.includes(action.payload.gender)
+        );
+        state.initialValue = state.initialValue.filter(
+          (student) =>
+            student.isHosteler.toString() == action.payload.isHosteler
+        );
       }
     },
     findStudent: (state, action) => {
       state.currentStudent = state.initialValue.filter(
-        student => student.studentNo == action.payload
+        (student) => student.studentNo == action.payload
       );
     },
   },
-  
 });
 
 export default StudentSlice.reducer;

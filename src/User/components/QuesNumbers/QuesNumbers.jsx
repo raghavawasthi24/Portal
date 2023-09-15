@@ -124,24 +124,22 @@ const QuesNumbers = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Use memoization to store the visited status for each question.
-    const memoizedVisitedStatus = {};
-
     quesdata.initialQues.forEach((ques, id) => {
       const active = id === currentBtnIndex - 1;
-
-      if (active && !memoizedVisitedStatus[ques?.quesId]) {
+      const { visited } = findVisitedStatus(
+        ques?.quesId,
+        currentCategoryQuestions
+      );
+      if (active && !visited) {
         VisitedStatus({ category, quesId: ques?.quesId })
           .then((res) => {
             // console.log(res);
             if (res) {
               dispatch(markVisited(res));
-              // Update the memoization cache with the visited status.
-              memoizedVisitedStatus[ques?.quesId] = res;
             }
           })
           .catch((err) => {
-            console.log(err);
+            console.error(err);
           });
       }
     });

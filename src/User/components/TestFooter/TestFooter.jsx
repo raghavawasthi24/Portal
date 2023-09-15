@@ -36,16 +36,9 @@ const TestFooter = () => {
     }
   }, [currentCategoryQuestions, quesData]);
 
-  // const setReviewHandler = (review) => {
-  //   // Set the review property for the current question
-  //   dispatch(
-  //     markReview({
-  //       categoryId: currentQuestion.category,
-  //       questionId: currentQuestion.quesId,
-  //       review,
-  //     })
-  //   );
-  // };
+  const skipAndNext = () => {
+    dispatch(nextQues(quesData.initialQues));
+  };
 
   const saveAndNext = () => {
     if (!isAnswered) {
@@ -105,6 +98,12 @@ const TestFooter = () => {
           Mark for Review
         </Button>
         {/* </div> */}
+        <Button
+          onClick={skipAndNext}
+          className="!bg-testHeadGrad3 !border-2 !border-reviewColor !border-solid !px-4"
+        >
+          Skip Question
+        </Button>
         <Button
           onClick={saveAndNext}
           className="!text-white !bg-saveColor !px-4"

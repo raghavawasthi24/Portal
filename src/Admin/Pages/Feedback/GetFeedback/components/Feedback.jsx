@@ -28,11 +28,13 @@ const Feedback = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/feedback-response/`).then((res) => {
-      console.log(res);
-      setFeedbackList(res.data);
-      setLocalVar(res.data);
-    });
+    axios
+      .get(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/feedback-response/`)
+      .then((res) => {
+        // console.log(res);
+        setFeedbackList(res.data);
+        setLocalVar(res.data);
+      });
   }, []);
 
   const inputHandler = (e) => {

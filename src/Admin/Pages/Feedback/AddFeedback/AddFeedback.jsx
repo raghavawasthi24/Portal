@@ -30,8 +30,8 @@ const AddFeedback = () => {
 
   const edit = useSelector((state) => state.editShow.initialValue);
   const editQues = useSelector((state) => state.feedback.initial);
-  const loader=useSelector(state=>state.loader.loader)
-  console.log(editQues);
+  const loader = useSelector((state) => state.loader.loader);
+  // console.log(editQues);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,17 +39,18 @@ const AddFeedback = () => {
     if (!check) {
       navigate("/login");
     }
-    dispatch(toggleLoader(true))
+    dispatch(toggleLoader(true));
     axios
       .get(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setFeedQues(res.data);
-        dispatch(toggleLoader(false))
+        dispatch(toggleLoader(false));
         dispatch(feedbacklist(res.data));
-      }).catch(()=>{
-        toast.error("Someting went wrong")
-        dispatch(toggleLoader(false))
+      })
+      .catch(() => {
+        toast.error("Someting went wrong");
+        dispatch(toggleLoader(false));
       });
   }, []);
 
@@ -61,38 +62,37 @@ const AddFeedback = () => {
     });
     dispatch(toggleEditOpt());
   };
-  
+
   const delFeedback = (id) => {
-    dispatch(toggleLoader(true))
+    dispatch(toggleLoader(true));
     axios
       .delete(
-        `${
-          import.meta.env.VITE_APP_DJANGO_URL
-        }/feedback/questionRUD/${id}`
+        `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/questionRUD/${id}`
       )
       .then((res) => {
-        if(res.status===204){
-        console.log(res);
-        toast.success("Question deleted successfully");
-        axios
-          .get(
-            `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`
-          )
-          .then((res) => {
-            console.log(res);
-            setFeedQues(res.data);
-            dispatch(feedbacklist(res.data));
-            dispatch(toggleLoader(false))
-          }).catch(()=>{
-            toast.error("Someting went wrong")
-            dispatch(toggleLoader(false))
-          })
-          
+        if (res.status === 204) {
+          // console.log(res);
+          toast.success("Question deleted successfully");
+          axios
+            .get(
+              `${import.meta.env.VITE_APP_DJANGO_URL}/feedback/get-f-question/`
+            )
+            .then((res) => {
+              // console.log(res);
+              setFeedQues(res.data);
+              dispatch(feedbacklist(res.data));
+              dispatch(toggleLoader(false));
+            })
+            .catch(() => {
+              toast.error("Someting went wrong");
+              dispatch(toggleLoader(false));
+            });
         }
         // dispatch(feedbacklist(res.data))
-      }).catch(()=>{
-        toast.error("Someting went wrong")
-        dispatch(toggleLoader(false))
+      })
+      .catch(() => {
+        toast.error("Someting went wrong");
+        dispatch(toggleLoader(false));
       });
   };
   return (
@@ -189,7 +189,6 @@ const AddFeedback = () => {
         <Loader />
       </div>
     </div>
-    
   );
 };
 

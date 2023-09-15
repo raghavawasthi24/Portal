@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Loader from "../../../Loader/Loader";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { toggleLoader } from "../../../store/slices/LoaderSlice";
 
 const Test = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Test = () => {
   const [loading, setLoading] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const [timer, setTimer] = useState(90);
+  const loader = useSelector((state) => state.loader.loader);
 
   useEffect(() => {
     const check = Cookies.get("spage2");
@@ -55,16 +57,19 @@ const Test = () => {
   // Retrieve the ques data from api
   useEffect(() => {
     const postCategory = category;
+    dispatch(toggleLoader(true));
     axios
       .get(`${import.meta.env.VITE_APP_NODE_URL}/category/${postCategory}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(quesList(res.data.msg));
+        dispatch(toggleLoader(false));
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setLoading(false);
+        dispatch(toggleLoader(false));
         toast.error("Something went wrong");
       });
   }, [category]);
@@ -96,7 +101,7 @@ const Test = () => {
           localStorage.setItem("timer", timer);
         }
         timerTemp -= 1;
-        console.log(timerTemp);
+        // console.log(timerTemp);
         setTimer(timerTemp);
         localStorage.setItem("timer", timerTemp);
         document.title = `InActive Tab - Countdown: ${timerTemp}s`;
@@ -113,22 +118,27 @@ const Test = () => {
   return loading ? (
     <Loader />
   ) : (
-    <div className="flex justify-evenly">
-      <ToastContainer />
-      <div className="flex flex-col justify-start w-8/12 m-0 py-4 pl-12">
-        <TestHeader />
-        <QuesTab />
-        <Question />
-        <TestFooter />
-      </div>
-      <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-start">
-        <div>
-          <Timer />
-          <QuesNumbers />
+    <>
+      <div className="flex justify-evenly">
+        <ToastContainer />
+        <div className="flex flex-col justify-start w-8/12 m-0 py-4 pl-12">
+          <TestHeader />
+          <QuesTab />
+          <Question />
+          <TestFooter />
         </div>
-        <BasicModal />
+        <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-start">
+          <div>
+            <Timer />
+            <QuesNumbers />
+          </div>
+          <BasicModal />
+        </div>
       </div>
-    </div>
+      <div style={{ display: loader ? "" : "none" }}>
+        <Loader />
+      </div>
+    </>
   );
 };
 

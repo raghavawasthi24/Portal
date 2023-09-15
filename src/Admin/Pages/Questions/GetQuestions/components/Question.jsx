@@ -10,12 +10,11 @@ import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import EditQuestion from "./EditQuestion";
 import { useDispatch } from "react-redux";
 import { toggleEditOpt } from "../../../../../store/slices/EditContSlice";
-import { quesList,prevQues } from "../../../../../store/slices/QuestionsSlice";
+import { quesList, prevQues } from "../../../../../store/slices/QuestionsSlice";
 import axios from "axios";
 import { useState } from "react";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { LineWave } from "react-loader-spinner";
-
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -40,7 +39,7 @@ const GetQuestions = () => {
         setCircleLoader(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setCircleLoader(false);
         // setLoading(false);
         dispatch(
@@ -64,19 +63,17 @@ const GetQuestions = () => {
       });
   }, [category]);
 
- 
-
   useEffect(() => {
-    console.log(
-      questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
-    );
+    // console.log(
+    //   questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
+    // );
     let options =
       questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.options;
     let correctId =
       questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
         ?.correctId;
     let index = options?.findIndex((x) => x.ansId == correctId);
-    console.log(index, options);
+    // console.log(index, options);
     setCorrectAns(options[index]?.name);
   }, [
     questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.question,
@@ -88,7 +85,7 @@ const GetQuestions = () => {
       .delete(`${import.meta.env.VITE_APP_NODE_URL}/deletequestions/${id}`)
       .then(() => {
         //   console.log(res)
-        dispatch(prevQues())
+        dispatch(prevQues());
 
         toast.success("Question deleted successfully");
         axios

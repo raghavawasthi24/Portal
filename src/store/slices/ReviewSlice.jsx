@@ -83,7 +83,7 @@ const ReviewSlice = createSlice({
         (cat) => cat.category === categoryId
       );
 
-      console.log(category);
+      // console.log(category);
       if (category) {
         const question = category.questions.find(
           (ques) => ques.id === questionId
