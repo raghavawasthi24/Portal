@@ -42,12 +42,11 @@ const LeaderBoard = () => {
     }
   }, []);
 
-
   //SOCKET.io
 
   useEffect(() => {
     setLoader(true);
-    const socket = io.connect("https://fluttering-lumber-production.up.railway.app/", {
+    const socket = io.connect(`${import.meta.env.VITE_APP_SOCKET_API}`, {
       transports: ["websocket"],
     });
 
@@ -145,7 +144,9 @@ const LeaderBoard = () => {
                 <TableHead sx={{ backgroundColor: "rgba(242, 241, 252, 1)" }}>
                   <TableRow>
                     <TableCell className="w-[50px]"></TableCell>
-                    <TableCell sx={{ textAlign: "center",width:"30px" }}>Rank</TableCell>
+                    <TableCell sx={{ textAlign: "center", width: "30px" }}>
+                      Rank
+                    </TableCell>
                     <TableCell sx={{ textAlign: "center" }}>
                       Student Number
                     </TableCell>
@@ -166,12 +167,19 @@ const LeaderBoard = () => {
                       className="cursor-pointer"
                     >
                       <TableCell className="w-[50px]">
-                      { Array.prototype.findIndex.call(
+                        {Array.prototype.findIndex.call(
                           students,
                           (x) => x.studentNo == student.studentNo
-                        )==0?<img src="Images/trophy-star.png" className="w-4 h-4 mr-2"/>:""}
+                        ) == 0 ? (
+                          <img
+                            src="Images/trophy-star.png"
+                            className="w-4 h-4 mr-2"
+                          />
+                        ) : (
+                          ""
+                        )}
                       </TableCell>
-                      <TableCell sx={{ textAlign: "center"}}>
+                      <TableCell sx={{ textAlign: "center" }}>
                         {Array.prototype.findIndex.call(
                           students,
                           (x) => x.studentNo == student.studentNo

@@ -63,7 +63,9 @@ const Login = ({ handleLogin }) => {
     let errors = {};
     if (!values.student_no) {
       errors.student_no = "Please Enter Student Number";
-    } else if (!/^22([0-9]{5,6})$/i.test(values.student_no)) {
+    } else if (
+      !/^[2][012](([x]{3})|[0-9]{2,3})([0-9]){3}(-d)?$/i.test(values.student_no)
+    ) {
       errors.student_no = "Enter Correct Student Number";
     }
     if (!values.password) {
