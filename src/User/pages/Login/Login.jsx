@@ -134,7 +134,7 @@ const Login = ({ handleLogin }) => {
                   label="Enter Your Student Number"
                   variant="outlined"
                   name="student_no"
-                  sx={{ width: "20rem" }}
+                  sx={{ width: "80%" }}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.student_no}
@@ -154,7 +154,7 @@ const Login = ({ handleLogin }) => {
                   sx={{
                     borderRadius: "8px",
                     borderLeft: "4px solid #543BA0",
-                    width: "20rem",
+                    width: "80%",
                   }}
                   className="login_field"
                   variant="outlined"

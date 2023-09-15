@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Test from "./User/pages/Test/Test";
 import Login from "./User/pages/Login/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -16,7 +16,34 @@ import GetFeedback from "./Admin/Pages/Feedback/GetFeedback/GetFeedback";
 import LandingPage from "./User/pages/LandingPage/LandingPage";
 import UserRoutes from "./User/utils/UserRoutes";
 import AdminRoutes from "./User/utils/AdminRoutes";
+import Error from "./Error/Error";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
+  const [smallDeviceStatus, setSmallDeviceStatus] = useState(false);
+  useEffect(() => {
+    const checkMobileView = () => {
+      if (window.innerWidth <= 768) {
+        toast.error("Open in Laptop/Desktop!", {
+          autoClose: 5000,
+        });
+        setSmallDeviceStatus(true);
+      } else {
+        setSmallDeviceStatus(false);
+      }
+    };
+
+    // Call the function on initial load
+    checkMobileView();
+
+    // Listen for window resize events and recheck mobile view
+    window.addEventListener("resize", checkMobileView);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", checkMobileView);
+    };
+  }, []);
   useEffect(() => handle.enter, []);
   const handle = useFullScreenHandle();
 
@@ -40,26 +67,35 @@ const App = () => {
     <FullScreen handle={handle}>
       <BrowserRouter>
         <Routes>
-          <Route path="/*" element={<Login />} />
-          <Route element={<UserRoutes />}>
-            <Route exact path="/instruction" element={<Instruction />} />
-            <Route exact path="/animation" element={<LandingPage />} />
-            <Route exact path="/test" element={<Test />} />
-            <Route exact path="/feedback" element={<Feedback />} />
-            <Route exact path="/Thankyou" element={<Thankyou />} />
-          </Route>
+          {smallDeviceStatus ? (
+            <>
+              <Route path="/*" element={<Error />} />
+            </>
+          ) : (
+            <>
+              <Route path="/*" element={<Login />} />
+              <Route element={<UserRoutes />}>
+                <Route exact path="/instruction" element={<Instruction />} />
+                <Route exact path="/animation" element={<LandingPage />} />
+                <Route exact path="/test" element={<Test />} />
+                <Route exact path="/feedback" element={<Feedback />} />
+                <Route exact path="/Thankyou" element={<Thankyou />} />
+              </Route>
 
-          <Route element={<AdminRoutes />}>
-            <Route exact path="/admin" element={<AdminHome />} />
-            <Route exact path="/leaderboard" element={<LeaderBoard />} />
-            <Route exact path="/getCandidate" element={<GetCandidates />} />
-            <Route exact path="/addCandidate" element={<AddCandidate />} />
-            <Route exact path="/addQuestions" element={<AddQuestions />} />
-            <Route exact path="/addfeedback" element={<AddFeedback />} />
-            <Route exact path="/getfeedback" element={<GetFeedback />} />
-          </Route>
+              <Route element={<AdminRoutes />}>
+                <Route exact path="/admin" element={<AdminHome />} />
+                <Route exact path="/leaderboard" element={<LeaderBoard />} />
+                <Route exact path="/getCandidate" element={<GetCandidates />} />
+                <Route exact path="/addCandidate" element={<AddCandidate />} />
+                <Route exact path="/addQuestions" element={<AddQuestions />} />
+                <Route exact path="/addfeedback" element={<AddFeedback />} />
+                <Route exact path="/getfeedback" element={<GetFeedback />} />
+              </Route>
+            </>
+          )}
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </FullScreen>
   );
 };
