@@ -4,8 +4,9 @@
 @tailwind utilities;
 
 body{    
+    background-repeat: no-repeat;
     background-image: url(/Images/BackgroundXL.png);
-    background-size: cover;
+    background-size: 100% 100%;
     /* Preventing selection of text */
     -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
