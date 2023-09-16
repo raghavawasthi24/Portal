@@ -58,11 +58,13 @@ const Feedback = () => {
 
     setFormValue(tempFormValues);
   };
-
+ 
   const uniquefn = () => {
     let disableflag = false;
-
-    if (formvValue.length === apiData.length) {
+    if (formvValue.length === 0){
+       disableflag=true;
+    }
+    else if (formvValue.length === apiData.length) {
       formvValue.forEach((ans) => {
         if (!ans.answer_text) {
           disableflag = true;
