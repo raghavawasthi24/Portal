@@ -31,7 +31,7 @@ const Timer = () => {
     const currentTime = Math.floor(Date.now() / 1000); // Convert current time to seconds
     if (savedTime) {
       const elapsedTime = currentTime - savedTime;
-      setTimeRemaining(Math.max(3 * 60 * 60 - elapsedTime, 0)); // 3 hours in seconds
+      setTimeRemaining(Math.max(1 * 60 * 60 - elapsedTime, 0)); // 3 hours in seconds
     }
 
     const timer = setInterval(() => {
