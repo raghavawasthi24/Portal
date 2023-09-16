@@ -206,7 +206,7 @@ const Login = ({ handleLogin }) => {
             </div>
           </form>
           <div className="imageSection">
-            <img src={LoginGif} style={{ height: "70vh" }} alt="login" />
+            <img src={LoginGif} style={{ height: "70vh" ,mixBlendMode: "darken" }} alt="login" />
           </div>
         </div>
         <ToastContainer />

@@ -8,7 +8,7 @@
     background-image: url(/Images/Background_portal.jpg);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
     text-align: center !important;
   }
   .ThankImg{
