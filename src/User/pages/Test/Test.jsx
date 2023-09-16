@@ -119,7 +119,7 @@ const Test = () => {
     <Loader />
   ) : (
     <>
-      <div className="flex justify-evenly">
+      <div className="flex justify-evenly h-screen">
         <ToastContainer />
         <div className="flex flex-col justify-start w-8/12 m-0 py-4 pl-12">
           <TestHeader />

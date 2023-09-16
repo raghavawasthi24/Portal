@@ -167,6 +167,7 @@ const Instruction = () => {
             className="instruction_lang_box"
             style={{
               backgroundColor: "transparent",
+              height: "100%",
               boxShadow: "4px 4px 10px 0px #00000040",
             }}
           >
