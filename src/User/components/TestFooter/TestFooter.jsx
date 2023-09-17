@@ -88,7 +88,7 @@ const TestFooter = () => {
   };
 
   return (
-    <div className=" bg-gradient-to-r from-testFooterGrad1 to-testFooterGrad2 py-4 px-4 fixed bottom-8 w-3/5 ">
+    <div className=" bg-gradient-to-r from-testFooterGrad1 to-testFooterGrad2 py-4 px-4 absolute bottom-8 w-3/5 ">
       <div className="flex justify-between">
         {/* <div className="bg-reviewColor border-radius"> */}
         <Button

@@ -67,9 +67,9 @@ const QuestionsSlice = createSlice({
             state.quesCategory = "CSS";
             break;
           case "CSS":
-            state.quesCategory = "JavaScript";
+            state.quesCategory = "Sql";
             break;
-          case "JavaScript":
+          case "Sql":
             state.quesCategory = "Aptitude";
             break;
           case "Aptitude":

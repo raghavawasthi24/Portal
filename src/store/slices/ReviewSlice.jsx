@@ -23,7 +23,7 @@ const initialState = {
       questions: [],
     },
     {
-      category: "JavaScript",
+      category: "Sql",
       questions: [],
     },
     {

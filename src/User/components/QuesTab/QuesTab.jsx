@@ -9,12 +9,7 @@ import { toast } from "react-toastify";
 const QuesTab = () => {
   const optionalCategory = localStorage.getItem("language");
   // const quesCtg = useSelector((state) => state.prevNext);
-  const [quesType, setQuesType] = useState([
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Aptitude",
-  ]);
+  const [quesType, setQuesType] = useState(["HTML", "CSS", "Sql", "Aptitude"]);
 
   useEffect(() => {
     const optionalCategory = localStorage.getItem("language");
@@ -29,7 +24,7 @@ const QuesTab = () => {
           toast.error("Something went wrong");
         });
     }
-    setQuesType(["HTML", "CSS", "JavaScript", "Aptitude", optionalCategory]);
+    setQuesType(["HTML", "CSS", "Sql", "Aptitude", optionalCategory]);
   }, [optionalCategory]);
 
   const [selTech, setSelTech] = useState(quesType[0]);
@@ -58,7 +53,7 @@ const QuesTab = () => {
   }, [currentdata.quesCategory]);
 
   return (
-    <div className="mt-0 mb-6  shadow-md shadow-gray-600 mx-32">
+    <div className="mt-0 mb-4  shadow-md shadow-gray-600 mx-32">
       <Tabs value={value} onChange={handleChange} variant="fullWidth">
         {quesType?.map((type, id) => {
           return <Tab label={type} key={id} className="shadow" />;
