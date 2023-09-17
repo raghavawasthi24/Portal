@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Timer = () => {
-  const [timeRemaining, setTimeRemaining] = useState(10800); // Total time remaining in seconds
+  const [timeRemaining, setTimeRemaining] = useState(3600); // Total time remaining in seconds
   const studentNumber = localStorage.getItem("studentNo");
   const nav = useNavigate();
 
