@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { quesList } from "../../../store/slices/QuestionsSlice";
 import BasicModal from "./components/PopUp";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Loader from "../../../Loader/Loader";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -120,7 +120,7 @@ const Test = () => {
   ) : (
     <>
       <div className="flex justify-evenly h-screen">
-        <ToastContainer />
+        {/* <ToastContainer /> */}
         <div className="flex flex-col justify-start w-8/12 m-0 py-4 pl-12">
           <TestHeader />
           <QuesTab />

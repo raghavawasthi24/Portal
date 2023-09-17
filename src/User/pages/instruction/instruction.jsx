@@ -70,7 +70,7 @@ const Instruction = () => {
             }/category/user/${id}?category=${Language}`
           )
           .then(() => {
-            toast.info("Test Started");
+            // toast.info("Test Started");
           })
           .catch(() => {
             toast.error("Something went wrong");

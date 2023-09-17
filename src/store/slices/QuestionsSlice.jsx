@@ -60,7 +60,7 @@ const QuestionsSlice = createSlice({
         const optionalCategory = localStorage.getItem("language");
         // console.log(state.quesCategory, action.payload.length);
 
-        if (state.quesCategory !== optionalCategory) state.initialQuesNo = 1;
+        state.initialQuesNo = 1;
 
         switch (state.quesCategory) {
           case "HTML":
@@ -74,6 +74,9 @@ const QuestionsSlice = createSlice({
             break;
           case "Aptitude":
             state.quesCategory = optionalCategory;
+            break;
+          case optionalCategory:
+            state.quesCategory = "HTML";
             break;
         }
         // console.log(state.quesCategory, "changed");

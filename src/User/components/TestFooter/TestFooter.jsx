@@ -3,7 +3,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import { Button } from "@mui/material";
 import { nextQues } from "../../../store/slices/QuestionsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { setStatus } from "../../../store/slices/ReviewSlice";
 import SubmitAnswer from "../../utils/SubmitAns";
 
@@ -124,7 +124,7 @@ const TestFooter = () => {
           Marked for review
         </span>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 };
