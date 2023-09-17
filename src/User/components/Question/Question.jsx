@@ -57,7 +57,7 @@ const Question = () => {
       <Typography variant="h6">Question {quesData.initialQuesNo}</Typography>
       <Divider />
       <Typography variant="body">
-        {quesData.initialQues[quesData.initialQuesNo - 1]?.question}
+        {`${quesData.initialQues[quesData.initialQuesNo - 1]?.question}`}
       </Typography>
       <br />
       <FormControl>
