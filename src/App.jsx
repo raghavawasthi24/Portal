@@ -23,12 +23,21 @@ const App = () => {
   const [smallDeviceStatus, setSmallDeviceStatus] = useState(false);
   useEffect(() => {
     const checkMobileView = () => {
+      // Check if the device width is less than or equal to 768 pixels
       if (window.innerWidth <= 768) {
-        toast.error("Open in Laptop/Desktop!", {
-          autoClose: 5000,
-        });
-        setSmallDeviceStatus(true);
+        // Check if the orientation is portrait
+        if (window.innerWidth < window.innerHeight) {
+          // Device is in portrait mode
+          setSmallDeviceStatus(true);
+          toast.error("Open in Laptop/Desktop!", {
+            autoClose: 5000,
+          });
+        } else {
+          // Device is in landscape mode
+          setSmallDeviceStatus(false);
+        }
       } else {
+        // Device width is greater than 768 pixels
         setSmallDeviceStatus(false);
       }
     };
