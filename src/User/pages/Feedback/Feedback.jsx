@@ -76,12 +76,15 @@ const Feedback = () => {
     setDisable(disableflag);
   };
   const handlesubmit = () => {
+    setLoading(true);
+
     axios
       .post(`${import.meta.env.VITE_APP_DJANGO_URL}/feedback/add-f-answer/`, {
         student_number: localStorage.getItem("studentNo"),
         answers: formvValue,
       })
       .then(() => {
+        setLoading(false)
         Cookies.set("spage4", true);
         Cookies.remove("spage3");
         navigate("/thankyou");
