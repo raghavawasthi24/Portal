@@ -103,7 +103,6 @@ const Question = () => {
               },
             ],
           })
-          console.log(formvalues)
           .then((res) => {
             // console.log(res);
             setCount(count + 1);
