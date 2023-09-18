@@ -64,7 +64,7 @@ const Login = ({ handleLogin }) => {
     if (!values.student_no) {
       errors.student_no = "Please Enter Student Number";
     } else if (
-      !/^[2][012](([x]{3})|[0-9]{2,3})([0-9]){3}(-d)?$/i.test(values.student_no)
+      !/^[2][2](([x]{3})|[0-9]{2,3})([0-9]){3}(-d)?$/i.test(values.student_no)
     ) {
       errors.student_no = "Enter Correct Student Number";
     }
@@ -206,7 +206,11 @@ const Login = ({ handleLogin }) => {
             </div>
           </form>
           <div className="imageSection">
-            <img src={LoginGif} style={{ height: "70vh" ,mixBlendMode: "darken" }} alt="login" />
+            <img
+              src={LoginGif}
+              style={{ height: "70vh", mixBlendMode: "darken" }}
+              alt="login"
+            />
           </div>
         </div>
         <ToastContainer />
