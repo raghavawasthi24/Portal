@@ -57,7 +57,17 @@ const Question = () => {
       <Typography variant="h6">Question {quesData.initialQuesNo}</Typography>
       <Divider />
       <Typography variant="body">
-        {`${quesData.initialQues[quesData.initialQuesNo - 1]?.question}`}
+      {
+              questionDisplay?.initialQues[questionDisplay?.initialQuesNo - 1]
+              ?.question.split('\n').map(function( item, idx) {
+                return (
+                    <span key={idx}>
+                      {item}
+                      <br/>
+                    </span>
+                )
+              })
+            }
       </Typography>
       <br />
       <FormControl>

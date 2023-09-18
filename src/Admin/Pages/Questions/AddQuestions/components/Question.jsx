@@ -103,6 +103,7 @@ const Question = () => {
               },
             ],
           })
+          console.log(formvalues)
           .then((res) => {
             // console.log(res);
             setCount(count + 1);
@@ -124,7 +125,7 @@ const Question = () => {
       <TextField
         id="outlined-multiline-flexible"
         label="Question"
-        multiline
+        multiline="true"
         maxRows={4}
         value={formvalues.question}
         name="question"

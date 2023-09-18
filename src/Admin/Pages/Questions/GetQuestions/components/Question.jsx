@@ -26,6 +26,7 @@ const GetQuestions = () => {
   const [correctAns, setCorrectAns] = useState();
   const dispatch = useDispatch();
   const [circleLoader, setCircleLoader] = useState(true);
+  const [question,setQuestion]=useState("")
 
   useEffect(() => {
     setCircleLoader(true);
@@ -67,6 +68,8 @@ const GetQuestions = () => {
     // console.log(
     //   questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]
     // );
+    // let question=questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.queston;
+    // question = question.replace(/\n/g, '<br />');
     let options =
       questionDisplay?.initialQues[questionDisplay.initialQuesNo - 1]?.options;
     let correctId =
@@ -168,9 +171,20 @@ const GetQuestions = () => {
           </div>
           <hr />
           <p>
-            {
+            {/* {
               questionDisplay?.initialQues[questionDisplay?.initialQuesNo - 1]
                 ?.question
+            } */}
+            {
+              questionDisplay?.initialQues[questionDisplay?.initialQuesNo - 1]
+              ?.question.split('\n').map(function( item, idx) {
+                return (
+                    <span key={idx}>
+                      {item}
+                      <br/>
+                    </span>
+                )
+              })
             }
           </p>
 
