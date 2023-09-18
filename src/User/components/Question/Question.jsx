@@ -53,20 +53,20 @@ const Question = () => {
   };
 
   return (
-    <div className="m-4 pl-3 overflow-y-auto h-30vh">
+    <div className="m-4 pl-3 overflow-y-auto h-[48vh]">
       <Typography variant="h6">Question {quesData.initialQuesNo}</Typography>
       <Divider />
       <Typography variant="body">
-      {
-              quesData.initialQues[quesData.initialQuesNo - 1]?.question.split('\n').map(function( item, idx) {
-                return (
-                    <span key={idx}>
-                      {item}
-                      <br/>
-                    </span>
-                )
-              })
-            }
+        {quesData.initialQues[quesData.initialQuesNo - 1]?.question
+          .split("\n")
+          .map(function (item, idx) {
+            return (
+              <span key={idx}>
+                {item}
+                <br />
+              </span>
+            );
+          })}
       </Typography>
       <br />
       <FormControl>
