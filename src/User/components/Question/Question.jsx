@@ -58,8 +58,7 @@ const Question = () => {
       <Divider />
       <Typography variant="body">
       {
-              questionDisplay?.initialQues[questionDisplay?.initialQuesNo - 1]
-              ?.question.split('\n').map(function( item, idx) {
+              quesData.initialQues[quesData.initialQuesNo - 1]?.question.split('\n').map(function( item, idx) {
                 return (
                     <span key={idx}>
                       {item}
