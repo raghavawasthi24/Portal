@@ -48,6 +48,7 @@ const CandidateDisplay = () => {
             <TableRow sx={{ backgroundColor: "rgba(222, 234, 254, 0.5)" }}>
               <TableCell>Student Name</TableCell>
               <TableCell>Student Number</TableCell>
+              <TableCell>Score</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -59,6 +60,7 @@ const CandidateDisplay = () => {
               >
                 <TableCell>{student.name}</TableCell>
                 <TableCell>{student.studentNo}</TableCell>
+                <TableCell>{student.totalscore}</TableCell>
                 <TableCell>
                   <Button
                     size="small"
@@ -100,7 +102,7 @@ const CandidateDisplay = () => {
               Branch : {data.currentStudent[0]?.branch}
             </p>
             <p className="border-b w-full">
-              Score : {data.currentStudent[0]?.totalScore}
+              Score : {data.currentStudent[0]?.totalscore}
             </p>
           </div>
         </div>

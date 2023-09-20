@@ -17,6 +17,7 @@ const StudentSlice = createSlice({
       f = action.payload;
     },
     searchStudent: (state, action) => {
+      console.log(action.payload)
       state.initialValue = f;
       state.initialValue = state.initialValue.filter((student) =>
         student.name.toLowerCase().includes(action.payload.toLowerCase())
@@ -28,6 +29,14 @@ const StudentSlice = createSlice({
         // console.log(state.initialValue);
         state.initialValue = state.initialValue.filter(
           (student) => student.studentNo == action.payload
+        );
+      }
+      if (state.initialValue == "") {
+        // console.log("nnnn");
+        state.initialValue = f;
+        // console.log(state.initialValue);
+        state.initialValue = state.initialValue.filter(
+          (student) => student.branch == action.payload
         );
       }
     },
