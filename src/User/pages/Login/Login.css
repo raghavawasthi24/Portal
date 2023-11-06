@@ -24,7 +24,7 @@ align-self: center;
     flex-direction: column;
     box-shadow: 1px 1px 5px grey;
     /* height: 50vh; */
-    width: 30vw;
+    width: 40vw;
       margin: auto;
     align-self: center;
 }
@@ -32,10 +32,6 @@ align-self: center;
     font-size: x-large;
     font-weight: bold;
     margin: 3vh auto 2vh auto;
-}
-.login_field{
-  
-    /* align-self: center; */
 }
 .input_field{
     margin:1.5rem 0 0 0; 

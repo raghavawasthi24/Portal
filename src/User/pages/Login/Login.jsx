@@ -198,11 +198,41 @@ const Login = ({ handleLogin }) => {
                 sx={{
                   backgroundColor: "#543BA0",
                   "&:hover": { backgroundColor: "#543BA0" },
-                  margin: "2rem 0",
+                  margin: "1rem 0",
                 }}
               >
                 LOGIN
               </Button>
+
+                <p> OR directly Login as</p>
+              <div className="flex justify-center gap-4">
+
+              <Button
+                variant="contained"
+                className="login_btn"
+                type="submit"
+                sx={{
+                  backgroundColor: "#42b883",
+                  "&:hover": { backgroundColor: "#42b883" },
+                  margin: "1rem 0 2rem",
+                }}
+              >
+                Login As Candidate
+              </Button>
+
+              <Button
+                variant="contained"
+                className="login_btn"
+                type="submit"
+                sx={{
+                  backgroundColor: "#ff7e67",
+                  "&:hover": { backgroundColor: "#ff7e67" },
+                  margin: "1rem 0 2rem",
+                }}
+              >
+                Login As Admin
+              </Button>
+              </div>
             </div>
           </form>
           <div className="imageSection">

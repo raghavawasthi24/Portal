@@ -6,7 +6,7 @@
 body{    
     background-repeat: no-repeat;
     background-image: url(/Images/BackgroundXL.png);
-    background-size: 100% 100%;
+    background-size: 100vw 100vh;
     /* Preventing selection of text */
     -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */

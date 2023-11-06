@@ -47,7 +47,7 @@ const LeaderBoard = () => {
   useEffect(() => {
     setLoader(true);
     const socket = io.connect(`${import.meta.env.VITE_APP_SOCKET_API}`, {
-      transports: ["websocket"],
+      transports: ["websocket"], 
     });
 
     axios

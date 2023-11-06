@@ -28,7 +28,7 @@ const AddQuestions = () => {
     <>
     <div>
       <Header />
-      <div className="flex" style={{ margin: "7rem 0 0 3rem" }}>
+      <div className="flex" style={{ margin: "7rem 0 0rem 3rem" }}>
         <div className="w-2/3">
           <Question />
         </div>

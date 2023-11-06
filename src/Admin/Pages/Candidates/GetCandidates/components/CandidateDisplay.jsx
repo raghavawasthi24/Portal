@@ -60,7 +60,7 @@ const CandidateDisplay = () => {
               >
                 <TableCell>{student.name}</TableCell>
                 <TableCell>{student.studentNo}</TableCell>
-                <TableCell>{student.totalscore}</TableCell>
+                <TableCell>{student.totalscore``}</TableCell>
                 <TableCell>
                   <Button
                     size="small"
