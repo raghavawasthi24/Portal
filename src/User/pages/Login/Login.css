@@ -1,59 +1,64 @@
-.loginPage{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    background-size: cover;
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
 }
-.loginLogo{
-   margin:7vh 0 4vh 10vw ;
-}
-.login{
-    display: flex;
-}
-.formSection{
-width: 50%;
-text-align: center;
-justify-content: center;
-margin:0 auto;
-align-self: center;
-}
-.login_form{
-    background-color: rgba(255, 255, 255, 0.447);
-    display: flex;
-    flex-direction: column;
-    box-shadow: 1px 1px 5px grey;
-    /* height: 50vh; */
-    width: 40vw;
-      margin: auto;
-    align-self: center;
-}
-.login_form_header{
-    font-size: x-large;
-    font-weight: bold;
-    margin: 3vh auto 2vh auto;
-}
-.input_field{
-    margin:1.5rem 0 0 0; 
-    height: 10vh;
-    /* border: 1px solid green; */
-}
-.error{
-    color: red;
-    font-weight: 500;
-    width:80%;
-    margin: auto;
-    text-align: left;
-    font-size: smaller;
-}
-.login_btn{
-    width:40%;
-    margin: 10rem 0;
-    align-self: center;
+.loginLogo {
+  margin: 7vh 0 4vh 10vw;
 }
 
-.imageSection{
-    width: 50%;
-    text-align: center;
-    justify-content: center;
+.login {
+  display: flex;
+}
+
+.formSection {
+  width: 50%;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+  align-self: center;
+}
+
+.login_form {
+  background-color: rgba(255, 255, 255, 0.447);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 5px grey;
+  /* height: 50vh; */
+  width: 30vw;
+  margin: auto;
+  align-self: center;
+}
+
+.login_form_header {
+  font-size: x-large;
+  font-weight: bold;
+  margin: 3vh auto 0.5vh auto;
+}
+
+.input_field {
+  margin: 1rem 0 0 0;
+  height: 10vh;
+  /* border: 1px solid green; */
+}
+.error {
+  color: red;
+  font-weight: 500;
+  width: 80%;
+  margin: auto;
+  text-align: left;
+  font-size: smaller;
+}
+.login_btn {
+  width: 80%;
+  margin: 10rem 0;
+  align-self: center;
+}
+
+.imageSection {
+  width: 50%;
+  text-align: center;
+  justify-content: center;
 }

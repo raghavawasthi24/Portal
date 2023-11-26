@@ -58,9 +58,9 @@ const CandidateDisplay = () => {
                 key={index}
                 sx={{ backgroundColor: "rgb(255, 255, 255)" }}
               >
-                <TableCell>{student.name}</TableCell>
-                <TableCell>{student.studentNo}</TableCell>
-                <TableCell>{student.totalscore``}</TableCell>
+                <TableCell>{student?.name}</TableCell>
+                <TableCell>{student?.studentNo}</TableCell>
+                <TableCell>{student?.totalscore}</TableCell>
                 <TableCell>
                   <Button
                     size="small"
