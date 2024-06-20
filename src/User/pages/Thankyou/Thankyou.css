@@ -1,38 +1,37 @@
-
-.ThankMain{
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    height: 100vh !important;
-    width: 100% !important;
-    background-image: url(/Images/Background_portal.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    text-align: center !important;
-  }
-  .ThankImg{
-      margin-top: 15vh;
-      display: flex !important; 
-      justify-content: center;
-      align-items: center;
-  }
-  .ThankHead{
+.ThankMain {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  width: 100% !important;
+  /* background-image: url(/Images/Background_portal.jpg); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  text-align: center !important;
+}
+.ThankImg {
+  margin-top: 15vh;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.ThankHead {
   padding: 2rem;
   font-size: 3rem;
-      font-family: poppins;
-      font-weight: 900;
-      background: linear-gradient(180deg, #7BCEEF 0%, rgba(117, 63, 229, 0.8) 100%);
+  font-family: poppins;
+  font-weight: 900;
+  background: linear-gradient(180deg, #7bceef 0%, rgba(117, 63, 229, 0.8) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  }
-  .Copyright{
-      margin-top: 4rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #3718AE;
-      font-size: 1.5rem;
-      font-weight: 500;
-  }
+}
+.Copyright {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3718ae;
+  font-size: 1.5rem;
+  font-weight: 500;
+}

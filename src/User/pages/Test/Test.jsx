@@ -108,7 +108,7 @@ const Test = () => {
       }, 1000);
     } else {
       clearInterval(interval);
-      document.title = "CSI Exam Portal";
+      document.title = "Portal";
     }
     return () => {
       clearInterval(interval);
