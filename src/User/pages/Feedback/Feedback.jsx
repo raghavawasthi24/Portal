@@ -58,13 +58,12 @@ const Feedback = () => {
 
     setFormValue(tempFormValues);
   };
- 
+
   const uniquefn = () => {
     let disableflag = false;
-    if (formvValue.length === 0){
-       disableflag=true;
-    }
-    else if (formvValue.length === apiData.length) {
+    if (formvValue.length === 0) {
+      disableflag = true;
+    } else if (formvValue.length === apiData.length) {
       formvValue.forEach((ans) => {
         if (!ans.answer_text) {
           disableflag = true;
@@ -84,7 +83,7 @@ const Feedback = () => {
         answers: formvValue,
       })
       .then(() => {
-        setLoading(false)
+        setLoading(false);
         Cookies.set("spage4", true);
         Cookies.remove("spage3");
         navigate("/thankyou");
@@ -96,7 +95,7 @@ const Feedback = () => {
   ) : (
     <>
       {apiData.length ? (
-        <Container className="FeedbackMain">
+        <div className="FeedbackMain" sx={{ padding: "0" }}>
           <Typography className="FeedbackHead">Feedback</Typography>
           <Box>
             {apiData.map((ques, i) =>
@@ -130,7 +129,7 @@ const Feedback = () => {
               Submit
             </button>
           </Box>
-        </Container>
+        </div>
       ) : null}
     </>
   );

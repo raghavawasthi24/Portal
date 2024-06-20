@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import { getLoginTime } from "../../utils/index";
 import Cookies from "js-cookie";
+import CircleIcon from "@mui/icons-material/Circle";
 
 const Timer = () => {
   const [timeRemaining, setTimeRemaining] = useState(3600); // Total time remaining in seconds
@@ -108,20 +109,8 @@ const Timer = () => {
   const seconds = Math.floor(timeRemaining % 60);
 
   return (
-    <div className="flex flex-col mt-4 !text-center align-middle border bg-red-500 h-48">
-      <Typography
-        variant="h5"
-        className="text-center bg-gradient-to-r from-timerGrad1 to-timerGrad2 p-4"
-      >
-        Time Left
-      </Typography>
-      <Grid
-        container
-        gap={6}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ pt: "10px", ml: "0", background: "white", height: "100%" }}
-      >
+    <div className="flex flex-col !text-center align-middle border bg-transparent py-2">
+      <Grid container gap={6} justifyContent="center">
         <Grid item>
           <Typography
             variant="h5"
@@ -150,6 +139,20 @@ const Timer = () => {
           <Typography variant="caption">Seconds</Typography>
         </Grid>
       </Grid>
+
+      <div className="flex justify-around mt-2 gap-2 px-2">
+        <span className="flex items-center text-xs">
+          <CircleIcon color="error" /> UnAttempted
+        </span>
+        <span className="flex items-center text-xs">
+          <CircleIcon color="success" />
+          Attempted
+        </span>
+        <span className="flex items-center text-xs">
+          <CircleIcon color="primary" />
+          Marked for review
+        </span>
+      </div>
     </div>
   );
 };

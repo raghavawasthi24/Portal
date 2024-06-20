@@ -163,7 +163,7 @@ const QuesNumbers = () => {
     <div className="flex flex-col">
       <Typography
         variant="h5"
-        className="text-center  bg-gradient-to-r from-quesGrad1 to-quesGrad2 p-4 px-0"
+        className="text-center  bg-gradient-to-r from-quesGrad1 to-quesGrad2 p-1"
       >
         Questions
       </Typography>
@@ -171,12 +171,10 @@ const QuesNumbers = () => {
         container
         spacing={2}
         gap={1}
-        justifyContent="center"
         alignItems="start"
         sx={{
-          mt: "10px",
+          padding: "10px",
           overflowY: "auto",
-          height: "32vh",
         }}
       >
         {quesdata.initialQues.map((ques, id) => {

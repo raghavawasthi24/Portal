@@ -98,32 +98,22 @@ const TestFooter = () => {
           Mark for Review
         </Button>
         {/* </div> */}
-        <Button
-          onClick={skipAndNext}
-          className="!bg-testHeadGrad3 !border-2 !border-reviewColor !border-solid !px-4"
-        >
-          Skip Question
-        </Button>
-        <Button
-          onClick={saveAndNext}
-          className="!text-white !bg-saveColor !px-4"
-        >
-          Save And Next
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            onClick={skipAndNext}
+            className="!bg-testHeadGrad3 !border-2 !border-reviewColor !border-solid !px-4"
+          >
+            Next
+          </Button>
+          <Button
+            onClick={saveAndNext}
+            className="!text-white !bg-saveColor !px-4"
+          >
+            Save And Next
+          </Button>
+        </div>
       </div>
-      <div className="flex justify-around mt-4">
-        <span className="flex items-center">
-          <CircleIcon color="error" /> UnAttempted
-        </span>
-        <span className="flex items-center">
-          <CircleIcon color="success" />
-          Attempted
-        </span>
-        <span className="flex items-center">
-          <CircleIcon color="primary" />
-          Marked for review
-        </span>
-      </div>
+
       {/* <ToastContainer /> */}
     </div>
   );

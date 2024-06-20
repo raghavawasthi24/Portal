@@ -121,13 +121,15 @@ const Test = () => {
     <>
       <div className="flex justify-evenly h-screen">
         {/* <ToastContainer /> */}
-        <div className="flex flex-col justify-start w-8/12 m-0 py-4 pl-12">
-          <TestHeader />
-          <QuesTab />
-          <Question />
+        <div className="flex flex-col justify-between w-8/12">
+          <div>
+            <TestHeader />
+            <QuesTab />
+            <Question />
+          </div>
           <TestFooter />
         </div>
-        <div className="flex flex-col w-4/12 m-0 py-4 pr-12 justify-start">
+        <div className="flex flex-col w-4/12 justify-between">
           <div>
             <Timer />
             <QuesNumbers />

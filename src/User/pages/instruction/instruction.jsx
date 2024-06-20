@@ -84,20 +84,19 @@ const Instruction = () => {
 
   return (
     <div className="instructions overflow-y-auto">
-      <Grid container spacing={2} margin={5}>
-        <Grid item xs={8}>
+      <div className="flex">
+        <div className="w-3/4">
           <div className="instructionLeft">
-            <Card
+            <div
               className="instruction_box"
               style={{
                 backgroundColor: "transparent",
-                boxShadow: "4px 4px 10px 0px #00000040",
               }}
             >
               <div className="instruction_header">
                 <p className="instruction_heading">Instructions</p>
               </div>
-              <div style={{ height: "23rem", overflow: "scroll" }}>
+              <div>
                 {arr.map((link, i) => (
                   <div className="instruction_list" key={i}>
                     <ListItemIcon className="listCircle">
@@ -115,14 +114,13 @@ const Instruction = () => {
                   </div>
                 ))}
               </div>
-            </Card>
+            </div>
           </div>
           <div>
-            <Card
+            <div
               className="confirm_box"
               style={{
                 backgroundColor: "transparent",
-                boxShadow: "4px 4px 10px 0px #00000040",
               }}
             >
               <Typography style={{ fontWeight: "bold", margin: "3vh" }}>
@@ -159,12 +157,12 @@ const Instruction = () => {
                   }}
                 />
               </div>
-            </Card>
+            </div>
           </div>
-        </Grid>
-        <Grid item xs={3} className="instructionRight">
-          <Card
-            className="instruction_lang_box"
+        </div>
+        <div className="w-1/4">
+          <div
+            className="flex flex-col justify-between p-4"
             style={{
               backgroundColor: "transparent",
               height: "100%",
@@ -210,9 +208,9 @@ const Instruction = () => {
                 Save & Next
               </Button>
             </div>
-          </Card>
-        </Grid>
-      </Grid>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

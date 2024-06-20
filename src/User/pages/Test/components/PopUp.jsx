@@ -55,10 +55,10 @@ export default function BasicModal() {
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between py-2 px-8">
       <Button
         type="submit"
-        className="!bg-submitColor !text-white w-4 !mx-auto !px-16 !py-2 fixed -bottom-14"
+        className="!bg-submitColor !text-white w-full !px-16 py-4"
         onClick={handleOpen}
       >
         Submit

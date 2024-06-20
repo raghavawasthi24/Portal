@@ -32,12 +32,11 @@ const FeedbackQues = (props) => {
           onChange={(e) => {
             textFn(e);
           }}
-          onBlur={(e) =>
+          onFocus={(e) =>
             props.ondata({
               question_id: props.ques_id,
               answer_text: e.target.value,
             })
-            
           }
         />
       </FormControl>

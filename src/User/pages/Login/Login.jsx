@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
-import LoginGif from "../../assets/Coding workshop (1).gif";
+import LoginGif from "../../assets/loginImage.png";
 import {
   Button,
   FormControl,
@@ -57,8 +57,8 @@ const Login = ({ handleLogin }) => {
   const navigate = useNavigate();
 
   const initialValues = {
-    student_no: "",
-    password: "",
+    student_no: "2210160",
+    password: "Raghav@2210160",
   };
 
   const validate = (values) => {
@@ -82,7 +82,6 @@ const Login = ({ handleLogin }) => {
 
     return errors;
   };
-
 
   const onSubmit = (values) => {
     // console.log(values);
@@ -121,68 +120,28 @@ const Login = ({ handleLogin }) => {
       });
   };
 
-  const submitCandidate = () => {
-    setLoader(true);
-    axios.post(`${import.meta.env.VITE_APP_DJANGO_URL}/accounts/login/`, {
-      student_no: "2210160",
-      password: "Raghav@2210160",
-    })
-      .then((res) => {
-        setLoader(false);
-        // console.log(res);
-        Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
-        isLoggedin = true;
-        localStorage.setItem("studentNo", res.data.studentNo);
-        localStorage.setItem("id", res.data._id);
-
-        if (res.data.isAdmin === true) {
-          Cookies.set("isAdmin", true);
-          Cookies.set("apage1", true);
-          navigate("/admin");
-        } else if (res.data.isSubmit === true) {
-          Cookies.set("spage4", true);
-          navigate("/Thankyou");
-        } else if (res.data.logintime !== 0) {
-          localStorage.setItem("savedTime", res.data.logintime.toString());
-          localStorage.setItem("language", res.data.category || "C");
-          Cookies.set("spage2", true);
-          navigate("/test");
-        } else {
-          Cookies.set("spage1", true);
-          navigate("/instruction");
-        }
-      })
-      .catch((err) => {
-        setLoader(false);
-        console.error(err);
-        toast.error("Invalid Student No or Password");
-      });
-  }
-
   const adminLogin = () => {
-        // console.log(res);
-        Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
-        isLoggedin = true;
-        Cookies.set("isAdmin", true);
-        Cookies.set("apage1", true);
-        navigate("/admin");
-   
-  }
+    // console.log(res);
+    Cookies.set("isLoggedIn", true); // Set isLoggedIn cookie
+    isLoggedin = true;
+    Cookies.set("isAdmin", true);
+    Cookies.set("apage1", true);
+    navigate("/admin");
+  };
   const formik = useFormik({ initialValues, validate, onSubmit });
 
   return (
     <div>
       <div className="loginPage">
-        <img
-          src="/Images/csiLogo.svg"
+        {/* <img src="/Images/csiLogo.svg"
           style={{ height: 70, width: 50 }}
           alt="login"
           className="loginLogo"
-        />
+        /> */}
         <div className="login">
           <form className="formSection" onSubmit={formik.handleSubmit}>
             <div elevation={3} className="login_form">
-              <h3 className="login_form_header">CINE-2023</h3>
+              <h3 className="login_form_header">Login Here!</h3>
               <div className="input_field">
                 <TextField
                   label="Enter Your Student Number"
@@ -256,21 +215,7 @@ const Login = ({ handleLogin }) => {
                 LOGIN
               </Button>
 
-                <p> OR directly Login as</p>
-              
-              <Button
-                variant="contained"
-                className="login_btn"
-                type="button"
-                onClick={submitCandidate}
-                sx={{
-                  backgroundColor: "#42b883",
-                  "&:hover": { backgroundColor: "#42b883" },
-                  margin: "0.5rem",
-                }}
-              >
-                Login As Candidate
-              </Button>
+              <p className="text-xs text-gray-600"> or</p>
 
               <Button
                 variant="contained"
@@ -285,13 +230,12 @@ const Login = ({ handleLogin }) => {
               >
                 Login As Admin
               </Button>
-              
             </div>
           </form>
           <div className="imageSection">
             <img
               src={LoginGif}
-              style={{ height: "70vh", mixBlendMode: "darken" }}
+              style={{ height: "90vh", mixBlendMode: "darken" }}
               alt="login"
             />
           </div>

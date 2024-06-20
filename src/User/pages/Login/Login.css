@@ -1,6 +1,7 @@
 .loginPage {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 100vh;
   width: 100vw;
   background-size: cover;
@@ -25,7 +26,7 @@
   background-color: rgba(255, 255, 255, 0.447);
   display: flex;
   flex-direction: column;
-  box-shadow: 1px 1px 5px grey;
+  /* box-shadow: 1px 1px 5px grey; */
   /* height: 50vh; */
   width: 30vw;
   margin: auto;
@@ -35,7 +36,8 @@
 .login_form_header {
   font-size: x-large;
   font-weight: bold;
-  margin: 3vh auto 0.5vh auto;
+  margin: 1vh auto;
+  color: rgb(79, 79, 79);
 }
 
 .input_field {

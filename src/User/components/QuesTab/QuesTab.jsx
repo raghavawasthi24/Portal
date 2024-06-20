@@ -53,7 +53,7 @@ const QuesTab = () => {
   }, [currentdata.quesCategory]);
 
   return (
-    <div className="mt-0 mb-4  shadow-md shadow-gray-600 mx-32">
+    <div className="my-2  shadow-md shadow-gray-600 mx-32">
       <Tabs value={value} onChange={handleChange} variant="fullWidth">
         {quesType?.map((type, id) => {
           return <Tab label={type} key={id} className="shadow" />;

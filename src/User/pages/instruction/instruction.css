@@ -21,7 +21,6 @@
 }
 .instruction_box{
     align-self: center;
-  overflow-y: scroll;
 }
 .instructionRight{
     display: flex;
